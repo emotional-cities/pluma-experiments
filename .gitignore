@@ -7,6 +7,7 @@ obj
 *.exe
 *.exe.settings
 *.blend
+
 20092022/Bonsai/Packages/Bonsai.2.7.0-rc1/Bonsai.2.7.0-rc1.nupkg
 20092022/Bonsai/Packages/Bonsai.2.7.0-rc1/Bonsai.nuspec
 20092022/Bonsai/Packages/Bonsai.Audio.2.6.0/.signature.p7s
