@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WorkflowBuilder Version="2.6.3"
+<WorkflowBuilder Version="2.7.0-rc1"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
                  xmlns:scr="clr-namespace:Bonsai.Scripting;assembly=Bonsai.Scripting"
@@ -138,7 +138,7 @@
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="dsp:MatrixWriter">
-                            <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\12092022\test2022_09_15_15_32_23\Streams_39</dsp:Path>
+                            <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\12092022\test2022_09_20_17_03_34\Streams_39</dsp:Path>
                             <dsp:Suffix>None</dsp:Suffix>
                             <dsp:Overwrite>false</dsp:Overwrite>
                             <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -221,7 +221,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\12092022\test2022_09_15_15_32_23\StreamReadDump.bin</dsp:Path>
+                      <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\12092022\test2022_09_20_17_03_34\StreamReadDump.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -278,7 +278,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\12092022\test2022_09_15_15_32_23\Microphone.bin</dsp:Path>
+                      <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\12092022\test2022_09_20_17_03_34\Microphone.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -332,7 +332,7 @@
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\12092022\test2022_09_15_15_32_23\Accelarometer.csv</io:FileName>
+                    <io:FileName>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\12092022\test2022_09_20_17_03_34\Accelarometer.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>true</io:Overwrite>
                     <io:Suffix>None</io:Suffix>
@@ -386,7 +386,7 @@
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\12092022\test2022_09_15_15_32_23\ubx_harp_ts.csv</io:FileName>
+                    <io:FileName>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\12092022\test2022_09_20_17_03_34\ubx_harp_ts.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>false</io:Overwrite>
                     <io:Suffix>None</io:Suffix>
@@ -445,7 +445,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\12092022\test2022_09_15_15_32_23\ubx.bin</dsp:Path>
+                      <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\12092022\test2022_09_20_17_03_34\ubx.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -500,12 +500,12 @@
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\12092022\test2022_09_15_15_32_23\ubx_harp_ts.csv</io:FileName>
+                    <io:FileName>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\12092022\test2022_09_20_17_03_34\empatica_harp_ts.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>false</io:Overwrite>
                     <io:Suffix>None</io:Suffix>
-                    <io:IncludeHeader>false</io:IncludeHeader>
-                    <io:Selector>Item1,Item2</io:Selector>
+                    <io:IncludeHeader>true</io:IncludeHeader>
+                    <io:Selector />
                   </Expression>
                   <Expression xsi:type="WorkflowOutput" />
                 </Nodes>
@@ -804,7 +804,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Timer">
-                      <rx:DueTime>PT26S</rx:DueTime>
+                      <rx:DueTime>PT29S</rx:DueTime>
                       <rx:Period>PT0S</rx:Period>
                     </Combinator>
                   </Expression>
