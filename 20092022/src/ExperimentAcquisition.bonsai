@@ -19,6 +19,9 @@
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
     <Nodes>
+      <Expression xsi:type="ExternalizedMapping">
+        <Property Name="Value" />
+      </Expression>
       <Expression xsi:type="GroupWorkflow">
         <Name>Logging</Name>
         <Workflow>
@@ -28,7 +31,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="StringProperty">
-                <Value>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\12092022\test</Value>
+                <Value>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20220922\ControlBenchmarkRun_GOPRO</Value>
               </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">
@@ -138,7 +141,7 @@
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="dsp:MatrixWriter">
-                            <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\12092022\test2022_09_20_17_03_34\Streams_39</dsp:Path>
+                            <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20220922\ControlBenchmarkRun2022_09_22_11_16_56\Streams_39</dsp:Path>
                             <dsp:Suffix>None</dsp:Suffix>
                             <dsp:Overwrite>false</dsp:Overwrite>
                             <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -221,7 +224,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\12092022\test2022_09_20_17_03_34\StreamReadDump.bin</dsp:Path>
+                      <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20220922\ControlBenchmarkRun2022_09_22_11_16_56\StreamReadDump.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -278,7 +281,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\12092022\test2022_09_20_17_03_34\Microphone.bin</dsp:Path>
+                      <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20220922\ControlBenchmarkRun2022_09_22_11_16_56\Microphone.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -332,7 +335,7 @@
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\12092022\test2022_09_20_17_03_34\Accelarometer.csv</io:FileName>
+                    <io:FileName>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20220922\ControlBenchmarkRun2022_09_22_11_16_56\Accelarometer.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>true</io:Overwrite>
                     <io:Suffix>None</io:Suffix>
@@ -386,7 +389,7 @@
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\12092022\test2022_09_20_17_03_34\ubx_harp_ts.csv</io:FileName>
+                    <io:FileName>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20220922\ControlBenchmarkRun2022_09_22_11_16_56\ubx_harp_ts.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>false</io:Overwrite>
                     <io:Suffix>None</io:Suffix>
@@ -445,7 +448,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\12092022\test2022_09_20_17_03_34\ubx.bin</dsp:Path>
+                      <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20220922\ControlBenchmarkRun2022_09_22_11_16_56\ubx.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -500,7 +503,7 @@
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\12092022\test2022_09_20_17_03_34\empatica_harp_ts.csv</io:FileName>
+                    <io:FileName>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20220922\ControlBenchmarkRun2022_09_22_11_16_56\empatica_harp_ts.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>false</io:Overwrite>
                     <io:Suffix>None</io:Suffix>
@@ -804,7 +807,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Timer">
-                      <rx:DueTime>PT29S</rx:DueTime>
+                      <rx:DueTime>PT18S</rx:DueTime>
                       <rx:Period>PT0S</rx:Period>
                     </Combinator>
                   </Expression>
@@ -845,7 +848,7 @@
           <Nodes>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="al:AudioCapture">
-                <al:DeviceName>Microphone (Sound Blaster G3)</al:DeviceName>
+                <al:DeviceName>Line (Sound Blaster G3)</al:DeviceName>
                 <al:SampleRate>44100</al:SampleRate>
                 <al:SampleFormat>Stereo16</al:SampleFormat>
                 <al:BufferLength>0.1</al:BufferLength>
@@ -1725,194 +1728,206 @@ it.Item3 as TimestampSource)</scr:Expression>
           </Edges>
         </Workflow>
       </Expression>
-      <Expression xsi:type="SubscribeSubject">
-        <Name>MicrophoneData</Name>
-      </Expression>
-      <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
-      <Expression xsi:type="MemberSelector">
-        <Selector>Value</Selector>
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="dsp:Threshold">
-          <dsp:ThresholdValue>110</dsp:ThresholdValue>
-          <dsp:MaxValue>1</dsp:MaxValue>
-          <dsp:ThresholdType>Binary</dsp:ThresholdType>
-        </Combinator>
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="dsp:Sum" />
-      </Expression>
-      <Expression xsi:type="MemberSelector">
-        <Selector>Val0</Selector>
-      </Expression>
-      <Expression xsi:type="GreaterThan">
-        <Operand xsi:type="DoubleProperty">
-          <Value>0</Value>
-        </Operand>
-      </Expression>
-      <Expression xsi:type="Condition">
-        <Workflow>
-          <Nodes>
-            <Expression xsi:type="WorkflowInput">
-              <Name>Source1</Name>
-            </Expression>
-            <Expression xsi:type="WorkflowOutput" />
-          </Nodes>
-          <Edges>
-            <Edge From="0" To="1" Label="Source1" />
-          </Edges>
-        </Workflow>
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="rx:WithLatestFrom" />
-      </Expression>
-      <Expression xsi:type="MemberSelector">
-        <Selector>Item2.Seconds</Selector>
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="rx:GateInterval">
-          <rx:Interval>PT1S</rx:Interval>
-        </Combinator>
-      </Expression>
-      <Expression xsi:type="SubscribeSubject">
-        <Name>BioDataEvents</Name>
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="harp:FilterMessage">
-          <harp:Address>39</harp:Address>
-          <harp:MessageType>Write</harp:MessageType>
-        </Combinator>
-      </Expression>
-      <Expression xsi:type="harp:Parse">
-        <harp:Type>Timestamp</harp:Type>
-        <harp:IsArray>false</harp:IsArray>
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="rx:Zip" />
-      </Expression>
-      <Expression xsi:type="Subtract" />
-      <Expression xsi:type="SubscribeSubject">
-        <Name>LoggingDump</Name>
-      </Expression>
-      <Expression xsi:type="Condition">
-        <Workflow>
-          <Nodes>
-            <Expression xsi:type="WorkflowInput">
-              <Name>Source1</Name>
-            </Expression>
-            <Expression xsi:type="MemberSelector">
-              <Selector>Address</Selector>
-            </Expression>
-            <Expression xsi:type="NotEqual">
-              <Operand xsi:type="IntProperty">
-                <Value>222</Value>
-              </Operand>
-            </Expression>
-            <Expression xsi:type="WorkflowOutput" />
-          </Nodes>
-          <Edges>
-            <Edge From="0" To="1" Label="Source1" />
-            <Edge From="1" To="2" Label="Source1" />
-            <Edge From="2" To="3" Label="Source1" />
-          </Edges>
-        </Workflow>
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="harp:FilterMessage">
-          <harp:Address xsi:nil="true" />
-          <harp:MessageType>Write</harp:MessageType>
-        </Combinator>
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="harp:FilterMessage">
-          <harp:Address xsi:nil="true" />
-          <harp:MessageType>Event</harp:MessageType>
-        </Combinator>
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="rx:Merge" />
-      </Expression>
-      <Expression xsi:type="rx:GroupBy">
-        <rx:KeySelector>Address</rx:KeySelector>
-      </Expression>
-      <Expression xsi:type="SelectMany">
-        <Workflow>
-          <Nodes>
-            <Expression xsi:type="WorkflowInput">
-              <Name>Source1</Name>
-            </Expression>
-            <Expression xsi:type="ReplaySubject">
-              <Name>Data</Name>
-              <BufferSize xsi:nil="true" />
-            </Expression>
-            <Expression xsi:type="SubscribeSubject">
-              <Name>Data</Name>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:Merge" />
-            </Expression>
-            <Expression xsi:type="harp:Parse">
-              <harp:Type>Timestamp</harp:Type>
-              <harp:IsArray>false</harp:IsArray>
-            </Expression>
-            <Expression xsi:type="scr:ExpressionTransform">
-              <scr:Expression>TimeSpan.FromSeconds(it)</scr:Expression>
-            </Expression>
-            <Expression xsi:type="SubscribeSubject">
-              <Name>Data</Name>
-            </Expression>
-            <Expression xsi:type="MemberSelector">
-              <Selector>Key</Selector>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:WithLatestFrom" />
-            </Expression>
-            <Expression xsi:type="WorkflowOutput" />
-          </Nodes>
-          <Edges>
-            <Edge From="0" To="1" Label="Source1" />
-            <Edge From="2" To="3" Label="Source1" />
-            <Edge From="3" To="4" Label="Source1" />
-            <Edge From="4" To="5" Label="Source1" />
-            <Edge From="5" To="8" Label="Source1" />
-            <Edge From="6" To="7" Label="Source1" />
-            <Edge From="7" To="8" Label="Source2" />
-            <Edge From="8" To="9" Label="Source1" />
-          </Edges>
-        </Workflow>
-      </Expression>
-      <Expression xsi:type="viz:LineGraphBuilder">
-        <viz:ValueSelector>Item1.TotalMinutes,Item2</viz:ValueSelector>
-        <viz:SymbolType>VDash</viz:SymbolType>
-        <viz:LineWidth>0</viz:LineWidth>
-        <viz:Capacity>10000</viz:Capacity>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="GroupWorkflow">
+          <Name>Debug tools</Name>
+          <Workflow>
+            <Nodes>
+              <Expression xsi:type="SubscribeSubject">
+                <Name>MicrophoneData</Name>
+              </Expression>
+              <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
+              <Expression xsi:type="MemberSelector">
+                <Selector>Value</Selector>
+              </Expression>
+              <Expression xsi:type="Combinator">
+                <Combinator xsi:type="dsp:Threshold">
+                  <dsp:ThresholdValue>110</dsp:ThresholdValue>
+                  <dsp:MaxValue>1</dsp:MaxValue>
+                  <dsp:ThresholdType>Binary</dsp:ThresholdType>
+                </Combinator>
+              </Expression>
+              <Expression xsi:type="Combinator">
+                <Combinator xsi:type="dsp:Sum" />
+              </Expression>
+              <Expression xsi:type="MemberSelector">
+                <Selector>Val0</Selector>
+              </Expression>
+              <Expression xsi:type="GreaterThan">
+                <Operand xsi:type="DoubleProperty">
+                  <Value>0</Value>
+                </Operand>
+              </Expression>
+              <Expression xsi:type="Condition">
+                <Workflow>
+                  <Nodes>
+                    <Expression xsi:type="WorkflowInput">
+                      <Name>Source1</Name>
+                    </Expression>
+                    <Expression xsi:type="WorkflowOutput" />
+                  </Nodes>
+                  <Edges>
+                    <Edge From="0" To="1" Label="Source1" />
+                  </Edges>
+                </Workflow>
+              </Expression>
+              <Expression xsi:type="Combinator">
+                <Combinator xsi:type="rx:WithLatestFrom" />
+              </Expression>
+              <Expression xsi:type="MemberSelector">
+                <Selector>Item2.Seconds</Selector>
+              </Expression>
+              <Expression xsi:type="Combinator">
+                <Combinator xsi:type="rx:GateInterval">
+                  <rx:Interval>PT1S</rx:Interval>
+                </Combinator>
+              </Expression>
+              <Expression xsi:type="SubscribeSubject">
+                <Name>BioDataEvents</Name>
+              </Expression>
+              <Expression xsi:type="Combinator">
+                <Combinator xsi:type="harp:FilterMessage">
+                  <harp:Address>39</harp:Address>
+                  <harp:MessageType>Write</harp:MessageType>
+                </Combinator>
+              </Expression>
+              <Expression xsi:type="harp:Parse">
+                <harp:Type>Timestamp</harp:Type>
+                <harp:IsArray>false</harp:IsArray>
+              </Expression>
+              <Expression xsi:type="Combinator">
+                <Combinator xsi:type="rx:Zip" />
+              </Expression>
+              <Expression xsi:type="Subtract" />
+              <Expression xsi:type="SubscribeSubject">
+                <Name>LoggingDump</Name>
+              </Expression>
+              <Expression xsi:type="Condition">
+                <Workflow>
+                  <Nodes>
+                    <Expression xsi:type="WorkflowInput">
+                      <Name>Source1</Name>
+                    </Expression>
+                    <Expression xsi:type="MemberSelector">
+                      <Selector>Address</Selector>
+                    </Expression>
+                    <Expression xsi:type="NotEqual">
+                      <Operand xsi:type="IntProperty">
+                        <Value>222</Value>
+                      </Operand>
+                    </Expression>
+                    <Expression xsi:type="WorkflowOutput" />
+                  </Nodes>
+                  <Edges>
+                    <Edge From="0" To="1" Label="Source1" />
+                    <Edge From="1" To="2" Label="Source1" />
+                    <Edge From="2" To="3" Label="Source1" />
+                  </Edges>
+                </Workflow>
+              </Expression>
+              <Expression xsi:type="Combinator">
+                <Combinator xsi:type="harp:FilterMessage">
+                  <harp:Address xsi:nil="true" />
+                  <harp:MessageType>Write</harp:MessageType>
+                </Combinator>
+              </Expression>
+              <Expression xsi:type="Combinator">
+                <Combinator xsi:type="harp:FilterMessage">
+                  <harp:Address xsi:nil="true" />
+                  <harp:MessageType>Event</harp:MessageType>
+                </Combinator>
+              </Expression>
+              <Expression xsi:type="Combinator">
+                <Combinator xsi:type="rx:Merge" />
+              </Expression>
+              <Expression xsi:type="rx:GroupBy">
+                <rx:KeySelector>Address</rx:KeySelector>
+              </Expression>
+              <Expression xsi:type="SelectMany">
+                <Workflow>
+                  <Nodes>
+                    <Expression xsi:type="WorkflowInput">
+                      <Name>Source1</Name>
+                    </Expression>
+                    <Expression xsi:type="ReplaySubject">
+                      <Name>Data</Name>
+                      <BufferSize xsi:nil="true" />
+                    </Expression>
+                    <Expression xsi:type="SubscribeSubject">
+                      <Name>Data</Name>
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="rx:Merge" />
+                    </Expression>
+                    <Expression xsi:type="harp:Parse">
+                      <harp:Type>Timestamp</harp:Type>
+                      <harp:IsArray>false</harp:IsArray>
+                    </Expression>
+                    <Expression xsi:type="scr:ExpressionTransform">
+                      <scr:Expression>TimeSpan.FromSeconds(it)</scr:Expression>
+                    </Expression>
+                    <Expression xsi:type="SubscribeSubject">
+                      <Name>Data</Name>
+                    </Expression>
+                    <Expression xsi:type="MemberSelector">
+                      <Selector>Key</Selector>
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="rx:WithLatestFrom" />
+                    </Expression>
+                    <Expression xsi:type="WorkflowOutput" />
+                  </Nodes>
+                  <Edges>
+                    <Edge From="0" To="1" Label="Source1" />
+                    <Edge From="2" To="3" Label="Source1" />
+                    <Edge From="3" To="4" Label="Source1" />
+                    <Edge From="4" To="5" Label="Source1" />
+                    <Edge From="5" To="8" Label="Source1" />
+                    <Edge From="6" To="7" Label="Source1" />
+                    <Edge From="7" To="8" Label="Source2" />
+                    <Edge From="8" To="9" Label="Source1" />
+                  </Edges>
+                </Workflow>
+              </Expression>
+              <Expression xsi:type="viz:LineGraphBuilder">
+                <viz:ValueSelector>Item1.TotalMinutes,Item2</viz:ValueSelector>
+                <viz:SymbolType>VDash</viz:SymbolType>
+                <viz:LineWidth>0</viz:LineWidth>
+                <viz:Capacity>10000</viz:Capacity>
+              </Expression>
+            </Nodes>
+            <Edges>
+              <Edge From="0" To="1" Label="Source1" />
+              <Edge From="1" To="2" Label="Source1" />
+              <Edge From="1" To="8" Label="Source2" />
+              <Edge From="2" To="3" Label="Source1" />
+              <Edge From="3" To="4" Label="Source1" />
+              <Edge From="4" To="5" Label="Source1" />
+              <Edge From="5" To="6" Label="Source1" />
+              <Edge From="6" To="7" Label="Source1" />
+              <Edge From="7" To="8" Label="Source1" />
+              <Edge From="8" To="9" Label="Source1" />
+              <Edge From="9" To="10" Label="Source1" />
+              <Edge From="10" To="14" Label="Source1" />
+              <Edge From="11" To="12" Label="Source1" />
+              <Edge From="12" To="13" Label="Source1" />
+              <Edge From="13" To="14" Label="Source2" />
+              <Edge From="14" To="15" Label="Source1" />
+              <Edge From="16" To="17" Label="Source1" />
+              <Edge From="17" To="18" Label="Source1" />
+              <Edge From="17" To="19" Label="Source1" />
+              <Edge From="18" To="20" Label="Source1" />
+              <Edge From="19" To="20" Label="Source2" />
+              <Edge From="20" To="21" Label="Source1" />
+              <Edge From="21" To="22" Label="Source1" />
+              <Edge From="22" To="23" Label="Source1" />
+            </Edges>
+          </Workflow>
+        </Builder>
       </Expression>
     </Nodes>
     <Edges>
-      <Edge From="12" To="13" Label="Source1" />
-      <Edge From="13" To="14" Label="Source1" />
-      <Edge From="13" To="20" Label="Source2" />
-      <Edge From="14" To="15" Label="Source1" />
-      <Edge From="15" To="16" Label="Source1" />
-      <Edge From="16" To="17" Label="Source1" />
-      <Edge From="17" To="18" Label="Source1" />
-      <Edge From="18" To="19" Label="Source1" />
-      <Edge From="19" To="20" Label="Source1" />
-      <Edge From="20" To="21" Label="Source1" />
-      <Edge From="21" To="22" Label="Source1" />
-      <Edge From="22" To="26" Label="Source1" />
-      <Edge From="23" To="24" Label="Source1" />
-      <Edge From="24" To="25" Label="Source1" />
-      <Edge From="25" To="26" Label="Source2" />
-      <Edge From="26" To="27" Label="Source1" />
-      <Edge From="28" To="29" Label="Source1" />
-      <Edge From="29" To="30" Label="Source1" />
-      <Edge From="29" To="31" Label="Source1" />
-      <Edge From="30" To="32" Label="Source1" />
-      <Edge From="31" To="32" Label="Source2" />
-      <Edge From="32" To="33" Label="Source1" />
-      <Edge From="33" To="34" Label="Source1" />
-      <Edge From="34" To="35" Label="Source1" />
+      <Edge From="0" To="1" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
