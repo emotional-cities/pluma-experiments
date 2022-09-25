@@ -1,9 +1,11 @@
+from logging import warning
 import numpy as np
 import pandas as pd
 import datetime
 import os
 from utils.ubx import read_ubx_file
 from dotmap import DotMap
+import warnings
 
 '''IO import functions
 '''
@@ -61,13 +63,17 @@ def get_stream_path(streamID, root = '', suffix = 'Streams_', ext = ''):
     _suffix = f'{suffix}{streamID}{ext}'
     return os.path.join(root, _suffix)
 
-def load_harp_stream(streamID, root = ''):
+def load_harp_stream(streamID, root = '', throwFileError = True):
     path = get_stream_path(streamID, root)
     if os.path.isfile(path):
         data = read_harp_bin(path)
-        return data#streams.HarpStream(streamID)
+        return data
     else:
-        raise FileExistsError
+        if throwFileError:
+            raise FileExistsError
+        else:
+            warnings.warn(f'Harp stream with Id {streamID} not found')
+            return pd.DataFrame()
 
 def load_ubx_stream(root = ''):
     bin_file = load_ubx_bin(root = root)

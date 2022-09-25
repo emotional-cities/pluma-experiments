@@ -1,53 +1,52 @@
 from dotmap import DotMap
 import pandas as pd
+from utils.EmotionalCitiesStreams import HarpStream
+import utils.dataloader
 
-"""Stores the correspondence between stream labels and values
-"""
+def populate_streams(root = ''):
 
-_stream_labels = DotMap()
+  streams = DotMap()
+  streams.BioData.EnableStreams = HarpStream(32, 'BioData', 'EnableStreams', root = root)
+  streams.BioData.DisableStreams = HarpStream(33, 'BioData', 'DisableStreams', root = root)
+  streams.BioData.ECG = HarpStream(35, 'BioData', 'ECG', root = root)
+  streams.BioData.GSR = HarpStream(36, 'BioData', 'GSR', root = root)
+  streams.BioData.Accelarometer = HarpStream(37, 'BioData', 'Accelarometer', root = root)
+  streams.BioData.DigitalIn = HarpStream(38, 'BioData', 'DigitalIn', root = root)
+  streams.BioData.Set = HarpStream(39, 'BioData', 'Set', root = root)
+  streams.BioData.Clear = HarpStream(40, 'BioData', 'Clear', root = root)
 
-_stream_labels.BioData_EnableStream = 32
-_stream_labels.BioData_DisableStream = 33
-_stream_labels.BioData_ECG = 35
-_stream_labels.BioData_GSR = 36
-_stream_labels.BioData_Accelarometer = 37
-_stream_labels.BioData_DigitalIn = 38
-_stream_labels.BioData_Set = 39
-_stream_labels.BioData_Clear = 40
+  streams.PupilLabs.LSLSampleTime = HarpStream(220, 'PupilLabs', 'LSLSampleTime', root = root)
+  streams.PupilLabs.LSLSampleArray = HarpStream(221, 'PupilLabs', 'LSLSampleArray', root = root)
 
-_stream_labels.PupilLabs_LSLSampleTime = 220
-_stream_labels.PupilLabs_LSLSampleArray = 221
+  streams.Microphone.BufferIndex =  HarpStream(222, 'Microphone', 'BufferIndex', root = root)
 
-_stream_labels.Microphone_BufferIndex = 222
+  streams.TK.AmbientLight.AmbientLight = HarpStream(223, 'TK', 'AmbientLight.AmbientLight', root = root)
 
-_stream_labels.TK_AmbientLight_AmbientLight = 223
+  streams.TK.CO2V2.CO2Conc = HarpStream(224, 'TK', 'CO2V2.CO2Conc', root = root)
+  streams.TK.CO2V2.Temperature = HarpStream(225, 'TK', 'CO2V2.Temperature', root = root)
+  streams.TK.CO2V2.Humidity = HarpStream(226, 'TK', 'CO2V2.Humidity', root = root)
 
-_stream_labels.TK_CO2V2_CO2Conc = 224
-_stream_labels.TK_CO2V2_Temperature = 225
-_stream_labels.TK_CO2V2_Humidity = 226
+  streams.TK.GPS.Latitude = HarpStream(227, 'TK', 'GPS.Latitude', root = root)
+  streams.TK.GPS.Longitude = HarpStream(228, 'TK', 'GPS.Latitude', root = root)
+  streams.TK.GPS.Altitude = HarpStream(229, 'TK', 'GPS.Latitude', root = root)
+  streams.TK.GPS.Data = HarpStream(230, 'TK', 'GPS.Latitude', root = root)
+  streams.TK.GPS.Time = HarpStream(231, 'TK', 'GPS.Latitude', root = root)
+  streams.TK.GPS.HasFix = HarpStream(232, 'TK', 'GPS.Latitude', root = root)
 
-_stream_labels.TK_GPS_Latitude = 227
-_stream_labels.TK_GPS_Longitude = 228
-_stream_labels.TK_GPS_Altitude = 229
-_stream_labels.TK_GPS_Data = 230
-_stream_labels.TK_GPS_Time = 231
-_stream_labels.TK_GPS_HasFix = 232
+  streams.TK.AirQuality.IAQIndex = HarpStream(233, 'TK', 'AirQuality.IAQIndex', root = root)
+  streams.TK.AirQuality.Temperature = HarpStream(234, 'TK', 'AirQuality.IAQIndex', root = root)
+  streams.TK.AirQuality.Humidity = HarpStream(235, 'TK', 'AirQuality.IAQIndex', root = root)
+  streams.TK.AirQuality.AirPressure = HarpStream(236, 'TK', 'AirQuality.IAQIndex', root = root)
 
-_stream_labels.TK_AirQuality_IAQIndex = 233
-_stream_labels.TK_AirQuality_Temperature = 234
-_stream_labels.TK_AirQuality_Humidity = 235
-_stream_labels.TK_AirQuality_AirPressure = 236
+  streams.TK.SoundPressureLevel.SPL = HarpStream(237, 'TK', 'SoundPressureLevel.SPL', root = root)
 
-_stream_labels.TK_SoundPressureLevel_SPL = 237
+  streams.TK.Humidity.Humidity = HarpStream(238, 'TK', 'Humidity.Humidity', root = root)
 
-_stream_labels.TK_Humidity_Humidity = 238
+  streams.TK.AnalogIn.Voltage = HarpStream(239, 'TK', 'AnalogIn.Voltage', root = root)
 
-_stream_labels.TK_AnalogIn_AnalogIn = 238
+  streams.UBX = utils.dataloader.load_ubx_stream(root = root)
+  streams.Accelerometer = utils.dataloader.load_accelerometer(root = root)
+  streams.Empatica = utils.dataloader.load_empatica(root = root)
+  streams.Microphone = utils.dataloader.load_microphone(root = root)
 
-#_stream_labels_inv = {v: k for k, v in _stream_labels.toDict().items()}
-
-class HarpStream:
-  def __init__(self, code: int, label: str, data: pd.DataFrame):
-    self.code = code
-    self.label = label
-    self.data = data
+  return streams
