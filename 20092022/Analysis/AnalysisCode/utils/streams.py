@@ -1,7 +1,6 @@
 from dotmap import DotMap
 import pandas as pd
-from utils.EmotionalCitiesStreams import HarpStream
-import utils.dataloader
+from utils.EmotionalCitiesStreams import HarpStream, UbxStream, AccelerometerStream, EmpaticaStream, MicrophoneStream
 
 def populate_streams(root = ''):
 
@@ -44,9 +43,9 @@ def populate_streams(root = ''):
 
   streams.TK.AnalogIn.Voltage =                 HarpStream(239, device = 'TK', streamlabel = 'AnalogIn.Voltage', root = root)
 
-  # streams.UBX = utils.dataloader.load_ubx_stream(root = root)
-  # streams.Accelerometer = utils.dataloader.load_accelerometer(root = root)
-  # streams.Empatica = utils.dataloader.load_empatica(root = root)
-  # streams.Microphone = utils.dataloader.load_microphone(root = root)
+  streams.UBX =                                 UbxStream(device = 'UBX', streamlabel = 'UBX', root = root)
+  streams.Accelerometer =                       AccelerometerStream(device = 'Accelerometer', streamlabel = 'Accelerometer', root = root)
+  streams.Empatica =                            EmpaticaStream(device = 'Accelerometer', streamlabel = 'Accelerometer', root = root)
+  streams.Microphone =                          MicrophoneStream(device = 'Accelerometer', streamlabel = 'Accelerometer', root = root)
 
   return streams
