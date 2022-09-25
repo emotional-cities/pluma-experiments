@@ -1,4 +1,3 @@
-from logging import warning
 import numpy as np
 import pandas as pd
 import datetime
@@ -137,8 +136,3 @@ def parse_empatica_stream(empatica_stream):
 def load_microphone(filename = 'Microphone.bin', root = ''):
     micdata = np.fromfile(os.path.join(root, filename), dtype='int16').reshape(-1,2)
     return micdata
-
-
-#def load_all_streams(root = ''):
-#    streams = DotMap()
-#    streams.
