@@ -3,12 +3,12 @@ import utils.ubx
 class Stream:
 	"""_summary_
 	"""
-    def __init__(self, device, streamlabel, root = '', data = None, autoload = True):
-        self.device = device
-        self.streamlabel = streamlabel
-        self.rootfolder = root
-        self.data = data
-        self.autoload = autoload
+	def __init__(self, device, streamlabel, root = '', data = None, autoload = True):
+		self.device = device
+		self.streamlabel = streamlabel
+		self.rootfolder = root
+		self.data = data
+		self.autoload = autoload
 
 
 class HarpStream(Stream):
@@ -43,7 +43,7 @@ class UbxStream(Stream):
 	def load(self):
 		self.data = load_ubx_stream(root = self.rootfolder)
 
-	def filter_ubx_event(self, event):
+	def filter_event(self, event):
 		return utils.ubx.filter_ubx_event(self.data, event)
 
 	def __str__(self):

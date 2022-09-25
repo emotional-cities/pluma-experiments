@@ -106,6 +106,7 @@ _accelerometer_header = [
 def load_accelerometer(filename = 'Accelarometer.csv', root = ''):
     df = pd.read_csv(os.path.join(root, filename), header = None, names= _accelerometer_header)
     df['Seconds'] = _HARP_T0 + pd.to_timedelta(df['Seconds'].values, 's')
+    df['SoftwareTimestamp'] =  _HARP_T0 + pd.to_timedelta(df['SoftwareTimestamp'].values, 's')
     df.set_index('Seconds', inplace=True)
     return df
 
