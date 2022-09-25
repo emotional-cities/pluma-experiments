@@ -3,18 +3,26 @@ import pandas as pd
 from utils.dataloader import load_harp_stream
 
 
-class HarpStream:
-	def __init__(self, eventcode, device, streamlabel, root = '', data = None):
+class Stream:
+    def __init__(self, device, streamlabel, root = '', data = None, autoload = True):
+        self.device = device
+        self.streamlabel = streamlabel
+        self.rootfolder = root
+        self.data = data
+        self.autoload = autoload
+
+class HarpStream(Stream):
+	def __init__(self, eventcode, **kw):
+		super(HarpStream,self).__init__(**kw)
 		self.eventcode = eventcode
-		self.device = device
-		self.streamlabel = streamlabel
-		self.rootfolder = root
+		if self.autoload:
+			self.load()
 
-		if data is None:
-			self.data = self._load_harp_stream()
-		else:
-			self.data = data
+	def load(self):
+		self.data = load_harp_stream(self.eventcode, root = self.rootfolder, throwFileError=False)
 
-	def _load_harp_stream(self):
-		return load_harp_stream(self.eventcode, root = self.rootfolder, throwFileError=False)
-
+# class UbxStream:
+#     class B(A):
+#     def __init__(self,b,**kw):
+#         self.b=b
+#         super(B,self).__init__(**kw)
