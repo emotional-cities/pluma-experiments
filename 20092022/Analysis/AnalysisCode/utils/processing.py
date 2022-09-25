@@ -14,3 +14,7 @@ def butter_highpass_filter(data, cutoff, fs, order=5):
     b, a = butter_highpass(cutoff, fs, order=order)
     y = signal.filtfilt(b, a, data)
     return y
+
+## Local functions
+def normalize_data(data_in):
+    return (data_in - np.min(data_in))/ (np.max(data_in - np.min(data_in)))
