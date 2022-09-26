@@ -4,6 +4,7 @@ from utils.EmotionalCitiesStreams import HarpStream, UbxStream, AccelerometerStr
 def populate_streams(root = '', autoload = True):
 
   streams = DotMap()
+  # BioData streams
   streams.BioData.EnableStreams =               HarpStream(32, device = 'BioData', streamlabel = 'EnableStreams', root = root, autoload = autoload)
   streams.BioData.DisableStreams =              HarpStream(33, device = 'BioData', streamlabel = 'DisableStreams', root = root, autoload = autoload)
   streams.BioData.ECG =                         HarpStream(35, device = 'BioData', streamlabel = 'ECG', root = root, autoload = autoload)
@@ -13,11 +14,14 @@ def populate_streams(root = '', autoload = True):
   streams.BioData.Set =                         HarpStream(39, device = 'BioData', streamlabel = 'Set', root = root, autoload = autoload)
   streams.BioData.Clear =                       HarpStream(40, device = 'BioData', streamlabel = 'Clear', root = root, autoload = autoload)
 
+  # PupilLabs streams
   streams.PupilLabs.LSLSampleTime =             HarpStream(220, device = 'PupilLabs', streamlabel = 'LSLSampleTime', root = root, autoload = autoload)
   streams.PupilLabs.LSLSampleArray =            HarpStream(221, device = 'PupilLabs', streamlabel = 'LSLSampleArray', root = root, autoload = autoload)
 
+  # Microphone streams
   streams.Microphone.BufferIndex =              HarpStream(222, device = 'Microphone', streamlabel = 'BufferIndex', root = root, autoload = autoload)
 
+  # TinkerForge streams
   streams.TK.AmbientLight.AmbientLight =        HarpStream(223, device = 'TK', streamlabel = 'AmbientLight.AmbientLight', root = root, autoload = autoload)
 
   streams.TK.CO2V2.CO2Conc =                    HarpStream(224, device = 'TK', streamlabel = 'CO2V2.CO2Conc', root = root, autoload = autoload)
@@ -42,9 +46,16 @@ def populate_streams(root = '', autoload = True):
 
   streams.TK.AnalogIn.Voltage =                 HarpStream(239, device = 'TK', streamlabel = 'AnalogIn.Voltage', root = root, autoload = autoload)
 
+  # UBX streams
   streams.UBX =                                 UbxStream(device = 'UBX', streamlabel = 'UBX', root = root, autoload = autoload)
+
+  # Accelerometer streams
   streams.Accelerometer =                       AccelerometerStream(device = 'Accelerometer', streamlabel = 'Accelerometer', root = root, autoload = autoload)
+
+  # Empatica streams
   streams.Empatica =                            EmpaticaStream(device = 'Empatica', streamlabel = 'Empatica', root = root, autoload = autoload)
+
+  # Microphone streams
   streams.Microphone =                          MicrophoneStream(device = 'Microphone', streamlabel = 'Microphone', root = root, autoload = autoload)
 
   return streams
