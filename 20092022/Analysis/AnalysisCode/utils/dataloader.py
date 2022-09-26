@@ -122,16 +122,25 @@ def load_empatica(filename = 'empatica_harp_ts.csv', root = ''):
 
 def parse_empatica_stream(empatica_stream):
     stream_id = empatica_stream['Message'][0].split(' ')[0]
+    df = empatica_stream['Message'].str.split(pat = ' ', expand = True)
     if stream_id == 'E4_Acc':
         df_labels = ['Stream', 'E4_Seconds', 'AccX', 'AccY', 'AccZ']
+        df.columns = df_labels
+        df[['AccX', 'AccY', 'AccZ']] = df[['AccX', 'AccY', 'AccZ']].astype(float)
+        df['E4_Seconds'] = _HARP_T0 + pd.to_timedelta(df['E4_Seconds'].values.astype(float), 's')
+
     elif stream_id in ['E4_Hr', 'E4_Bvp','E4_Gsr', 'E4_Battery', 'E4_Ibi', 'E4_Tag', 'E4_Temperature']:
         df_labels = ['Stream', 'E4_Seconds', 'Value']
+        df.columns = df_labels
+        df[['Value']] = df[['Value']].astype(float)
+        df['E4_Seconds'] = _HARP_T0 + pd.to_timedelta(df['E4_Seconds'].values.astype(float), 's')
+
     elif stream_id == 'R':
         df_labels = ['Stream', 'Event', 'StreamSubscription', 'Status']
+        df.columns = df_labels
+
     else:
         raise (f'Unexpected empatica stream id label: {stream_id}. No parse is currently set.')
-    df = empatica_stream['Message'].str.split(pat = ' ')
-    df.columns = df_labels
     return df
 
 def load_microphone(filename = 'Microphone.bin', root = ''):
