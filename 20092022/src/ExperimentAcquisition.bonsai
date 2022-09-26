@@ -623,7 +623,7 @@
             </Expression>
             <Expression xsi:type="Disable">
               <Builder xsi:type="GroupWorkflow">
-                <Name>DisableStream</Name>
+                <Name>EnableStream</Name>
                 <Workflow>
                   <Nodes>
                     <Expression xsi:type="WorkflowInput">
