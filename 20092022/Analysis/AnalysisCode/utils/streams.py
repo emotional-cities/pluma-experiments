@@ -18,8 +18,6 @@ def populate_streams(root = '', autoload = True):
   streams.PupilLabs.LSLSampleTime =             HarpStream(220, device = 'PupilLabs', streamlabel = 'LSLSampleTime', root = root, autoload = autoload)
   streams.PupilLabs.LSLSampleArray =            HarpStream(221, device = 'PupilLabs', streamlabel = 'LSLSampleArray', root = root, autoload = autoload)
 
-  # Microphone streams
-  streams.Microphone.BufferIndex =              HarpStream(222, device = 'Microphone', streamlabel = 'BufferIndex', root = root, autoload = autoload)
 
   # TinkerForge streams
   streams.TK.AmbientLight.AmbientLight =        HarpStream(223, device = 'TK', streamlabel = 'AmbientLight.AmbientLight', root = root, autoload = autoload)
@@ -56,6 +54,7 @@ def populate_streams(root = '', autoload = True):
   streams.Empatica =                            EmpaticaStream(device = 'Empatica', streamlabel = 'Empatica', root = root, autoload = autoload)
 
   # Microphone streams
-  streams.Microphone =                          MicrophoneStream(device = 'Microphone', streamlabel = 'Microphone', root = root, autoload = autoload)
+  streams.Microphone.Audio =                    MicrophoneStream(device = 'Microphone', streamlabel = 'Audio', root = root, autoload = autoload)
+  streams.Microphone.BufferIndex =              HarpStream(222, device = 'Microphone', streamlabel = 'BufferIndex', root = root, autoload = autoload)
 
   return streams
