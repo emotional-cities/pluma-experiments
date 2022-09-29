@@ -1,5 +1,6 @@
 from utils.dataloader import load_harp_stream, load_ubx_stream, load_accelerometer, load_empatica, load_microphone
 import utils.ubx
+import matplotlib.pyplot as plt
 class Stream:
 	"""_summary_
 	"""
@@ -10,6 +11,27 @@ class Stream:
 		self.data = data
 		self.autoload = autoload
 
+	def plot(self, col = None , **kwargs):
+		thisfigure = plt.figure()
+		label = self.device + "." + self.streamlabel
+		if col is None:
+			plt.plot(self.data, **kwargs, label = label)
+		else:
+			plt.plot(self.data.loc[col], **kwargs, label = label)
+		plt.xlabel("Time")
+		plt.ylabel("Sensor value (a.u.)")
+		plt.title(label)
+		return thisfigure
+
+	def slice(self, start = None, end = None):
+		if (start is not None) & (end is not None):
+			return self.data.loc[start:end]
+		elif (start is None) & (end is not None):
+			return self.data.loc[:end]
+		elif (start is not None) & (end is None):
+			return self.data.loc[start:]
+		else:
+			return self.data
 
 class HarpStream(Stream):
 	"""_summary_
@@ -25,6 +47,7 @@ class HarpStream(Stream):
 
 	def load(self):
 		self.data = load_harp_stream(self.eventcode, root = self.rootfolder, throwFileError=False)
+
 
 	def __str__(self):
 		return f'Harp stream from device {self.device}, stream {self.streamlabel}({self.eventcode})'
@@ -65,6 +88,7 @@ class AccelerometerStream(Stream):
 
 	def __str__(self):
 		return f'Accelerometer stream from device {self.device}, stream {self.streamlabel}'
+
 class MicrophoneStream (Stream):
 	"""_summary_
 
