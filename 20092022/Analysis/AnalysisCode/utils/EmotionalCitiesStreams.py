@@ -36,18 +36,16 @@ class Stream:
 		else:
 			return self.data
 
-	def resample_temporospatial(self,
-                    georeference,
+	@staticmethod
+	def resample_temporospatial(input_data, georeference,
                     sampling_dt = datetime.timedelta(seconds = 2)):
-
-		inputdata = self.data
 		resampled = georeference.loc[:,"Lat":"Height"].resample(sampling_dt, origin='start').mean()
 		resampled['Data'] = np.NAN
 		for i in np.arange(len(resampled)-1):
-			resampled['Data'].iloc[i] = (inputdata[
-				(inputdata.index >= resampled.index[i]) &
-				(inputdata.index < resampled.index[i+1])]).mean()
-		resampled['Data'].iloc[i+1] = (inputdata[inputdata.index >= resampled.index[i+1]]).mean()
+			resampled['Data'].iloc[i] = (input_data[
+				(input_data.index >= resampled.index[i]) &
+				(input_data.index < resampled.index[i+1])]).mean()
+		resampled['Data'].iloc[i+1] = (input_data[input_data.index >= resampled.index[i+1]]).mean()
 		return resampled
 
 class HarpStream(Stream):
