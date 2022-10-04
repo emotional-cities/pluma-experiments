@@ -1,4 +1,3 @@
-from sympy import root
 from utils.dataloader import load_harp_stream, load_ubx_stream, load_accelerometer, load_empatica, load_microphone
 import utils.ubx
 import matplotlib.pyplot as plt
