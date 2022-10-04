@@ -108,7 +108,7 @@ class Dataset:
 	def showmap(self,
             NavData = None,
             figsize = (20,20),
-            with_scaling = 0.6, to_aspect= (4/3),
+            with_scaling = 0.6, to_aspect= (4/3), tiles = tmb.tiles.build_OSM(),
             cmap = 'jet', markersize = 15, colorscale_override = None):
 		if NavData is None:
 			NavData = self.georeference #plot only the georeference basically
@@ -123,7 +123,6 @@ class Dataset:
 
 		fig, ax = plt.subplots(1,1)
 		fig.set_size_inches(figsize)
-		tiles = tmb.tiles.build_OSM()
 		extent = tmb.Extent.from_lonlat(np.min(NavData['Lon'].values), np.max(NavData['Lon'].values),
                                         np.min(NavData['Lat'].values), np.max(NavData['Lat'].values))
 		extent = extent.to_aspect(to_aspect).with_scaling(with_scaling)
