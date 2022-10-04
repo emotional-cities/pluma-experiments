@@ -1,3 +1,4 @@
+from sympy import root
 from utils.dataloader import load_harp_stream, load_ubx_stream, load_accelerometer, load_empatica, load_microphone
 import utils.ubx
 import matplotlib.pyplot as plt
@@ -10,6 +11,7 @@ class Stream:
 		self.rootfolder = root
 		self.data = data
 		self.autoload = autoload
+		self.georeference = None
 
 	def plot(self, col = None , **kwargs):
 		thisfigure = plt.figure()
@@ -33,6 +35,22 @@ class Stream:
 		else:
 			return self.data
 
+	def add_georeference(self, df):
+		if (isinstance(df, UbxStream)):
+			self.georeference = df.parseposition()
+		else:
+			raise "Reference stream must be a UbxStream class."
+
+	def spatial_position(self, interpolate = True, interpolate_type = 'linear'):
+		"""_summary_
+
+		Returns:
+			_type_: _description_
+		"""
+		#The idea is to return the position of the sample.
+		#Return for each entry in pandas. Interpolate?
+
+
 class HarpStream(Stream):
 	"""_summary_
 
@@ -48,7 +66,6 @@ class HarpStream(Stream):
 	def load(self):
 		self.data = load_harp_stream(self.eventcode, root = self.rootfolder, throwFileError=False)
 
-
 	def __str__(self):
 		return f'Harp stream from device {self.device}, stream {self.streamlabel}({self.eventcode})'
 
@@ -60,6 +77,7 @@ class UbxStream(Stream):
 	"""
 	def __init__(self, **kw):
 		super(UbxStream,self).__init__(**kw)
+		self.positiondata = None
 		if self.autoload:
 			self.load()
 
@@ -68,6 +86,13 @@ class UbxStream(Stream):
 
 	def filter_event(self, event):
 		return utils.ubx.filter_ubx_event(self.data, event)
+
+	def parseposition(self, event = "NAV-HPPOSLLH"):
+		NavData = self.filter_event(event)
+		NavData.insert(NavData.shape[1], "Lat", NavData.apply(lambda x : x.Message.lat, axis = 1), False)
+		NavData.insert(NavData.shape[1], "Lon", NavData.apply(lambda x : x.Message.lon, axis = 1), False)
+		NavData.insert(NavData.shape[1], "Height", NavData.apply(lambda x : x.Message.height, axis = 1), False)
+		NavData.insert(NavData.shape[1], "Time", NavData.apply(lambda x : x.Message.iTOW, axis = 1), False)
 
 	def __str__(self):
 		return f'Ubx stream from device {self.device}, stream {self.streamlabel}'
