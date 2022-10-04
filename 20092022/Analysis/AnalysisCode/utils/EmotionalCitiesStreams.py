@@ -1,6 +1,8 @@
 from utils.dataloader import load_harp_stream, load_ubx_stream, load_accelerometer, load_empatica, load_microphone
 import utils.ubx
 import matplotlib.pyplot as plt
+import datetime
+import numpy as np
 class Stream:
 	"""_summary_
 	"""
@@ -34,21 +36,19 @@ class Stream:
 		else:
 			return self.data
 
-	def add_georeference(self, df):
-		if (isinstance(df, UbxStream)):
-			self.georeference = df.parseposition()
-		else:
-			raise "Reference stream must be a UbxStream class."
+	def resample_temporospatial(self,
+                    georeference,
+                    sampling_dt = datetime.timedelta(seconds = 2)):
 
-	def spatial_position(self, interpolate = True, interpolate_type = 'linear'):
-		"""_summary_
-
-		Returns:
-			_type_: _description_
-		"""
-		#The idea is to return the position of the sample.
-		#Return for each entry in pandas. Interpolate?
-
+		inputdata = self.data
+		resampled = georeference.loc[:,"Lat":"Height"].resample(sampling_dt, origin='start').mean()
+		resampled['Data'] = np.NAN
+		for i in np.arange(len(resampled)-1):
+			resampled['Data'].iloc[i] = (inputdata[
+				(inputdata.index >= resampled.index[i]) &
+				(inputdata.index < resampled.index[i+1])]).mean()
+		resampled['Data'].iloc[i+1] = (inputdata[inputdata.index >= resampled.index[i+1]]).mean()
+		return resampled
 
 class HarpStream(Stream):
 	"""_summary_
