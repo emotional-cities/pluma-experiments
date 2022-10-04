@@ -2,6 +2,9 @@ from dotmap import DotMap
 from utils.EmotionalCitiesStreams import HarpStream, UbxStream, AccelerometerStream, EmpaticaStream, MicrophoneStream
 import pickle
 import os
+import tilemapbase as tmb
+import numpy as np
+import matplotlib.pyplot as plt
 class Dataset:
 
 	def __init__(self, root, datasetlabel = '', ):
@@ -9,6 +12,24 @@ class Dataset:
 		self.datasetlabel = datasetlabel
 		self.georeference = None
 		self.streams = None
+		self.georeference = None
+
+	def add_georeference(self, ubxstream = None, event = 'NAV-HPPOSLLH'):
+		if ubxstream is None:
+			try:
+				NavData = self.streams.UBX.filter_event(event)
+			except:
+				raise 'Could not load Ubx stream.'
+		else:
+			if not isinstance(ubxstream, UbxStream):
+				raise "Reference must be a UbxStream class instance"
+			else:
+				NavData = ubxstream.filter_event(event)
+		NavData.insert(NavData.shape[1], "Lat", NavData.apply(lambda x : x.Message.lat, axis = 1), False)
+		NavData.insert(NavData.shape[1], "Lon", NavData.apply(lambda x : x.Message.lon, axis = 1), False)
+		NavData.insert(NavData.shape[1], "Height", NavData.apply(lambda x : x.Message.height, axis = 1), False)
+		NavData.insert(NavData.shape[1], "Time", NavData.apply(lambda x : x.Message.iTOW, axis = 1), False)
+		self.georeference = NavData
 
 	def export_streams(self, filename = None):
 		if filename is None:
@@ -81,3 +102,40 @@ class Dataset:
 		streams.Microphone.BufferIndex =              HarpStream(222, device = 'Microphone', streamlabel = 'BufferIndex', root = root, autoload = autoload)
 
 		self.streams = streams
+
+
+	### Visualization ###
+	def showmap(self,
+            NavData = None,
+            figsize = (20,20),
+            with_scaling = 0.6, to_aspect= (4/3),
+            cmap = 'jet', markersize = 15, colorscale_override = None):
+		if NavData is None:
+			NavData = self.georeference #plot only the georeference basically
+			NavData = NavData.assign(Data=1)
+		else:
+			if 'Data' not in NavData.columns:
+				raise 'NavData input must have a "Data" Column. Use Stream.resample_temporospatial() for an example.'
+
+		#import geopandas as gpd
+		#coord = gpd.points_from_xy(NavData['Lon'], NavData['Lat'], NavData['Height'])
+		#gdf = gpd.GeoDataFrame(geometry=coord, crs='epsg:4326')
+
+		fig, ax = plt.subplots(1,1)
+		fig.set_size_inches(figsize)
+		tiles = tmb.tiles.build_OSM()
+		extent = tmb.Extent.from_lonlat(np.min(NavData['Lon'].values), np.max(NavData['Lon'].values),
+                                        np.min(NavData['Lat'].values), np.max(NavData['Lat'].values))
+		extent = extent.to_aspect(to_aspect).with_scaling(with_scaling)
+		ax.xaxis.set_visible(False)
+		ax.yaxis.set_visible(False)
+		plotter = tmb.Plotter(extent, tiles, width=600)
+		plotter.plot(ax)
+
+		path = [tmb.project(x,y) for x,y in zip(NavData['Lon'].values, NavData['Lat'].values)]
+		x, y = zip(*path)
+
+		if colorscale_override is None:
+			colorscale_override = NavData['Data'].values
+		ax.scatter(x, y, c = colorscale_override, s = markersize, cmap = cmap)
+		return fig
