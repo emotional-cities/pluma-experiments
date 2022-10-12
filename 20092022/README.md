@@ -62,6 +62,29 @@ class SceneCameraGaze(Outlet):
         )
 ```
 
+## Pupil Labs Pupil Invisible 
+ 
+### Install notes 
+ - To have in Bonsai pupil invible capture you will need to intall the pupil relay lsl from https://pupil-invisible-lsl-relay.readthedocs.io/en/stable/
+    - pip install pupil-invisible-lsl-relay
+ - In bonsai side you need to install Bonsai.lsl package.
+
+### Execution Notes 
+ - On the phone run the invisible Companion app 
+ - Both phone and computer needs to be on the same wifi network
+ - in python run pupil_invisible_lsl_relay
+    - If discovery works you get a list of all connected devices.
+        - Enter the index of the device you want to connect to.
+    - If not on the device go to the menu-streaming 
+        - there is an IP adrees : port of the device 
+        - you should then from python run pupil_invisible_lsl_relay --device_address device_ip:device_port
+ - On Bonsai side inser an lsl stream inlet 
+    - name the stream to pupil_invisible_Gaze
+    - Stream ChannelCount 2
+    - Stream ChannelFormat Float32 
+
+
+
 ## Bonsai data logging
 
 Most of the data currently being saved in Bonsai is packaged in a HARP message format. For each different event (different address) a new .bin file will be created.
