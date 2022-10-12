@@ -105,6 +105,19 @@ To achieve this, Bonsai is randomly toggling a digital output in the HARP behavi
 | **TK-SoundPressureLevel** |       SPL       |      237      |                                               |
 |      **TK-Humidity**      |     Humidity    |      238      |                                               |
 |      **TK-AnalogIn**      |     AnalogIn    |      239      |                                               |
+| **TK-Particulate Matter** |       PM1.0     |      240      |               Timestamped(int)                |
+|                           |       PM2.5     |      241      |               Timestamped(int)                |
+|                           |       PM10      |      242      |               Timestamped(int)                |
+|     **TK-Dual0-20mA**     |   Solar-Light   |      243      |               Timestamped(int)                |
+|     **TK-Thermoouple**    |   Radiant Temp  |      244      |               Timestamped(int)                |
+|        **TK-PTC**         |     Air Temp    |      245      |               Timestamped(int)                |
+|        **ATMOS22**        |    North Wind   |      246      |               Timestamped(float)              |
+|                           |     East Wind   |      247      |               Timestamped(float)              |
+|                           |     Gust Wind   |      248      |               Timestamped(float)              |
+|                           |     Air Temp    |      249      |               Timestamped(float)              |
+|                           |   XOrientation  |      250      |               Timestamped(float)              |
+|                           |   YOrientation  |      251      |               Timestamped(float)              |
+|                           |    NullValue    |      252      |               Timestamped(float)              |
 |       **PupilLabs**       |  LSL-SampleTime |      220      |                                               |
 |                           | LSL-SampleArray |      221      |                                               |
 |                           |                 |               |                                               |
