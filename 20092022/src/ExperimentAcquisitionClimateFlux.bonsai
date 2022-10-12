@@ -1941,7 +1941,8 @@ it.Item3 as TimestampSource)</scr:Expression>
                   <Expression xsi:type="WorkflowInput">
                     <Name>Source1</Name>
                   </Expression>
-                  <Expression xsi:type="Condition">
+                  <Expression xsi:type="Disable">
+                    <Builder xsi:type="Condition">
                       <Name>Check For Error Codes -9999 and -9990</Name>
                       <Workflow>
                         <Nodes>
@@ -2029,6 +2030,7 @@ it.Item3 as TimestampSource)</scr:Expression>
                           <Edge From="16" To="17" Label="Source1" />
                         </Edges>
                       </Workflow>
+                    </Builder>
                   </Expression>
                   <Expression xsi:type="scr:ExpressionTransform">
                     <scr:Expression>new (
