@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <WorkflowBuilder Version="2.7.0-rc1"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
@@ -47,321 +47,313 @@
             <Expression xsi:type="PublishSubject" TypeArguments="harp:HarpMessage">
               <Name>LoggingDump</Name>
             </Expression>
-            <Expression xsi:type="Disable">
-              <Builder xsi:type="GroupWorkflow">
-                <Name>LogMuxAddress</Name>
-                <Workflow>
-                  <Nodes>
-                    <Expression xsi:type="WorkflowInput">
-                      <Name>Source1</Name>
-                    </Expression>
-                    <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="harp:FilterMessage">
-                        <harp:Address xsi:nil="true" />
-                        <harp:MessageType>Event</harp:MessageType>
-                      </Combinator>
-                    </Expression>
-                    <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="harp:FilterMessage">
-                        <harp:Address xsi:nil="true" />
-                        <harp:MessageType>Write</harp:MessageType>
-                      </Combinator>
-                    </Expression>
-                    <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="rx:Merge" />
-                    </Expression>
-                    <Expression xsi:type="rx:GroupBy">
-                      <rx:KeySelector>Address</rx:KeySelector>
-                    </Expression>
-                    <Expression xsi:type="ExternalizedMapping">
-                      <Property Name="LogName" />
-                    </Expression>
-                    <Expression xsi:type="SelectMany">
-                      <Name>LogHarpStreams</Name>
-                      <Workflow>
-                        <Nodes>
-                          <Expression xsi:type="WorkflowInput">
-                            <Name>Source1</Name>
-                          </Expression>
-                          <Expression xsi:type="AsyncSubject">
-                            <Name>Register</Name>
-                          </Expression>
-                          <Expression xsi:type="SubscribeSubject">
-                            <Name>Register</Name>
-                          </Expression>
-                          <Expression xsi:type="MemberSelector">
-                            <Selector>Key</Selector>
-                          </Expression>
-                          <Expression xsi:type="ExternalizedMapping">
-                            <Property Name="Value" DisplayName="LogName" />
-                          </Expression>
-                          <Expression xsi:type="Combinator">
-                            <Combinator xsi:type="StringProperty">
-                              <Value>Streams</Value>
-                            </Combinator>
-                          </Expression>
-                          <Expression xsi:type="Combinator">
-                            <Combinator xsi:type="rx:Take">
-                              <rx:Count>1</rx:Count>
-                            </Combinator>
-                          </Expression>
-                          <Expression xsi:type="SubscribeSubject">
-                            <Name>LoggingPath</Name>
-                          </Expression>
-                          <Expression xsi:type="Combinator">
-                            <Combinator xsi:type="rx:Zip" />
-                          </Expression>
-                          <Expression xsi:type="Format">
-                            <Format>{2}\{0}_{1}</Format>
-                            <Selector>Item1,Item2,Item3</Selector>
-                          </Expression>
-                          <Expression xsi:type="Combinator">
-                            <Combinator xsi:type="rx:Take">
-                              <rx:Count>1</rx:Count>
-                            </Combinator>
-                          </Expression>
-                          <Expression xsi:type="AsyncSubject">
-                            <Name>LogName</Name>
-                          </Expression>
-                          <Expression xsi:type="SubscribeSubject">
-                            <Name>Register</Name>
-                          </Expression>
-                          <Expression xsi:type="Combinator">
-                            <Combinator xsi:type="rx:Merge" />
-                          </Expression>
-                          <Expression xsi:type="MemberSelector">
-                            <Selector>MessageBytes</Selector>
-                          </Expression>
-                          <Expression xsi:type="SubscribeSubject">
-                            <Name>LogName</Name>
-                          </Expression>
-                          <Expression xsi:type="PropertyMapping">
-                            <PropertyMappings>
-                              <Property Name="Path" />
-                            </PropertyMappings>
-                          </Expression>
-                          <Expression xsi:type="Combinator">
-                            <Combinator xsi:type="dsp:MatrixWriter">
-                              <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20220922\TRASH2022_09_26_16_58_57\Streams_38</dsp:Path>
-                              <dsp:Suffix>None</dsp:Suffix>
-                              <dsp:Overwrite>false</dsp:Overwrite>
-                              <dsp:Layout>ColumnMajor</dsp:Layout>
-                            </Combinator>
-                          </Expression>
-                          <Expression xsi:type="WorkflowOutput" />
-                        </Nodes>
-                        <Edges>
-                          <Edge From="0" To="1" Label="Source1" />
-                          <Edge From="2" To="3" Label="Source1" />
-                          <Edge From="3" To="8" Label="Source2" />
-                          <Edge From="4" To="5" Label="Source1" />
-                          <Edge From="5" To="6" Label="Source1" />
-                          <Edge From="6" To="8" Label="Source1" />
-                          <Edge From="7" To="8" Label="Source3" />
-                          <Edge From="8" To="9" Label="Source1" />
-                          <Edge From="9" To="10" Label="Source1" />
-                          <Edge From="10" To="11" Label="Source1" />
-                          <Edge From="12" To="13" Label="Source1" />
-                          <Edge From="13" To="14" Label="Source1" />
-                          <Edge From="14" To="17" Label="Source1" />
-                          <Edge From="15" To="16" Label="Source1" />
-                          <Edge From="16" To="17" Label="Source2" />
-                          <Edge From="17" To="18" Label="Source1" />
-                        </Edges>
-                      </Workflow>
-                    </Expression>
-                    <Expression xsi:type="WorkflowOutput" />
-                  </Nodes>
-                  <Edges>
-                    <Edge From="0" To="1" Label="Source1" />
-                    <Edge From="0" To="2" Label="Source1" />
-                    <Edge From="1" To="3" Label="Source2" />
-                    <Edge From="2" To="3" Label="Source1" />
-                    <Edge From="3" To="4" Label="Source1" />
-                    <Edge From="4" To="6" Label="Source1" />
-                    <Edge From="5" To="6" Label="Source2" />
-                    <Edge From="6" To="7" Label="Source1" />
-                  </Edges>
-                </Workflow>
-              </Builder>
+            <Expression xsi:type="GroupWorkflow">
+              <Name>LogMuxAddress</Name>
+              <Workflow>
+                <Nodes>
+                  <Expression xsi:type="WorkflowInput">
+                    <Name>Source1</Name>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="harp:FilterMessage">
+                      <harp:Address xsi:nil="true" />
+                      <harp:MessageType>Event</harp:MessageType>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="harp:FilterMessage">
+                      <harp:Address xsi:nil="true" />
+                      <harp:MessageType>Write</harp:MessageType>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:Merge" />
+                  </Expression>
+                  <Expression xsi:type="rx:GroupBy">
+                    <rx:KeySelector>Address</rx:KeySelector>
+                  </Expression>
+                  <Expression xsi:type="ExternalizedMapping">
+                    <Property Name="LogName" />
+                  </Expression>
+                  <Expression xsi:type="SelectMany">
+                    <Name>LogHarpStreams</Name>
+                    <Workflow>
+                      <Nodes>
+                        <Expression xsi:type="WorkflowInput">
+                          <Name>Source1</Name>
+                        </Expression>
+                        <Expression xsi:type="AsyncSubject">
+                          <Name>Register</Name>
+                        </Expression>
+                        <Expression xsi:type="SubscribeSubject">
+                          <Name>Register</Name>
+                        </Expression>
+                        <Expression xsi:type="MemberSelector">
+                          <Selector>Key</Selector>
+                        </Expression>
+                        <Expression xsi:type="ExternalizedMapping">
+                          <Property Name="Value" DisplayName="LogName" />
+                        </Expression>
+                        <Expression xsi:type="Combinator">
+                          <Combinator xsi:type="StringProperty">
+                            <Value>Streams</Value>
+                          </Combinator>
+                        </Expression>
+                        <Expression xsi:type="Combinator">
+                          <Combinator xsi:type="rx:Take">
+                            <rx:Count>1</rx:Count>
+                          </Combinator>
+                        </Expression>
+                        <Expression xsi:type="SubscribeSubject">
+                          <Name>LoggingPath</Name>
+                        </Expression>
+                        <Expression xsi:type="Combinator">
+                          <Combinator xsi:type="rx:Zip" />
+                        </Expression>
+                        <Expression xsi:type="Format">
+                          <Format>{2}\{0}_{1}</Format>
+                          <Selector>Item1,Item2,Item3</Selector>
+                        </Expression>
+                        <Expression xsi:type="Combinator">
+                          <Combinator xsi:type="rx:Take">
+                            <rx:Count>1</rx:Count>
+                          </Combinator>
+                        </Expression>
+                        <Expression xsi:type="AsyncSubject">
+                          <Name>LogName</Name>
+                        </Expression>
+                        <Expression xsi:type="SubscribeSubject">
+                          <Name>Register</Name>
+                        </Expression>
+                        <Expression xsi:type="Combinator">
+                          <Combinator xsi:type="rx:Merge" />
+                        </Expression>
+                        <Expression xsi:type="MemberSelector">
+                          <Selector>MessageBytes</Selector>
+                        </Expression>
+                        <Expression xsi:type="SubscribeSubject">
+                          <Name>LogName</Name>
+                        </Expression>
+                        <Expression xsi:type="PropertyMapping">
+                          <PropertyMappings>
+                            <Property Name="Path" />
+                          </PropertyMappings>
+                        </Expression>
+                        <Expression xsi:type="Combinator">
+                          <Combinator xsi:type="dsp:MatrixWriter">
+                            <dsp:Path>G:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20221012\2022_10_12_15_53_14\Streams_39</dsp:Path>
+                            <dsp:Suffix>None</dsp:Suffix>
+                            <dsp:Overwrite>false</dsp:Overwrite>
+                            <dsp:Layout>ColumnMajor</dsp:Layout>
+                          </Combinator>
+                        </Expression>
+                        <Expression xsi:type="WorkflowOutput" />
+                      </Nodes>
+                      <Edges>
+                        <Edge From="0" To="1" Label="Source1" />
+                        <Edge From="2" To="3" Label="Source1" />
+                        <Edge From="3" To="8" Label="Source2" />
+                        <Edge From="4" To="5" Label="Source1" />
+                        <Edge From="5" To="6" Label="Source1" />
+                        <Edge From="6" To="8" Label="Source1" />
+                        <Edge From="7" To="8" Label="Source3" />
+                        <Edge From="8" To="9" Label="Source1" />
+                        <Edge From="9" To="10" Label="Source1" />
+                        <Edge From="10" To="11" Label="Source1" />
+                        <Edge From="12" To="13" Label="Source1" />
+                        <Edge From="13" To="14" Label="Source1" />
+                        <Edge From="14" To="17" Label="Source1" />
+                        <Edge From="15" To="16" Label="Source1" />
+                        <Edge From="16" To="17" Label="Source2" />
+                        <Edge From="17" To="18" Label="Source1" />
+                      </Edges>
+                    </Workflow>
+                  </Expression>
+                  <Expression xsi:type="WorkflowOutput" />
+                </Nodes>
+                <Edges>
+                  <Edge From="0" To="1" Label="Source1" />
+                  <Edge From="0" To="2" Label="Source1" />
+                  <Edge From="1" To="3" Label="Source2" />
+                  <Edge From="2" To="3" Label="Source1" />
+                  <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="4" To="6" Label="Source1" />
+                  <Edge From="5" To="6" Label="Source2" />
+                  <Edge From="6" To="7" Label="Source1" />
+                </Edges>
+              </Workflow>
             </Expression>
-            <Expression xsi:type="Disable">
-              <Builder xsi:type="GroupWorkflow">
-                <Name>LogReadDump</Name>
-                <Workflow>
-                  <Nodes>
-                    <Expression xsi:type="WorkflowInput">
-                      <Name>Source1</Name>
-                    </Expression>
-                    <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="harp:FilterMessage">
-                        <harp:Address xsi:nil="true" />
-                        <harp:MessageType>Read</harp:MessageType>
-                      </Combinator>
-                    </Expression>
-                    <Expression xsi:type="MemberSelector">
-                      <Selector>MessageBytes</Selector>
-                    </Expression>
-                    <Expression xsi:type="ExternalizedMapping">
-                      <Property Name="Value" DisplayName="LogName" />
-                    </Expression>
-                    <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="StringProperty">
-                        <Value>StreamReadDump.bin</Value>
-                      </Combinator>
-                    </Expression>
-                    <Expression xsi:type="SubscribeSubject">
-                      <Name>LoggingPath</Name>
-                    </Expression>
-                    <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="rx:Zip" />
-                    </Expression>
-                    <Expression xsi:type="Format">
-                      <Format>{0}\{1}</Format>
-                      <Selector>Item1,Item2</Selector>
-                    </Expression>
-                    <Expression xsi:type="PropertyMapping">
-                      <PropertyMappings>
-                        <Property Name="Path" />
-                      </PropertyMappings>
-                    </Expression>
-                    <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="dsp:MatrixWriter">
-                        <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20220922\TRASH2022_09_26_16_58_57\StreamReadDump.bin</dsp:Path>
-                        <dsp:Suffix>None</dsp:Suffix>
-                        <dsp:Overwrite>false</dsp:Overwrite>
-                        <dsp:Layout>ColumnMajor</dsp:Layout>
-                      </Combinator>
-                    </Expression>
-                    <Expression xsi:type="WorkflowOutput" />
-                  </Nodes>
-                  <Edges>
-                    <Edge From="0" To="1" Label="Source1" />
-                    <Edge From="1" To="2" Label="Source1" />
-                    <Edge From="2" To="9" Label="Source1" />
-                    <Edge From="3" To="4" Label="Source1" />
-                    <Edge From="4" To="6" Label="Source2" />
-                    <Edge From="5" To="6" Label="Source1" />
-                    <Edge From="6" To="7" Label="Source1" />
-                    <Edge From="7" To="8" Label="Source1" />
-                    <Edge From="8" To="9" Label="Source2" />
-                    <Edge From="9" To="10" Label="Source1" />
-                  </Edges>
-                </Workflow>
-              </Builder>
+            <Expression xsi:type="GroupWorkflow">
+              <Name>LogReadDump</Name>
+              <Workflow>
+                <Nodes>
+                  <Expression xsi:type="WorkflowInput">
+                    <Name>Source1</Name>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="harp:FilterMessage">
+                      <harp:Address xsi:nil="true" />
+                      <harp:MessageType>Read</harp:MessageType>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="MemberSelector">
+                    <Selector>MessageBytes</Selector>
+                  </Expression>
+                  <Expression xsi:type="ExternalizedMapping">
+                    <Property Name="Value" DisplayName="LogName" />
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="StringProperty">
+                      <Value>StreamReadDump.bin</Value>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="SubscribeSubject">
+                    <Name>LoggingPath</Name>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:Zip" />
+                  </Expression>
+                  <Expression xsi:type="Format">
+                    <Format>{0}\{1}</Format>
+                    <Selector>Item1,Item2</Selector>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="Path" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="dsp:MatrixWriter">
+                      <dsp:Path>G:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20221012\2022_10_12_15_53_14\StreamReadDump.bin</dsp:Path>
+                      <dsp:Suffix>None</dsp:Suffix>
+                      <dsp:Overwrite>false</dsp:Overwrite>
+                      <dsp:Layout>ColumnMajor</dsp:Layout>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="WorkflowOutput" />
+                </Nodes>
+                <Edges>
+                  <Edge From="0" To="1" Label="Source1" />
+                  <Edge From="1" To="2" Label="Source1" />
+                  <Edge From="2" To="9" Label="Source1" />
+                  <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="4" To="6" Label="Source2" />
+                  <Edge From="5" To="6" Label="Source1" />
+                  <Edge From="6" To="7" Label="Source1" />
+                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="8" To="9" Label="Source2" />
+                  <Edge From="9" To="10" Label="Source1" />
+                </Edges>
+              </Workflow>
             </Expression>
             <Expression xsi:type="PublishSubject" TypeArguments="p1:Mat">
               <Name>MicrophoneData</Name>
             </Expression>
-            <Expression xsi:type="Disable">
-              <Builder xsi:type="GroupWorkflow">
-                <Name>LogMicrophone</Name>
-                <Workflow>
-                  <Nodes>
-                    <Expression xsi:type="ExternalizedMapping">
-                      <Property Name="Value" DisplayName="LogName" />
-                    </Expression>
-                    <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="StringProperty">
-                        <Value>Microphone.bin</Value>
-                      </Combinator>
-                    </Expression>
-                    <Expression xsi:type="WorkflowInput">
-                      <Name>Source1</Name>
-                    </Expression>
-                    <Expression xsi:type="SubscribeSubject">
-                      <Name>LoggingPath</Name>
-                    </Expression>
-                    <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="rx:Zip" />
-                    </Expression>
-                    <Expression xsi:type="Format">
-                      <Format>{0}\{1}</Format>
-                      <Selector>Item1,Item2</Selector>
-                    </Expression>
-                    <Expression xsi:type="PropertyMapping">
-                      <PropertyMappings>
-                        <Property Name="Path" />
-                      </PropertyMappings>
-                    </Expression>
-                    <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="dsp:MatrixWriter">
-                        <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20220922\TRASH2022_09_26_16_58_57\Microphone.bin</dsp:Path>
-                        <dsp:Suffix>None</dsp:Suffix>
-                        <dsp:Overwrite>false</dsp:Overwrite>
-                        <dsp:Layout>ColumnMajor</dsp:Layout>
-                      </Combinator>
-                    </Expression>
-                    <Expression xsi:type="WorkflowOutput" />
-                  </Nodes>
-                  <Edges>
-                    <Edge From="0" To="1" Label="Source1" />
-                    <Edge From="1" To="4" Label="Source2" />
-                    <Edge From="2" To="7" Label="Source1" />
-                    <Edge From="3" To="4" Label="Source1" />
-                    <Edge From="4" To="5" Label="Source1" />
-                    <Edge From="5" To="6" Label="Source1" />
-                    <Edge From="6" To="7" Label="Source2" />
-                    <Edge From="7" To="8" Label="Source1" />
-                  </Edges>
-                </Workflow>
-              </Builder>
+            <Expression xsi:type="GroupWorkflow">
+              <Name>LogMicrophone</Name>
+              <Workflow>
+                <Nodes>
+                  <Expression xsi:type="ExternalizedMapping">
+                    <Property Name="Value" DisplayName="LogName" />
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="StringProperty">
+                      <Value>Microphone.bin</Value>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="WorkflowInput">
+                    <Name>Source1</Name>
+                  </Expression>
+                  <Expression xsi:type="SubscribeSubject">
+                    <Name>LoggingPath</Name>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:Zip" />
+                  </Expression>
+                  <Expression xsi:type="Format">
+                    <Format>{0}\{1}</Format>
+                    <Selector>Item1,Item2</Selector>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="Path" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="dsp:MatrixWriter">
+                      <dsp:Path>G:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20221012\2022_10_12_15_53_14\Microphone.bin</dsp:Path>
+                      <dsp:Suffix>None</dsp:Suffix>
+                      <dsp:Overwrite>false</dsp:Overwrite>
+                      <dsp:Layout>ColumnMajor</dsp:Layout>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="WorkflowOutput" />
+                </Nodes>
+                <Edges>
+                  <Edge From="0" To="1" Label="Source1" />
+                  <Edge From="1" To="4" Label="Source2" />
+                  <Edge From="2" To="7" Label="Source1" />
+                  <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="4" To="5" Label="Source1" />
+                  <Edge From="5" To="6" Label="Source1" />
+                  <Edge From="6" To="7" Label="Source2" />
+                  <Edge From="7" To="8" Label="Source1" />
+                </Edges>
+              </Workflow>
             </Expression>
             <Expression xsi:type="PublishSubject" TypeArguments="sys:Tuple(p2:AccelerometerData,sys:Double,sys:Double)">
               <Name>AccelarometerData</Name>
             </Expression>
-            <Expression xsi:type="Disable">
-              <Builder xsi:type="GroupWorkflow">
-                <Name>LogAccelarometer</Name>
-                <Workflow>
-                  <Nodes>
-                    <Expression xsi:type="SubscribeSubject">
-                      <Name>LoggingPath</Name>
-                    </Expression>
-                    <Expression xsi:type="ExternalizedMapping">
-                      <Property Name="Value" DisplayName="LogName" />
-                    </Expression>
-                    <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="StringProperty">
-                        <Value>Accelarometer.csv</Value>
-                      </Combinator>
-                    </Expression>
-                    <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="rx:Zip" />
-                    </Expression>
-                    <Expression xsi:type="Format">
-                      <Format>{0}\{1}</Format>
-                      <Selector>Item1,Item2</Selector>
-                    </Expression>
-                    <Expression xsi:type="PropertyMapping">
-                      <PropertyMappings>
-                        <Property Name="FileName" />
-                      </PropertyMappings>
-                    </Expression>
-                    <Expression xsi:type="WorkflowInput">
-                      <Name>Source1</Name>
-                    </Expression>
-                    <Expression xsi:type="io:CsvWriter">
-                      <io:FileName>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20220922\TRASH2022_09_26_16_58_57\Accelarometer.csv</io:FileName>
-                      <io:Append>false</io:Append>
-                      <io:Overwrite>true</io:Overwrite>
-                      <io:Suffix>None</io:Suffix>
-                      <io:IncludeHeader>false</io:IncludeHeader>
-                    </Expression>
-                    <Expression xsi:type="WorkflowOutput" />
-                  </Nodes>
-                  <Edges>
-                    <Edge From="0" To="3" Label="Source1" />
-                    <Edge From="1" To="2" Label="Source1" />
-                    <Edge From="2" To="3" Label="Source2" />
-                    <Edge From="3" To="4" Label="Source1" />
-                    <Edge From="4" To="5" Label="Source1" />
-                    <Edge From="5" To="7" Label="Source2" />
-                    <Edge From="6" To="7" Label="Source1" />
-                    <Edge From="7" To="8" Label="Source1" />
-                  </Edges>
-                </Workflow>
-              </Builder>
+            <Expression xsi:type="GroupWorkflow">
+              <Name>LogAccelarometer</Name>
+              <Workflow>
+                <Nodes>
+                  <Expression xsi:type="SubscribeSubject">
+                    <Name>LoggingPath</Name>
+                  </Expression>
+                  <Expression xsi:type="ExternalizedMapping">
+                    <Property Name="Value" DisplayName="LogName" />
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="StringProperty">
+                      <Value>Accelarometer.csv</Value>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:Zip" />
+                  </Expression>
+                  <Expression xsi:type="Format">
+                    <Format>{0}\{1}</Format>
+                    <Selector>Item1,Item2</Selector>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="FileName" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="WorkflowInput">
+                    <Name>Source1</Name>
+                  </Expression>
+                  <Expression xsi:type="io:CsvWriter">
+                    <io:FileName>G:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20221012\2022_10_12_15_53_14\Accelarometer.csv</io:FileName>
+                    <io:Append>false</io:Append>
+                    <io:Overwrite>true</io:Overwrite>
+                    <io:Suffix>None</io:Suffix>
+                    <io:IncludeHeader>false</io:IncludeHeader>
+                  </Expression>
+                  <Expression xsi:type="WorkflowOutput" />
+                </Nodes>
+                <Edges>
+                  <Edge From="0" To="3" Label="Source1" />
+                  <Edge From="1" To="2" Label="Source1" />
+                  <Edge From="2" To="3" Label="Source2" />
+                  <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="4" To="5" Label="Source1" />
+                  <Edge From="5" To="7" Label="Source2" />
+                  <Edge From="6" To="7" Label="Source1" />
+                  <Edge From="7" To="8" Label="Source1" />
+                </Edges>
+              </Workflow>
             </Expression>
             <Expression xsi:type="PublishSubject" TypeArguments="sys:Tuple(ubx:UbxPacket,sys:Double)">
               <Name>UbxEvents</Name>
@@ -397,7 +389,7 @@
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>G:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20221012\2022_10_12_15_39_32\ubx_harp_ts.csv</io:FileName>
+                    <io:FileName>G:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20221012\2022_10_12_15_53_14\ubx_harp_ts.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>false</io:Overwrite>
                     <io:Suffix>None</io:Suffix>
@@ -421,120 +413,116 @@
             <Expression xsi:type="MemberSelector">
               <Selector>Item1</Selector>
             </Expression>
-            <Expression xsi:type="Disable">
-              <Builder xsi:type="GroupWorkflow">
-                <Name>LogUbx</Name>
-                <Workflow>
-                  <Nodes>
-                    <Expression xsi:type="SubscribeSubject">
-                      <Name>LoggingPath</Name>
-                    </Expression>
-                    <Expression xsi:type="ExternalizedMapping">
-                      <Property Name="Value" DisplayName="LogName" />
-                    </Expression>
-                    <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="StringProperty">
-                        <Value>ubx.bin</Value>
-                      </Combinator>
-                    </Expression>
-                    <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="rx:Zip" />
-                    </Expression>
-                    <Expression xsi:type="Format">
-                      <Format>{0}\{1}</Format>
-                      <Selector>Item1,Item2</Selector>
-                    </Expression>
-                    <Expression xsi:type="PropertyMapping">
-                      <PropertyMappings>
-                        <Property Name="Path" />
-                      </PropertyMappings>
-                    </Expression>
-                    <Expression xsi:type="WorkflowInput">
-                      <Name>Source1</Name>
-                    </Expression>
-                    <Expression xsi:type="MemberSelector">
-                      <Selector>MessageBytes</Selector>
-                    </Expression>
-                    <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="dsp:MatrixWriter">
-                        <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20220922\TRASH2022_09_26_16_58_57\ubx.bin</dsp:Path>
-                        <dsp:Suffix>None</dsp:Suffix>
-                        <dsp:Overwrite>false</dsp:Overwrite>
-                        <dsp:Layout>ColumnMajor</dsp:Layout>
-                      </Combinator>
-                    </Expression>
-                    <Expression xsi:type="WorkflowOutput" />
-                  </Nodes>
-                  <Edges>
-                    <Edge From="0" To="3" Label="Source1" />
-                    <Edge From="1" To="2" Label="Source1" />
-                    <Edge From="2" To="3" Label="Source2" />
-                    <Edge From="3" To="4" Label="Source1" />
-                    <Edge From="4" To="5" Label="Source1" />
-                    <Edge From="5" To="8" Label="Source2" />
-                    <Edge From="6" To="7" Label="Source1" />
-                    <Edge From="7" To="8" Label="Source1" />
-                    <Edge From="8" To="9" Label="Source1" />
-                  </Edges>
-                </Workflow>
-              </Builder>
+            <Expression xsi:type="GroupWorkflow">
+              <Name>LogUbx</Name>
+              <Workflow>
+                <Nodes>
+                  <Expression xsi:type="SubscribeSubject">
+                    <Name>LoggingPath</Name>
+                  </Expression>
+                  <Expression xsi:type="ExternalizedMapping">
+                    <Property Name="Value" DisplayName="LogName" />
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="StringProperty">
+                      <Value>ubx.bin</Value>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:Zip" />
+                  </Expression>
+                  <Expression xsi:type="Format">
+                    <Format>{0}\{1}</Format>
+                    <Selector>Item1,Item2</Selector>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="Path" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="WorkflowInput">
+                    <Name>Source1</Name>
+                  </Expression>
+                  <Expression xsi:type="MemberSelector">
+                    <Selector>MessageBytes</Selector>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="dsp:MatrixWriter">
+                      <dsp:Path>G:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20221012\2022_10_12_15_53_14\ubx.bin</dsp:Path>
+                      <dsp:Suffix>None</dsp:Suffix>
+                      <dsp:Overwrite>false</dsp:Overwrite>
+                      <dsp:Layout>ColumnMajor</dsp:Layout>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="WorkflowOutput" />
+                </Nodes>
+                <Edges>
+                  <Edge From="0" To="3" Label="Source1" />
+                  <Edge From="1" To="2" Label="Source1" />
+                  <Edge From="2" To="3" Label="Source2" />
+                  <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="4" To="5" Label="Source1" />
+                  <Edge From="5" To="8" Label="Source2" />
+                  <Edge From="6" To="7" Label="Source1" />
+                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="8" To="9" Label="Source1" />
+                </Edges>
+              </Workflow>
             </Expression>
             <Expression xsi:type="PublishSubject" TypeArguments="sys:Tuple(sys:String,sys:Double)">
               <Name>EmpaticaEvents</Name>
             </Expression>
-            <Expression xsi:type="Disable">
-              <Builder xsi:type="GroupWorkflow">
-                <Name>LogEmpaticaHarp</Name>
-                <Workflow>
-                  <Nodes>
-                    <Expression xsi:type="SubscribeSubject">
-                      <Name>LoggingPath</Name>
-                    </Expression>
-                    <Expression xsi:type="ExternalizedMapping">
-                      <Property Name="Value" DisplayName="LogName" />
-                    </Expression>
-                    <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="StringProperty">
-                        <Value>empatica_harp_ts.csv</Value>
-                      </Combinator>
-                    </Expression>
-                    <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="rx:Zip" />
-                    </Expression>
-                    <Expression xsi:type="Format">
-                      <Format>{0}\{1}</Format>
-                      <Selector>Item1,Item2</Selector>
-                    </Expression>
-                    <Expression xsi:type="PropertyMapping">
-                      <PropertyMappings>
-                        <Property Name="FileName" />
-                      </PropertyMappings>
-                    </Expression>
-                    <Expression xsi:type="WorkflowInput">
-                      <Name>Source1</Name>
-                    </Expression>
-                    <Expression xsi:type="io:CsvWriter">
-                      <io:FileName>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20220922\TRASH2022_09_26_16_58_57\empatica_harp_ts.csv</io:FileName>
-                      <io:Append>false</io:Append>
-                      <io:Overwrite>false</io:Overwrite>
-                      <io:Suffix>None</io:Suffix>
-                      <io:IncludeHeader>true</io:IncludeHeader>
-                      <io:Selector />
-                    </Expression>
-                    <Expression xsi:type="WorkflowOutput" />
-                  </Nodes>
-                  <Edges>
-                    <Edge From="0" To="3" Label="Source1" />
-                    <Edge From="1" To="2" Label="Source1" />
-                    <Edge From="2" To="3" Label="Source2" />
-                    <Edge From="3" To="4" Label="Source1" />
-                    <Edge From="4" To="5" Label="Source1" />
-                    <Edge From="5" To="7" Label="Source2" />
-                    <Edge From="6" To="7" Label="Source1" />
-                    <Edge From="7" To="8" Label="Source1" />
-                  </Edges>
-                </Workflow>
-              </Builder>
+            <Expression xsi:type="GroupWorkflow">
+              <Name>LogEmpaticaHarp</Name>
+              <Workflow>
+                <Nodes>
+                  <Expression xsi:type="SubscribeSubject">
+                    <Name>LoggingPath</Name>
+                  </Expression>
+                  <Expression xsi:type="ExternalizedMapping">
+                    <Property Name="Value" DisplayName="LogName" />
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="StringProperty">
+                      <Value>empatica_harp_ts.csv</Value>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:Zip" />
+                  </Expression>
+                  <Expression xsi:type="Format">
+                    <Format>{0}\{1}</Format>
+                    <Selector>Item1,Item2</Selector>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="FileName" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="WorkflowInput">
+                    <Name>Source1</Name>
+                  </Expression>
+                  <Expression xsi:type="io:CsvWriter">
+                    <io:FileName>G:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20221012\2022_10_12_15_53_14\empatica_harp_ts.csv</io:FileName>
+                    <io:Append>false</io:Append>
+                    <io:Overwrite>false</io:Overwrite>
+                    <io:Suffix>None</io:Suffix>
+                    <io:IncludeHeader>true</io:IncludeHeader>
+                    <io:Selector />
+                  </Expression>
+                  <Expression xsi:type="WorkflowOutput" />
+                </Nodes>
+                <Edges>
+                  <Edge From="0" To="3" Label="Source1" />
+                  <Edge From="1" To="2" Label="Source1" />
+                  <Edge From="2" To="3" Label="Source2" />
+                  <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="4" To="5" Label="Source1" />
+                  <Edge From="5" To="7" Label="Source2" />
+                  <Edge From="6" To="7" Label="Source1" />
+                  <Edge From="7" To="8" Label="Source1" />
+                </Edges>
+              </Workflow>
             </Expression>
           </Nodes>
           <Edges>
@@ -789,7 +777,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Timer">
-                      <rx:DueTime>PT12S</rx:DueTime>
+                      <rx:DueTime>PT19S</rx:DueTime>
                       <rx:Period>PT0S</rx:Period>
                     </Combinator>
                   </Expression>
@@ -1954,93 +1942,93 @@ it.Item3 as TimestampSource)</scr:Expression>
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="Condition">
-                    <Name>Check For Error Codes -9999 and -9990</Name>
-                    <Workflow>
-                      <Nodes>
-                        <Expression xsi:type="WorkflowInput">
-                          <Name>Source1</Name>
-                        </Expression>
-                        <Expression xsi:type="MemberSelector">
-                          <Selector>Item1</Selector>
-                        </Expression>
-                        <Expression xsi:type="scr:ExpressionTransform">
-                          <scr:Expression>it!=-9999 &amp;&amp; it!= -9990
+                      <Name>Check For Error Codes -9999 and -9990</Name>
+                      <Workflow>
+                        <Nodes>
+                          <Expression xsi:type="WorkflowInput">
+                            <Name>Source1</Name>
+                          </Expression>
+                          <Expression xsi:type="MemberSelector">
+                            <Selector>Item1</Selector>
+                          </Expression>
+                          <Expression xsi:type="scr:ExpressionTransform">
+                            <scr:Expression>it!=-9999 &amp;&amp; it!= -9990
 </scr:Expression>
-                        </Expression>
-                        <Expression xsi:type="MemberSelector">
-                          <Selector>Item2</Selector>
-                        </Expression>
-                        <Expression xsi:type="scr:ExpressionTransform">
-                          <scr:Expression>it!=-9999 &amp;&amp; it!= -9990
+                          </Expression>
+                          <Expression xsi:type="MemberSelector">
+                            <Selector>Item2</Selector>
+                          </Expression>
+                          <Expression xsi:type="scr:ExpressionTransform">
+                            <scr:Expression>it!=-9999 &amp;&amp; it!= -9990
 </scr:Expression>
-                        </Expression>
-                        <Expression xsi:type="MemberSelector">
-                          <Selector>Item3</Selector>
-                        </Expression>
-                        <Expression xsi:type="scr:ExpressionTransform">
-                          <scr:Expression>it!=-9999 &amp;&amp; it!= -9990
+                          </Expression>
+                          <Expression xsi:type="MemberSelector">
+                            <Selector>Item3</Selector>
+                          </Expression>
+                          <Expression xsi:type="scr:ExpressionTransform">
+                            <scr:Expression>it!=-9999 &amp;&amp; it!= -9990
 </scr:Expression>
-                        </Expression>
-                        <Expression xsi:type="MemberSelector">
-                          <Selector>Item4</Selector>
-                        </Expression>
-                        <Expression xsi:type="scr:ExpressionTransform">
-                          <scr:Expression>it!=-9999 &amp;&amp; it!= -9990
+                          </Expression>
+                          <Expression xsi:type="MemberSelector">
+                            <Selector>Item4</Selector>
+                          </Expression>
+                          <Expression xsi:type="scr:ExpressionTransform">
+                            <scr:Expression>it!=-9999 &amp;&amp; it!= -9990
 </scr:Expression>
-                        </Expression>
-                        <Expression xsi:type="MemberSelector">
-                          <Selector>Item5</Selector>
-                        </Expression>
-                        <Expression xsi:type="scr:ExpressionTransform">
-                          <scr:Expression>it!=-9999 &amp;&amp; it!= -9990
+                          </Expression>
+                          <Expression xsi:type="MemberSelector">
+                            <Selector>Item5</Selector>
+                          </Expression>
+                          <Expression xsi:type="scr:ExpressionTransform">
+                            <scr:Expression>it!=-9999 &amp;&amp; it!= -9990
 </scr:Expression>
-                        </Expression>
-                        <Expression xsi:type="MemberSelector">
-                          <Selector>Item6</Selector>
-                        </Expression>
-                        <Expression xsi:type="scr:ExpressionTransform">
-                          <scr:Expression>it!=-9999 &amp;&amp; it!= -9990
+                          </Expression>
+                          <Expression xsi:type="MemberSelector">
+                            <Selector>Item6</Selector>
+                          </Expression>
+                          <Expression xsi:type="scr:ExpressionTransform">
+                            <scr:Expression>it!=-9999 &amp;&amp; it!= -9990
 </scr:Expression>
-                        </Expression>
-                        <Expression xsi:type="MemberSelector">
-                          <Selector>Item7</Selector>
-                        </Expression>
-                        <Expression xsi:type="scr:ExpressionTransform">
-                          <scr:Expression>it!=-9999 &amp;&amp; it!= -9990
+                          </Expression>
+                          <Expression xsi:type="MemberSelector">
+                            <Selector>Item7</Selector>
+                          </Expression>
+                          <Expression xsi:type="scr:ExpressionTransform">
+                            <scr:Expression>it!=-9999 &amp;&amp; it!= -9990
 </scr:Expression>
-                        </Expression>
-                        <Expression xsi:type="Combinator">
-                          <Combinator xsi:type="rx:Zip" />
-                        </Expression>
-                        <Expression xsi:type="BitwiseAnd" />
-                        <Expression xsi:type="WorkflowOutput" />
-                      </Nodes>
-                      <Edges>
-                        <Edge From="0" To="1" Label="Source1" />
-                        <Edge From="0" To="3" Label="Source1" />
-                        <Edge From="0" To="5" Label="Source1" />
-                        <Edge From="0" To="7" Label="Source1" />
-                        <Edge From="0" To="9" Label="Source1" />
-                        <Edge From="0" To="11" Label="Source1" />
-                        <Edge From="0" To="13" Label="Source1" />
-                        <Edge From="1" To="2" Label="Source1" />
-                        <Edge From="2" To="15" Label="Source1" />
-                        <Edge From="3" To="4" Label="Source1" />
-                        <Edge From="4" To="15" Label="Source2" />
-                        <Edge From="5" To="6" Label="Source1" />
-                        <Edge From="6" To="15" Label="Source3" />
-                        <Edge From="7" To="8" Label="Source1" />
-                        <Edge From="8" To="15" Label="Source4" />
-                        <Edge From="9" To="10" Label="Source1" />
-                        <Edge From="10" To="15" Label="Source5" />
-                        <Edge From="11" To="12" Label="Source1" />
-                        <Edge From="12" To="15" Label="Source6" />
-                        <Edge From="13" To="14" Label="Source1" />
-                        <Edge From="14" To="15" Label="Source7" />
-                        <Edge From="15" To="16" Label="Source1" />
-                        <Edge From="16" To="17" Label="Source1" />
-                      </Edges>
-                    </Workflow>
+                          </Expression>
+                          <Expression xsi:type="Combinator">
+                            <Combinator xsi:type="rx:Zip" />
+                          </Expression>
+                          <Expression xsi:type="BitwiseAnd" />
+                          <Expression xsi:type="WorkflowOutput" />
+                        </Nodes>
+                        <Edges>
+                          <Edge From="0" To="1" Label="Source1" />
+                          <Edge From="0" To="3" Label="Source1" />
+                          <Edge From="0" To="5" Label="Source1" />
+                          <Edge From="0" To="7" Label="Source1" />
+                          <Edge From="0" To="9" Label="Source1" />
+                          <Edge From="0" To="11" Label="Source1" />
+                          <Edge From="0" To="13" Label="Source1" />
+                          <Edge From="1" To="2" Label="Source1" />
+                          <Edge From="2" To="15" Label="Source1" />
+                          <Edge From="3" To="4" Label="Source1" />
+                          <Edge From="4" To="15" Label="Source2" />
+                          <Edge From="5" To="6" Label="Source1" />
+                          <Edge From="6" To="15" Label="Source3" />
+                          <Edge From="7" To="8" Label="Source1" />
+                          <Edge From="8" To="15" Label="Source4" />
+                          <Edge From="9" To="10" Label="Source1" />
+                          <Edge From="10" To="15" Label="Source5" />
+                          <Edge From="11" To="12" Label="Source1" />
+                          <Edge From="12" To="15" Label="Source6" />
+                          <Edge From="13" To="14" Label="Source1" />
+                          <Edge From="14" To="15" Label="Source7" />
+                          <Edge From="15" To="16" Label="Source1" />
+                          <Edge From="16" To="17" Label="Source1" />
+                        </Edges>
+                      </Workflow>
                   </Expression>
                   <Expression xsi:type="scr:ExpressionTransform">
                     <scr:Expression>new (
