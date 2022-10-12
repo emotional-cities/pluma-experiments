@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <WorkflowBuilder Version="2.7.0-rc1"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
@@ -2057,8 +2057,8 @@ it.Item7 as NullValue)</scr:Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
             <Expression xsi:type="harp:Format">
               <harp:MessageType>Event</harp:MessageType>
-              <harp:Address>245</harp:Address>
-              <harp:PayloadType>TimestampedS32</harp:PayloadType>
+              <harp:Address>246</harp:Address>
+              <harp:PayloadType>TimestampedFloat</harp:PayloadType>
             </Expression>
             <Expression xsi:type="MemberSelector">
               <Selector>EastWindSpeed</Selector>
@@ -2066,8 +2066,8 @@ it.Item7 as NullValue)</scr:Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
             <Expression xsi:type="harp:Format">
               <harp:MessageType>Event</harp:MessageType>
-              <harp:Address>245</harp:Address>
-              <harp:PayloadType>TimestampedS32</harp:PayloadType>
+              <harp:Address>247</harp:Address>
+              <harp:PayloadType>TimestampedFloat</harp:PayloadType>
             </Expression>
             <Expression xsi:type="MemberSelector">
               <Selector>GustWindSpeeed</Selector>
@@ -2075,8 +2075,8 @@ it.Item7 as NullValue)</scr:Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
             <Expression xsi:type="harp:Format">
               <harp:MessageType>Event</harp:MessageType>
-              <harp:Address>245</harp:Address>
-              <harp:PayloadType>TimestampedS32</harp:PayloadType>
+              <harp:Address>248</harp:Address>
+              <harp:PayloadType>TimestampedFloat</harp:PayloadType>
             </Expression>
             <Expression xsi:type="MemberSelector">
               <Selector>AirTemperature</Selector>
@@ -2084,8 +2084,8 @@ it.Item7 as NullValue)</scr:Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
             <Expression xsi:type="harp:Format">
               <harp:MessageType>Event</harp:MessageType>
-              <harp:Address>245</harp:Address>
-              <harp:PayloadType>TimestampedS32</harp:PayloadType>
+              <harp:Address>249</harp:Address>
+              <harp:PayloadType>TimestampedFloat</harp:PayloadType>
             </Expression>
             <Expression xsi:type="MemberSelector">
               <Selector>XOrientation</Selector>
@@ -2093,8 +2093,8 @@ it.Item7 as NullValue)</scr:Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
             <Expression xsi:type="harp:Format">
               <harp:MessageType>Event</harp:MessageType>
-              <harp:Address>245</harp:Address>
-              <harp:PayloadType>TimestampedS32</harp:PayloadType>
+              <harp:Address>250</harp:Address>
+              <harp:PayloadType>TimestampedFloat</harp:PayloadType>
             </Expression>
             <Expression xsi:type="MemberSelector">
               <Selector>YOrientation</Selector>
@@ -2102,8 +2102,8 @@ it.Item7 as NullValue)</scr:Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
             <Expression xsi:type="harp:Format">
               <harp:MessageType>Event</harp:MessageType>
-              <harp:Address>245</harp:Address>
-              <harp:PayloadType>TimestampedS32</harp:PayloadType>
+              <harp:Address>251</harp:Address>
+              <harp:PayloadType>TimestampedFloat</harp:PayloadType>
             </Expression>
             <Expression xsi:type="MemberSelector">
               <Selector>NullValue</Selector>
@@ -2111,8 +2111,8 @@ it.Item7 as NullValue)</scr:Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
             <Expression xsi:type="harp:Format">
               <harp:MessageType>Event</harp:MessageType>
-              <harp:Address>245</harp:Address>
-              <harp:PayloadType>TimestampedS32</harp:PayloadType>
+              <harp:Address>252</harp:Address>
+              <harp:PayloadType>TimestampedFloat</harp:PayloadType>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="rx:Merge" />
