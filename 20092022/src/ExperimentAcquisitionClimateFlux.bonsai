@@ -31,7 +31,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="StringProperty">
-                <Value>G:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20221012\</Value>
+                <Value>G:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20221013\Outedoor</Value>
               </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">
@@ -141,7 +141,7 @@
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="dsp:MatrixWriter">
-                            <dsp:Path>G:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20221012\2022_10_12_15_53_14\Streams_39</dsp:Path>
+                            <dsp:Path>G:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20221013\Outedoor2022_10_13_10_33_33\Streams_39</dsp:Path>
                             <dsp:Suffix>None</dsp:Suffix>
                             <dsp:Overwrite>false</dsp:Overwrite>
                             <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -224,7 +224,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>G:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20221012\2022_10_12_15_53_14\StreamReadDump.bin</dsp:Path>
+                      <dsp:Path>G:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20221013\Outedoor2022_10_13_10_33_33\StreamReadDump.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -281,7 +281,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>G:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20221012\2022_10_12_15_53_14\Microphone.bin</dsp:Path>
+                      <dsp:Path>G:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20221013\Outedoor2022_10_13_10_33_33\Microphone.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -335,7 +335,7 @@
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>G:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20221012\2022_10_12_15_53_14\Accelarometer.csv</io:FileName>
+                    <io:FileName>G:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20221013\Outedoor2022_10_13_10_33_33\Accelarometer.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>true</io:Overwrite>
                     <io:Suffix>None</io:Suffix>
@@ -389,7 +389,7 @@
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>G:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20221012\2022_10_12_15_53_14\ubx_harp_ts.csv</io:FileName>
+                    <io:FileName>G:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20221013\Outedoor2022_10_13_10_33_33\ubx_harp_ts.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>false</io:Overwrite>
                     <io:Suffix>None</io:Suffix>
@@ -448,7 +448,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>G:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20221012\2022_10_12_15_53_14\ubx.bin</dsp:Path>
+                      <dsp:Path>G:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20221013\Outedoor2022_10_13_10_33_33\ubx.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -503,7 +503,7 @@
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>G:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20221012\2022_10_12_15_53_14\empatica_harp_ts.csv</io:FileName>
+                    <io:FileName>G:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20221013\Outedoor2022_10_13_10_33_33\empatica_harp_ts.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>false</io:Overwrite>
                     <io:Suffix>None</io:Suffix>
@@ -777,7 +777,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Timer">
-                      <rx:DueTime>PT19S</rx:DueTime>
+                      <rx:DueTime>PT20S</rx:DueTime>
                       <rx:Period>PT0S</rx:Period>
                     </Combinator>
                   </Expression>
@@ -1321,71 +1321,69 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
           </Edges>
         </Workflow>
       </Expression>
-      <Expression xsi:type="Disable">
-        <Builder xsi:type="GroupWorkflow">
-          <Name>Pupil</Name>
-          <Workflow>
-            <Nodes>
-              <Expression xsi:type="lsl:StreamInlet">
-                <lsl:Name>pupil_invisible_Gaze</lsl:Name>
-                <lsl:ChannelCount>2</lsl:ChannelCount>
-                <lsl:ChunkSize xsi:nil="true" />
-                <lsl:ChannelFormat>Float32</lsl:ChannelFormat>
-              </Expression>
-              <Expression xsi:type="MemberSelector">
-                <Selector>Timestamp</Selector>
-              </Expression>
-              <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
-              <Expression xsi:type="harp:Format">
-                <harp:MessageType>Event</harp:MessageType>
-                <harp:Address>220</harp:Address>
-                <harp:PayloadType>TimestampedFloat</harp:PayloadType>
-              </Expression>
-              <Expression xsi:type="MulticastSubject">
-                <Name>LoggingDump</Name>
-              </Expression>
-              <Expression xsi:type="MemberSelector">
-                <Selector>Data</Selector>
-              </Expression>
-              <Expression xsi:type="Combinator">
-                <Combinator xsi:type="dsp:ConvertFromArray">
-                  <dsp:Size>
-                    <dsp:Width>0</dsp:Width>
-                    <dsp:Height>0</dsp:Height>
-                  </dsp:Size>
-                  <dsp:Depth>F32</dsp:Depth>
-                  <dsp:Channels xsi:nil="true" />
-                </Combinator>
-              </Expression>
-              <Expression xsi:type="dsp:ConvertToArray">
+      <Expression xsi:type="GroupWorkflow">
+        <Name>Pupil</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="lsl:StreamInlet">
+              <lsl:Name>pupil_invisible_Gaze</lsl:Name>
+              <lsl:ChannelCount>2</lsl:ChannelCount>
+              <lsl:ChunkSize xsi:nil="true" />
+              <lsl:ChannelFormat>Float32</lsl:ChannelFormat>
+            </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>Timestamp</Selector>
+            </Expression>
+            <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
+            <Expression xsi:type="harp:Format">
+              <harp:MessageType>Event</harp:MessageType>
+              <harp:Address>220</harp:Address>
+              <harp:PayloadType>TimestampedFloat</harp:PayloadType>
+            </Expression>
+            <Expression xsi:type="MulticastSubject">
+              <Name>LoggingDump</Name>
+            </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>Data</Selector>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="dsp:ConvertFromArray">
+                <dsp:Size>
+                  <dsp:Width>0</dsp:Width>
+                  <dsp:Height>0</dsp:Height>
+                </dsp:Size>
                 <dsp:Depth>F32</dsp:Depth>
-              </Expression>
-              <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
-              <Expression xsi:type="harp:Format">
-                <harp:MessageType>Event</harp:MessageType>
-                <harp:Address>221</harp:Address>
-                <harp:PayloadType>TimestampedFloat</harp:PayloadType>
-              </Expression>
-              <Expression xsi:type="MulticastSubject">
-                <Name>LoggingDump</Name>
-              </Expression>
-              <Expression xsi:type="WorkflowOutput" />
-            </Nodes>
-            <Edges>
-              <Edge From="0" To="1" Label="Source1" />
-              <Edge From="0" To="5" Label="Source1" />
-              <Edge From="0" To="11" Label="Source1" />
-              <Edge From="1" To="2" Label="Source1" />
-              <Edge From="2" To="3" Label="Source1" />
-              <Edge From="3" To="4" Label="Source1" />
-              <Edge From="5" To="6" Label="Source1" />
-              <Edge From="6" To="7" Label="Source1" />
-              <Edge From="7" To="8" Label="Source1" />
-              <Edge From="8" To="9" Label="Source1" />
-              <Edge From="9" To="10" Label="Source1" />
-            </Edges>
-          </Workflow>
-        </Builder>
+                <dsp:Channels xsi:nil="true" />
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="dsp:ConvertToArray">
+              <dsp:Depth>F32</dsp:Depth>
+            </Expression>
+            <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
+            <Expression xsi:type="harp:Format">
+              <harp:MessageType>Event</harp:MessageType>
+              <harp:Address>221</harp:Address>
+              <harp:PayloadType>TimestampedFloat</harp:PayloadType>
+            </Expression>
+            <Expression xsi:type="MulticastSubject">
+              <Name>LoggingDump</Name>
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="0" To="5" Label="Source1" />
+            <Edge From="0" To="11" Label="Source1" />
+            <Edge From="1" To="2" Label="Source1" />
+            <Edge From="2" To="3" Label="Source1" />
+            <Edge From="3" To="4" Label="Source1" />
+            <Edge From="5" To="6" Label="Source1" />
+            <Edge From="6" To="7" Label="Source1" />
+            <Edge From="7" To="8" Label="Source1" />
+            <Edge From="8" To="9" Label="Source1" />
+            <Edge From="9" To="10" Label="Source1" />
+          </Edges>
+        </Workflow>
       </Expression>
       <Expression xsi:type="GroupWorkflow">
         <Name>AdaFruitAcc</Name>
@@ -1483,7 +1481,7 @@ it.Item3 as TimestampSource)</scr:Expression>
           <Nodes>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="ubx:Device">
-                <ubx:PortName>COM9</ubx:PortName>
+                <ubx:PortName>COM11</ubx:PortName>
               </Combinator>
             </Expression>
             <Expression xsi:type="SubscribeSubject">
