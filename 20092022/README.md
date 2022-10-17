@@ -17,6 +17,19 @@ This experiment will test the integration of various sources of hardware. These 
  - Pupillabs pupil core
  - Harp-triggered I2C Accelarometer
 
+## Tinker Forge 
+
+### Install notes 
+ - Bonsai reads from Tinkerforge trhough the Brick Deamon, so you should follow the Brick Daemon Installation on Windows https://www.tinkerforge.com/en/doc/Software/Brickd_Install_Windows.html#brickd-install-windows
+
+ - Is also usefull to have the Brick viewer in order to be able to check the tinkerforge system and view outputs/inputs to all sensors connected.
+ - On Bonsai side you should install the tinkerforge nuget package.
+
+### Execution Notes 
+- Open Bonsai and insert a CreateBrickConnection node, check the port and host, but the default values should be ok for a local system with a clena inhstallation.
+- connect that node to all specific tinkerforge sensor or actuator nodes that you have connected in your system, confure them properly (different components have differet set of settings). Don't forget to give the proper Uid (there is a dropdown that only shows compatible sensors to easy your life).
+
+
 ## Pupillabs pupilcore
 
 Opening Pupil Capture ---
@@ -62,7 +75,7 @@ class SceneCameraGaze(Outlet):
         )
 ```
 
-## Pupil Labs Pupil Invisible 
+## Pupil Labs Pupil Invisible Python Lsl Relay solution 
  
 ### Install notes 
  - To have in Bonsai pupil invible capture you will need to intall the pupil relay lsl from https://pupil-invisible-lsl-relay.readthedocs.io/en/stable/
@@ -82,6 +95,18 @@ class SceneCameraGaze(Outlet):
     - name the stream to pupil_invisible_Gaze
     - Stream ChannelCount 2
     - Stream ChannelFormat Float32 
+
+## Pupil Labs Pupil Invisible 0MQ
+
+Pupil labs implements 0MQ messages using the NDSI protocol. https://github.com/pupil-labs/pyndsi/blob/v1.0/ndsi-commspec.md
+
+### Execution Notes 
+- pip install ndsi
+- pip install opencv-python
+- git clone https://github.com/pupil-labs/pyndsi.git
+- navigate to the cloned folder 
+- activate emotional cities conda env
+- 
 
 
 
