@@ -99,7 +99,6 @@ class Dataset:
 		streams.TK.PTC.AirTemp =      	  			  HarpStream(245, device = 'TK', streamlabel = 'PTC.AirTemp', root = root, autoload = autoload)
 
 		# ATMOS streams
-
 		streams.Atmos.NorthWind =               	  HarpStream(246, device = 'BioData', streamlabel = 'NorthWind', root = root, autoload = autoload)
 		streams.Atmos.EastWind =              		  HarpStream(247, device = 'BioData', streamlabel = 'EastWind', root = root, autoload = autoload)
 		streams.Atmos.GustWind	=                     HarpStream(248, device = 'BioData', streamlabel = 'GustWind', root = root, autoload = autoload)
@@ -107,10 +106,6 @@ class Dataset:
 		streams.Atmos.XOrientation =                  HarpStream(250, device = 'BioData', streamlabel = 'XOrientation', root = root, autoload = autoload)
 		streams.Atmos.YOrientation =                  HarpStream(251, device = 'BioData', streamlabel = 'YOrientation', root = root, autoload = autoload)
 		streams.Atmos.NullValue =                     HarpStream(252, device = 'BioData', streamlabel = 'NullValue', root = root, autoload = autoload)
-
-
-
-
 
   		# UBX streams
 		streams.UBX =                                 UbxStream(device = 'UBX', streamlabel = 'UBX', root = root, autoload = autoload)
