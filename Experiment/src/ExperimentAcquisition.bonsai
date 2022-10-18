@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WorkflowBuilder Version="2.7.0-rc1"
+<WorkflowBuilder Version="2.7.0"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
-                 xmlns:scr="clr-namespace:Bonsai.Scripting;assembly=Bonsai.Scripting"
+                 xmlns:scr="clr-namespace:Bonsai.Scripting.Expressions;assembly=Bonsai.Scripting.Expressions"
                  xmlns:harp="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
                  xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
                  xmlns:p1="clr-namespace:OpenCV.Net;assembly=OpenCV.Net"
@@ -40,12 +40,12 @@
             <Expression xsi:type="scr:ExpressionTransform">
               <scr:Expression>it.Value +  it.TimeStamp.ToString("yyyy_MM_dd_HH_mm_ss")</scr:Expression>
             </Expression>
-            <Expression xsi:type="ReplaySubject">
+            <Expression xsi:type="rx:ReplaySubject">
               <Name>LoggingPath</Name>
-              <BufferSize xsi:nil="true" />
+              <rx:BufferSize xsi:nil="true" />
             </Expression>
-            <Expression xsi:type="PublishSubject" TypeArguments="harp:HarpMessage">
-              <Name>LoggingDump</Name>
+            <Expression xsi:type="rx:PublishSubject" TypeArguments="harp:HarpMessage">
+              <rx:Name>LoggingDump</rx:Name>
             </Expression>
             <Expression xsi:type="GroupWorkflow">
               <Name>LogMuxAddress</Name>
@@ -75,14 +75,14 @@
                   <Expression xsi:type="ExternalizedMapping">
                     <Property Name="LogName" />
                   </Expression>
-                  <Expression xsi:type="SelectMany">
+                  <Expression xsi:type="rx:SelectMany">
                     <Name>LogHarpStreams</Name>
                     <Workflow>
                       <Nodes>
                         <Expression xsi:type="WorkflowInput">
                           <Name>Source1</Name>
                         </Expression>
-                        <Expression xsi:type="AsyncSubject">
+                        <Expression xsi:type="rx:AsyncSubject">
                           <Name>Register</Name>
                         </Expression>
                         <Expression xsi:type="SubscribeSubject">
@@ -119,7 +119,7 @@
                             <rx:Count>1</rx:Count>
                           </Combinator>
                         </Expression>
-                        <Expression xsi:type="AsyncSubject">
+                        <Expression xsi:type="rx:AsyncSubject">
                           <Name>LogName</Name>
                         </Expression>
                         <Expression xsi:type="SubscribeSubject">
@@ -246,8 +246,8 @@
                 </Edges>
               </Workflow>
             </Expression>
-            <Expression xsi:type="PublishSubject" TypeArguments="p1:Mat">
-              <Name>MicrophoneData</Name>
+            <Expression xsi:type="rx:PublishSubject" TypeArguments="p1:Mat">
+              <rx:Name>MicrophoneData</rx:Name>
             </Expression>
             <Expression xsi:type="GroupWorkflow">
               <Name>LogMicrophone</Name>
@@ -301,8 +301,8 @@
                 </Edges>
               </Workflow>
             </Expression>
-            <Expression xsi:type="PublishSubject" TypeArguments="sys:Tuple(p2:AccelerometerData,sys:Double,sys:Double)">
-              <Name>AccelarometerData</Name>
+            <Expression xsi:type="rx:PublishSubject" TypeArguments="sys:Tuple(p2:AccelerometerData,sys:Double,sys:Double)">
+              <rx:Name>AccelarometerData</rx:Name>
             </Expression>
             <Expression xsi:type="GroupWorkflow">
               <Name>LogAccelarometer</Name>
@@ -355,8 +355,8 @@
                 </Edges>
               </Workflow>
             </Expression>
-            <Expression xsi:type="PublishSubject" TypeArguments="sys:Tuple(ubx:UbxPacket,sys:Double)">
-              <Name>UbxEvents</Name>
+            <Expression xsi:type="rx:PublishSubject" TypeArguments="sys:Tuple(ubx:UbxPacket,sys:Double)">
+              <rx:Name>UbxEvents</rx:Name>
             </Expression>
             <Expression xsi:type="GroupWorkflow">
               <Name>LogUbxHarp</Name>
@@ -469,8 +469,8 @@
                 </Edges>
               </Workflow>
             </Expression>
-            <Expression xsi:type="PublishSubject" TypeArguments="sys:Tuple(sys:String,sys:Double)">
-              <Name>EmpaticaEvents</Name>
+            <Expression xsi:type="rx:PublishSubject" TypeArguments="sys:Tuple(sys:String,sys:Double)">
+              <rx:Name>EmpaticaEvents</rx:Name>
             </Expression>
             <Expression xsi:type="GroupWorkflow">
               <Name>LogEmpaticaHarp</Name>
@@ -561,7 +561,7 @@
             <Expression xsi:type="MemberSelector">
               <Selector>Seconds</Selector>
             </Expression>
-            <Expression xsi:type="BehaviorSubject">
+            <Expression xsi:type="rx:BehaviorSubject">
               <Name>TimestampSource</Name>
             </Expression>
             <Expression xsi:type="WorkflowOutput" />
@@ -579,8 +579,8 @@
         <Name>BioData</Name>
         <Workflow>
           <Nodes>
-            <Expression xsi:type="BehaviorSubject" TypeArguments="harp:HarpMessage">
-              <Name>BioDataCommands</Name>
+            <Expression xsi:type="rx:BehaviorSubject" TypeArguments="harp:HarpMessage">
+              <rx:Name>BioDataCommands</rx:Name>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="harp:Device">
@@ -593,7 +593,7 @@
                 <harp:PortName>COM9</harp:PortName>
               </Combinator>
             </Expression>
-            <Expression xsi:type="PublishSubject">
+            <Expression xsi:type="rx:PublishSubject">
               <Name>BioDataEvents</Name>
             </Expression>
             <Expression xsi:type="MulticastSubject">
@@ -720,8 +720,8 @@
         <Name>SynchPulse</Name>
         <Workflow>
           <Nodes>
-            <Expression xsi:type="PublishSubject" TypeArguments="sys:Object">
-              <Name>SynchPulse</Name>
+            <Expression xsi:type="rx:PublishSubject" TypeArguments="sys:Object">
+              <rx:Name>SynchPulse</rx:Name>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="harp:CreateMessage">
@@ -751,7 +751,7 @@
               <Name>BioDataCommands</Name>
             </Expression>
             <Expression xsi:type="WorkflowOutput" />
-            <Expression xsi:type="Defer">
+            <Expression xsi:type="rx:Defer">
               <Workflow>
                 <Nodes>
                   <Expression xsi:type="ExternalizedMapping">
@@ -1489,8 +1489,8 @@ it.Item3 as TimestampSource)</scr:Expression>
               <Property Name="Port" />
               <Property Name="Host" />
             </Expression>
-            <Expression xsi:type="BehaviorSubject" TypeArguments="sys:String">
-              <Name>EmpaticaCommands</Name>
+            <Expression xsi:type="rx:BehaviorSubject" TypeArguments="sys:String">
+              <rx:Name>EmpaticaCommands</rx:Name>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="p4:EmpaticaClient">
@@ -1728,7 +1728,7 @@ it.Item3 as TimestampSource)</scr:Expression>
                   <Value>0</Value>
                 </Operand>
               </Expression>
-              <Expression xsi:type="Condition">
+              <Expression xsi:type="rx:Condition">
                 <Workflow>
                   <Nodes>
                     <Expression xsi:type="WorkflowInput">
@@ -1772,7 +1772,7 @@ it.Item3 as TimestampSource)</scr:Expression>
               <Expression xsi:type="SubscribeSubject">
                 <Name>LoggingDump</Name>
               </Expression>
-              <Expression xsi:type="Condition">
+              <Expression xsi:type="rx:Condition">
                 <Workflow>
                   <Nodes>
                     <Expression xsi:type="WorkflowInput">
@@ -1813,15 +1813,15 @@ it.Item3 as TimestampSource)</scr:Expression>
               <Expression xsi:type="rx:GroupBy">
                 <rx:KeySelector>Address</rx:KeySelector>
               </Expression>
-              <Expression xsi:type="SelectMany">
+              <Expression xsi:type="rx:SelectMany">
                 <Workflow>
                   <Nodes>
                     <Expression xsi:type="WorkflowInput">
                       <Name>Source1</Name>
                     </Expression>
-                    <Expression xsi:type="ReplaySubject">
+                    <Expression xsi:type="rx:ReplaySubject">
                       <Name>Data</Name>
-                      <BufferSize xsi:nil="true" />
+                      <rx:BufferSize xsi:nil="true" />
                     </Expression>
                     <Expression xsi:type="SubscribeSubject">
                       <Name>Data</Name>
@@ -1864,6 +1864,10 @@ it.Item3 as TimestampSource)</scr:Expression>
                 <viz:SymbolType>VDash</viz:SymbolType>
                 <viz:LineWidth>0</viz:LineWidth>
                 <viz:Capacity>10000</viz:Capacity>
+                <viz:XMin xsi:nil="true" />
+                <viz:XMax xsi:nil="true" />
+                <viz:YMin xsi:nil="true" />
+                <viz:YMax xsi:nil="true" />
               </Expression>
             </Nodes>
             <Edges>

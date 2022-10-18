@@ -9,6 +9,7 @@ obj
 *.blend
 *.pyc
 *.pickle
+Packages
 
 20092022/Bonsai/Packages/Bonsai.2.7.0-rc1/Bonsai.2.7.0-rc1.nupkg
 20092022/Bonsai/Packages/Bonsai.2.7.0-rc1/Bonsai.nuspec
