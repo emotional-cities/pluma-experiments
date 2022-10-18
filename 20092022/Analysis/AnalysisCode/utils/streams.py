@@ -88,14 +88,38 @@ class Dataset:
 
 		streams.TK.AnalogIn.Voltage =                 HarpStream(239, device = 'TK', streamlabel = 'AnalogIn.Voltage', root = root, autoload = autoload)
 
-		# UBX streams
+		streams.TK.ParticulateMatter.PM1_0 =          HarpStream(240, device = 'TK', streamlabel = 'ParticulateMatter.PM1_0', root = root, autoload = autoload)
+		streams.TK.ParticulateMatter.PM2_5 =          HarpStream(241, device = 'TK', streamlabel = 'ParticulateMatter.PM2_5', root = root, autoload = autoload)
+		streams.TK.ParticulateMatter.PM10_0 =         HarpStream(242, device = 'TK', streamlabel = 'ParticulateMatter.PM10_0', root = root, autoload = autoload)
+
+		streams.TK.Dual0_20mA.SolarLight =      	  HarpStream(243, device = 'TK', streamlabel = 'Dual0_20mA.SolarLight', root = root, autoload = autoload)
+
+		streams.TK.Thermocouple.Temperature =      	  HarpStream(244, device = 'TK', streamlabel = 'Thermocouple.Temperature', root = root, autoload = autoload)
+
+		streams.TK.PTC.AirTemp =      	  			  HarpStream(245, device = 'TK', streamlabel = 'PTC.AirTemp', root = root, autoload = autoload)
+
+		# ATMOS streams
+
+		streams.Atmos.NorthWind =               	  HarpStream(246, device = 'BioData', streamlabel = 'NorthWind', root = root, autoload = autoload)
+		streams.Atmos.EastWind =              		  HarpStream(247, device = 'BioData', streamlabel = 'EastWind', root = root, autoload = autoload)
+		streams.Atmos.GustWind	=                     HarpStream(248, device = 'BioData', streamlabel = 'GustWind', root = root, autoload = autoload)
+		streams.Atmos.AirTemperature =			  	  HarpStream(249, device = 'BioData', streamlabel = 'AirTemperature', root = root, autoload = autoload)
+		streams.Atmos.XOrientation =                  HarpStream(250, device = 'BioData', streamlabel = 'XOrientation', root = root, autoload = autoload)
+		streams.Atmos.YOrientation =                  HarpStream(251, device = 'BioData', streamlabel = 'YOrientation', root = root, autoload = autoload)
+		streams.Atmos.NullValue =                     HarpStream(252, device = 'BioData', streamlabel = 'NullValue', root = root, autoload = autoload)
+
+
+
+
+
+  		# UBX streams
 		streams.UBX =                                 UbxStream(device = 'UBX', streamlabel = 'UBX', root = root, autoload = autoload)
 
 		# Accelerometer streams
 		streams.Accelerometer =                       AccelerometerStream(device = 'Accelerometer', streamlabel = 'Accelerometer', root = root, autoload = autoload)
 
 		# Empatica streams
-		streams.Empatica =                            EmpaticaStream(device = 'Empatica', streamlabel = 'Empatica', root = root, autoload = autoload)
+		streams.Empatica =                            EmpaticaStream(device = 'Empatica', streamlabel = 'Empatica', root = root, autoload = False)
 
 		# Microphone streams
 		streams.Microphone.Audio =                    MicrophoneStream(device = 'Microphone', streamlabel = 'Audio', root = root, autoload = autoload)

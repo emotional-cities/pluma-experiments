@@ -17,6 +17,19 @@ This experiment will test the integration of various sources of hardware. These 
  - Pupillabs pupil core
  - Harp-triggered I2C Accelarometer
 
+## Tinker Forge 
+
+### Install notes 
+ - Bonsai reads from Tinkerforge trhough the Brick Deamon, so you should follow the Brick Daemon Installation on Windows https://www.tinkerforge.com/en/doc/Software/Brickd_Install_Windows.html#brickd-install-windows
+
+ - Is also usefull to have the Brick viewer in order to be able to check the tinkerforge system and view outputs/inputs to all sensors connected. https://www.tinkerforge.com/en/doc/Software/Brickv.html
+ - On Bonsai side you should install the tinkerforge nuget package.
+
+### Execution Notes 
+- Open Bonsai and insert a CreateBrickConnection node, check the port and host, but the default values should be ok for a local system with a clena inhstallation.
+- connect that node to all specific tinkerforge sensor or actuator nodes that you have connected in your system, confure them properly (different components have differet set of settings). Don't forget to give the proper Uid (there is a dropdown that only shows compatible sensors to easy your life).
+
+
 ## Pupillabs pupilcore
 
 Opening Pupil Capture ---
@@ -62,6 +75,41 @@ class SceneCameraGaze(Outlet):
         )
 ```
 
+## Pupil Labs Pupil Invisible Python Lsl Relay solution 
+ 
+### Install notes 
+ - To have in Bonsai pupil invible capture you will need to intall the pupil relay lsl from https://pupil-invisible-lsl-relay.readthedocs.io/en/stable/
+    - pip install pupil-invisible-lsl-relay
+ - In bonsai side you need to install Bonsai.lsl package.
+
+### Execution Notes 
+ - On the phone run the invisible Companion app 
+ - Both phone and computer needs to be on the same wifi network
+ - in python run pupil_invisible_lsl_relay
+    - If discovery works you get a list of all connected devices.
+        - Enter the index of the device you want to connect to.
+    - If not on the device go to the menu-streaming 
+        - there is an IP adrees : port of the device 
+        - you should then from python run pupil_invisible_lsl_relay --device_address device_ip:device_port
+ - On Bonsai side inser an lsl stream inlet 
+    - name the stream to pupil_invisible_Gaze
+    - Stream ChannelCount 2
+    - Stream ChannelFormat Float32 
+
+## Pupil Labs Pupil Invisible 0MQ
+
+Pupil labs implements 0MQ messages using the NDSI protocol. https://github.com/pupil-labs/pyndsi/blob/v1.0/ndsi-commspec.md
+
+### Execution Notes 
+- pip install ndsi
+- pip install opencv-python
+- git clone https://github.com/pupil-labs/pyndsi.git
+- navigate to the cloned folder 
+- activate emotional cities conda env
+- 
+
+
+
 ## Bonsai data logging
 
 Most of the data currently being saved in Bonsai is packaged in a HARP message format. For each different event (different address) a new .bin file will be created.
@@ -105,6 +153,19 @@ To achieve this, Bonsai is randomly toggling a digital output in the HARP behavi
 | **TK-SoundPressureLevel** |       SPL       |      237      |                                               |
 |      **TK-Humidity**      |     Humidity    |      238      |                                               |
 |      **TK-AnalogIn**      |     AnalogIn    |      239      |                                               |
+| **TK-Particulate Matter** |       PM1.0     |      240      |               Timestamped(int)                |
+|                           |       PM2.5     |      241      |               Timestamped(int)                |
+|                           |       PM10      |      242      |               Timestamped(int)                |
+|     **TK-Dual0-20mA**     |   Solar-Light   |      243      |               Timestamped(int)                |
+|     **TK-Thermoouple**    |   Radiant Temp  |      244      |               Timestamped(int)                |
+|        **TK-PTC**         |     Air Temp    |      245      |               Timestamped(int)                |
+|        **ATMOS22**        |    North Wind   |      246      |               Timestamped(float)              |
+|                           |     East Wind   |      247      |               Timestamped(float)              |
+|                           |     Gust Wind   |      248      |               Timestamped(float)              |
+|                           |     Air Temp    |      249      |               Timestamped(float)              |
+|                           |   XOrientation  |      250      |               Timestamped(float)              |
+|                           |   YOrientation  |      251      |               Timestamped(float)              |
+|                           |    NullValue    |      252      |               Timestamped(float)              |
 |       **PupilLabs**       |  LSL-SampleTime |      220      |                                               |
 |                           | LSL-SampleArray |      221      |                                               |
 |                           |                 |               |                                               |
