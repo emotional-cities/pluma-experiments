@@ -17,6 +17,10 @@ This experiment will test the integration of various sources of hardware. These 
  - Pupillabs pupil core
  - Harp-triggered I2C Accelarometer
 
+## Walker fake monitor
+In order to have a monitor that remote applications can target, we must emulate a fake hardware display. We are currently using the `IddSampleDriver` [(Instructions and download of Release 0.0.1 here.)](https://github.com/roshkins/IddSampleDriver/releases/tag/0.0.1)
+
+
 ## Tinker Forge 
 
 ### Install notes 
