@@ -85,10 +85,25 @@ def load_ubx_stream(root = ''):
         raise ValueError('Misalignment found between CSV and UBX arrays.')
 
 def load_ubx_bin(filename = 'ubx.bin', root = ''):
-    return read_ubx_file(os.path.join(root, filename))
+    try:
+        df = read_ubx_file(os.path.join(root, filename))
+    except FileNotFoundError:
+        warnings.warn(f'UBX stream file {filename} could not be found.')
+        return
+    except FileExistsError:
+        warnings.warn(f'UBX stream file {filename} could not be found.')
+        return
+    return df
 
 def load_ubx_harp_ts(filename = 'ubx_harp_ts.csv', root = ''):
-    df = pd.read_csv(os.path.join(root, filename), header = None, names = ('Seconds', 'Class', 'Identity'))
+    try:
+        df = pd.read_csv(os.path.join(root, filename), header = None, names = ('Seconds', 'Class', 'Identity'))
+    except FileNotFoundError:
+        warnings.warn(f'UBX stream alignment file {filename} could not be found.')
+        return
+    except FileExistsError:
+        warnings.warn(f'UBX stream alignment file {filename} could not be found.')
+        return
     df['Seconds'] = _HARP_T0 + pd.to_timedelta(df['Seconds'].values, 's')
     df.set_index('Seconds', inplace=True)
     return df
@@ -103,15 +118,29 @@ _accelerometer_header = [
     'SysCalibEnabled', 'GyroCalibEnabled','AccCalibEnabled', 'MagCalibEnabled',
     'Temperature', 'Seconds', 'SoftwareTimestamp']
 
-def load_accelerometer(filename = 'Accelarometer.csv', root = ''):
-    df = pd.read_csv(os.path.join(root, filename), header = None, names= _accelerometer_header)
+def load_accelerometer(filename = 'accelerometer.csv', root = ''):
+    try:
+        df = pd.read_csv(os.path.join(root, filename), header = None, names= _accelerometer_header)
+    except FileNotFoundError:
+        warnings.warn(f'Accelerometer stream file {filename} could not be found.')
+        return
+    except FileExistsError:
+        warnings.warn(f'Accelerometer stream file {filename} could not be found.')
+        return
     df['Seconds'] = _HARP_T0 + pd.to_timedelta(df['Seconds'].values, 's')
     df['SoftwareTimestamp'] =  _HARP_T0 + pd.to_timedelta(df['SoftwareTimestamp'].values, 's')
     df.set_index('Seconds', inplace=True)
     return df
 
 def load_empatica(filename = 'empatica_harp_ts.csv', root = ''):
-    df = pd.read_csv(os.path.join(root, filename), names= ['Message', 'Seconds'], delimiter=',', header=1)
+    try:
+        df = pd.read_csv(os.path.join(root, filename), names= ['Message', 'Seconds'], delimiter=',', header=1)
+    except FileNotFoundError:
+        warnings.warn(f'Empatica stream file {filename} could not be found.')
+        return
+    except FileExistsError:
+        warnings.warn(f'Empatica stream file {filename} could not be found.')
+        return
     df['Seconds'] = _HARP_T0 + pd.to_timedelta(df['Seconds'].values, 's')
     df.set_index('Seconds', inplace=True)
     df['StreamId'] = df['Message'].apply(lambda x: x.split(' ')[0])
@@ -144,5 +173,10 @@ def parse_empatica_stream(empatica_stream):
     return df
 
 def load_microphone(filename = 'Microphone.bin', root = ''):
-    micdata = np.fromfile(os.path.join(root, filename), dtype='int16').reshape(-1,2)
+    try:
+        micdata = np.fromfile(os.path.join(root, filename), dtype='int16').reshape(-1,2)
+    except FileExistsError:
+        warnings.warn(f'Microphone stream file {filename} could not be found.')
+    except FileNotFoundError:
+        warnings.warn(f'Microphone stream file {filename} could not be found.')
     return micdata

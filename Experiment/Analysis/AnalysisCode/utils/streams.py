@@ -53,7 +53,7 @@ class Dataset:
 		streams.BioData.DisableStreams =              HarpStream(33, device = 'BioData', streamlabel = 'DisableStreams', root = root, autoload = autoload)
 		streams.BioData.ECG =                         HarpStream(35, device = 'BioData', streamlabel = 'ECG', root = root, autoload = autoload)
 		streams.BioData.GSR =                         HarpStream(36, device = 'BioData', streamlabel = 'GSR', root = root, autoload = autoload)
-		streams.BioData.Accelarometer =               HarpStream(37, device = 'BioData', streamlabel = 'Accelarometer', root = root, autoload = autoload)
+		streams.BioData.Accelerometer =               HarpStream(37, device = 'BioData', streamlabel = 'Accelerometer', root = root, autoload = autoload)
 		streams.BioData.DigitalIn =                   HarpStream(38, device = 'BioData', streamlabel = 'DigitalIn', root = root, autoload = autoload)
 		streams.BioData.Set =                         HarpStream(39, device = 'BioData', streamlabel = 'Set', root = root, autoload = autoload)
 		streams.BioData.Clear =                       HarpStream(40, device = 'BioData', streamlabel = 'Clear', root = root, autoload = autoload)
@@ -107,9 +107,6 @@ class Dataset:
 		streams.Atmos.YOrientation =                  HarpStream(251, device = 'BioData', streamlabel = 'YOrientation', root = root, autoload = autoload)
 		streams.Atmos.NullValue =                     HarpStream(252, device = 'BioData', streamlabel = 'NullValue', root = root, autoload = autoload)
 
-  		# UBX streams
-		streams.UBX =                                 UbxStream(device = 'UBX', streamlabel = 'UBX', root = root, autoload = autoload)
-
 		# Accelerometer streams
 		streams.Accelerometer =                       AccelerometerStream(device = 'Accelerometer', streamlabel = 'Accelerometer', root = root, autoload = autoload)
 
@@ -119,6 +116,9 @@ class Dataset:
 		# Microphone streams
 		streams.Microphone.Audio =                    MicrophoneStream(device = 'Microphone', streamlabel = 'Audio', root = root, autoload = autoload)
 		streams.Microphone.BufferIndex =              HarpStream(222, device = 'Microphone', streamlabel = 'BufferIndex', root = root, autoload = autoload)
+
+		# UBX streams
+		streams.UBX =                                 UbxStream(device = 'UBX', streamlabel = 'UBX', root = root, autoload = autoload)
 
 		self.streams = streams
 
