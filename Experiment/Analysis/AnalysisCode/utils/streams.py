@@ -53,7 +53,7 @@ class Dataset:
 		streams.BioData.DisableStreams =              HarpStream(33, device = 'BioData', streamlabel = 'DisableStreams', root = root, autoload = autoload)
 		streams.BioData.ECG =                         HarpStream(35, device = 'BioData', streamlabel = 'ECG', root = root, autoload = autoload)
 		streams.BioData.GSR =                         HarpStream(36, device = 'BioData', streamlabel = 'GSR', root = root, autoload = autoload)
-		streams.BioData.Accelarometer =               HarpStream(37, device = 'BioData', streamlabel = 'Accelarometer', root = root, autoload = autoload)
+		streams.BioData.Accelerometer =               HarpStream(37, device = 'BioData', streamlabel = 'Accelerometer', root = root, autoload = autoload)
 		streams.BioData.DigitalIn =                   HarpStream(38, device = 'BioData', streamlabel = 'DigitalIn', root = root, autoload = autoload)
 		streams.BioData.Set =                         HarpStream(39, device = 'BioData', streamlabel = 'Set', root = root, autoload = autoload)
 		streams.BioData.Clear =                       HarpStream(40, device = 'BioData', streamlabel = 'Clear', root = root, autoload = autoload)
