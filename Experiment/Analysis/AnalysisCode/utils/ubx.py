@@ -67,7 +67,7 @@ def filter_ubx_event(df, event):
 #def get_gyro_from_ubx(message):
 #    return pd.Series([e, f, g])
 
-## Parse accelarometer data
+## Parse accelerometer data
 
 # ESF_MEAS = filter_event(ubx_data, "ESF-MEAS")
 
