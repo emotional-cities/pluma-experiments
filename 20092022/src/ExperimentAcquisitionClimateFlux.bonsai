@@ -1,20 +1,20 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>t
 <WorkflowBuilder Version="2.7.0-rc1"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
                  xmlns:scr="clr-namespace:Bonsai.Scripting;assembly=Bonsai.Scripting"
                  xmlns:harp="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
                  xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
-                 xmlns:p1="clr-namespace:OpenCV.Net;assembly=OpenCV.Net"
+                 xmlns:cv="clr-namespace:OpenCV.Net;assembly=OpenCV.Net"
                  xmlns:sys="clr-namespace:System;assembly=mscorlib"
-                 xmlns:p2="clr-namespace:;assembly=Extensions"
+                 xmlns:ext="clr-namespace:;assembly=Extensions"
                  xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
                  xmlns:ubx="clr-namespace:Bonsai.uBlox;assembly=Bonsai.uBlox"
-                 xmlns:p3="clr-namespace:Bonsai.Numerics.Distributions;assembly=Bonsai.Numerics"
+                 xmlns:num="clr-namespace:Bonsai.Numerics.Distributions;assembly=Bonsai.Numerics"
                  xmlns:al="clr-namespace:Bonsai.Audio;assembly=Bonsai.Audio"
                  xmlns:tkf="clr-namespace:Bonsai.Tinkerforge;assembly=Bonsai.Tinkerforge"
                  xmlns:lsl="clr-namespace:Bonsai.Lsl;assembly=Bonsai.Lsl"
-                 xmlns:p4="clr-namespace:Bonsai.WebSockets;assembly=Bonsai.WebSockets"
+                 xmlns:ws="clr-namespace:Bonsai.WebSockets;assembly=Bonsai.WebSockets"
                  xmlns:viz="clr-namespace:Bonsai.Design.Visualizers;assembly=Bonsai.Design.Visualizers"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
@@ -246,7 +246,7 @@
                 </Edges>
               </Workflow>
             </Expression>
-            <Expression xsi:type="PublishSubject" TypeArguments="p1:Mat">
+            <Expression xsi:type="PublishSubject" TypeArguments="cv:Mat">
               <Name>MicrophoneData</Name>
             </Expression>
             <Expression xsi:type="GroupWorkflow">
@@ -301,7 +301,7 @@
                 </Edges>
               </Workflow>
             </Expression>
-            <Expression xsi:type="PublishSubject" TypeArguments="sys:Tuple(p2:AccelerometerData,sys:Double,sys:Double)">
+            <Expression xsi:type="PublishSubject" TypeArguments="sys:Tuple(ext:AccelerometerData,sys:Double,sys:Double)">
               <Name>AccelarometerData</Name>
             </Expression>
             <Expression xsi:type="GroupWorkflow">
@@ -759,13 +759,13 @@
                     <Property Name="Upper" />
                   </Expression>
                   <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="p3:CreateDiscreteUniform">
-                      <p3:Lower>10</p3:Lower>
-                      <p3:Upper>30</p3:Upper>
+                    <Combinator xsi:type="num:CreateDiscreteUniform">
+                      <num:Lower>10</num:Lower>
+                      <num:Upper>30</num:Upper>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="p3:Sample" />
+                    <Combinator xsi:type="num:Sample" />
                   </Expression>
                   <Expression xsi:type="scr:ExpressionTransform">
                     <scr:Expression>TimeSpan.FromSeconds(it)</scr:Expression>
@@ -1414,7 +1414,7 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
               </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">
-              <Combinator xsi:type="p2:ParseAccelerometerString" />
+              <Combinator xsi:type="ext:ParseAccelerometerString" />
             </Expression>
             <Expression xsi:type="SubscribeSubject">
               <Name>TimestampSource</Name>
@@ -1516,9 +1516,9 @@ it.Item3 as TimestampSource)</scr:Expression>
                 <Name>EmpaticaCommands</Name>
               </Expression>
               <Expression xsi:type="Combinator">
-                <Combinator xsi:type="p4:EmpaticaClient">
-                  <p4:Host>127.0.0.1</p4:Host>
-                  <p4:Port>28000</p4:Port>
+                <Combinator xsi:type="ws:EmpaticaClient">
+                  <ws:Host>127.0.0.1</ws:Host>
+                  <ws:Port>28000</ws:Port>
                 </Combinator>
               </Expression>
               <Expression xsi:type="SubscribeSubject">
@@ -1922,11 +1922,11 @@ it.Item3 as TimestampSource)</scr:Expression>
         <Workflow>
           <Nodes>
             <Expression xsi:type="Combinator">
-              <Combinator xsi:type="p2:WindSerial">
-                <p2:PortName>COM7</p2:PortName>
-                <p2:RequestString>0R4!</p2:RequestString>
-                <p2:PollingInterval>50</p2:PollingInterval>
-                <p2:Timeout>1000</p2:Timeout>
+              <Combinator xsi:type="ext:WindSerial">
+                <ext:PortName>COM7</ext:PortName>
+                <ext:RequestString>0R4!</ext:RequestString>
+                <ext:PollingInterval>50</ext:PollingInterval>
+                <ext:Timeout>1000</ext:Timeout>
               </Combinator>
             </Expression>
             <Expression xsi:type="Parse">
