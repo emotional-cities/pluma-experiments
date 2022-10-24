@@ -49,6 +49,14 @@ obj
 20092022/Bonsai/Packages/Bonsai.Lsl.0.1.0/LICENSE
 20092022/Bonsai/Packages/Bonsai.Lsl.0.1.0/lib/net472/Bonsai.Lsl.dll
 20092022/Bonsai/Packages/Bonsai.Lsl.0.1.0/lib/net472/Bonsai.Lsl.xml
+20092022/Bonsai/Packages/Bonsai.Lsl.0.1.2/Bonsai.Lsl.0.1.2.nupkg
+20092022/Bonsai/Packages/Bonsai.Lsl.0.1.2/Bonsai.Lsl.nuspec
+20092022/Bonsai/Packages/Bonsai.Lsl.0.1.2/icon.png
+20092022/Bonsai/Packages/Bonsai.Lsl.0.1.2/LICENSE
+20092022/Bonsai/Packages/Bonsai.Lsl.0.1.2/lib/net472/Bonsai.Lsl.dll
+20092022/Bonsai/Packages/Bonsai.Lsl.0.1.2/lib/net472/Bonsai.Lsl.xml
+20092022/Bonsai/Packages/Bonsai.Lsl.0.1.2/runtimes/win-x86/native/lsl.dll
+20092022/Bonsai/Packages/Bonsai.Lsl.0.1.2/runtimes/win-x64/native/lsl.dll
 20092022/Bonsai/Packages/Bonsai.Numerics.0.7.0/Bonsai.Numerics.0.7.0.nupkg
 20092022/Bonsai/Packages/Bonsai.Numerics.0.7.0/Bonsai.Numerics.nuspec
 20092022/Bonsai/Packages/Bonsai.Numerics.0.7.0/lib/net462/Bonsai.Numerics.dll
@@ -1418,3 +1426,4 @@ obj
 20092022/Bonsai/Packages/openal.redist.2.0.7.0/build/net40/openal.redist.targets
 20092022/Bonsai/Packages/openal.redist.2.0.7.0/build/net45/openal.redist.targets
 20092022/Bonsai/Packages/Bonsai.Tinkerforge.0.1.1/*
+
