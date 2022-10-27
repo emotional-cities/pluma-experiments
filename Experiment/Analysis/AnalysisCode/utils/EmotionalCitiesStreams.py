@@ -3,6 +3,17 @@ import utils.ubx
 import matplotlib.pyplot as plt
 import datetime
 import numpy as np
+from enum import Enum
+
+class StreamType(Enum):
+	NONE = None
+	UBX = 'UbxStream'
+	HARP = 'HarpStream'
+	ACCELEROMETER = 'AccelerometerStream'
+	MICROPHONE = 'MicrophoneStream'
+	EMPATICA = 'EmpaticaStream'
+
+
 class Stream:
 	"""_summary_
 	"""
@@ -13,6 +24,7 @@ class Stream:
 		self.data = data
 		self.autoload = autoload
 		self.georeference = None
+		self.streamtype = StreamType.NONE
 
 	def plot(self, col = None , **kwargs):
 		thisfigure = plt.figure()
@@ -57,6 +69,7 @@ class HarpStream(Stream):
 	def __init__(self, eventcode, **kw):
 		super(HarpStream,self).__init__(**kw)
 		self.eventcode = eventcode
+		self.streamtype = StreamType.HARP
 		if self.autoload:
 			self.load()
 
@@ -75,6 +88,7 @@ class UbxStream(Stream):
 	def __init__(self, **kw):
 		super(UbxStream,self).__init__(**kw)
 		self.positiondata = None
+  		self.streamtype = StreamType.UBX
 		if self.autoload:
 			self.load()
 
@@ -102,6 +116,7 @@ class AccelerometerStream(Stream):
 	"""
 	def __init__(self, **kw):
 		super(AccelerometerStream,self).__init__(**kw)
+		self.streamtype = StreamType.ACCELEROMETER
 		if self.autoload:
 			self.load()
 
@@ -135,6 +150,7 @@ class EmpaticaStream(Stream):
 	"""
 	def __init__(self, **kw):
 		super(EmpaticaStream,self).__init__(**kw)
+		self.streamtype = StreamType.EMPATICA
 		if self.autoload:
 			self.load()
 
