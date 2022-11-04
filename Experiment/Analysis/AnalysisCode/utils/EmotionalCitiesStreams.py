@@ -88,7 +88,7 @@ class UbxStream(Stream):
 	def __init__(self, **kw):
 		super(UbxStream,self).__init__(**kw)
 		self.positiondata = None
-  		self.streamtype = StreamType.UBX
+		self.streamtype = StreamType.UBX
 		if self.autoload:
 			self.load()
 
