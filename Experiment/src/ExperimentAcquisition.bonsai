@@ -759,7 +759,7 @@
                     <Property Name="Upper" />
                   </Expression>
                   <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="p3:CreateDiscreteUniform">
+                    <Combinator xsi:type="p3:CreateContinuousUniform">
                       <p3:Lower>10</p3:Lower>
                       <p3:Upper>30</p3:Upper>
                     </Combinator>
