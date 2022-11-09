@@ -12,7 +12,6 @@ class Dataset:
 		self.datasetlabel = datasetlabel
 		self.georeference = None
 		self.streams = None
-		self.georeference = None
 
 	def add_georeference(self, ubxstream = None, event = 'NAV-HPPOSLLH'):
 		if ubxstream is None:
@@ -99,13 +98,13 @@ class Dataset:
 		streams.TK.PTC.AirTemp =      	  			  HarpStream(245, device = 'TK', streamlabel = 'PTC.AirTemp', root = root, autoload = autoload)
 
 		# ATMOS streams
-		streams.Atmos.NorthWind =               	  HarpStream(246, device = 'BioData', streamlabel = 'NorthWind', root = root, autoload = autoload)
-		streams.Atmos.EastWind =              		  HarpStream(247, device = 'BioData', streamlabel = 'EastWind', root = root, autoload = autoload)
-		streams.Atmos.GustWind	=                     HarpStream(248, device = 'BioData', streamlabel = 'GustWind', root = root, autoload = autoload)
-		streams.Atmos.AirTemperature =			  	  HarpStream(249, device = 'BioData', streamlabel = 'AirTemperature', root = root, autoload = autoload)
-		streams.Atmos.XOrientation =                  HarpStream(250, device = 'BioData', streamlabel = 'XOrientation', root = root, autoload = autoload)
-		streams.Atmos.YOrientation =                  HarpStream(251, device = 'BioData', streamlabel = 'YOrientation', root = root, autoload = autoload)
-		streams.Atmos.NullValue =                     HarpStream(252, device = 'BioData', streamlabel = 'NullValue', root = root, autoload = autoload)
+		streams.Atmos.NorthWind =               	  HarpStream(246, device = 'Atoms', streamlabel = 'NorthWind', root = root, autoload = autoload)
+		streams.Atmos.EastWind =              		  HarpStream(247, device = 'Atoms', streamlabel = 'EastWind', root = root, autoload = autoload)
+		streams.Atmos.GustWind	=                     HarpStream(248, device = 'Atoms', streamlabel = 'GustWind', root = root, autoload = autoload)
+		streams.Atmos.AirTemperature =			  	  HarpStream(249, device = 'Atoms', streamlabel = 'AirTemperature', root = root, autoload = autoload)
+		streams.Atmos.XOrientation =                  HarpStream(250, device = 'Atoms', streamlabel = 'XOrientation', root = root, autoload = autoload)
+		streams.Atmos.YOrientation =                  HarpStream(251, device = 'Atoms', streamlabel = 'YOrientation', root = root, autoload = autoload)
+		streams.Atmos.NullValue =                     HarpStream(252, device = 'Atoms', streamlabel = 'NullValue', root = root, autoload = autoload)
 
 		# Accelerometer streams
 		streams.Accelerometer =                       AccelerometerStream(device = 'Accelerometer', streamlabel = 'Accelerometer', root = root, autoload = autoload)
