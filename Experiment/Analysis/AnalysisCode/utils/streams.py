@@ -13,21 +13,18 @@ class Dataset:
 		self.georeference = None
 		self.streams = None
 
-	def add_georeference(self, ubxstream = None, event = 'NAV-HPPOSLLH'):
+	def add_ubx_georeference(self, ubxstream = None, correct_clock_drift = True):
 		if ubxstream is None:
 			try:
-				NavData = self.streams.UBX.filter_event(event)
+				NavData = self.streams.UBX.parseposition()
 			except:
 				raise 'Could not load Ubx stream.'
 		else:
 			if not isinstance(ubxstream, UbxStream):
 				raise "Reference must be a UbxStream class instance"
 			else:
-				NavData = ubxstream.filter_event(event)
-		NavData.insert(NavData.shape[1], "Lat", NavData.apply(lambda x : x.Message.lat, axis = 1), False)
-		NavData.insert(NavData.shape[1], "Lon", NavData.apply(lambda x : x.Message.lon, axis = 1), False)
-		NavData.insert(NavData.shape[1], "Height", NavData.apply(lambda x : x.Message.height, axis = 1), False)
-		NavData.insert(NavData.shape[1], "Time", NavData.apply(lambda x : x.Message.iTOW, axis = 1), False)
+				NavData = ubxstream.parseposition()
+
 		self.georeference = NavData
 
 	def export_streams(self, filename = None):
