@@ -1,6 +1,8 @@
 import pyubx2 as ubx
 import pandas as pd
-
+import numpy as np
+import matplotlib.pyplot as plt
+from utils.streamsprocessing import SyncTimestamp
 
 def errhandler(err):
     '''
@@ -49,6 +51,52 @@ def filter_ubx_event(df, event):
     '''
     return df.loc[df['Identity'] == event, :]
 
+
+def align_ubx_to_harp(ubx_SyncTimestamp : SyncTimestamp, harp_SyncTimestamp : SyncTimestamp, dt_error = 0.002, plot_diagnosis = False):
+    """Matches sync pulse indices from the ubx to the harp stream. First step to correct alignment drift.
+
+    Args:
+        ubx_SyncTimestamp (SyncTimestamp): SyncTimestamp object created from the timestamps of ubx alignment events
+        harp_SyncTimestamp (SyncTimestamp): SyncTimestamp object created from the timestamps of Harp alignment events
+        dt_error (float, optional): Temporal error to flag automatic misdetections of alignemnt events (in seconds). Defaults to 0.002.
+        plot_diagnosis (bool, optional): Defaults to False.
+
+    Returns:
+        np.array : A 2 column array that matches sync pulse indices from the ubx to the harp stream.
+    """
+    ubx_ts = ubx_SyncTimestamp
+    harp_ts = harp_SyncTimestamp
+
+    min_pair_index = 0
+    pulses_lookup = np.empty((ubx_ts.max_pairs,2), dtype=np.int16)
+    for pair in np.arange(ubx_ts.max_pairs):
+        dyad = harp_ts.find_closest_pair(ubx_ts.get_pair(pair)[-1], dt_error =  dt_error, min_pair_index = min_pair_index)
+        pulses_lookup[pair,:] = [pair, dyad[0]]
+        min_pair_index = dyad[1]
+
+    if plot_diagnosis == True:
+        plt.figure(figsize= (12,8))
+        plt.subplot(211)
+        plt.plot(pulses_lookup[:,0], pulses_lookup[:,1], '.')
+        plt.xlabel('ubx_index')
+        plt.ylabel('Harp_index')
+        plt.title('Index correspondence between streams')
+
+        plt.subplot(212)
+
+        plt.scatter(np.arange(len(ubx_ts.ts_array[pulses_lookup[:,0]])-1), np.diff(ubx_ts.ts_array[pulses_lookup[:,0]]), 100,label = "ubx")
+        plt.scatter(np.arange(len(harp_ts.ts_array[pulses_lookup[:,1]])-1), np.diff(harp_ts.ts_array[pulses_lookup[:,1]]), label = "HARP")
+
+        ax = plt.gca()
+        from matplotlib.ticker import MaxNLocator
+        ax.xaxis.set_major_locator(MaxNLocator(integer=True))
+        plt.ylabel('$\Delta t$ (s)')
+        plt.xlabel('Trial number')
+        plt.legend()
+
+        plt.show()
+
+    return pulses_lookup
 
 ## TODO
 
