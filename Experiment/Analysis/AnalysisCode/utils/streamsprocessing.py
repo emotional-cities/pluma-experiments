@@ -2,6 +2,7 @@ import numpy as np
 
 class SyncTimestamp:
     def __init__(self, ts_array, seconds_conversion = (lambda x: x)) -> None:
+        self.raw_ts_array = ts_array
         self.ts_array = ts_array
         self.seconds_conversion_factor = seconds_conversion
         self.zero()
