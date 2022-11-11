@@ -1,10 +1,16 @@
-from dotmap import DotMap
-from utils.EmotionalCitiesStreams import HarpStream, UbxStream, AccelerometerStream, EmpaticaStream, MicrophoneStream
 import pickle
 import os
 import tilemapbase as tmb
 import numpy as np
 import matplotlib.pyplot as plt
+
+from dotmap import DotMap
+from sklearn.linear_model import LinearRegression
+
+from utils.streamsprocessing import SyncTimestamp
+from utils.EmotionalCitiesStreams import HarpStream, UbxStream, AccelerometerStream, EmpaticaStream, MicrophoneStream
+from utils.ubx import align_ubx_to_harp
+
 class Dataset:
 
 	def __init__(self, root, datasetlabel = '', ):
@@ -13,19 +19,46 @@ class Dataset:
 		self.georeference = None
 		self.streams = None
 
-	def add_ubx_georeference(self, ubxstream = None, correct_clock_drift = True):
+	def add_ubx_georeference(self, ubxstream = None, event = "NAV-HPPOSLLH", calibrate_clock = True):
 		if ubxstream is None:
 			try:
-				NavData = self.streams.UBX.parseposition()
+				NavData = self.streams.UBX.parseposition(event = event, calibrate_clock = calibrate_clock)
 			except:
 				raise 'Could not load Ubx stream.'
 		else:
 			if not isinstance(ubxstream, UbxStream):
 				raise "Reference must be a UbxStream class instance"
 			else:
-				NavData = ubxstream.parseposition()
-
+				NavData = ubxstream.parseposition(event = event, calibrate_clock = calibrate_clock)
 		self.georeference = NavData
+
+	def get_clockcalibration_ubx_to_harp_clock(self, bitmask = 3, dt_error = 0.002, plot_diagnosis = False, r2_min_qc = 0.99):
+     	#Get the TIM_TM2 Message that timestamps the incoming TTL
+		tim_tm2 = self.streams.UBX.filter_event("TIM-TM2") # TTL
+		tim_tm2.insert(tim_tm2.shape[1], "RisingEdge", tim_tm2.apply(lambda x : x.loc["Message"].towMsR, axis = 1), False)
+		risingEdgeEvents = tim_tm2["RisingEdge"].drop_duplicates(keep = 'first').values.astype(float)
+
+		#From Harp, get the second output channel
+		harp_sync_out = self.streams.BioData.Set.data
+		harp_sync_out = harp_sync_out[harp_sync_out["Value"].values & bitmask > 0]
+
+		gps_ts = SyncTimestamp(risingEdgeEvents, seconds_conversion=lambda x : x*1e-3)
+		harp_ts = SyncTimestamp(harp_sync_out.index.values, seconds_conversion=lambda x : x / np.timedelta64(1, 's'))
+		align_lookup = align_ubx_to_harp(gps_ts, harp_ts, dt_error=dt_error, plot_diagnosis = plot_diagnosis)
+
+		harp_ts_seconds = HarpStream.to_seconds(harp_ts.raw_ts_array)
+		x_gps_time = gps_ts.raw_ts_array[align_lookup[:,0]].reshape(-1, 1)
+		y_harp_time = harp_ts_seconds[align_lookup[:,1]]
+		model = LinearRegression().fit(x_gps_time, y_harp_time)
+		slope = model.coef_[0]
+		offset = model.intercept_
+		r2 = model.score(x_gps_time,y_harp_time)
+		if r2 < r2_min_qc:
+			raise AssertionError(f"The quality of the linear fit is lower than expected {r2}")
+		else:
+			self.streams.UBX.clock_calib_model = model
+			return model
+
 
 	def export_streams(self, filename = None):
 		if filename is None:
