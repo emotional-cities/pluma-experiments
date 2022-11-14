@@ -7,11 +7,7 @@ from EmotionalCities.IO.ubx import load_ubx_stream,filter_ubx_event
 from EmotionalCities.Streams.harpStream import HarpStream
 
 class UbxStream(Stream):
-	"""_summary_
 
-	Args:
-		Stream (_type_): _description_
-	"""
 	def __init__(self, **kw):
 		super(UbxStream,self).__init__(**kw)
 		self.positiondata = None

@@ -14,9 +14,18 @@ class StreamType(Enum):
 
 
 class Stream:
-	"""_summary_
+	"""Based class for all stream types
 	"""
-	def __init__(self, device, streamlabel, root = '', data = None, autoload = True):
+	def __init__(self, device : str, streamlabel : str, root = '', data : any = None, autoload : bool = True):
+		"""_summary_
+		Args:
+			device (str): Device label
+			streamlabel (str): Stream label
+			root (str, optional): Root path where the files of the stream are expected to be found. Defaults to ''.
+			data (any, optional): Data to initially populate the stream. Defaults to None.
+			autoload (bool, optional): If True, it will attempt to automatically load the data when instantiated. Defaults to True.
+		"""
+
 		self.device = device
 		self.streamlabel = streamlabel
 		self.rootfolder = root
