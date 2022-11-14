@@ -6,10 +6,23 @@ from scipy import signal
 from EmotionalCities.Processing import utils
 
 def heartrate_from_ecg(ecg_data_stream,
-                       fs = 250, skip_slice = 4, max_heartrate_bpm = 200.0,
-                       peak_height = 800, smooth_win = 10, invert = False):
+                       fs : float = 250, skip_slice : int = 4, max_heartrate_bpm : float = 200.0,
+                       peak_height : float = 800, smooth_win : int = 10, invert : bool = False) -> tuple:
     ## Load biodata
+    """Calculates heart rate from the raw ECG waveform signal
 
+    Args:
+        ecg_data_stream (_type_): ECG input data
+        fs (float, optional): ECG sampling rate (Hz). Defaults to 250.
+        skip_slice (int, optional): How to slice the incoming raw array. Fs corresponds to the sampling rate post-slicing. Defaults to 4.
+        max_heartrate_bpm (float, optional): Maximum theoretical heartrate. Defaults to 200.0.
+        peak_height (float, optional): Height of ECG peaks. Defaults to 800.
+        smooth_win (int, optional): Smoothing window size (in samples) used to convolve the data. Defaults to 10.
+        invert (bool, optional): If True, it will invert the raw signal (i.e. Signal * -1 ). Defaults to False.
+
+    Returns:
+        tuple: Tuple with a DataFrame containing timestamped heartbeats, and an array with the processed waveform signal, respectively.
+    """
     ecg = ecg_data_stream.data
     if invert:
         ecg = ecg * (-1.0)
