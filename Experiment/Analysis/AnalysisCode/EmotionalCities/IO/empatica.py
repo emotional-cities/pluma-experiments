@@ -6,7 +6,16 @@ from dotmap import DotMap
 from EmotionalCities.IO.constants import _HARP_T0
 
 
-def load_empatica(filename = 'empatica_harp_ts.csv', root = ''):
+def load_empatica(filename : str = 'empatica_harp_ts.csv', root : str = '') -> DotMap:
+    """Loads the raw Empatica data, from a .csv file, to a DotMap structure.
+
+    Args:
+        filename (str, optional): Input file name to target. Defaults to 'empatica_harp_ts.csv'.
+        root (str, optional): Root path where filename is expected to be found. Defaults to ''.
+
+    Returns:
+        DotMap: DotMap where each Empatica message type can be indexed.
+    """
     try:
         df = pd.read_csv(os.path.join(root, filename), names= ['Message', 'Seconds'], delimiter=',', header=1)
     except FileNotFoundError:
@@ -23,7 +32,15 @@ def load_empatica(filename = 'empatica_harp_ts.csv', root = ''):
         _dict[label] = parse_empatica_stream(group)
     return DotMap(_dict)
 
-def parse_empatica_stream(empatica_stream):
+def parse_empatica_stream(empatica_stream : pd.DataFrame) -> pd.DataFrame:
+    """Helper function to parse the messages from various empatica message types
+
+    Args:
+        empatica_stream (pd.DataFrame): CSV data in DataFrame format
+
+    Returns:
+        pd.DataFrame: A DataFrame with parsed relevant empatica data indexed by time.
+    """
     stream_id = empatica_stream['Message'][0].split(' ')[0]
     if stream_id == 'E4_Acc':
         df = empatica_stream['Message'].str.split(pat = ' ', expand = True)

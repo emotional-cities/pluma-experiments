@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 from EmotionalCities.Streams.stream import Stream, StreamType
-from EmotionalCities.IO.accelarometer import load_accelerometer
+from EmotionalCities.IO.accelerometer import load_accelerometer
 
 class AccelerometerStream(Stream):
 	"""_summary_
