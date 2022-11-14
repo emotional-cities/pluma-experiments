@@ -14,7 +14,16 @@ _accelerometer_header = [
     'SysCalibEnabled', 'GyroCalibEnabled','AccCalibEnabled', 'MagCalibEnabled',
     'Temperature', 'Seconds', 'SoftwareTimestamp']
 
-def load_accelerometer(filename = 'accelerometer.csv', root = ''):
+def load_accelerometer(filename : str = 'accelerometer.csv', root : str = '') -> pd.DataFrame:
+    """Loads the raw acceleromter data from file to a pandas DataFrame.
+
+    Args:
+        filename (str, optional): Input file name to target. Defaults to 'accelerometer.csv'.
+        root (str, optional): Root path where filename is expected to be found. Defaults to ''.
+
+    Returns:
+        pd.DataFrame: Dataframe with descriptive data indexed by time (Seconds)
+    """
     try:
         df = pd.read_csv(os.path.join(root, filename), header = None, names= _accelerometer_header)
     except FileNotFoundError:

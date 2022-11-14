@@ -6,10 +6,16 @@ import pandas as pd
 
 from EmotionalCities.IO.constants import _HARP_T0
 
-def read_ubx_file(path):
-    '''
-    Outputs a dataframe with messages from UBX file.
-    '''
+def read_ubx_file(path : str) -> pd.DataFrame:
+    """Outputs a dataframe with all messages from UBX binary file.
+
+    Args:
+        path (str): Absolute path to the UBX binary file.
+
+    Returns:
+        pd.DataFrame: Output DataFrame with minimally parsed UBX messages.
+    """
+
     print(f'Opening file {path}...')
     out = []
     with open(path, 'rb') as fstream:
@@ -24,24 +30,28 @@ def read_ubx_file(path):
     print('Done.')
     return df
 
-def filter_ubx_event(df, event):
-    '''
-    Outputs a dataframe containing the messages from a single event
-    '''
+def filter_ubx_event(df : pd.DataFrame, event : str) -> pd.DataFrame:
+    """Filters a UBX dataframe by the specified event (or "Identity") string.
+
+    Args:
+        df (pd.DataFrame): Input DataFrame with UBX data. E.g. the output of read_ubx_file()
+        event (str): Identity label used to filter the messages.
+
+    Returns:
+        pd.DataFrame: _description_
+    """
     return df.loc[df['Identity'] == event, :]
 
+def load_ubx_bin(filename : str = 'ubx.bin', root : str = '') -> pd.DataFrame:
+    """Helper function for read_ubx_file()
 
-def load_ubx_stream(root = ''):
-    bin_file = load_ubx_bin(root = root)
-    csv_file = load_ubx_harp_ts(root = root)
-    if (bin_file['Class'].values == csv_file['Class'].values).all():
-        bin_file['Seconds'] = csv_file.index
-        bin_file = bin_file.set_index('Seconds')
-        return bin_file
-    else:
-        raise ValueError('Misalignment found between CSV and UBX arrays.')
+    Args:
+        filename (str, optional): Relative path of the expected UBX binary file. Defaults to 'ubx.bin'.
+        root (str, optional): Root path for the UBX binary file. Defaults to ''.
 
-def load_ubx_bin(filename = 'ubx.bin', root = ''):
+    Returns:
+        pd.DataFrame: Output from read_ubx_file()
+    """
     try:
         df = read_ubx_file(os.path.join(root, filename))
     except FileNotFoundError:
@@ -52,7 +62,17 @@ def load_ubx_bin(filename = 'ubx.bin', root = ''):
         return
     return df
 
-def load_ubx_harp_ts(filename = 'ubx_harp_ts.csv', root = ''):
+def load_ubx_harp_ts(filename : str = 'ubx_harp_ts.csv', root : str = '') -> pd.DataFrame:
+    """Reads the software timestamped data of all UBX messages
+
+    Args:
+        filename (str, optional): Relative path of the expected .csv file wherein each line is a received UBX message. Defaults to 'ubx_harp_ts.csv'.
+        root (str, optional): Root path for the .csv file. Defaults to ''.
+
+    Returns:
+        pd.DataFrame: DataFrame with relevant data index by time.
+    """
+
     try:
         df = pd.read_csv(os.path.join(root, filename), header = None, names = ('Seconds', 'Class', 'Identity'))
     except FileNotFoundError:
@@ -64,6 +84,28 @@ def load_ubx_harp_ts(filename = 'ubx_harp_ts.csv', root = ''):
     df['Seconds'] = _HARP_T0 + pd.to_timedelta(df['Seconds'].values, 's')
     df.set_index('Seconds', inplace=True)
     return df
+
+def load_ubx_stream(root : str = '') -> pd.DataFrame:
+    """Helper function that outputs the merge the outputs of load_ubx_bin() and load_ubx_harp_ts().
+    It additionally checks if, for each binary messages there exists the correspondent timestamped event.
+
+    Args:
+        root (str, optional): Root path for both .csv and .bin files. Defaults to ''.
+
+    Raises:
+        ValueError: Raises an error if there is a mismatch between the two files.
+
+    Returns:
+        pd.DataFrame: DataFrame indexed by the message times found in the output of load_ubx_harp_ts()
+    """
+    bin_file = load_ubx_bin(root = root)
+    csv_file = load_ubx_harp_ts(root = root)
+    if (bin_file['Class'].values == csv_file['Class'].values).all():
+        bin_file['Seconds'] = csv_file.index
+        bin_file = bin_file.set_index('Seconds')
+        return bin_file
+    else:
+        raise ValueError('Misalignment found between CSV and UBX arrays.')
 
 
 def errhandler(err):
