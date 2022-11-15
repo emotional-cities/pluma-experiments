@@ -1,6 +1,3 @@
-import datetime
-
-import numpy as np
 from enum import Enum
 import matplotlib.pyplot as plt
 
@@ -31,7 +28,6 @@ class Stream:
 		self.rootfolder = root
 		self.data = data
 		self.autoload = autoload
-		self.georeference = None
 		self.streamtype = StreamType.NONE
 
 	def plot(self, col = None , **kwargs):

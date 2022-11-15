@@ -1,5 +1,5 @@
-from EmotionalCities.Streams.stream import Stream, StreamType
-from EmotionalCities.IO.microphone import load_microphone
+from pluma.stream import Stream, StreamType
+from pluma.io.microphone import load_microphone
 
 class MicrophoneStream (Stream):
 	"""_summary_
@@ -9,6 +9,7 @@ class MicrophoneStream (Stream):
 	"""
 	def __init__(self, **kw):
 		super(MicrophoneStream,self).__init__(**kw)
+		self.streamtype = StreamType.MICROPHONE
 		if self.autoload:
 			self.load()
 

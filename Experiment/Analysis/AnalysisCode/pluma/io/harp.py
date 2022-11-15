@@ -1,11 +1,11 @@
 import os
 import warnings
+import datetime
 
 import numpy as np
 import pandas as pd
 
-from EmotionalCities.IO.constants import _HARP_T0
-
+_HARP_T0 = datetime.datetime(1904, 1, 1)
 
 _SECONDS_PER_TICK = 32e-6
 

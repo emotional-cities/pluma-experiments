@@ -1,8 +1,8 @@
 import numpy as np
 import pandas as pd
 
-from EmotionalCities.Streams.stream import Stream, StreamType
-from EmotionalCities.IO.harp import load_harp_stream, _HARP_T0
+from pluma.stream import Stream, StreamType
+from pluma.io.harp import load_harp_stream, _HARP_T0
 
 class HarpStream(Stream):
 	"""_summary_

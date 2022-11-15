@@ -2,7 +2,8 @@ import os
 import warnings
 
 import pandas as pd
-from EmotionalCities.IO.constants import _HARP_T0
+
+from pluma.io.harp import _HARP_T0
 
 _accelerometer_header = [
     'Orientation.X', 'Orientation.Y', 'Orientation.Z',

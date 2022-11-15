@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import tilemapbase as tmb
 import numpy as np
+
 ### Visualization ###
 def showmap(NavData,
         figsize = (20,20),

@@ -3,7 +3,8 @@ import warnings
 
 import pandas as pd
 from dotmap import DotMap
-from EmotionalCities.IO.constants import _HARP_T0
+
+from pluma.io.harp import _HARP_T0
 
 
 def load_empatica(filename: str = 'empatica_harp_ts.csv',

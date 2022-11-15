@@ -5,7 +5,7 @@ from matplotlib.ticker import MaxNLocator
 
 from sklearn.linear_model import LinearRegression
 
-from EmotionalCities.Streams.harpStream import HarpStream
+from pluma.stream.harp import HarpStream
 
 class SyncTimestamp:
     def __init__(self, ts_array, seconds_conversion = (lambda x: x)) -> None:
@@ -64,12 +64,24 @@ class SyncTimestamp:
         return str(self.ts_array)
 
 
-def align_ubx_to_harp(ubx_SyncTimestamp : SyncTimestamp, harp_SyncTimestamp : SyncTimestamp, dt_error = 0.002, plot_diagnosis = False):
+def align_ubx_to_harp(
+    ubx_SyncTimestamp : SyncTimestamp,
+    harp_SyncTimestamp : SyncTimestamp,
+    dt_error : float = 0.002, plot_diagnosis: bool = False):
     """Matches sync pulse indices from the ubx to the harp stream. First step to correct alignment drift.
 
     Args:
         ubx_SyncTimestamp (SyncTimestamp): SyncTimestamp object created from the timestamps of ubx alignment events
         harp_SyncTimestamp (SyncTimestamp): SyncTimestamp object created from the timestamps of Harp alignment events
+        dt_error (float, optional): _description_. Defaults to 0.002.
+        plot_diagnosis (bool, optional): _description_. Defaults to False.
+
+    Returns:
+        _type_: _description_
+    """    
+    """
+
+    Args:
         dt_error (float, optional): Temporal error to flag automatic misdetections of alignemnt events (in seconds). Defaults to 0.002.
         plot_diagnosis (bool, optional): Defaults to False.
 

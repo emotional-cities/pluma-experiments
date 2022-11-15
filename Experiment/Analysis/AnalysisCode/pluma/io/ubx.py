@@ -4,7 +4,7 @@ import warnings
 import pyubx2 as ubx
 import pandas as pd
 
-from EmotionalCities.IO.constants import _HARP_T0
+from pluma.io.harp import _HARP_T0
 
 
 def read_ubx_file(path: str) -> pd.DataFrame:
