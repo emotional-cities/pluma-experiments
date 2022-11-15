@@ -6,22 +6,23 @@ import pandas as pd
 
 from EmotionalCities.IO.constants import _HARP_T0
 
+
 _SECONDS_PER_TICK = 32e-6
 
 _payloadtypes = {
-    1 : np.dtype(np.uint8),
-    2 : np.dtype(np.uint16),
-    4 : np.dtype(np.uint32),
-    8 : np.dtype(np.uint64),
-    129 : np.dtype(np.int8),
-    130 : np.dtype(np.int16),
-    132 : np.dtype(np.int32),
-    136 : np.dtype(np.int64),
-    68 : np.dtype(np.float32)
+    1: np.dtype(np.uint8),
+    2: np.dtype(np.uint16),
+    4: np.dtype(np.uint32),
+    8: np.dtype(np.uint64),
+    129: np.dtype(np.int8),
+    130: np.dtype(np.int16),
+    132: np.dtype(np.int32),
+    136: np.dtype(np.int64),
+    68: np.dtype(np.float32)
 }
 
 
-def read_harp_bin(file : str, time_offset : float = 0) -> pd.DataFrame:
+def read_harp_bin(file: str, time_offset: float = 0) -> pd.DataFrame:
     """Reads data from the specified Harp binary file. Ideally, from a single address and stable format.
     Args:
         file (str): Input file name to target.
@@ -41,8 +42,10 @@ def read_harp_bin(file : str, time_offset : float = 0) -> pd.DataFrame:
     payloadtype = _payloadtypes[data[4] & ~0x10]
     elementsize = payloadtype.itemsize
     payloadshape = (length, payloadsize // elementsize)
-    seconds = np.ndarray(length, dtype=np.uint32, buffer=data, offset=5, strides=stride)
-    ticks = np.ndarray(length, dtype=np.uint16, buffer=data, offset=9, strides=stride)
+    seconds = np.ndarray(length, dtype=np.uint32,
+                         buffer=data, offset=5, strides=stride)
+    ticks = np.ndarray(length, dtype=np.uint16,
+                       buffer=data, offset=9, strides=stride)
 
     seconds = ticks * _SECONDS_PER_TICK + seconds
     seconds += time_offset
@@ -55,14 +58,21 @@ def read_harp_bin(file : str, time_offset : float = 0) -> pd.DataFrame:
         buffer=data, offset=11,
         strides=(stride, elementsize))
 
-    if payload.shape[1] ==  1:
-        return pd.DataFrame(payload, index=seconds, columns = ['Value'])
+    if payload.shape[1] == 1:
+        return pd.DataFrame(
+            payload,
+            index=seconds,
+            columns=['Value'])
 
     else:
-        return pd.DataFrame(payload, index=seconds, columns = ['Value' + str(x) for x in np.arange(payload.shape[1])])
+        return pd.DataFrame(
+            payload,
+            index=seconds,
+            columns=['Value' + str(x) for x in np.arange(payload.shape[1])])
 
 
-def get_stream_path(streamID : int, root : str = '', suffix : str = 'Streams_', ext : str = '') -> str:
+def get_stream_path(streamID: int,
+                    root: str = '', suffix: str = 'Streams_', ext: str = '') -> str:
     """Helper function to generate a full path of the harp stream binary file.
 
     Args:
@@ -77,7 +87,10 @@ def get_stream_path(streamID : int, root : str = '', suffix : str = 'Streams_', 
     _suffix = f'{suffix}{streamID}{ext}'
     return os.path.join(root, _suffix)
 
-def load_harp_stream(streamID : int, root : str = '', throwFileError : bool = True) -> pd.DataFrame:
+
+def load_harp_stream(streamID: int,
+                     root: str = '',
+                     throwFileError: bool = True) -> pd.DataFrame:
     """Helper function that runs read_harp_bin() with arguments built using get_stream_path()
 
     Args:

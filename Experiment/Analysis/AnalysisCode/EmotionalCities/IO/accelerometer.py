@@ -11,10 +11,15 @@ _accelerometer_header = [
     'Magnetometer.X', 'Magnetometer.Y', 'Magnetometer.Z',
     'Accl.X', 'Accl.Y', 'Accl.Z',
     'Gravitiy.X', 'Gravitiy.Y', 'Gravitiy.Z',
-    'SysCalibEnabled', 'GyroCalibEnabled','AccCalibEnabled', 'MagCalibEnabled',
+    'SysCalibEnabled', 'GyroCalibEnabled',
+    'AccCalibEnabled', 'MagCalibEnabled',
     'Temperature', 'Seconds', 'SoftwareTimestamp']
 
-def load_accelerometer(filename : str = 'accelerometer.csv', root : str = '') -> pd.DataFrame:
+
+def load_accelerometer(
+        filename: str = 'accelerometer.csv',
+        root: str = '') -> pd.DataFrame:
+
     """Loads the raw acceleromter data from file to a pandas DataFrame.
 
     Args:
@@ -25,14 +30,20 @@ def load_accelerometer(filename : str = 'accelerometer.csv', root : str = '') ->
         pd.DataFrame: Dataframe with descriptive data indexed by time (Seconds)
     """
     try:
-        df = pd.read_csv(os.path.join(root, filename), header = None, names= _accelerometer_header)
+        df = pd.read_csv(
+            os.path.join(root, filename),
+            header=None,
+            names=_accelerometer_header)
     except FileNotFoundError:
-        warnings.warn(f'Accelerometer stream file {filename} could not be found.')
+        warnings.warn(f'Accelerometer stream file\
+            {filename} could not be found.')
         return
     except FileExistsError:
-        warnings.warn(f'Accelerometer stream file {filename} could not be found.')
+        warnings.warn(f'Accelerometer stream file\
+            {filename} could not be found.')
         return
     df['Seconds'] = _HARP_T0 + pd.to_timedelta(df['Seconds'].values, 's')
-    df['SoftwareTimestamp'] =  _HARP_T0 + pd.to_timedelta(df['SoftwareTimestamp'].values, 's')
+    df['SoftwareTimestamp'] = \
+        _HARP_T0 + pd.to_timedelta(df['SoftwareTimestamp'].values, 's')
     df.set_index('Seconds', inplace=True)
     return df
