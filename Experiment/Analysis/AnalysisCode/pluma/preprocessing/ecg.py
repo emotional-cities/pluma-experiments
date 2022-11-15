@@ -3,7 +3,7 @@ import pandas as pd
 
 from scipy import signal
 
-from EmotionalCities.Processing import utils
+from pluma.preprocessing import utils
 
 def heartrate_from_ecg(ecg_data_stream,
                        fs : float = 250, skip_slice : int = 4, max_heartrate_bpm : float = 200.0,

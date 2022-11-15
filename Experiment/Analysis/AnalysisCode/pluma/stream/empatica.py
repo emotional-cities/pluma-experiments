@@ -1,7 +1,5 @@
-
-from EmotionalCities.Streams.stream import Stream, StreamType
-from EmotionalCities.IO.empatica import load_empatica
-
+from pluma.stream import Stream, StreamType
+from pluma.io.empatica import load_empatica
 
 class EmpaticaStream(Stream):
 	"""_summary_

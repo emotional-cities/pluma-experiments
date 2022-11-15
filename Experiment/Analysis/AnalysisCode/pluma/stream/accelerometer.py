@@ -1,8 +1,6 @@
-import pandas as pd
-import numpy as np
+from pluma.stream import Stream, StreamType
+from pluma.io.accelerometer import load_accelerometer
 
-from EmotionalCities.Streams.stream import Stream, StreamType
-from EmotionalCities.IO.accelerometer import load_accelerometer
 
 class AccelerometerStream(Stream):
 	"""_summary_
