@@ -6,7 +6,8 @@ import pandas as pd
 
 from EmotionalCities.IO.constants import _HARP_T0
 
-def read_ubx_file(path : str) -> pd.DataFrame:
+
+def read_ubx_file(path: str) -> pd.DataFrame:
     """Outputs a dataframe with all messages from UBX binary file.
 
     Args:
@@ -21,7 +22,7 @@ def read_ubx_file(path : str) -> pd.DataFrame:
     with open(path, 'rb') as fstream:
         out = read(fstream)
 
-    df = pd.DataFrame({'Message':out})
+    df = pd.DataFrame({'Message': out})
     df['Identity'] = df['Message'].apply(lambda x: x.identity)
     df['Class'] = df['Message'].apply(lambda x: x.identity.split('-')[0])
     df['Id'] = df['Message'].apply(lambda x: x.identity.split('-')[1])
@@ -30,7 +31,8 @@ def read_ubx_file(path : str) -> pd.DataFrame:
     print('Done.')
     return df
 
-def filter_ubx_event(df : pd.DataFrame, event : str) -> pd.DataFrame:
+
+def filter_ubx_event(df: pd.DataFrame, event: str) -> pd.DataFrame:
     """Filters a UBX dataframe by the specified event (or "Identity") string.
 
     Args:
@@ -42,7 +44,8 @@ def filter_ubx_event(df : pd.DataFrame, event : str) -> pd.DataFrame:
     """
     return df.loc[df['Identity'] == event, :]
 
-def load_ubx_bin(filename : str = 'ubx.bin', root : str = '') -> pd.DataFrame:
+
+def load_ubx_bin(filename: str = 'ubx.bin', root: str = '') -> pd.DataFrame:
     """Helper function for read_ubx_file()
 
     Args:
@@ -62,7 +65,8 @@ def load_ubx_bin(filename : str = 'ubx.bin', root : str = '') -> pd.DataFrame:
         return
     return df
 
-def load_ubx_harp_ts(filename : str = 'ubx_harp_ts.csv', root : str = '') -> pd.DataFrame:
+
+def load_ubx_harp_ts(filename: str = 'ubx_harp_ts.csv', root: str = '') -> pd.DataFrame:
     """Reads the software timestamped data of all UBX messages
 
     Args:
@@ -74,7 +78,7 @@ def load_ubx_harp_ts(filename : str = 'ubx_harp_ts.csv', root : str = '') -> pd.
     """
 
     try:
-        df = pd.read_csv(os.path.join(root, filename), header = None, names = ('Seconds', 'Class', 'Identity'))
+        df = pd.read_csv(os.path.join(root, filename), header=None, names=('Seconds', 'Class', 'Identity'))
     except FileNotFoundError:
         warnings.warn(f'UBX stream alignment file {filename} could not be found.')
         return
@@ -85,7 +89,8 @@ def load_ubx_harp_ts(filename : str = 'ubx_harp_ts.csv', root : str = '') -> pd.
     df.set_index('Seconds', inplace=True)
     return df
 
-def load_ubx_stream(root : str = '') -> pd.DataFrame:
+
+def load_ubx_stream(root: str = '') -> pd.DataFrame:
     """Helper function that outputs the merge the outputs of load_ubx_bin() and load_ubx_harp_ts().
     It additionally checks if, for each binary messages there exists the correspondent timestamped event.
 
@@ -98,8 +103,8 @@ def load_ubx_stream(root : str = '') -> pd.DataFrame:
     Returns:
         pd.DataFrame: DataFrame indexed by the message times found in the output of load_ubx_harp_ts()
     """
-    bin_file = load_ubx_bin(root = root)
-    csv_file = load_ubx_harp_ts(root = root)
+    bin_file = load_ubx_bin(root=root)
+    csv_file = load_ubx_harp_ts(root=root)
     if (bin_file['Class'].values == csv_file['Class'].values).all():
         bin_file['Seconds'] = csv_file.index
         bin_file = bin_file.set_index('Seconds')
@@ -115,7 +120,9 @@ def errhandler(err):
     print(f'\nERROR: {err}\n')
 
 
-def read(stream, errorhandler = errhandler, protfilter=2, quitonerror = 3, validate = True, msgmode = 0):
+def read(stream,
+         errorhandler=errhandler, protfilter=2,
+         quitonerror=3, validate=True, msgmode=0):
     '''
     Reads and parses UBX message data from stream.
     '''
