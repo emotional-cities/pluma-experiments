@@ -14,7 +14,7 @@
                  xmlns:al="clr-namespace:Bonsai.Audio;assembly=Bonsai.Audio"
                  xmlns:tkf="clr-namespace:Bonsai.Tinkerforge;assembly=Bonsai.Tinkerforge"
                  xmlns:lsl="clr-namespace:Bonsai.Lsl;assembly=Bonsai.Lsl"
-                 xmlns:p4="clr-namespace:Bonsai.WebSockets;assembly=Bonsai.WebSockets"
+                 xmlns:p4="clr-namespace:Bonsai.WebSockets;assembly=Extensions"
                  xmlns:viz="clr-namespace:Bonsai.Design.Visualizers;assembly=Bonsai.Design.Visualizers"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
@@ -1722,8 +1722,7 @@ it.Item3 as TimestampSource)</scr:Expression>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="p4:EmpaticaClient">
-                <p4:Host>127.0.0.1</p4:Host>
-                <p4:Port>28000</p4:Port>
+                <p4:Port>0</p4:Port>
               </Combinator>
             </Expression>
             <Expression xsi:type="SubscribeSubject">
