@@ -20,7 +20,12 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="StringProperty">
-          <Value>C:\Users\neurogears\Desktop\EC_datasets\FMUL2022_10_21_11_20_53</Value>
+          <Value>C:\Users\neurogears\Desktop\EC_datasets\PupilBenchmark_2022_09_29_10_59_55</Value>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Take">
+          <rx:Count>1</rx:Count>
         </Combinator>
       </Expression>
       <Expression xsi:type="rx:CreateObservable">
@@ -62,7 +67,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="ubx:FileDevice">
-                <ubx:FileName>C:\Users\neurogears\Desktop\EC_datasets\FMUL2022_10_21_11_20_53\ubx.bin</ubx:FileName>
+                <ubx:FileName>C:\Users\neurogears\Desktop\EC_datasets\SoundCardTKbenchmark2022_09_27_15_16_36\ubx.bin</ubx:FileName>
               </Combinator>
             </Expression>
             <Expression xsi:type="SubscribeSubject">
@@ -78,7 +83,7 @@
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvReader">
-              <io:FileName>C:\Users\neurogears\Desktop\EC_datasets\FMUL2022_10_21_11_20_53\ubx_harp_ts.csv</io:FileName>
+              <io:FileName>C:\Users\neurogears\Desktop\EC_datasets\SoundCardTKbenchmark2022_09_27_15_16_36\ubx_harp_ts.csv</io:FileName>
               <io:ScanPattern>%d,%s,%s</io:ScanPattern>
               <io:SkipRows>0</io:SkipRows>
             </Expression>
@@ -175,7 +180,7 @@
                           <Property Name="FileName" />
                         </Expression>
                         <Expression xsi:type="io:CsvWriter">
-                          <io:FileName>C:\Users\neurogears\Desktop\EC_datasets\FMUL2022_10_21_11_20_53\UBX\RXM_RLM.csv</io:FileName>
+                          <io:FileName>C:\Users\neurogears\Desktop\EC_datasets\SoundCardTKbenchmark2022_09_27_15_16_36\UBX\TIM_TM2.csv</io:FileName>
                           <io:Append>false</io:Append>
                           <io:Overwrite>true</io:Overwrite>
                           <io:Suffix>None</io:Suffix>
@@ -221,7 +226,7 @@
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="dsp:MatrixWriter">
-                            <dsp:Path>C:\Users\neurogears\Desktop\EC_datasets\FMUL2022_10_21_11_20_53\UBX\RXM_RLM.bin</dsp:Path>
+                            <dsp:Path>C:\Users\neurogears\Desktop\EC_datasets\SoundCardTKbenchmark2022_09_27_15_16_36\UBX\TIM_TM2.bin</dsp:Path>
                             <dsp:Suffix>None</dsp:Suffix>
                             <dsp:Overwrite>true</dsp:Overwrite>
                             <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -292,9 +297,10 @@
       </Expression>
     </Nodes>
     <Edges>
-      <Edge From="0" To="2" Label="Source1" />
-      <Edge From="1" To="2" Label="Source2" />
-      <Edge From="2" To="3" Label="Source1" />
+      <Edge From="0" To="3" Label="Source1" />
+      <Edge From="1" To="2" Label="Source1" />
+      <Edge From="2" To="3" Label="Source2" />
+      <Edge From="3" To="4" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
