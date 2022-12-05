@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WorkflowBuilder Version="2.6.2"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xmlns:al="clr-namespace:Bonsai.Audio;assembly=Bonsai.Audio"
+                 xmlns="https://bonsai-rx.org/2018/workflow">
+  <Workflow>
+    <Nodes>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="al:AudioCapture">
+            <al:DeviceName>Line (Sound Blaster G3)</al:DeviceName>
+            <al:SampleRate>44100</al:SampleRate>
+            <al:SampleFormat>Stereo16</al:SampleFormat>
+            <al:BufferLength>10</al:BufferLength>
+          </Combinator>
+        </Builder>
+      </Expression>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="al:AudioWriter">
+            <al:FileName>teste.wav</al:FileName>
+            <al:Suffix>None</al:Suffix>
+            <al:Buffered>true</al:Buffered>
+            <al:Overwrite>true</al:Overwrite>
+            <al:SampleRate>44100</al:SampleRate>
+          </Combinator>
+        </Builder>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="al:AudioReader">
+          <al:FileName>teste.wav</al:FileName>
+          <al:BufferLength>10</al:BufferLength>
+          <al:SampleRate>0</al:SampleRate>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="al:AudioPlayback">
+          <al:DeviceName>Generic Software on Speakers (Sound Blaster G3)</al:DeviceName>
+          <al:SampleRate>44100</al:SampleRate>
+        </Combinator>
+      </Expression>
+    </Nodes>
+    <Edges>
+      <Edge From="0" To="1" Label="Source1" />
+      <Edge From="2" To="3" Label="Source1" />
+    </Edges>
+  </Workflow>
+</WorkflowBuilder>
