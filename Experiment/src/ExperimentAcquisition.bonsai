@@ -10,10 +10,10 @@
                  xmlns:p2="clr-namespace:;assembly=Extensions"
                  xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
                  xmlns:ubx="clr-namespace:Bonsai.uBlox;assembly=Bonsai.uBlox"
+                 xmlns:lsl="clr-namespace:Bonsai.Lsl;assembly=Bonsai.Lsl"
                  xmlns:p3="clr-namespace:Bonsai.Numerics.Distributions;assembly=Bonsai.Numerics"
                  xmlns:al="clr-namespace:Bonsai.Audio;assembly=Bonsai.Audio"
                  xmlns:tkf="clr-namespace:Bonsai.Tinkerforge;assembly=Bonsai.Tinkerforge"
-                 xmlns:lsl="clr-namespace:Bonsai.Lsl;assembly=Bonsai.Lsl"
                  xmlns:p4="clr-namespace:Bonsai.WebSockets;assembly=Extensions"
                  xmlns:viz="clr-namespace:Bonsai.Design.Visualizers;assembly=Bonsai.Design.Visualizers"
                  xmlns="https://bonsai-rx.org/2018/workflow">
@@ -40,9 +40,13 @@
             <Expression xsi:type="scr:ExpressionTransform">
               <scr:Expression>it.Value +  it.TimeStamp.ToString("yyyy_MM_dd_HH_mm_ss")</scr:Expression>
             </Expression>
-            <Expression xsi:type="rx:ReplaySubject">
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Take">
+                <rx:Count>1</rx:Count>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="rx:AsyncSubject">
               <Name>LoggingPath</Name>
-              <rx:BufferSize xsi:nil="true" />
             </Expression>
             <Expression xsi:type="rx:PublishSubject" TypeArguments="harp:HarpMessage">
               <rx:Name>LoggingDump</rx:Name>
@@ -584,19 +588,76 @@
                 </Edges>
               </Workflow>
             </Expression>
+            <Expression xsi:type="rx:PublishSubject" TypeArguments="harp:Timestamped(lsl:Timestamped(sys:Int32))">
+              <rx:Name>EEG_Marker</rx:Name>
+            </Expression>
+            <Expression xsi:type="GroupWorkflow">
+              <Name>LogEegMarkers</Name>
+              <Workflow>
+                <Nodes>
+                  <Expression xsi:type="SubscribeSubject">
+                    <Name>LoggingPath</Name>
+                  </Expression>
+                  <Expression xsi:type="ExternalizedMapping">
+                    <Property Name="Value" DisplayName="LogName" />
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="StringProperty">
+                      <Value>eeg_markers.csv</Value>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:Zip" />
+                  </Expression>
+                  <Expression xsi:type="Format">
+                    <Format>{0}\{1}</Format>
+                    <Selector>Item1,Item2</Selector>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="FileName" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="WorkflowInput">
+                    <Name>Source1</Name>
+                  </Expression>
+                  <Expression xsi:type="io:CsvWriter">
+                    <io:FileName>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20220922\TRASH2022_09_26_16_58_57\empatica_harp_ts.csv</io:FileName>
+                    <io:Append>false</io:Append>
+                    <io:Overwrite>false</io:Overwrite>
+                    <io:Suffix>None</io:Suffix>
+                    <io:IncludeHeader>true</io:IncludeHeader>
+                    <io:Selector />
+                  </Expression>
+                  <Expression xsi:type="WorkflowOutput" />
+                </Nodes>
+                <Edges>
+                  <Edge From="0" To="3" Label="Source1" />
+                  <Edge From="1" To="2" Label="Source1" />
+                  <Edge From="2" To="3" Label="Source2" />
+                  <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="4" To="5" Label="Source1" />
+                  <Edge From="5" To="7" Label="Source2" />
+                  <Edge From="6" To="7" Label="Source1" />
+                  <Edge From="7" To="8" Label="Source1" />
+                </Edges>
+              </Workflow>
+            </Expression>
           </Nodes>
           <Edges>
             <Edge From="0" To="1" Label="Source1" />
             <Edge From="1" To="2" Label="Source1" />
             <Edge From="2" To="3" Label="Source1" />
             <Edge From="3" To="4" Label="Source1" />
-            <Edge From="5" To="6" Label="Source1" />
-            <Edge From="5" To="7" Label="Source1" />
-            <Edge From="8" To="9" Label="Source1" />
-            <Edge From="10" To="11" Label="Source1" />
-            <Edge From="12" To="13" Label="Source1" />
+            <Edge From="4" To="5" Label="Source1" />
+            <Edge From="6" To="7" Label="Source1" />
+            <Edge From="6" To="8" Label="Source1" />
+            <Edge From="9" To="10" Label="Source1" />
+            <Edge From="11" To="12" Label="Source1" />
             <Edge From="13" To="14" Label="Source1" />
-            <Edge From="15" To="16" Label="Source1" />
+            <Edge From="14" To="15" Label="Source1" />
+            <Edge From="16" To="17" Label="Source1" />
+            <Edge From="18" To="19" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
@@ -2123,6 +2184,54 @@ it.Item7 as NullValue)</scr:Expression>
             <Edge From="23" To="24" Label="Source7" />
             <Edge From="24" To="25" Label="Source1" />
             <Edge From="25" To="26" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="GroupWorkflow">
+        <Name>EEG</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>SynchPulse</Name>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="IntProperty">
+                <Value>1</Value>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="rx:Accumulate" />
+            <Expression xsi:type="lsl:StreamOutlet">
+              <lsl:Name>EmotionalCitiesStream1</lsl:Name>
+              <lsl:ContentType>Markers</lsl:ContentType>
+              <lsl:ChannelCount>1</lsl:ChannelCount>
+              <lsl:Selector>it</lsl:Selector>
+              <lsl:SampleRate>0</lsl:SampleRate>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="lsl:Timestamp" />
+            </Expression>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>TimestampSource</Name>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:WithLatestFrom" />
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="harp:CreateTimestamped" />
+            </Expression>
+            <Expression xsi:type="MulticastSubject">
+              <Name>EEG_Marker</Name>
+            </Expression>
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="2" Label="Source1" />
+            <Edge From="2" To="3" Label="Source1" />
+            <Edge From="3" To="4" Label="Source1" />
+            <Edge From="4" To="6" Label="Source1" />
+            <Edge From="5" To="6" Label="Source2" />
+            <Edge From="6" To="7" Label="Source1" />
+            <Edge From="7" To="8" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
