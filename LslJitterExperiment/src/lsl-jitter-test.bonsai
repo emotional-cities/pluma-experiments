@@ -249,6 +249,7 @@
         <lsl:ChannelCount>1</lsl:ChannelCount>
         <lsl:ChunkSize xsi:nil="true" />
         <lsl:ChannelFormat>Float32</lsl:ChannelFormat>
+        <lsl:ProcessingOptions>All</lsl:ProcessingOptions>
       </Expression>
       <Expression xsi:type="lsl:StreamInlet">
         <lsl:Name>LslOut2</lsl:Name>
@@ -256,6 +257,7 @@
         <lsl:ChannelCount>1</lsl:ChannelCount>
         <lsl:ChunkSize xsi:nil="true" />
         <lsl:ChannelFormat>Float32</lsl:ChannelFormat>
+        <lsl:ProcessingOptions>All</lsl:ProcessingOptions>
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="rx:Zip" />
