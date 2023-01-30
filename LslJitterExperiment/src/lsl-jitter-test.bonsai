@@ -154,93 +154,105 @@
         <Selector>Seconds</Selector>
       </Expression>
       <Expression xsi:type="lsl:StreamOutlet">
-        <lsl:Name>LslOut</lsl:Name>
-        <lsl:ContentType>Timestamp1</lsl:ContentType>
+        <lsl:Name>LslOut1</lsl:Name>
+        <lsl:ContentType />
         <lsl:ChannelCount>1</lsl:ChannelCount>
         <lsl:SampleRate>0</lsl:SampleRate>
       </Expression>
-      <Expression xsi:type="GroupWorkflow">
-        <Name>Expander2</Name>
-        <Workflow>
-          <Nodes>
-            <Expression xsi:type="rx:BehaviorSubject" TypeArguments="harp:HarpMessage">
-              <rx:Name>ExpanderCommands2</rx:Name>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="harp:Device">
-                <harp:DeviceState>Active</harp:DeviceState>
-                <harp:DumpRegisters>true</harp:DumpRegisters>
-                <harp:LedState>On</harp:LedState>
-                <harp:VisualIndicators>On</harp:VisualIndicators>
-                <harp:Heartbeat>Disable</harp:Heartbeat>
-                <harp:IgnoreErrors>false</harp:IgnoreErrors>
-                <harp:PortName>COM3</harp:PortName>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="rx:PublishSubject">
-              <Name>ExpanderEvents2</Name>
-            </Expression>
-            <Expression xsi:type="WorkflowOutput" />
-          </Nodes>
-          <Edges>
-            <Edge From="0" To="1" Label="Source1" />
-            <Edge From="1" To="2" Label="Source1" />
-            <Edge From="2" To="3" Label="Source1" />
-          </Edges>
-        </Workflow>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="GroupWorkflow">
+          <Name>Expander2</Name>
+          <Workflow>
+            <Nodes>
+              <Expression xsi:type="rx:BehaviorSubject" TypeArguments="harp:HarpMessage">
+                <rx:Name>ExpanderCommands2</rx:Name>
+              </Expression>
+              <Expression xsi:type="Combinator">
+                <Combinator xsi:type="harp:Device">
+                  <harp:DeviceState>Active</harp:DeviceState>
+                  <harp:DumpRegisters>true</harp:DumpRegisters>
+                  <harp:LedState>On</harp:LedState>
+                  <harp:VisualIndicators>On</harp:VisualIndicators>
+                  <harp:Heartbeat>Disable</harp:Heartbeat>
+                  <harp:IgnoreErrors>false</harp:IgnoreErrors>
+                  <harp:PortName>COM3</harp:PortName>
+                </Combinator>
+              </Expression>
+              <Expression xsi:type="rx:PublishSubject">
+                <Name>ExpanderEvents2</Name>
+              </Expression>
+              <Expression xsi:type="WorkflowOutput" />
+            </Nodes>
+            <Edges>
+              <Edge From="0" To="1" Label="Source1" />
+              <Edge From="1" To="2" Label="Source1" />
+              <Edge From="2" To="3" Label="Source1" />
+            </Edges>
+          </Workflow>
+        </Builder>
       </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="harp:FilterMessage">
-          <harp:Address>32</harp:Address>
-          <harp:MessageType>Event</harp:MessageType>
-        </Combinator>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="harp:FilterMessage">
+            <harp:Address>32</harp:Address>
+            <harp:MessageType>Event</harp:MessageType>
+          </Combinator>
+        </Builder>
       </Expression>
-      <Expression xsi:type="harp:Parse">
-        <harp:Type>TimestampedU8</harp:Type>
-        <harp:IsArray>false</harp:IsArray>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="harp:Parse">
+          <harp:Type>TimestampedU8</harp:Type>
+          <harp:IsArray>false</harp:IsArray>
+        </Builder>
       </Expression>
-      <Expression xsi:type="rx:Condition">
-        <Workflow>
-          <Nodes>
-            <Expression xsi:type="WorkflowInput">
-              <Name>Source1</Name>
-            </Expression>
-            <Expression xsi:type="MemberSelector">
-              <Selector>Value</Selector>
-            </Expression>
-            <Expression xsi:type="Equal">
-              <Operand xsi:type="WorkflowProperty" TypeArguments="sys:Byte">
-                <Value>17</Value>
-              </Operand>
-            </Expression>
-            <Expression xsi:type="WorkflowOutput" />
-          </Nodes>
-          <Edges>
-            <Edge From="0" To="1" Label="Source1" />
-            <Edge From="1" To="2" Label="Source1" />
-            <Edge From="2" To="3" Label="Source1" />
-          </Edges>
-        </Workflow>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="rx:Condition">
+          <Workflow>
+            <Nodes>
+              <Expression xsi:type="WorkflowInput">
+                <Name>Source1</Name>
+              </Expression>
+              <Expression xsi:type="MemberSelector">
+                <Selector>Value</Selector>
+              </Expression>
+              <Expression xsi:type="Equal">
+                <Operand xsi:type="WorkflowProperty" TypeArguments="sys:Byte">
+                  <Value>17</Value>
+                </Operand>
+              </Expression>
+              <Expression xsi:type="WorkflowOutput" />
+            </Nodes>
+            <Edges>
+              <Edge From="0" To="1" Label="Source1" />
+              <Edge From="1" To="2" Label="Source1" />
+              <Edge From="2" To="3" Label="Source1" />
+            </Edges>
+          </Workflow>
+        </Builder>
       </Expression>
-      <Expression xsi:type="MemberSelector">
-        <Selector>Seconds</Selector>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="MemberSelector">
+          <Selector>Seconds</Selector>
+        </Builder>
       </Expression>
-      <Expression xsi:type="lsl:StreamOutlet">
-        <lsl:Name>LslOut</lsl:Name>
-        <lsl:ContentType>Timestamp2</lsl:ContentType>
-        <lsl:ChannelCount>1</lsl:ChannelCount>
-        <lsl:SampleRate>0</lsl:SampleRate>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="lsl:StreamOutlet">
+          <lsl:Name>LslOut2</lsl:Name>
+          <lsl:ContentType />
+          <lsl:ChannelCount>1</lsl:ChannelCount>
+          <lsl:SampleRate>0</lsl:SampleRate>
+        </Builder>
       </Expression>
       <Expression xsi:type="lsl:StreamInlet">
-        <lsl:Name>LslOut</lsl:Name>
-        <lsl:ContentType>Timestamp1</lsl:ContentType>
+        <lsl:Name>LslOut1</lsl:Name>
+        <lsl:ContentType />
         <lsl:ChannelCount>1</lsl:ChannelCount>
         <lsl:ChunkSize xsi:nil="true" />
         <lsl:ChannelFormat>Float32</lsl:ChannelFormat>
       </Expression>
       <Expression xsi:type="lsl:StreamInlet">
-        <lsl:Name>LslOut</lsl:Name>
-        <lsl:ContentType>Timestamp2</lsl:ContentType>
+        <lsl:Name>LslOut2</lsl:Name>
+        <lsl:ContentType />
         <lsl:ChannelCount>1</lsl:ChannelCount>
         <lsl:ChunkSize xsi:nil="true" />
         <lsl:ChannelFormat>Float32</lsl:ChannelFormat>
