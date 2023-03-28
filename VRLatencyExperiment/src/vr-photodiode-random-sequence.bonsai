@@ -4,6 +4,7 @@
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
                  xmlns:harp="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
                  xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
+                 xmlns:zmq="clr-namespace:Bonsai.ZeroMQ;assembly=Bonsai.ZeroMQ"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
     <Nodes>
@@ -103,6 +104,18 @@
         <io:Suffix>None</io:Suffix>
         <io:IncludeHeader>false</io:IncludeHeader>
       </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="zmq:Subscriber">
+          <zmq:ConnectionString>tcp://localhost:5557</zmq:ConnectionString>
+          <zmq:Topic />
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="MemberSelector">
+        <Selector>Last</Selector>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="zmq:ConvertToString" />
+      </Expression>
     </Nodes>
     <Edges>
       <Edge From="0" To="1" Label="Source1" />
@@ -125,6 +138,8 @@
       <Edge From="16" To="17" Label="Source1" />
       <Edge From="17" To="18" Label="Source2" />
       <Edge From="18" To="19" Label="Source1" />
+      <Edge From="20" To="21" Label="Source1" />
+      <Edge From="21" To="22" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
