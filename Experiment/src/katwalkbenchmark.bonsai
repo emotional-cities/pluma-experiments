@@ -24,7 +24,7 @@
           <harp:VisualIndicators>On</harp:VisualIndicators>
           <harp:Heartbeat>Disable</harp:Heartbeat>
           <harp:IgnoreErrors>false</harp:IgnoreErrors>
-          <harp:PortName>COM3</harp:PortName>
+          <harp:PortName>COM8</harp:PortName>
         </Combinator>
       </Expression>
       <Expression xsi:type="rx:PublishSubject">
@@ -121,7 +121,7 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="IntProperty">
-          <Value>50</Value>
+          <Value>170</Value>
         </Combinator>
       </Expression>
       <Expression xsi:type="harp:Format">
