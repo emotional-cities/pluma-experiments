@@ -19,8 +19,6 @@ This experiment will test the integration of various sources of hardware. These 
 
 ## Walker fake monitor
 In order to have a monitor that remote applications can target, we must emulate a fake hardware display. We are currently using the `IddSampleDriver` [(Instructions and download of Release 0.0.1 here.)](https://github.com/roshkins/IddSampleDriver/releases/tag/0.0.1)
-
-
 ## Tinker Forge 
 
 ### Install notes 
@@ -32,74 +30,6 @@ In order to have a monitor that remote applications can target, we must emulate 
 ### Execution Notes 
 - Open Bonsai and insert a CreateBrickConnection node, check the port and host, but the default values should be ok for a local system with a clena inhstallation.
 - connect that node to all specific tinkerforge sensor or actuator nodes that you have connected in your system, confure them properly (different components have differet set of settings). Don't forget to give the proper Uid (there is a dropdown that only shows compatible sensors to easy your life).
-
-
-## Pupillabs pupilcore
-
-Opening Pupil Capture ---
-Open the Pupil Capture software after headset is plugged in. Adjust the eye cameras until the whole of each eye is visible. When the eye 3D model is stable, the eye capture windows will show blue outline around the eyes.
-
-For the LSL relay to work, there needs to be a valid calibration (for the screen position) loaded, press the C button on the left to initiate calibration. It doesn't need to be a good calibration, just needs to finish to initiate the data stream. Also only needs to be done once, not on each startup. In the plugin manager (on the right of the window) ensure that the Pupil LSL relay plugin is enabled. To start the system recording open the recorded tab and set save directories etc. - then press the R button on the left (and again to stop). Note that the data from the LSL relay will still stream even if a recording isn't started, so record start not required to acquire data from LSL stream in Bonsai. If you change a plugin in the pupil_capture_settings folder, the changes will not take effect until the Pupil Capture software is restarted.
-
-The Pupil Capture software that initiates the LSL relay and records the world camera uses python plugins for certain featues (including the LSL relay). It looks for these plugins always in the users home directory (C:/Users/xxx) in a folder called pupil_capture_settings. There doesn't seem to be any setting to change where this folder gets found so all plugins and changes to plugins must happen in this folder to be registered. (in the current experiment computer the folder is located at C:\Users\AndréAlmeida\pupil_capture_settings\plugins) - run "pupil_invisible_lsl_relay" in an anaconda prompt
-
-N.B. there is some weirdness going on with the streaming rate here in the channel output
-Eye capture for each eye is at about 120 fps, but the received data with LSL is at 240 (double).
-Streams that are dependent on BOTH eyes (e.g. gaze position) seem to be indeed updated at 240.
-Those that are independent based on each eye (e.g. diameter_2d) produce samples at 120 each but somehow get duplicated for each sample, probably either at the plugin level or pupil core level
-
-```python
-class SceneCameraGaze(Outlet):
-
-    @property
-    def name(self) -> str:
-        return "pupil_capture"
-
-    @property
-    def event_key(self) -> str:
-        return "gaze"
-
-    def setup_channels(self):
-
-        return (
-            confidence_channel(), # confidence (1 chan both eyes) - 1 chan
-
-            # *norm_pos_channels(), # 'screen' position, x and y value - 2 chan
-
-            # *gaze_point_3d_channels(), # 3d gaze position - 3 chan
-
-            # *eye_center_channels(), # 3d position of front of each eye (3 chan per eye) - 6 chan
-
-            *gaze_normal_channels(), # 3d position for each eye (probably normal vector from eye center) 6 chan
-
-            *diameter_2d_channels(), # 2d diameter each eye - 2 chan
-
-            # *diameter_3d_channels(), # 3d diameter each eye - 2 chan
-
-        )
-```
-
-## Pupil Labs Pupil Invisible Python Lsl Relay solution 
- 
-### Install notes 
- - To have in Bonsai pupil invible capture you will need to intall the pupil relay lsl from https://pupil-invisible-lsl-relay.readthedocs.io/en/stable/
-    - pip install pupil-invisible-lsl-relay
- - In bonsai side you need to install Bonsai.lsl package.
-
-### Execution Notes 
- - On the phone run the invisible Companion app 
- - Both phone and computer needs to be on the same wifi network
- - in python run pupil_invisible_lsl_relay
-    - If discovery works you get a list of all connected devices.
-        - Enter the index of the device you want to connect to.
-    - If not on the device go to the menu-streaming 
-        - there is an IP adrees : port of the device 
-        - you should then from python run pupil_invisible_lsl_relay --device_address device_ip:device_port
- - On Bonsai side inser an lsl stream inlet 
-    - name the stream to pupil_invisible_Gaze
-    - Stream ChannelCount 2
-    - Stream ChannelFormat Float32 
-
 ## Pupil Labs Pupil Invisible 0MQ
 
 Pupil labs implements 0MQ messages using the NDSI protocol. https://github.com/pupil-labs/pyndsi/blob/v1.0/ndsi-commspec.md
@@ -110,9 +40,6 @@ Pupil labs implements 0MQ messages using the NDSI protocol. https://github.com/p
 - git clone https://github.com/pupil-labs/pyndsi.git
 - navigate to the cloned folder 
 - activate emotional cities conda env
-- 
-
-
 
 ## Bonsai data logging
 
@@ -170,7 +97,9 @@ To achieve this, Bonsai is randomly toggling a digital output in the HARP behavi
 |                           |   XOrientation  |      250      |               Timestamped(float)              |
 |                           |   YOrientation  |      251      |               Timestamped(float)              |
 |                           |    NullValue    |      252      |               Timestamped(float)              |
-|       **PupilLabs**       |  LSL-SampleTime |      220      |                                               |
-|                           | LSL-SampleArray |      221      |                                               |
 |                           |                 |               |                                               |
-
+|       **PupilLabs**       |    WorldCamera  |      210      |            Timestamped(FrameNumber)           |
+|                           |        IMU      |      211      |            Timestamped(FrameNumber)           |
+|                           |       Gaze      |      212      |            Timestamped(FrameNumber)           |
+|                           |       Audio     |      213      |            Timestamped(FrameNumber)           |
+|                           |        Key      |      214      |            Timestamped(FrameNumber)           |
