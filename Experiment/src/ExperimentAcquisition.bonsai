@@ -753,15 +753,11 @@
                               <Expression xsi:type="SubscribeSubject">
                                 <Name>ThisIndex</Name>
                               </Expression>
-                              <Expression xsi:type="PropertyMapping">
-                                <PropertyMappings>
-                                  <Property Name="Value" />
-                                </PropertyMappings>
+                              <Expression xsi:type="Combinator">
+                                <Combinator xsi:type="rx:WithLatestFrom" />
                               </Expression>
-                              <Expression xsi:type="Index">
-                                <Operand xsi:type="IntProperty">
-                                  <Value>2</Value>
-                                </Operand>
+                              <Expression xsi:type="scr:ExpressionTransform">
+                                <scr:Expression>it.Item1[it.Item2]</scr:Expression>
                               </Expression>
                               <Expression xsi:type="MemberSelector">
                                 <Selector>Buffer</Selector>
@@ -795,9 +791,9 @@
                               <Expression xsi:type="WorkflowOutput" />
                             </Nodes>
                             <Edges>
-                              <Edge From="0" To="3" Label="Source1" />
-                              <Edge From="1" To="2" Label="Source1" />
-                              <Edge From="2" To="3" Label="Source2" />
+                              <Edge From="0" To="2" Label="Source1" />
+                              <Edge From="1" To="2" Label="Source2" />
+                              <Edge From="2" To="3" Label="Source1" />
                               <Edge From="3" To="4" Label="Source1" />
                               <Edge From="4" To="10" Label="Source1" />
                               <Edge From="5" To="7" Label="Source1" />
