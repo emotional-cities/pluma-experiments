@@ -48,7 +48,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="StringProperty">
-                <Value>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20220922\EmpaticaLDRBenchmark</Value>
+                <Value>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\PupilLabsBenchmark</Value>
               </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">
@@ -162,7 +162,7 @@
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="dsp:MatrixWriter">
-                            <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20220922\EmpaticaLDRBenchmark2023_04_12_12_12_18\Streams_39</dsp:Path>
+                            <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\PupilLabsBenchmark2023_04_12_14_10_21\Streams_39</dsp:Path>
                             <dsp:Suffix>None</dsp:Suffix>
                             <dsp:Overwrite>false</dsp:Overwrite>
                             <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -245,7 +245,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20220922\EmpaticaLDRBenchmark2023_04_12_12_12_18\StreamReadDump.bin</dsp:Path>
+                      <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\PupilLabsBenchmark2023_04_12_14_10_21\StreamReadDump.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -302,7 +302,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20220922\EmpaticaLDRBenchmark2023_04_12_12_12_18\Microphone.bin</dsp:Path>
+                      <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\PupilLabsBenchmark2023_04_12_14_10_21\Microphone.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -356,7 +356,7 @@
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20220922\EmpaticaLDRBenchmark2023_04_12_12_12_18\Accelerometer.csv</io:FileName>
+                    <io:FileName>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\PupilLabsBenchmark2023_04_12_14_10_21\Accelerometer.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>true</io:Overwrite>
                     <io:Suffix>None</io:Suffix>
@@ -584,7 +584,7 @@
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20220922\EmpaticaLDRBenchmark2023_04_12_12_12_18\empatica_harp_ts.csv</io:FileName>
+                    <io:FileName>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\PupilLabsBenchmark2023_04_12_14_10_21\empatica_harp_ts.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>false</io:Overwrite>
                     <io:Suffix>None</io:Suffix>
@@ -639,7 +639,7 @@
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20220922\EmpaticaLDRBenchmark2023_04_12_12_12_18\eeg_markers.csv</io:FileName>
+                    <io:FileName>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\PupilLabsBenchmark2023_04_12_14_10_21\eeg_markers.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>false</io:Overwrite>
                     <io:Suffix>None</io:Suffix>
@@ -786,7 +786,7 @@
                               </Expression>
                               <Expression xsi:type="Combinator">
                                 <Combinator xsi:type="dsp:MatrixWriter">
-                                  <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20220922\EmpaticaLDRBenchmark2023_04_12_12_12_18\PupilLabs\WorldCamera_Frame2.csv</dsp:Path>
+                                  <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\PupilLabsBenchmark2023_04_12_14_10_21\PupilLabs\WorldCamera_Frame2.csv</dsp:Path>
                                   <dsp:Suffix>None</dsp:Suffix>
                                   <dsp:Overwrite>false</dsp:Overwrite>
                                   <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -1058,7 +1058,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="rx:Delay">
-                <rx:DueTime>PT0.1S</rx:DueTime>
+                <rx:DueTime>PT0.2S</rx:DueTime>
               </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">
@@ -1082,8 +1082,8 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="p4:CreateContinuousUniform">
-                      <p4:Lower>10</p4:Lower>
-                      <p4:Upper>30</p4:Upper>
+                      <p4:Lower>5</p4:Lower>
+                      <p4:Upper>20</p4:Upper>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
@@ -1099,7 +1099,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Timer">
-                      <rx:DueTime>PT27.276S</rx:DueTime>
+                      <rx:DueTime>PT6.973S</rx:DueTime>
                       <rx:Period>PT0S</rx:Period>
                     </Combinator>
                   </Expression>
@@ -1953,105 +1953,115 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
             <Expression xsi:type="MulticastSubject">
               <Name>HarpSoftwareLogging</Name>
             </Expression>
-            <Expression xsi:type="rx:Defer">
-              <Name>IMU</Name>
-              <Workflow>
-                <Nodes>
-                  <Expression xsi:type="SubscribeSubject">
-                    <Name>PupilSensorData</Name>
-                  </Expression>
-                  <Expression xsi:type="ExternalizedMapping">
-                    <Property Name="Value" DisplayName="SensorLoggingName" />
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="StringProperty">
-                      <Value>IMU</Value>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:Take">
-                      <rx:Count>1</rx:Count>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="PropertyMapping">
-                    <PropertyMappings>
-                      <Property Name="SensorLoggingName" />
-                    </PropertyMappings>
-                  </Expression>
-                  <Expression xsi:type="ExternalizedMapping">
-                    <Property Name="Value" DisplayName="SensorName" />
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="StringProperty">
-                      <Value>BMI160 IMU</Value>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:Take">
-                      <rx:Count>1</rx:Count>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="PropertyMapping">
-                    <PropertyMappings>
-                      <Property Name="SensorName" />
-                    </PropertyMappings>
-                  </Expression>
-                  <Expression xsi:type="ExternalizedMapping">
-                    <Property Name="Value" DisplayName="InitializationCommand" />
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="StringProperty">
-                      <Value>{"action": "set_control_value", "control_id": "streaming", "value": "true"}</Value>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:Take">
-                      <rx:Count>1</rx:Count>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="PropertyMapping">
-                    <PropertyMappings>
-                      <Property Name="InitializationCommand" />
-                    </PropertyMappings>
-                  </Expression>
-                  <Expression xsi:type="IncludeWorkflow" Path="Extensions\ZyrePupilSensor.bonsai">
-                    <SensorName>BMI160 IMU</SensorName>
-                    <SensorLoggingName>IMU</SensorLoggingName>
-                    <InitializationCommand>{"action": "set_control_value", "control_id": "streaming", "value": "true"}</InitializationCommand>
-                  </Expression>
-                  <Expression xsi:type="WorkflowOutput" />
-                </Nodes>
-                <Edges>
-                  <Edge From="0" To="13" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="2" To="3" Label="Source1" />
-                  <Edge From="3" To="4" Label="Source1" />
-                  <Edge From="4" To="13" Label="Source2" />
-                  <Edge From="5" To="6" Label="Source1" />
-                  <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
-                  <Edge From="8" To="13" Label="Source3" />
-                  <Edge From="9" To="10" Label="Source1" />
-                  <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="11" To="12" Label="Source1" />
-                  <Edge From="12" To="13" Label="Source4" />
-                  <Edge From="13" To="14" Label="Source1" />
-                </Edges>
-              </Workflow>
+            <Expression xsi:type="Disable">
+              <Builder xsi:type="rx:Defer">
+                <Name>IMU</Name>
+                <Workflow>
+                  <Nodes>
+                    <Expression xsi:type="SubscribeSubject">
+                      <Name>PupilSensorData</Name>
+                    </Expression>
+                    <Expression xsi:type="ExternalizedMapping">
+                      <Property Name="Value" DisplayName="SensorLoggingName" />
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="StringProperty">
+                        <Value>IMU</Value>
+                      </Combinator>
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="rx:Take">
+                        <rx:Count>1</rx:Count>
+                      </Combinator>
+                    </Expression>
+                    <Expression xsi:type="PropertyMapping">
+                      <PropertyMappings>
+                        <Property Name="SensorLoggingName" />
+                      </PropertyMappings>
+                    </Expression>
+                    <Expression xsi:type="ExternalizedMapping">
+                      <Property Name="Value" DisplayName="SensorName" />
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="StringProperty">
+                        <Value>BMI160 IMU</Value>
+                      </Combinator>
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="rx:Take">
+                        <rx:Count>1</rx:Count>
+                      </Combinator>
+                    </Expression>
+                    <Expression xsi:type="PropertyMapping">
+                      <PropertyMappings>
+                        <Property Name="SensorName" />
+                      </PropertyMappings>
+                    </Expression>
+                    <Expression xsi:type="ExternalizedMapping">
+                      <Property Name="Value" DisplayName="InitializationCommand" />
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="StringProperty">
+                        <Value>{"action": "set_control_value", "control_id": "streaming", "value": "true"}</Value>
+                      </Combinator>
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="rx:Take">
+                        <rx:Count>1</rx:Count>
+                      </Combinator>
+                    </Expression>
+                    <Expression xsi:type="PropertyMapping">
+                      <PropertyMappings>
+                        <Property Name="InitializationCommand" />
+                      </PropertyMappings>
+                    </Expression>
+                    <Expression xsi:type="IncludeWorkflow" Path="Extensions\ZyrePupilSensor.bonsai">
+                      <SensorName>BMI160 IMU</SensorName>
+                      <SensorLoggingName>IMU</SensorLoggingName>
+                      <InitializationCommand>{"action": "set_control_value", "control_id": "streaming", "value": "true"}</InitializationCommand>
+                    </Expression>
+                    <Expression xsi:type="WorkflowOutput" />
+                  </Nodes>
+                  <Edges>
+                    <Edge From="0" To="13" Label="Source1" />
+                    <Edge From="1" To="2" Label="Source1" />
+                    <Edge From="2" To="3" Label="Source1" />
+                    <Edge From="3" To="4" Label="Source1" />
+                    <Edge From="4" To="13" Label="Source2" />
+                    <Edge From="5" To="6" Label="Source1" />
+                    <Edge From="6" To="7" Label="Source1" />
+                    <Edge From="7" To="8" Label="Source1" />
+                    <Edge From="8" To="13" Label="Source3" />
+                    <Edge From="9" To="10" Label="Source1" />
+                    <Edge From="10" To="11" Label="Source1" />
+                    <Edge From="11" To="12" Label="Source1" />
+                    <Edge From="12" To="13" Label="Source4" />
+                    <Edge From="13" To="14" Label="Source1" />
+                  </Edges>
+                </Workflow>
+              </Builder>
             </Expression>
-            <Expression xsi:type="MulticastSubject">
-              <Name>PupilSensorLogging</Name>
+            <Expression xsi:type="Disable">
+              <Builder xsi:type="MulticastSubject">
+                <Name>PupilSensorLogging</Name>
+              </Builder>
             </Expression>
-            <Expression xsi:type="MemberSelector">
-              <Selector>Item1</Selector>
+            <Expression xsi:type="Disable">
+              <Builder xsi:type="MemberSelector">
+                <Selector>Item1</Selector>
+              </Builder>
             </Expression>
-            <Expression xsi:type="harp:Format">
-              <harp:MessageType>Event</harp:MessageType>
-              <harp:Address>211</harp:Address>
-              <harp:PayloadType>TimestampedU64</harp:PayloadType>
+            <Expression xsi:type="Disable">
+              <Builder xsi:type="harp:Format">
+                <harp:MessageType>Event</harp:MessageType>
+                <harp:Address>211</harp:Address>
+                <harp:PayloadType>TimestampedU64</harp:PayloadType>
+              </Builder>
             </Expression>
-            <Expression xsi:type="MulticastSubject">
-              <Name>HarpSoftwareLogging</Name>
+            <Expression xsi:type="Disable">
+              <Builder xsi:type="MulticastSubject">
+                <Name>HarpSoftwareLogging</Name>
+              </Builder>
             </Expression>
             <Expression xsi:type="rx:Defer">
               <Name>Gaze</Name>
