@@ -12,3 +12,6 @@ obj
 *.pickle
 Packages
 Experiment/src/LedPosition.csv
+VRLatencyExperiment/src/*.csv
+VRLatencyExperiment/src/WithLastestFrom/*.csv
+VRLatencyExperiment/src/WithWriteOnHarp/*.csv
