@@ -12,12 +12,13 @@
                  xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
                  xmlns:ubx="clr-namespace:Bonsai.uBlox;assembly=Bonsai.uBlox"
                  xmlns:lsl="clr-namespace:Bonsai.Lsl;assembly=Bonsai.Lsl"
-                 xmlns:p4="clr-namespace:Bonsai.Numerics.Distributions;assembly=Bonsai.Numerics"
+                 xmlns:p4="clr-namespace:Harp.Pluma;assembly=Harp.Pluma"
+                 xmlns:p5="clr-namespace:Bonsai.Numerics.Distributions;assembly=Bonsai.Numerics"
                  xmlns:al="clr-namespace:Bonsai.Audio;assembly=Bonsai.Audio"
                  xmlns:tkf="clr-namespace:Bonsai.Tinkerforge;assembly=Bonsai.Tinkerforge"
-                 xmlns:p5="clr-namespace:Bonsai.Zyre;assembly=Bonsai.Zyre"
-                 xmlns:p6="clr-namespace:PupilInterface;assembly=PupilInterface"
-                 xmlns:p7="clr-namespace:Bonsai.WebSockets;assembly=Extensions"
+                 xmlns:p6="clr-namespace:Bonsai.Zyre;assembly=Bonsai.Zyre"
+                 xmlns:p7="clr-namespace:PupilInterface;assembly=PupilInterface"
+                 xmlns:p8="clr-namespace:Bonsai.WebSockets;assembly=Extensions"
                  xmlns:viz="clr-namespace:Bonsai.Design.Visualizers;assembly=Bonsai.Design.Visualizers"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
@@ -77,14 +78,18 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="harp:FilterMessage">
-                      <harp:Address xsi:nil="true" />
                       <harp:MessageType>Event</harp:MessageType>
+                      <harp:Register xsi:type="harp:FilterMessageAddress">
+                        <harp:Address xsi:nil="true" />
+                      </harp:Register>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="harp:FilterMessage">
-                      <harp:Address xsi:nil="true" />
                       <harp:MessageType>Write</harp:MessageType>
+                      <harp:Register xsi:type="harp:FilterMessageAddress">
+                        <harp:Address xsi:nil="true" />
+                      </harp:Register>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
@@ -213,8 +218,10 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="harp:FilterMessage">
-                      <harp:Address xsi:nil="true" />
                       <harp:MessageType>Read</harp:MessageType>
+                      <harp:Register xsi:type="harp:FilterMessageAddress">
+                        <harp:Address xsi:nil="true" />
+                      </harp:Register>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="MemberSelector">
@@ -864,17 +871,11 @@
         <Workflow>
           <Nodes>
             <Expression xsi:type="SubscribeSubject">
-              <Name>BioDataEvents</Name>
+              <Name>PlumaEvents</Name>
             </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="harp:FilterMessage">
-                <harp:Address>35</harp:Address>
-                <harp:MessageType>Event</harp:MessageType>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="harp:Parse">
-              <harp:Type>TimestampedU16</harp:Type>
-              <harp:IsArray>false</harp:IsArray>
+            <Expression xsi:type="p4:Parse">
+              <harp:MessageType>Event</harp:MessageType>
+              <harp:Register xsi:type="p4:TimestampedEcgAndAnalogData" />
             </Expression>
             <Expression xsi:type="MemberSelector">
               <Selector>Seconds</Selector>
@@ -889,7 +890,6 @@
             <Edge From="1" To="2" Label="Source1" />
             <Edge From="2" To="3" Label="Source1" />
             <Edge From="3" To="4" Label="Source1" />
-            <Edge From="4" To="5" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
@@ -901,18 +901,18 @@
               <rx:Name>BioDataCommands</rx:Name>
             </Expression>
             <Expression xsi:type="Combinator">
-              <Combinator xsi:type="harp:Device">
-                <harp:DeviceState>Active</harp:DeviceState>
+              <Combinator xsi:type="p4:Device">
+                <harp:OperationMode>Active</harp:OperationMode>
+                <harp:OperationLed>On</harp:OperationLed>
                 <harp:DumpRegisters>true</harp:DumpRegisters>
-                <harp:LedState>On</harp:LedState>
                 <harp:VisualIndicators>On</harp:VisualIndicators>
-                <harp:Heartbeat>Enable</harp:Heartbeat>
+                <harp:Heartbeat>Disabled</harp:Heartbeat>
                 <harp:IgnoreErrors>false</harp:IgnoreErrors>
-                <harp:PortName>COM9</harp:PortName>
+                <harp:PortName>COMx</harp:PortName>
               </Combinator>
             </Expression>
             <Expression xsi:type="rx:PublishSubject">
-              <Name>BioDataEvents</Name>
+              <Name>PlumaEvents</Name>
             </Expression>
             <Expression xsi:type="MulticastSubject">
               <Name>HarpSoftwareLogging</Name>
@@ -928,59 +928,23 @@
                 <rx:Count>1</rx:Count>
               </Combinator>
             </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="harp:CreateMessage">
+            <Expression xsi:type="p4:CreateMessage">
+              <harp:Payload xsi:type="p4:CreateStreamsEnablePayload">
                 <harp:MessageType>Write</harp:MessageType>
-                <harp:Address>32</harp:Address>
-                <harp:PayloadType>U8</harp:PayloadType>
-                <harp:Payload>7</harp:Payload>
-              </Combinator>
+                <p4:Value>Oximeter Ecg Gsr</p4:Value>
+              </harp:Payload>
             </Expression>
             <Expression xsi:type="MulticastSubject">
               <Name>BioDataCommands</Name>
             </Expression>
-            <Expression xsi:type="Disable">
-              <Builder xsi:type="GroupWorkflow">
-                <Name>EnableStream</Name>
-                <Workflow>
-                  <Nodes>
-                    <Expression xsi:type="WorkflowInput">
-                      <Name>Source1</Name>
-                    </Expression>
-                    <Expression xsi:type="WorkflowOutput" />
-                  </Nodes>
-                  <Edges>
-                    <Edge From="0" To="1" Label="Source1" />
-                  </Edges>
-                </Workflow>
-              </Builder>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="harp:CreateMessage">
+            <Expression xsi:type="p4:CreateMessage">
+              <harp:Payload xsi:type="p4:CreateOutputClearPayload">
                 <harp:MessageType>Write</harp:MessageType>
-                <harp:Address>40</harp:Address>
-                <harp:PayloadType>U8</harp:PayloadType>
-                <harp:Payload>1</harp:Payload>
-              </Combinator>
+                <p4:Value>DO0 DO1</p4:Value>
+              </harp:Payload>
             </Expression>
             <Expression xsi:type="MulticastSubject">
               <Name>BioDataCommands</Name>
-            </Expression>
-            <Expression xsi:type="Disable">
-              <Builder xsi:type="GroupWorkflow">
-                <Name>SynchOff</Name>
-                <Workflow>
-                  <Nodes>
-                    <Expression xsi:type="WorkflowInput">
-                      <Name>Source1</Name>
-                    </Expression>
-                    <Expression xsi:type="WorkflowOutput" />
-                  </Nodes>
-                  <Edges>
-                    <Edge From="0" To="1" Label="Source1" />
-                  </Edges>
-                </Workflow>
-              </Builder>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="rx:Timer">
@@ -988,32 +952,14 @@
                 <rx:Period>PT0S</rx:Period>
               </Combinator>
             </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="harp:CreateMessage">
+            <Expression xsi:type="p4:CreateMessage">
+              <harp:Payload xsi:type="p4:CreateStreamsEnablePayload">
                 <harp:MessageType>Write</harp:MessageType>
-                <harp:Address>32</harp:Address>
-                <harp:PayloadType>U8</harp:PayloadType>
-                <harp:Payload>15</harp:Payload>
-              </Combinator>
+                <p4:Value>Oximeter Ecg Gsr Accelerometer</p4:Value>
+              </harp:Payload>
             </Expression>
             <Expression xsi:type="MulticastSubject">
               <Name>BioDataCommands</Name>
-            </Expression>
-            <Expression xsi:type="Disable">
-              <Builder xsi:type="GroupWorkflow">
-                <Name>EnableStream</Name>
-                <Workflow>
-                  <Nodes>
-                    <Expression xsi:type="WorkflowInput">
-                      <Name>Source1</Name>
-                    </Expression>
-                    <Expression xsi:type="WorkflowOutput" />
-                  </Nodes>
-                  <Edges>
-                    <Edge From="0" To="1" Label="Source1" />
-                  </Edges>
-                </Workflow>
-              </Builder>
             </Expression>
           </Nodes>
           <Edges>
@@ -1023,14 +969,11 @@
             <Edge From="3" To="4" Label="Source1" />
             <Edge From="5" To="6" Label="Source1" />
             <Edge From="6" To="7" Label="Source1" />
-            <Edge From="6" To="10" Label="Source1" />
+            <Edge From="6" To="9" Label="Source1" />
             <Edge From="7" To="8" Label="Source1" />
-            <Edge From="8" To="9" Label="Source1" />
-            <Edge From="10" To="11" Label="Source1" />
+            <Edge From="9" To="10" Label="Source1" />
             <Edge From="11" To="12" Label="Source1" />
-            <Edge From="13" To="14" Label="Source1" />
-            <Edge From="14" To="15" Label="Source1" />
-            <Edge From="15" To="16" Label="Source1" />
+            <Edge From="12" To="13" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
@@ -1038,38 +981,8 @@
         <Name>SynchPulse</Name>
         <Workflow>
           <Nodes>
-            <Expression xsi:type="rx:PublishSubject" TypeArguments="sys:Object">
-              <rx:Name>SynchPulse</rx:Name>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="harp:CreateMessage">
-                <harp:MessageType>Write</harp:MessageType>
-                <harp:Address>39</harp:Address>
-                <harp:PayloadType>U8</harp:PayloadType>
-                <harp:Payload>3</harp:Payload>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="MulticastSubject">
-              <Name>BioDataCommands</Name>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:Delay">
-                <rx:DueTime>PT0.1S</rx:DueTime>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="harp:CreateMessage">
-                <harp:MessageType>Write</harp:MessageType>
-                <harp:Address>40</harp:Address>
-                <harp:PayloadType>U8</harp:PayloadType>
-                <harp:Payload>3</harp:Payload>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="MulticastSubject">
-              <Name>BioDataCommands</Name>
-            </Expression>
-            <Expression xsi:type="WorkflowOutput" />
             <Expression xsi:type="rx:Defer">
+              <Name>InterPulseInterval</Name>
               <Workflow>
                 <Nodes>
                   <Expression xsi:type="ExternalizedMapping">
@@ -1077,13 +990,13 @@
                     <Property Name="Upper" />
                   </Expression>
                   <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="p4:CreateContinuousUniform">
-                      <p4:Lower>10</p4:Lower>
-                      <p4:Upper>30</p4:Upper>
+                    <Combinator xsi:type="p5:CreateContinuousUniform">
+                      <p5:Lower>10</p5:Lower>
+                      <p5:Upper>30</p5:Upper>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="p4:Sample" />
+                    <Combinator xsi:type="p5:Sample" />
                   </Expression>
                   <Expression xsi:type="scr:ExpressionTransform">
                     <scr:Expression>TimeSpan.FromSeconds(it)</scr:Expression>
@@ -1117,14 +1030,41 @@
             <Expression xsi:type="MulticastSubject">
               <Name>SynchPulse</Name>
             </Expression>
+            <Expression xsi:type="rx:PublishSubject" TypeArguments="sys:Object">
+              <rx:Name>SynchPulse</rx:Name>
+            </Expression>
+            <Expression xsi:type="p4:CreateMessage">
+              <harp:Payload xsi:type="p4:CreateOutputSetPayload">
+                <harp:MessageType>Write</harp:MessageType>
+                <p4:Value>DO0 DO1</p4:Value>
+              </harp:Payload>
+            </Expression>
+            <Expression xsi:type="MulticastSubject">
+              <Name>BioDataCommands</Name>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Delay">
+                <rx:DueTime>PT0.1S</rx:DueTime>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="p4:CreateMessage">
+              <harp:Payload xsi:type="p4:CreateOutputClearPayload">
+                <harp:MessageType>Write</harp:MessageType>
+                <p4:Value>DO0 DO1</p4:Value>
+              </harp:Payload>
+            </Expression>
+            <Expression xsi:type="MulticastSubject">
+              <Name>BioDataCommands</Name>
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
           </Nodes>
           <Edges>
             <Edge From="0" To="1" Label="Source1" />
             <Edge From="1" To="2" Label="Source1" />
-            <Edge From="2" To="3" Label="Source1" />
             <Edge From="3" To="4" Label="Source1" />
             <Edge From="4" To="5" Label="Source1" />
             <Edge From="5" To="6" Label="Source1" />
+            <Edge From="6" To="7" Label="Source1" />
             <Edge From="7" To="8" Label="Source1" />
             <Edge From="8" To="9" Label="Source1" />
           </Edges>
@@ -1154,8 +1094,10 @@
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
             <Expression xsi:type="harp:Format">
               <harp:MessageType>Event</harp:MessageType>
-              <harp:Address>222</harp:Address>
-              <harp:PayloadType>TimestampedS32</harp:PayloadType>
+              <harp:Register xsi:type="harp:FormatMessagePayload">
+                <harp:Address>222</harp:Address>
+                <harp:PayloadType>TimestampedS32</harp:PayloadType>
+              </harp:Register>
             </Expression>
             <Expression xsi:type="MulticastSubject">
               <Name>HarpSoftwareLogging</Name>
@@ -1219,8 +1161,10 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
                   <Expression xsi:type="harp:Format">
                     <harp:MessageType>Event</harp:MessageType>
-                    <harp:Address>227</harp:Address>
-                    <harp:PayloadType>TimestampedS64</harp:PayloadType>
+                    <harp:Register xsi:type="harp:FormatMessagePayload">
+                      <harp:Address>227</harp:Address>
+                      <harp:PayloadType>TimestampedS64</harp:PayloadType>
+                    </harp:Register>
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Longitude</Selector>
@@ -1228,8 +1172,10 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
                   <Expression xsi:type="harp:Format">
                     <harp:MessageType>Event</harp:MessageType>
-                    <harp:Address>228</harp:Address>
-                    <harp:PayloadType>TimestampedS64</harp:PayloadType>
+                    <harp:Register xsi:type="harp:FormatMessagePayload">
+                      <harp:Address>228</harp:Address>
+                      <harp:PayloadType>TimestampedS64</harp:PayloadType>
+                    </harp:Register>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="tkf:GPSV2Altitude" />
@@ -1240,8 +1186,10 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
                   <Expression xsi:type="harp:Format">
                     <harp:MessageType>Event</harp:MessageType>
-                    <harp:Address>229</harp:Address>
-                    <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    <harp:Register xsi:type="harp:FormatMessagePayload">
+                      <harp:Address>229</harp:Address>
+                      <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    </harp:Register>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="tkf:GPSV2DateTime" />
@@ -1252,8 +1200,10 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
                   <Expression xsi:type="harp:Format">
                     <harp:MessageType>Event</harp:MessageType>
-                    <harp:Address>230</harp:Address>
-                    <harp:PayloadType>TimestampedS64</harp:PayloadType>
+                    <harp:Register xsi:type="harp:FormatMessagePayload">
+                      <harp:Address>230</harp:Address>
+                      <harp:PayloadType>TimestampedS64</harp:PayloadType>
+                    </harp:Register>
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Time</Selector>
@@ -1261,8 +1211,10 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
                   <Expression xsi:type="harp:Format">
                     <harp:MessageType>Event</harp:MessageType>
-                    <harp:Address>231</harp:Address>
-                    <harp:PayloadType>TimestampedS64</harp:PayloadType>
+                    <harp:Register xsi:type="harp:FormatMessagePayload">
+                      <harp:Address>231</harp:Address>
+                      <harp:PayloadType>TimestampedS64</harp:PayloadType>
+                    </harp:Register>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="tkf:GPSV2Status" />
@@ -1273,8 +1225,10 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
                   <Expression xsi:type="harp:Format">
                     <harp:MessageType>Event</harp:MessageType>
-                    <harp:Address>232</harp:Address>
-                    <harp:PayloadType>TimestampedU8</harp:PayloadType>
+                    <harp:Register xsi:type="harp:FormatMessagePayload">
+                      <harp:Address>232</harp:Address>
+                      <harp:PayloadType>TimestampedU8</harp:PayloadType>
+                    </harp:Register>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Merge" />
@@ -1339,8 +1293,10 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
                   <Expression xsi:type="harp:Format">
                     <harp:MessageType>Event</harp:MessageType>
-                    <harp:Address>224</harp:Address>
-                    <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    <harp:Register xsi:type="harp:FormatMessagePayload">
+                      <harp:Address>224</harp:Address>
+                      <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    </harp:Register>
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Temperature</Selector>
@@ -1348,8 +1304,10 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
                   <Expression xsi:type="harp:Format">
                     <harp:MessageType>Event</harp:MessageType>
-                    <harp:Address>225</harp:Address>
-                    <harp:PayloadType>TimestampedS16</harp:PayloadType>
+                    <harp:Register xsi:type="harp:FormatMessagePayload">
+                      <harp:Address>225</harp:Address>
+                      <harp:PayloadType>TimestampedS16</harp:PayloadType>
+                    </harp:Register>
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Humidity</Selector>
@@ -1357,8 +1315,10 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
                   <Expression xsi:type="harp:Format">
                     <harp:MessageType>Event</harp:MessageType>
-                    <harp:Address>226</harp:Address>
-                    <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    <harp:Register xsi:type="harp:FormatMessagePayload">
+                      <harp:Address>226</harp:Address>
+                      <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    </harp:Register>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Merge" />
@@ -1402,8 +1362,10 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
                   <Expression xsi:type="harp:Format">
                     <harp:MessageType>Event</harp:MessageType>
-                    <harp:Address>223</harp:Address>
-                    <harp:PayloadType>TimestampedS64</harp:PayloadType>
+                    <harp:Register xsi:type="harp:FormatMessagePayload">
+                      <harp:Address>223</harp:Address>
+                      <harp:PayloadType>TimestampedS64</harp:PayloadType>
+                    </harp:Register>
                   </Expression>
                   <Expression xsi:type="WorkflowOutput" />
                 </Nodes>
@@ -1437,8 +1399,10 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
                   <Expression xsi:type="harp:Format">
                     <harp:MessageType>Event</harp:MessageType>
-                    <harp:Address>233</harp:Address>
-                    <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    <harp:Register xsi:type="harp:FormatMessagePayload">
+                      <harp:Address>233</harp:Address>
+                      <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    </harp:Register>
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Temperature</Selector>
@@ -1446,8 +1410,10 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
                   <Expression xsi:type="harp:Format">
                     <harp:MessageType>Event</harp:MessageType>
-                    <harp:Address>234</harp:Address>
-                    <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    <harp:Register xsi:type="harp:FormatMessagePayload">
+                      <harp:Address>234</harp:Address>
+                      <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    </harp:Register>
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Humidity</Selector>
@@ -1455,8 +1421,10 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
                   <Expression xsi:type="harp:Format">
                     <harp:MessageType>Event</harp:MessageType>
-                    <harp:Address>235</harp:Address>
-                    <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    <harp:Register xsi:type="harp:FormatMessagePayload">
+                      <harp:Address>235</harp:Address>
+                      <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    </harp:Register>
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>AirPressure</Selector>
@@ -1464,8 +1432,10 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
                   <Expression xsi:type="harp:Format">
                     <harp:MessageType>Event</harp:MessageType>
-                    <harp:Address>236</harp:Address>
-                    <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    <harp:Register xsi:type="harp:FormatMessagePayload">
+                      <harp:Address>236</harp:Address>
+                      <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    </harp:Register>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Merge" />
@@ -1513,8 +1483,10 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
                   <Expression xsi:type="harp:Format">
                     <harp:MessageType>Event</harp:MessageType>
-                    <harp:Address>237</harp:Address>
-                    <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    <harp:Register xsi:type="harp:FormatMessagePayload">
+                      <harp:Address>237</harp:Address>
+                      <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    </harp:Register>
                   </Expression>
                   <Expression xsi:type="WorkflowOutput" />
                 </Nodes>
@@ -1546,8 +1518,10 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
                   <Expression xsi:type="harp:Format">
                     <harp:MessageType>Event</harp:MessageType>
-                    <harp:Address>238</harp:Address>
-                    <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    <harp:Register xsi:type="harp:FormatMessagePayload">
+                      <harp:Address>238</harp:Address>
+                      <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    </harp:Register>
                   </Expression>
                   <Expression xsi:type="WorkflowOutput" />
                 </Nodes>
@@ -1576,8 +1550,10 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
                   <Expression xsi:type="harp:Format">
                     <harp:MessageType>Event</harp:MessageType>
-                    <harp:Address>239</harp:Address>
-                    <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    <harp:Register xsi:type="harp:FormatMessagePayload">
+                      <harp:Address>239</harp:Address>
+                      <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    </harp:Register>
                   </Expression>
                   <Expression xsi:type="WorkflowOutput" />
                 </Nodes>
@@ -1607,8 +1583,10 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
                   <Expression xsi:type="harp:Format">
                     <harp:MessageType>Event</harp:MessageType>
-                    <harp:Address>243</harp:Address>
-                    <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    <harp:Register xsi:type="harp:FormatMessagePayload">
+                      <harp:Address>243</harp:Address>
+                      <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    </harp:Register>
                   </Expression>
                   <Expression xsi:type="WorkflowOutput" />
                 </Nodes>
@@ -1640,8 +1618,10 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
                   <Expression xsi:type="harp:Format">
                     <harp:MessageType>Event</harp:MessageType>
-                    <harp:Address>244</harp:Address>
-                    <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    <harp:Register xsi:type="harp:FormatMessagePayload">
+                      <harp:Address>244</harp:Address>
+                      <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    </harp:Register>
                   </Expression>
                   <Expression xsi:type="WorkflowOutput" />
                 </Nodes>
@@ -1673,8 +1653,10 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
                   <Expression xsi:type="harp:Format">
                     <harp:MessageType>Event</harp:MessageType>
-                    <harp:Address>245</harp:Address>
-                    <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    <harp:Register xsi:type="harp:FormatMessagePayload">
+                      <harp:Address>245</harp:Address>
+                      <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    </harp:Register>
                   </Expression>
                   <Expression xsi:type="WorkflowOutput" />
                 </Nodes>
@@ -1706,8 +1688,10 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
                   <Expression xsi:type="harp:Format">
                     <harp:MessageType>Event</harp:MessageType>
-                    <harp:Address>240</harp:Address>
-                    <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    <harp:Register xsi:type="harp:FormatMessagePayload">
+                      <harp:Address>240</harp:Address>
+                      <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    </harp:Register>
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Pm25</Selector>
@@ -1715,8 +1699,10 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
                   <Expression xsi:type="harp:Format">
                     <harp:MessageType>Event</harp:MessageType>
-                    <harp:Address>241</harp:Address>
-                    <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    <harp:Register xsi:type="harp:FormatMessagePayload">
+                      <harp:Address>241</harp:Address>
+                      <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    </harp:Register>
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Pm100</Selector>
@@ -1724,8 +1710,10 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
                   <Expression xsi:type="harp:Format">
                     <harp:MessageType>Event</harp:MessageType>
-                    <harp:Address>242</harp:Address>
-                    <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    <harp:Register xsi:type="harp:FormatMessagePayload">
+                      <harp:Address>242</harp:Address>
+                      <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                    </harp:Register>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Merge" />
@@ -1791,9 +1779,9 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
         <Workflow>
           <Nodes>
             <Expression xsi:type="Combinator">
-              <Combinator xsi:type="p5:ZyreNode">
-                <p5:Name>Pupil</p5:Name>
-                <p5:Group>pupil-mobile-v4</p5:Group>
+              <Combinator xsi:type="p6:ZyreNode">
+                <p6:Name>Pupil</p6:Name>
+                <p6:Group>pupil-mobile-v4</p6:Group>
               </Combinator>
             </Expression>
             <Expression xsi:type="rx:Condition">
@@ -1827,7 +1815,7 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
               <Selector>First</Selector>
             </Expression>
             <Expression xsi:type="Combinator">
-              <Combinator xsi:type="p6:PupilSensor" />
+              <Combinator xsi:type="p7:PupilSensor" />
             </Expression>
             <Expression xsi:type="rx:PublishSubject">
               <Name>PupilSensorData</Name>
@@ -1927,111 +1915,125 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
             </Expression>
             <Expression xsi:type="harp:Format">
               <harp:MessageType>Event</harp:MessageType>
-              <harp:Address>210</harp:Address>
-              <harp:PayloadType>TimestampedU64</harp:PayloadType>
+              <harp:Register xsi:type="harp:FormatMessagePayload">
+                <harp:Address>210</harp:Address>
+                <harp:PayloadType>TimestampedU64</harp:PayloadType>
+              </harp:Register>
             </Expression>
             <Expression xsi:type="MulticastSubject">
               <Name>HarpSoftwareLogging</Name>
             </Expression>
-            <Expression xsi:type="rx:Defer">
-              <Name>IMU</Name>
-              <Workflow>
-                <Nodes>
-                  <Expression xsi:type="SubscribeSubject">
-                    <Name>PupilSensorData</Name>
-                  </Expression>
-                  <Expression xsi:type="ExternalizedMapping">
-                    <Property Name="Value" DisplayName="SensorLoggingName" />
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="StringProperty">
-                      <Value>IMU</Value>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:Take">
-                      <rx:Count>1</rx:Count>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="PropertyMapping">
-                    <PropertyMappings>
-                      <Property Name="SensorLoggingName" />
-                    </PropertyMappings>
-                  </Expression>
-                  <Expression xsi:type="ExternalizedMapping">
-                    <Property Name="Value" DisplayName="SensorName" />
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="StringProperty">
-                      <Value>BMI160 IMU</Value>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:Take">
-                      <rx:Count>1</rx:Count>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="PropertyMapping">
-                    <PropertyMappings>
-                      <Property Name="SensorName" />
-                    </PropertyMappings>
-                  </Expression>
-                  <Expression xsi:type="ExternalizedMapping">
-                    <Property Name="Value" DisplayName="InitializationCommand" />
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="StringProperty">
-                      <Value>{"action": "set_control_value", "control_id": "streaming", "value": "true"}</Value>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:Take">
-                      <rx:Count>1</rx:Count>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="PropertyMapping">
-                    <PropertyMappings>
-                      <Property Name="InitializationCommand" />
-                    </PropertyMappings>
-                  </Expression>
-                  <Expression xsi:type="IncludeWorkflow" Path="Extensions\ZyrePupilSensor.bonsai">
-                    <SensorName>BMI160 IMU</SensorName>
-                    <SensorLoggingName>IMU</SensorLoggingName>
-                    <InitializationCommand>{"action": "set_control_value", "control_id": "streaming", "value": "true"}</InitializationCommand>
-                  </Expression>
-                  <Expression xsi:type="WorkflowOutput" />
-                </Nodes>
-                <Edges>
-                  <Edge From="0" To="13" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="2" To="3" Label="Source1" />
-                  <Edge From="3" To="4" Label="Source1" />
-                  <Edge From="4" To="13" Label="Source2" />
-                  <Edge From="5" To="6" Label="Source1" />
-                  <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
-                  <Edge From="8" To="13" Label="Source3" />
-                  <Edge From="9" To="10" Label="Source1" />
-                  <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="11" To="12" Label="Source1" />
-                  <Edge From="12" To="13" Label="Source4" />
-                  <Edge From="13" To="14" Label="Source1" />
-                </Edges>
-              </Workflow>
+            <Expression xsi:type="Disable">
+              <Builder xsi:type="rx:Defer">
+                <Name>IMU</Name>
+                <Workflow>
+                  <Nodes>
+                    <Expression xsi:type="SubscribeSubject">
+                      <Name>PupilSensorData</Name>
+                    </Expression>
+                    <Expression xsi:type="ExternalizedMapping">
+                      <Property Name="Value" DisplayName="SensorLoggingName" />
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="StringProperty">
+                        <Value>IMU</Value>
+                      </Combinator>
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="rx:Take">
+                        <rx:Count>1</rx:Count>
+                      </Combinator>
+                    </Expression>
+                    <Expression xsi:type="PropertyMapping">
+                      <PropertyMappings>
+                        <Property Name="SensorLoggingName" />
+                      </PropertyMappings>
+                    </Expression>
+                    <Expression xsi:type="ExternalizedMapping">
+                      <Property Name="Value" DisplayName="SensorName" />
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="StringProperty">
+                        <Value>BMI160 IMU</Value>
+                      </Combinator>
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="rx:Take">
+                        <rx:Count>1</rx:Count>
+                      </Combinator>
+                    </Expression>
+                    <Expression xsi:type="PropertyMapping">
+                      <PropertyMappings>
+                        <Property Name="SensorName" />
+                      </PropertyMappings>
+                    </Expression>
+                    <Expression xsi:type="ExternalizedMapping">
+                      <Property Name="Value" DisplayName="InitializationCommand" />
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="StringProperty">
+                        <Value>{"action": "set_control_value", "control_id": "streaming", "value": "true"}</Value>
+                      </Combinator>
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="rx:Take">
+                        <rx:Count>1</rx:Count>
+                      </Combinator>
+                    </Expression>
+                    <Expression xsi:type="PropertyMapping">
+                      <PropertyMappings>
+                        <Property Name="InitializationCommand" />
+                      </PropertyMappings>
+                    </Expression>
+                    <Expression xsi:type="IncludeWorkflow" Path="Extensions\ZyrePupilSensor.bonsai">
+                      <SensorName>BMI160 IMU</SensorName>
+                      <SensorLoggingName>IMU</SensorLoggingName>
+                      <InitializationCommand>{"action": "set_control_value", "control_id": "streaming", "value": "true"}</InitializationCommand>
+                    </Expression>
+                    <Expression xsi:type="WorkflowOutput" />
+                  </Nodes>
+                  <Edges>
+                    <Edge From="0" To="13" Label="Source1" />
+                    <Edge From="1" To="2" Label="Source1" />
+                    <Edge From="2" To="3" Label="Source1" />
+                    <Edge From="3" To="4" Label="Source1" />
+                    <Edge From="4" To="13" Label="Source2" />
+                    <Edge From="5" To="6" Label="Source1" />
+                    <Edge From="6" To="7" Label="Source1" />
+                    <Edge From="7" To="8" Label="Source1" />
+                    <Edge From="8" To="13" Label="Source3" />
+                    <Edge From="9" To="10" Label="Source1" />
+                    <Edge From="10" To="11" Label="Source1" />
+                    <Edge From="11" To="12" Label="Source1" />
+                    <Edge From="12" To="13" Label="Source4" />
+                    <Edge From="13" To="14" Label="Source1" />
+                  </Edges>
+                </Workflow>
+              </Builder>
             </Expression>
-            <Expression xsi:type="MulticastSubject">
-              <Name>PupilSensorLogging</Name>
+            <Expression xsi:type="Disable">
+              <Builder xsi:type="MulticastSubject">
+                <Name>PupilSensorLogging</Name>
+              </Builder>
             </Expression>
-            <Expression xsi:type="MemberSelector">
-              <Selector>Item1</Selector>
+            <Expression xsi:type="Disable">
+              <Builder xsi:type="MemberSelector">
+                <Selector>Item1</Selector>
+              </Builder>
             </Expression>
-            <Expression xsi:type="harp:Format">
-              <harp:MessageType>Event</harp:MessageType>
-              <harp:Address>211</harp:Address>
-              <harp:PayloadType>TimestampedU64</harp:PayloadType>
+            <Expression xsi:type="Disable">
+              <Builder xsi:type="harp:Format">
+                <harp:MessageType>Event</harp:MessageType>
+                <harp:Register xsi:type="harp:FormatMessagePayload">
+                  <harp:Address>211</harp:Address>
+                  <harp:PayloadType>TimestampedU64</harp:PayloadType>
+                </harp:Register>
+              </Builder>
             </Expression>
-            <Expression xsi:type="MulticastSubject">
-              <Name>HarpSoftwareLogging</Name>
+            <Expression xsi:type="Disable">
+              <Builder xsi:type="MulticastSubject">
+                <Name>HarpSoftwareLogging</Name>
+              </Builder>
             </Expression>
             <Expression xsi:type="rx:Defer">
               <Name>Gaze</Name>
@@ -2127,8 +2129,10 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
             </Expression>
             <Expression xsi:type="harp:Format">
               <harp:MessageType>Event</harp:MessageType>
-              <harp:Address>212</harp:Address>
-              <harp:PayloadType>TimestampedU64</harp:PayloadType>
+              <harp:Register xsi:type="harp:FormatMessagePayload">
+                <harp:Address>212</harp:Address>
+                <harp:PayloadType>TimestampedU64</harp:PayloadType>
+              </harp:Register>
             </Expression>
             <Expression xsi:type="MulticastSubject">
               <Name>HarpSoftwareLogging</Name>
@@ -2227,8 +2231,10 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
             </Expression>
             <Expression xsi:type="harp:Format">
               <harp:MessageType>Event</harp:MessageType>
-              <harp:Address>214</harp:Address>
-              <harp:PayloadType>TimestampedU64</harp:PayloadType>
+              <harp:Register xsi:type="harp:FormatMessagePayload">
+                <harp:Address>214</harp:Address>
+                <harp:PayloadType>TimestampedU64</harp:PayloadType>
+              </harp:Register>
             </Expression>
             <Expression xsi:type="MulticastSubject">
               <Name>HarpSoftwareLogging</Name>
@@ -2298,17 +2304,11 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
               <Combinator xsi:type="rx:WithLatestFrom" />
             </Expression>
             <Expression xsi:type="SubscribeSubject">
-              <Name>BioDataEvents</Name>
+              <Name>PlumaEvents</Name>
             </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="harp:FilterMessage">
-                <harp:Address>37</harp:Address>
-                <harp:MessageType>Event</harp:MessageType>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="harp:Parse">
-              <harp:Type>TimestampedU8</harp:Type>
-              <harp:IsArray>false</harp:IsArray>
+            <Expression xsi:type="p4:Parse">
+              <harp:MessageType>Event</harp:MessageType>
+              <harp:Register xsi:type="p4:TimestampedAccelerometerData" />
             </Expression>
             <Expression xsi:type="MemberSelector">
               <Selector>Seconds</Selector>
@@ -2337,16 +2337,15 @@ it.Item3 as TimestampSource)</scr:Expression>
             <Edge From="1" To="2" Label="Source1" />
             <Edge From="2" To="4" Label="Source1" />
             <Edge From="3" To="4" Label="Source2" />
-            <Edge From="4" To="9" Label="Source1" />
+            <Edge From="4" To="8" Label="Source1" />
             <Edge From="5" To="6" Label="Source1" />
             <Edge From="6" To="7" Label="Source1" />
-            <Edge From="7" To="8" Label="Source1" />
-            <Edge From="8" To="9" Label="Source2" />
+            <Edge From="7" To="8" Label="Source2" />
+            <Edge From="8" To="9" Label="Source1" />
             <Edge From="9" To="10" Label="Source1" />
             <Edge From="10" To="11" Label="Source1" />
             <Edge From="11" To="12" Label="Source1" />
             <Edge From="12" To="13" Label="Source1" />
-            <Edge From="13" To="14" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
@@ -2507,8 +2506,8 @@ it.Item3 as TimestampSource)</scr:Expression>
                     </PropertyMappings>
                   </Expression>
                   <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="p7:EmpaticaClient">
-                      <p7:Port>0</p7:Port>
+                    <Combinator xsi:type="p8:EmpaticaClient">
+                      <p8:Port>0</p8:Port>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="SubscribeSubject">
@@ -2646,25 +2645,13 @@ it.Item3 as TimestampSource)</scr:Expression>
         <Workflow>
           <Nodes>
             <Expression xsi:type="SubscribeSubject">
-              <Name>BioDataEvents</Name>
+              <Name>PlumaEvents</Name>
             </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="harp:FilterMessage">
-                <harp:Address>35</harp:Address>
-                <harp:MessageType>Event</harp:MessageType>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="harp:Parse">
-              <harp:Type>TimestampedU16</harp:Type>
-              <harp:IsArray>true</harp:IsArray>
+            <Expression xsi:type="p4:Parse">
+              <harp:Register xsi:type="p4:TimestampedEcgAndAnalogData" />
             </Expression>
             <Expression xsi:type="MemberSelector">
-              <Selector>Value</Selector>
-            </Expression>
-            <Expression xsi:type="Index">
-              <Operand xsi:type="IntProperty">
-                <Value>0</Value>
-              </Operand>
+              <Selector>Value.Ecg</Selector>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="rx:Slice">
@@ -2690,8 +2677,6 @@ it.Item3 as TimestampSource)</scr:Expression>
             <Edge From="2" To="3" Label="Source1" />
             <Edge From="3" To="4" Label="Source1" />
             <Edge From="4" To="5" Label="Source1" />
-            <Edge From="5" To="6" Label="Source1" />
-            <Edge From="6" To="7" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
@@ -2831,8 +2816,10 @@ it.Item7 as NullValue)</scr:Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
             <Expression xsi:type="harp:Format">
               <harp:MessageType>Event</harp:MessageType>
-              <harp:Address>246</harp:Address>
-              <harp:PayloadType>TimestampedFloat</harp:PayloadType>
+              <harp:Register xsi:type="harp:FormatMessagePayload">
+                <harp:Address>246</harp:Address>
+                <harp:PayloadType>TimestampedFloat</harp:PayloadType>
+              </harp:Register>
             </Expression>
             <Expression xsi:type="MemberSelector">
               <Selector>EastWindSpeed</Selector>
@@ -2840,8 +2827,10 @@ it.Item7 as NullValue)</scr:Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
             <Expression xsi:type="harp:Format">
               <harp:MessageType>Event</harp:MessageType>
-              <harp:Address>247</harp:Address>
-              <harp:PayloadType>TimestampedFloat</harp:PayloadType>
+              <harp:Register xsi:type="harp:FormatMessagePayload">
+                <harp:Address>247</harp:Address>
+                <harp:PayloadType>TimestampedFloat</harp:PayloadType>
+              </harp:Register>
             </Expression>
             <Expression xsi:type="MemberSelector">
               <Selector>GustWindSpeeed</Selector>
@@ -2849,8 +2838,10 @@ it.Item7 as NullValue)</scr:Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
             <Expression xsi:type="harp:Format">
               <harp:MessageType>Event</harp:MessageType>
-              <harp:Address>248</harp:Address>
-              <harp:PayloadType>TimestampedFloat</harp:PayloadType>
+              <harp:Register xsi:type="harp:FormatMessagePayload">
+                <harp:Address>248</harp:Address>
+                <harp:PayloadType>TimestampedFloat</harp:PayloadType>
+              </harp:Register>
             </Expression>
             <Expression xsi:type="MemberSelector">
               <Selector>AirTemperature</Selector>
@@ -2858,8 +2849,10 @@ it.Item7 as NullValue)</scr:Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
             <Expression xsi:type="harp:Format">
               <harp:MessageType>Event</harp:MessageType>
-              <harp:Address>249</harp:Address>
-              <harp:PayloadType>TimestampedFloat</harp:PayloadType>
+              <harp:Register xsi:type="harp:FormatMessagePayload">
+                <harp:Address>249</harp:Address>
+                <harp:PayloadType>TimestampedFloat</harp:PayloadType>
+              </harp:Register>
             </Expression>
             <Expression xsi:type="MemberSelector">
               <Selector>XOrientation</Selector>
@@ -2867,8 +2860,10 @@ it.Item7 as NullValue)</scr:Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
             <Expression xsi:type="harp:Format">
               <harp:MessageType>Event</harp:MessageType>
-              <harp:Address>250</harp:Address>
-              <harp:PayloadType>TimestampedFloat</harp:PayloadType>
+              <harp:Register xsi:type="harp:FormatMessagePayload">
+                <harp:Address>250</harp:Address>
+                <harp:PayloadType>TimestampedFloat</harp:PayloadType>
+              </harp:Register>
             </Expression>
             <Expression xsi:type="MemberSelector">
               <Selector>YOrientation</Selector>
@@ -2876,8 +2871,10 @@ it.Item7 as NullValue)</scr:Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
             <Expression xsi:type="harp:Format">
               <harp:MessageType>Event</harp:MessageType>
-              <harp:Address>251</harp:Address>
-              <harp:PayloadType>TimestampedFloat</harp:PayloadType>
+              <harp:Register xsi:type="harp:FormatMessagePayload">
+                <harp:Address>251</harp:Address>
+                <harp:PayloadType>TimestampedFloat</harp:PayloadType>
+              </harp:Register>
             </Expression>
             <Expression xsi:type="MemberSelector">
               <Selector>NullValue</Selector>
@@ -2885,8 +2882,10 @@ it.Item7 as NullValue)</scr:Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
             <Expression xsi:type="harp:Format">
               <harp:MessageType>Event</harp:MessageType>
-              <harp:Address>252</harp:Address>
-              <harp:PayloadType>TimestampedFloat</harp:PayloadType>
+              <harp:Register xsi:type="harp:FormatMessagePayload">
+                <harp:Address>252</harp:Address>
+                <harp:PayloadType>TimestampedFloat</harp:PayloadType>
+              </harp:Register>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="rx:Merge" />
@@ -2985,25 +2984,13 @@ it.Item7 as NullValue)</scr:Expression>
         <Workflow>
           <Nodes>
             <Expression xsi:type="SubscribeSubject">
-              <Name>BioDataEvents</Name>
+              <Name>PlumaEvents</Name>
             </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="harp:FilterMessage">
-                <harp:Address>35</harp:Address>
-                <harp:MessageType>Event</harp:MessageType>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="harp:Parse">
-              <harp:Type>TimestampedU16</harp:Type>
-              <harp:IsArray>true</harp:IsArray>
+            <Expression xsi:type="p4:Parse">
+              <harp:Register xsi:type="p4:TimestampedEcgAndAnalogData" />
             </Expression>
             <Expression xsi:type="MemberSelector">
-              <Selector>Value</Selector>
-            </Expression>
-            <Expression xsi:type="Index">
-              <Operand xsi:type="IntProperty">
-                <Value>1</Value>
-              </Operand>
+              <Selector>Value.Adc</Selector>
             </Expression>
             <Expression xsi:type="WorkflowOutput" />
           </Nodes>
@@ -3011,8 +2998,6 @@ it.Item7 as NullValue)</scr:Expression>
             <Edge From="0" To="1" Label="Source1" />
             <Edge From="1" To="2" Label="Source1" />
             <Edge From="2" To="3" Label="Source1" />
-            <Edge From="3" To="4" Label="Source1" />
-            <Edge From="4" To="5" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
@@ -3075,13 +3060,17 @@ it.Item7 as NullValue)</scr:Expression>
               </Expression>
               <Expression xsi:type="Combinator">
                 <Combinator xsi:type="harp:FilterMessage">
-                  <harp:Address>39</harp:Address>
                   <harp:MessageType>Write</harp:MessageType>
+                  <harp:Register xsi:type="harp:FilterMessageAddress">
+                    <harp:Address>39</harp:Address>
+                  </harp:Register>
                 </Combinator>
               </Expression>
               <Expression xsi:type="harp:Parse">
-                <harp:Type>Timestamp</harp:Type>
-                <harp:IsArray>false</harp:IsArray>
+                <harp:Register xsi:type="harp:ParseMessagePayload">
+                  <harp:PayloadType>Timestamp</harp:PayloadType>
+                  <harp:IsArray>false</harp:IsArray>
+                </harp:Register>
               </Expression>
               <Expression xsi:type="Combinator">
                 <Combinator xsi:type="rx:Zip" />
@@ -3115,14 +3104,18 @@ it.Item7 as NullValue)</scr:Expression>
               </Expression>
               <Expression xsi:type="Combinator">
                 <Combinator xsi:type="harp:FilterMessage">
-                  <harp:Address xsi:nil="true" />
                   <harp:MessageType>Write</harp:MessageType>
+                  <harp:Register xsi:type="harp:FilterMessageAddress">
+                    <harp:Address xsi:nil="true" />
+                  </harp:Register>
                 </Combinator>
               </Expression>
               <Expression xsi:type="Combinator">
                 <Combinator xsi:type="harp:FilterMessage">
-                  <harp:Address xsi:nil="true" />
                   <harp:MessageType>Event</harp:MessageType>
+                  <harp:Register xsi:type="harp:FilterMessageAddress">
+                    <harp:Address xsi:nil="true" />
+                  </harp:Register>
                 </Combinator>
               </Expression>
               <Expression xsi:type="Combinator">
@@ -3148,8 +3141,10 @@ it.Item7 as NullValue)</scr:Expression>
                       <Combinator xsi:type="rx:Merge" />
                     </Expression>
                     <Expression xsi:type="harp:Parse">
-                      <harp:Type>Timestamp</harp:Type>
-                      <harp:IsArray>false</harp:IsArray>
+                      <harp:Register xsi:type="harp:ParseMessagePayload">
+                        <harp:PayloadType>Timestamp</harp:PayloadType>
+                        <harp:IsArray>false</harp:IsArray>
+                      </harp:Register>
                     </Expression>
                     <Expression xsi:type="scr:ExpressionTransform">
                       <scr:Expression>TimeSpan.FromSeconds(it)</scr:Expression>
