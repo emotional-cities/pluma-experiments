@@ -14,7 +14,7 @@ This experiment will test the integration of various sources of hardware. These 
  - GPS Module (ZED-F9P)
  - Biaural audio
 	* no audio will be collected, instead we will short an input from the synchpulse to the audiocard to benchmark latencies
- - Pupillabs pupil core
+ - Pupillabs pupil invisible
  - Harp-triggered I2C Accelarometer
 
 ## Walker fake monitor
@@ -30,16 +30,27 @@ In order to have a monitor that remote applications can target, we must emulate 
 ### Execution Notes 
 - Open Bonsai and insert a CreateBrickConnection node, check the port and host, but the default values should be ok for a local system with a clena inhstallation.
 - connect that node to all specific tinkerforge sensor or actuator nodes that you have connected in your system, confure them properly (different components have differet set of settings). Don't forget to give the proper Uid (there is a dropdown that only shows compatible sensors to easy your life).
+
 ## Pupil Labs Pupil Invisible 0MQ
+The Pupil Invisible Companion app uses the [NDSI v4 protocol](https://docs.pupil-labs.com/invisible/real-time-api/legacy-api/) to publish video streams from the world/eye cameras as well as gaze data and user-events. 
+The app acts as a [Zyre](https://github.com/zeromq/zyre) host that contains data streams from individual sensors with a [specified protocol](https://github.com/pupil-labs/pyndsi/blob/v1.0/ndsi-commspec.md). 
+Sensors on the Zyre host define a data endpoint (for receiving sensor data) and a command endpoint (for controlling the sensor, e.g. enabling streaming) both of which use 0MQ messaging. A sensor's data can be read with a SUB socket connected to the the data endpoint, and controlled with a PUSH socket connected to the command endpoint.
 
-Pupil labs implements 0MQ messages using the NDSI protocol. https://github.com/pupil-labs/pyndsi/blob/v1.0/ndsi-commspec.md
+The general sequence for communicating with the Pupil Invisible is as follows:
+- A Bonsai.Zyre ZyreNode attempts to the companion app which can be found with the Zyre group name pupil-mobile-v4.
+- On a successful connection, the companion app will WHISPER all currently available sensors to the Bonsai ZyreNode, including their data/command endpoints.
+- Bonsai filters the WHISPER messages according to which sensors are required for data collection.
+- For those sensors a 0MQ message is sent with a PUSH socket to the command endpoint to activate streaming.
+- For those sensors a SUB socket is used to read out their values.
 
-### Execution Notes 
-- pip install ndsi
-- pip install opencv-python
-- git clone https://github.com/pupil-labs/pyndsi.git
-- navigate to the cloned folder 
-- activate emotional cities conda env
+In general, all sensor data streams are composed of three NetMQFrames for each sample:
+- Sensor UID
+- The data header
+- The raw binary data payload (can be parsed using the data header).
+
+The PupilInterface package provides some specific functionality for interfacing with the messages received from the pupil data streams. 
+- The sensor information received from the Zyre group is received as JSON which needs to be parsed. The PupilSensor operator extracts and parses JSON in Zyre NetMQFrames to give the required sensor data for streaming.
+- The world camera data is received as individual binary frames of H264 encoded data. The DecodeByteFrame operator instantiates a frame-by-frame ffmpeg decoder that decodes each binary frame into an image.
 
 ## Bonsai data logging
 
