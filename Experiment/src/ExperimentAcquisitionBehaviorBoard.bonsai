@@ -168,7 +168,7 @@
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="dsp:MatrixWriter">
-                            <dsp:Path>C:\Users\neurogears\Documents\DataTemp2023_04_28_13_30_33\Streams_122</dsp:Path>
+                            <dsp:Path>C:\Users\neurogears\Documents\DataTemp2023_04_28_13_32_15\Streams_122</dsp:Path>
                             <dsp:Suffix>None</dsp:Suffix>
                             <dsp:Overwrite>false</dsp:Overwrite>
                             <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -253,7 +253,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>C:\Users\neurogears\Documents\DataTemp2023_04_28_13_30_33\StreamReadDump.bin</dsp:Path>
+                      <dsp:Path>C:\Users\neurogears\Documents\DataTemp2023_04_28_13_32_15\StreamReadDump.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -310,7 +310,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>C:\Users\neurogears\Documents\DataTemp2023_04_28_13_30_33\Microphone.bin</dsp:Path>
+                      <dsp:Path>C:\Users\neurogears\Documents\DataTemp2023_04_28_13_32_15\Microphone.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -364,7 +364,7 @@
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>C:\Users\neurogears\Documents\DataTemp2023_04_28_13_30_33\Accelerometer.csv</io:FileName>
+                    <io:FileName>C:\Users\neurogears\Documents\DataTemp2023_04_28_13_32_15\Accelerometer.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>true</io:Overwrite>
                     <io:Suffix>None</io:Suffix>
@@ -592,7 +592,7 @@
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>C:\Users\neurogears\Documents\DataTemp2023_04_28_13_30_33\empatica_harp_ts.csv</io:FileName>
+                    <io:FileName>C:\Users\neurogears\Documents\DataTemp2023_04_28_13_32_15\empatica_harp_ts.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>false</io:Overwrite>
                     <io:Suffix>None</io:Suffix>
@@ -647,7 +647,7 @@
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>C:\Users\neurogears\Documents\DataTemp2023_04_28_13_30_33\eeg_markers.csv</io:FileName>
+                    <io:FileName>C:\Users\neurogears\Documents\DataTemp2023_04_28_13_32_15\eeg_markers.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>false</io:Overwrite>
                     <io:Suffix>None</io:Suffix>
@@ -1036,7 +1036,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Timer">
-                      <rx:DueTime>PT2.904S</rx:DueTime>
+                      <rx:DueTime>PT1.042S</rx:DueTime>
                       <rx:Period>PT0S</rx:Period>
                     </Combinator>
                   </Expression>
