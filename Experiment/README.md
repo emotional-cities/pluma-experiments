@@ -109,7 +109,8 @@ To achieve this, Bonsai is randomly toggling a digital output in the HARP behavi
 |                           |   YOrientation  |      251      |               Timestamped(float)              |
 |                           |    NullValue    |      252      |               Timestamped(float)              |
 |                           |                 |               |                                               |
-|       **PupilLabs**       |    WorldCamera  |      210      |            Timestamped(FrameNumber)           |
+|       **PupilLabs**       | WorldCamera(Decoded)  |      209      |            Timestamped(HasFrame?)           |
+|                           |    WorldCamera  |      210      |            Timestamped(FrameNumber)           |
 |                           |        IMU      |      211      |            Timestamped(FrameNumber)           |
 |                           |       Gaze      |      212      |            Timestamped(FrameNumber)           |
 |                           |       Audio     |      213      |            Timestamped(FrameNumber)           |
