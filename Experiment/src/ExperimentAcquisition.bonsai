@@ -15,7 +15,6 @@
                  xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
                  xmlns:p4="clr-namespace:Harp.Pluma;assembly=Harp.Pluma"
                  xmlns:p5="clr-namespace:Bonsai.Numerics.Distributions;assembly=Bonsai.Numerics"
-                 xmlns:beh="clr-namespace:Harp.Behavior;assembly=Harp.Behavior"
                  xmlns:al="clr-namespace:Bonsai.Audio;assembly=Bonsai.Audio"
                  xmlns:tkf="clr-namespace:Bonsai.Tinkerforge;assembly=Bonsai.Tinkerforge"
                  xmlns:p6="clr-namespace:Bonsai.Zyre;assembly=Bonsai.Zyre"
@@ -51,13 +50,18 @@
             </Expression>
             <Expression xsi:type="PropertySource" TypeArguments="io:GetDirectories,sys:String">
               <MemberName>Path</MemberName>
-              <Value>.</Value>
+              <Value>C:\Users\EmotionalCities_VRPC\Desktop\benchmarks\Data</Value>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="rx:Timestamp" />
             </Expression>
             <Expression xsi:type="scr:ExpressionTransform">
               <scr:Expression>it.Value +  it.TimeStamp.ToString("yyyy_MM_dd_HH_mm_ss")</scr:Expression>
+            </Expression>
+            <Expression xsi:type="Add">
+              <Operand xsi:type="StringProperty">
+                <Value>/</Value>
+              </Operand>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="rx:Take">
@@ -168,7 +172,7 @@
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="dsp:MatrixWriter">
-                            <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20220922\EmpaticaLDRBenchmark2023_04_12_12_12_18\Streams_39</dsp:Path>
+                            <dsp:Path>C:\Users\EmotionalCities_VRPC\Desktop\benchmarks\Data2023_06_15_11_56_20/\Streams_214</dsp:Path>
                             <dsp:Suffix>None</dsp:Suffix>
                             <dsp:Overwrite>false</dsp:Overwrite>
                             <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -253,7 +257,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20220922\EmpaticaLDRBenchmark2023_04_12_12_12_18\StreamReadDump.bin</dsp:Path>
+                      <dsp:Path>C:\Users\EmotionalCities_VRPC\Desktop\benchmarks\Data2023_06_15_11_56_20/\StreamReadDump.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -310,7 +314,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20220922\EmpaticaLDRBenchmark2023_04_12_12_12_18\Microphone.bin</dsp:Path>
+                      <dsp:Path>C:\Users\EmotionalCities_VRPC\Desktop\benchmarks\Data2023_06_15_11_56_20/\Microphone.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -364,7 +368,7 @@
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20220922\EmpaticaLDRBenchmark2023_04_12_12_12_18\Accelerometer.csv</io:FileName>
+                    <io:FileName>C:\Users\EmotionalCities_VRPC\Desktop\benchmarks\Data2023_06_15_11_56_20/\Accelerometer.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>true</io:Overwrite>
                     <io:Suffix>None</io:Suffix>
@@ -468,7 +472,7 @@
                           <Property Name="FileName" />
                         </Expression>
                         <Expression xsi:type="io:CsvWriter">
-                          <io:FileName>C:\Users\neurogears\Desktop\EC_datasets\FMUL2022_10_21_11_20_53\UBX\RXM_RLM.csv</io:FileName>
+                          <io:FileName>C:\Users\EmotionalCities_VRPC\Desktop\benchmarks\Data2023_06_15_11_56_20/\UBX\RXM_SFRBX.csv</io:FileName>
                           <io:Append>false</io:Append>
                           <io:Overwrite>false</io:Overwrite>
                           <io:Suffix>None</io:Suffix>
@@ -514,7 +518,7 @@
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="dsp:MatrixWriter">
-                            <dsp:Path>C:\Users\neurogears\Desktop\EC_datasets\FMUL2022_10_21_11_20_53\UBX\RXM_RLM.bin</dsp:Path>
+                            <dsp:Path>C:\Users\EmotionalCities_VRPC\Desktop\benchmarks\Data2023_06_15_11_56_20/\UBX\RXM_SFRBX.bin</dsp:Path>
                             <dsp:Suffix>None</dsp:Suffix>
                             <dsp:Overwrite>false</dsp:Overwrite>
                             <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -592,7 +596,7 @@
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20220922\EmpaticaLDRBenchmark2023_04_12_12_12_18\empatica_harp_ts.csv</io:FileName>
+                    <io:FileName>C:\Users\EmotionalCities_VRPC\Desktop\benchmarks\Data2023_06_15_11_56_20/\empatica_harp_ts.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>false</io:Overwrite>
                     <io:Suffix>None</io:Suffix>
@@ -647,7 +651,7 @@
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20220922\EmpaticaLDRBenchmark2023_04_12_12_12_18\eeg_markers.csv</io:FileName>
+                    <io:FileName>C:\Users\EmotionalCities_VRPC\Desktop\benchmarks\Data2023_06_15_11_56_20/\eeg_markers.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>false</io:Overwrite>
                     <io:Suffix>None</io:Suffix>
@@ -790,7 +794,7 @@
                               </Expression>
                               <Expression xsi:type="Combinator">
                                 <Combinator xsi:type="dsp:MatrixWriter">
-                                  <dsp:Path>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\Datasets\20220922\EmpaticaLDRBenchmark2023_04_12_12_12_18\PupilLabs\WorldCamera_Frame2.csv</dsp:Path>
+                                  <dsp:Path>C:\Users\EmotionalCities_VRPC\Desktop\benchmarks\Data2023_06_15_11_56_20/\PupilLabs\Key_Frame2.bin</dsp:Path>
                                   <dsp:Suffix>None</dsp:Suffix>
                                   <dsp:Overwrite>false</dsp:Overwrite>
                                   <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -910,6 +914,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:VideoWriter">
+                      <cv:FileName>C:\Users\EmotionalCities_VRPC\Desktop\benchmarks\Data2023_06_15_11_56_20/\pupil_video.avi</cv:FileName>
                       <cv:Suffix>None</cv:Suffix>
                       <cv:Buffered>true</cv:Buffered>
                       <cv:Overwrite>false</cv:Overwrite>
@@ -943,25 +948,26 @@
             <Edge From="2" To="3" Label="Source1" />
             <Edge From="3" To="4" Label="Source1" />
             <Edge From="4" To="5" Label="Source1" />
-            <Edge From="6" To="7" Label="Source1" />
-            <Edge From="6" To="8" Label="Source1" />
-            <Edge From="9" To="10" Label="Source1" />
-            <Edge From="11" To="12" Label="Source1" />
-            <Edge From="13" To="14" Label="Source1" />
+            <Edge From="5" To="6" Label="Source1" />
+            <Edge From="7" To="8" Label="Source1" />
+            <Edge From="7" To="9" Label="Source1" />
+            <Edge From="10" To="11" Label="Source1" />
+            <Edge From="12" To="13" Label="Source1" />
             <Edge From="14" To="15" Label="Source1" />
-            <Edge From="16" To="17" Label="Source1" />
-            <Edge From="18" To="19" Label="Source1" />
-            <Edge From="20" To="21" Label="Source1" />
+            <Edge From="15" To="16" Label="Source1" />
+            <Edge From="17" To="18" Label="Source1" />
+            <Edge From="19" To="20" Label="Source1" />
             <Edge From="21" To="22" Label="Source1" />
-            <Edge From="23" To="24" Label="Source1" />
-            <Edge From="23" To="25" Label="Source1" />
-            <Edge From="24" To="26" Label="Source2" />
-            <Edge From="25" To="26" Label="Source1" />
+            <Edge From="22" To="23" Label="Source1" />
+            <Edge From="24" To="25" Label="Source1" />
+            <Edge From="24" To="26" Label="Source1" />
+            <Edge From="25" To="27" Label="Source2" />
             <Edge From="26" To="27" Label="Source1" />
             <Edge From="27" To="28" Label="Source1" />
             <Edge From="28" To="29" Label="Source1" />
-            <Edge From="30" To="31" Label="Source1" />
+            <Edge From="29" To="30" Label="Source1" />
             <Edge From="31" To="32" Label="Source1" />
+            <Edge From="32" To="33" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
@@ -1011,7 +1017,7 @@
                       <harp:VisualIndicators>On</harp:VisualIndicators>
                       <harp:Heartbeat>Disabled</harp:Heartbeat>
                       <harp:IgnoreErrors>false</harp:IgnoreErrors>
-                      <harp:PortName>COMx</harp:PortName>
+                      <harp:PortName>COM8</harp:PortName>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="rx:PublishSubject">
@@ -1111,7 +1117,7 @@
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="rx:Timer">
-                            <rx:DueTime>PT27.276S</rx:DueTime>
+                            <rx:DueTime>PT11.073S</rx:DueTime>
                             <rx:Period>PT0S</rx:Period>
                           </Combinator>
                         </Expression>
@@ -1176,169 +1182,6 @@
           </Nodes>
           <Edges />
         </Workflow>
-      </Expression>
-      <Expression xsi:type="Disable">
-        <Builder xsi:type="GroupWorkflow">
-          <Name>Harp.Behavior</Name>
-          <Workflow>
-            <Nodes>
-              <Expression xsi:type="GroupWorkflow">
-                <Name>TimestampSource</Name>
-                <Workflow>
-                  <Nodes>
-                    <Expression xsi:type="SubscribeSubject">
-                      <Name>PlumaEvents</Name>
-                    </Expression>
-                    <Expression xsi:type="beh:Parse">
-                      <harp:Register xsi:type="beh:TimestampedAnalogData" />
-                    </Expression>
-                    <Expression xsi:type="MemberSelector">
-                      <Selector>Seconds</Selector>
-                    </Expression>
-                    <Expression xsi:type="rx:BehaviorSubject">
-                      <Name>TimestampSource</Name>
-                    </Expression>
-                    <Expression xsi:type="WorkflowOutput" />
-                  </Nodes>
-                  <Edges>
-                    <Edge From="0" To="1" Label="Source1" />
-                    <Edge From="1" To="2" Label="Source1" />
-                    <Edge From="2" To="3" Label="Source1" />
-                    <Edge From="3" To="4" Label="Source1" />
-                  </Edges>
-                </Workflow>
-              </Expression>
-              <Expression xsi:type="GroupWorkflow">
-                <Name>BioData</Name>
-                <Workflow>
-                  <Nodes>
-                    <Expression xsi:type="rx:BehaviorSubject" TypeArguments="harp:HarpMessage">
-                      <rx:Name>BioDataCommands</rx:Name>
-                    </Expression>
-                    <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="harp:Device">
-                        <harp:OperationMode>Active</harp:OperationMode>
-                        <harp:OperationLed>On</harp:OperationLed>
-                        <harp:DumpRegisters>true</harp:DumpRegisters>
-                        <harp:VisualIndicators>On</harp:VisualIndicators>
-                        <harp:Heartbeat>Disabled</harp:Heartbeat>
-                        <harp:IgnoreErrors>false</harp:IgnoreErrors>
-                        <harp:PortName>COM8</harp:PortName>
-                      </Combinator>
-                    </Expression>
-                    <Expression xsi:type="rx:PublishSubject">
-                      <Name>PlumaEvents</Name>
-                    </Expression>
-                    <Expression xsi:type="MulticastSubject">
-                      <Name>HarpSoftwareLogging</Name>
-                    </Expression>
-                    <Expression xsi:type="WorkflowOutput" />
-                  </Nodes>
-                  <Edges>
-                    <Edge From="0" To="1" Label="Source1" />
-                    <Edge From="1" To="2" Label="Source1" />
-                    <Edge From="2" To="3" Label="Source1" />
-                    <Edge From="3" To="4" Label="Source1" />
-                  </Edges>
-                </Workflow>
-              </Expression>
-              <Expression xsi:type="GroupWorkflow">
-                <Name>SynchPulse</Name>
-                <Workflow>
-                  <Nodes>
-                    <Expression xsi:type="rx:Defer">
-                      <Name>InterPulseInterval</Name>
-                      <Workflow>
-                        <Nodes>
-                          <Expression xsi:type="ExternalizedMapping">
-                            <Property Name="Lower" />
-                            <Property Name="Upper" />
-                          </Expression>
-                          <Expression xsi:type="Combinator">
-                            <Combinator xsi:type="p5:CreateContinuousUniform">
-                              <p5:Lower>10</p5:Lower>
-                              <p5:Upper>30</p5:Upper>
-                            </Combinator>
-                          </Expression>
-                          <Expression xsi:type="Combinator">
-                            <Combinator xsi:type="p5:Sample" />
-                          </Expression>
-                          <Expression xsi:type="scr:ExpressionTransform">
-                            <scr:Expression>TimeSpan.FromSeconds(it)</scr:Expression>
-                          </Expression>
-                          <Expression xsi:type="PropertyMapping">
-                            <PropertyMappings>
-                              <Property Name="DueTime" />
-                            </PropertyMappings>
-                          </Expression>
-                          <Expression xsi:type="Combinator">
-                            <Combinator xsi:type="rx:Timer">
-                              <rx:DueTime>PT27.276S</rx:DueTime>
-                              <rx:Period>PT0S</rx:Period>
-                            </Combinator>
-                          </Expression>
-                          <Expression xsi:type="WorkflowOutput" />
-                        </Nodes>
-                        <Edges>
-                          <Edge From="0" To="1" Label="Source1" />
-                          <Edge From="1" To="2" Label="Source1" />
-                          <Edge From="2" To="3" Label="Source1" />
-                          <Edge From="3" To="4" Label="Source1" />
-                          <Edge From="4" To="5" Label="Source1" />
-                          <Edge From="5" To="6" Label="Source1" />
-                        </Edges>
-                      </Workflow>
-                    </Expression>
-                    <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="rx:Repeat" />
-                    </Expression>
-                    <Expression xsi:type="MulticastSubject">
-                      <Name>SynchPulse</Name>
-                    </Expression>
-                    <Expression xsi:type="rx:PublishSubject" TypeArguments="sys:Object">
-                      <rx:Name>SynchPulse</rx:Name>
-                    </Expression>
-                    <Expression xsi:type="beh:CreateMessage">
-                      <harp:Payload xsi:type="beh:CreateOutputSetPayload">
-                        <harp:MessageType>Write</harp:MessageType>
-                        <beh:Value>DO0</beh:Value>
-                      </harp:Payload>
-                    </Expression>
-                    <Expression xsi:type="MulticastSubject">
-                      <Name>BioDataCommands</Name>
-                    </Expression>
-                    <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="rx:Delay">
-                        <rx:DueTime>PT0.1S</rx:DueTime>
-                      </Combinator>
-                    </Expression>
-                    <Expression xsi:type="beh:CreateMessage">
-                      <harp:Payload xsi:type="beh:CreateOutputClearPayload">
-                        <harp:MessageType>Write</harp:MessageType>
-                        <beh:Value>DO0</beh:Value>
-                      </harp:Payload>
-                    </Expression>
-                    <Expression xsi:type="MulticastSubject">
-                      <Name>BioDataCommands</Name>
-                    </Expression>
-                    <Expression xsi:type="WorkflowOutput" />
-                  </Nodes>
-                  <Edges>
-                    <Edge From="0" To="1" Label="Source1" />
-                    <Edge From="1" To="2" Label="Source1" />
-                    <Edge From="3" To="4" Label="Source1" />
-                    <Edge From="4" To="5" Label="Source1" />
-                    <Edge From="5" To="6" Label="Source1" />
-                    <Edge From="6" To="7" Label="Source1" />
-                    <Edge From="7" To="8" Label="Source1" />
-                    <Edge From="8" To="9" Label="Source1" />
-                  </Edges>
-                </Workflow>
-              </Expression>
-            </Nodes>
-            <Edges />
-          </Workflow>
-        </Builder>
       </Expression>
       <Expression xsi:type="GroupWorkflow">
         <Name>Microphone</Name>
@@ -1538,112 +1381,6 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
                   <Edge From="24" To="25" Label="Source1" />
                   <Edge From="25" To="26" Label="Source6" />
                   <Edge From="26" To="27" Label="Source1" />
-                </Edges>
-              </Workflow>
-            </Expression>
-            <Expression xsi:type="GroupWorkflow">
-              <Name>CO2</Name>
-              <Workflow>
-                <Nodes>
-                  <Expression xsi:type="WorkflowInput">
-                    <Name>Source1</Name>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="tkf:CO2V2">
-                      <tkf:Uid>Lhu</tkf:Uid>
-                      <tkf:Period>10</tkf:Period>
-                      <tkf:AirPressure>0</tkf:AirPressure>
-                      <tkf:TemperatureOffset>0</tkf:TemperatureOffset>
-                      <tkf:StatusLed>ShowStatus</tkf:StatusLed>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Co2Concentration</Selector>
-                  </Expression>
-                  <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
-                  <Expression xsi:type="harp:Format">
-                    <harp:MessageType>Event</harp:MessageType>
-                    <harp:Register xsi:type="harp:FormatMessagePayload">
-                      <harp:Address>224</harp:Address>
-                      <harp:PayloadType>TimestampedS32</harp:PayloadType>
-                    </harp:Register>
-                  </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Temperature</Selector>
-                  </Expression>
-                  <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
-                  <Expression xsi:type="harp:Format">
-                    <harp:MessageType>Event</harp:MessageType>
-                    <harp:Register xsi:type="harp:FormatMessagePayload">
-                      <harp:Address>225</harp:Address>
-                      <harp:PayloadType>TimestampedS16</harp:PayloadType>
-                    </harp:Register>
-                  </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Humidity</Selector>
-                  </Expression>
-                  <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
-                  <Expression xsi:type="harp:Format">
-                    <harp:MessageType>Event</harp:MessageType>
-                    <harp:Register xsi:type="harp:FormatMessagePayload">
-                      <harp:Address>226</harp:Address>
-                      <harp:PayloadType>TimestampedS32</harp:PayloadType>
-                    </harp:Register>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:Merge" />
-                  </Expression>
-                  <Expression xsi:type="WorkflowOutput" />
-                </Nodes>
-                <Edges>
-                  <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="1" To="5" Label="Source1" />
-                  <Edge From="1" To="8" Label="Source1" />
-                  <Edge From="2" To="3" Label="Source1" />
-                  <Edge From="3" To="4" Label="Source1" />
-                  <Edge From="4" To="11" Label="Source1" />
-                  <Edge From="5" To="6" Label="Source1" />
-                  <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="11" Label="Source2" />
-                  <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="9" To="10" Label="Source1" />
-                  <Edge From="10" To="11" Label="Source3" />
-                  <Edge From="11" To="12" Label="Source1" />
-                </Edges>
-              </Workflow>
-            </Expression>
-            <Expression xsi:type="GroupWorkflow">
-              <Name>AmbientLight</Name>
-              <Workflow>
-                <Nodes>
-                  <Expression xsi:type="WorkflowInput">
-                    <Name>Source1</Name>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="tkf:AmbientLightV3">
-                      <tkf:Uid>L3J</tkf:Uid>
-                      <tkf:Period>10</tkf:Period>
-                      <tkf:IlluminanceRange>Range64000Lux</tkf:IlluminanceRange>
-                      <tkf:IntegrationTime>Integration50ms</tkf:IntegrationTime>
-                      <tkf:StatusLed>ShowStatus</tkf:StatusLed>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
-                  <Expression xsi:type="harp:Format">
-                    <harp:MessageType>Event</harp:MessageType>
-                    <harp:Register xsi:type="harp:FormatMessagePayload">
-                      <harp:Address>223</harp:Address>
-                      <harp:PayloadType>TimestampedS64</harp:PayloadType>
-                    </harp:Register>
-                  </Expression>
-                  <Expression xsi:type="WorkflowOutput" />
-                </Nodes>
-                <Edges>
-                  <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="2" To="3" Label="Source1" />
-                  <Edge From="3" To="4" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -2026,21 +1763,17 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
             <Edge From="0" To="7" Label="Source1" />
             <Edge From="0" To="8" Label="Source1" />
             <Edge From="0" To="9" Label="Source1" />
-            <Edge From="0" To="10" Label="Source1" />
-            <Edge From="0" To="11" Label="Source1" />
-            <Edge From="1" To="12" Label="Source1" />
-            <Edge From="2" To="12" Label="Source2" />
-            <Edge From="3" To="12" Label="Source3" />
-            <Edge From="4" To="12" Label="Source4" />
-            <Edge From="5" To="12" Label="Source5" />
-            <Edge From="6" To="12" Label="Source6" />
-            <Edge From="7" To="12" Label="Source7" />
-            <Edge From="8" To="12" Label="Source8" />
-            <Edge From="9" To="12" Label="Source9" />
-            <Edge From="10" To="12" Label="Source10" />
-            <Edge From="11" To="12" Label="Source11" />
-            <Edge From="12" To="13" Label="Source1" />
-            <Edge From="13" To="14" Label="Source1" />
+            <Edge From="1" To="10" Label="Source1" />
+            <Edge From="2" To="10" Label="Source2" />
+            <Edge From="3" To="10" Label="Source3" />
+            <Edge From="4" To="10" Label="Source4" />
+            <Edge From="5" To="10" Label="Source5" />
+            <Edge From="6" To="10" Label="Source6" />
+            <Edge From="7" To="10" Label="Source7" />
+            <Edge From="8" To="10" Label="Source8" />
+            <Edge From="9" To="10" Label="Source9" />
+            <Edge From="10" To="11" Label="Source1" />
+            <Edge From="11" To="12" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
@@ -2086,6 +1819,9 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="p7:PupilSensor" />
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="io:WriteLine" />
             </Expression>
             <Expression xsi:type="rx:PublishSubject">
               <Name>PupilSensorData</Name>
@@ -2196,126 +1932,26 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
             <Expression xsi:type="MemberSelector">
               <Selector>Item2.Last.Buffer</Selector>
             </Expression>
+            <Expression xsi:type="ExternalizedMapping">
+              <Property Name="Value" DisplayName="Path" />
+            </Expression>
+            <Expression xsi:type="PropertySource" TypeArguments="io:GetDirectories,sys:String">
+              <MemberName>Path</MemberName>
+              <Value>C:\Users\EmotionalCities_VRPC\Desktop\benchmarks\Experiment\LocalPackages\FFMPEGlib</Value>
+            </Expression>
+            <Expression xsi:type="PropertyMapping">
+              <PropertyMappings>
+                <Property Name="BinariesPath" />
+              </PropertyMappings>
+            </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="p7:DecodeByteFrame">
-                <p7:BinariesPath>C:\Users\AndréAlmeida\NeuroGEARS Ltd\Emotional Cities - Documents\Experiment Control and Acquisition\FFmpegLib</p7:BinariesPath>
+                <p7:BinariesPath>C:\Users\EmotionalCities_VRPC\Desktop\benchmarks\Experiment\LocalPackages\FFMPEGlib</p7:BinariesPath>
               </Combinator>
             </Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
             <Expression xsi:type="MulticastSubject">
               <Name>PupilDecodedFrames</Name>
-            </Expression>
-            <Expression xsi:type="Disable">
-              <Builder xsi:type="rx:Defer">
-                <Name>IMU</Name>
-                <Workflow>
-                  <Nodes>
-                    <Expression xsi:type="SubscribeSubject">
-                      <Name>PupilSensorData</Name>
-                    </Expression>
-                    <Expression xsi:type="ExternalizedMapping">
-                      <Property Name="Value" DisplayName="SensorLoggingName" />
-                    </Expression>
-                    <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="StringProperty">
-                        <Value>IMU</Value>
-                      </Combinator>
-                    </Expression>
-                    <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="rx:Take">
-                        <rx:Count>1</rx:Count>
-                      </Combinator>
-                    </Expression>
-                    <Expression xsi:type="PropertyMapping">
-                      <PropertyMappings>
-                        <Property Name="SensorLoggingName" />
-                      </PropertyMappings>
-                    </Expression>
-                    <Expression xsi:type="ExternalizedMapping">
-                      <Property Name="Value" DisplayName="SensorName" />
-                    </Expression>
-                    <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="StringProperty">
-                        <Value>BMI160 IMU</Value>
-                      </Combinator>
-                    </Expression>
-                    <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="rx:Take">
-                        <rx:Count>1</rx:Count>
-                      </Combinator>
-                    </Expression>
-                    <Expression xsi:type="PropertyMapping">
-                      <PropertyMappings>
-                        <Property Name="SensorName" />
-                      </PropertyMappings>
-                    </Expression>
-                    <Expression xsi:type="ExternalizedMapping">
-                      <Property Name="Value" DisplayName="InitializationCommand" />
-                    </Expression>
-                    <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="StringProperty">
-                        <Value>{"action": "set_control_value", "control_id": "streaming", "value": "true"}</Value>
-                      </Combinator>
-                    </Expression>
-                    <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="rx:Take">
-                        <rx:Count>1</rx:Count>
-                      </Combinator>
-                    </Expression>
-                    <Expression xsi:type="PropertyMapping">
-                      <PropertyMappings>
-                        <Property Name="InitializationCommand" />
-                      </PropertyMappings>
-                    </Expression>
-                    <Expression xsi:type="IncludeWorkflow" Path="Extensions\ZyrePupilSensor.bonsai">
-                      <SensorName>BMI160 IMU</SensorName>
-                      <SensorLoggingName>IMU</SensorLoggingName>
-                      <InitializationCommand>{"action": "set_control_value", "control_id": "streaming", "value": "true"}</InitializationCommand>
-                    </Expression>
-                    <Expression xsi:type="WorkflowOutput" />
-                  </Nodes>
-                  <Edges>
-                    <Edge From="0" To="13" Label="Source1" />
-                    <Edge From="1" To="2" Label="Source1" />
-                    <Edge From="2" To="3" Label="Source1" />
-                    <Edge From="3" To="4" Label="Source1" />
-                    <Edge From="4" To="13" Label="Source2" />
-                    <Edge From="5" To="6" Label="Source1" />
-                    <Edge From="6" To="7" Label="Source1" />
-                    <Edge From="7" To="8" Label="Source1" />
-                    <Edge From="8" To="13" Label="Source3" />
-                    <Edge From="9" To="10" Label="Source1" />
-                    <Edge From="10" To="11" Label="Source1" />
-                    <Edge From="11" To="12" Label="Source1" />
-                    <Edge From="12" To="13" Label="Source4" />
-                    <Edge From="13" To="14" Label="Source1" />
-                  </Edges>
-                </Workflow>
-              </Builder>
-            </Expression>
-            <Expression xsi:type="Disable">
-              <Builder xsi:type="MulticastSubject">
-                <Name>PupilSensorLogging</Name>
-              </Builder>
-            </Expression>
-            <Expression xsi:type="Disable">
-              <Builder xsi:type="MemberSelector">
-                <Selector>Item1</Selector>
-              </Builder>
-            </Expression>
-            <Expression xsi:type="Disable">
-              <Builder xsi:type="harp:Format">
-                <harp:MessageType>Event</harp:MessageType>
-                <harp:Register xsi:type="harp:FormatMessagePayload">
-                  <harp:Address>211</harp:Address>
-                  <harp:PayloadType>TimestampedU64</harp:PayloadType>
-                </harp:Register>
-              </Builder>
-            </Expression>
-            <Expression xsi:type="Disable">
-              <Builder xsi:type="MulticastSubject">
-                <Name>HarpSoftwareLogging</Name>
-              </Builder>
             </Expression>
             <Expression xsi:type="rx:Defer">
               <Name>Gaze</Name>
@@ -2615,26 +2251,26 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
             <Edge From="3" To="4" Label="Source1" />
             <Edge From="4" To="5" Label="Source1" />
             <Edge From="5" To="6" Label="Source1" />
-            <Edge From="7" To="8" Label="Source1" />
+            <Edge From="6" To="7" Label="Source1" />
             <Edge From="8" To="9" Label="Source1" />
-            <Edge From="8" To="12" Label="Source1" />
             <Edge From="9" To="10" Label="Source1" />
+            <Edge From="9" To="13" Label="Source1" />
             <Edge From="10" To="11" Label="Source1" />
-            <Edge From="12" To="13" Label="Source1" />
-            <Edge From="13" To="14" Label="Source1" />
+            <Edge From="11" To="12" Label="Source1" />
+            <Edge From="13" To="17" Label="Source1" />
             <Edge From="14" To="15" Label="Source1" />
-            <Edge From="16" To="17" Label="Source1" />
+            <Edge From="15" To="16" Label="Source1" />
+            <Edge From="16" To="17" Label="Source2" />
             <Edge From="17" To="18" Label="Source1" />
             <Edge From="18" To="19" Label="Source1" />
-            <Edge From="19" To="20" Label="Source1" />
+            <Edge From="20" To="21" Label="Source1" />
             <Edge From="21" To="22" Label="Source1" />
             <Edge From="22" To="23" Label="Source1" />
             <Edge From="23" To="24" Label="Source1" />
-            <Edge From="24" To="25" Label="Source1" />
+            <Edge From="25" To="26" Label="Source1" />
             <Edge From="26" To="27" Label="Source1" />
             <Edge From="27" To="28" Label="Source1" />
             <Edge From="28" To="29" Label="Source1" />
-            <Edge From="29" To="30" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
@@ -2727,7 +2363,7 @@ it.Item3 as TimestampSource)</scr:Expression>
           <Nodes>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="ubx:Device">
-                <ubx:PortName>COM11</ubx:PortName>
+                <ubx:PortName>COM4</ubx:PortName>
               </Combinator>
             </Expression>
             <Expression xsi:type="SubscribeSubject">
@@ -2749,268 +2385,270 @@ it.Item3 as TimestampSource)</scr:Expression>
           </Edges>
         </Workflow>
       </Expression>
-      <Expression xsi:type="GroupWorkflow">
-        <Name>Empatica</Name>
-        <Workflow>
-          <Nodes>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="StringProperty">
-                <Value>127.0.0.1</Value>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:Take">
-                <rx:Count>1</rx:Count>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="rx:AsyncSubject">
-              <Name>E4_Host</Name>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="IntProperty">
-                <Value>8000</Value>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:Take">
-                <rx:Count>1</rx:Count>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="rx:AsyncSubject">
-              <Name>E4_Port</Name>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="StringProperty">
-                <Value>11111111111111111111111111111111</Value>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:Take">
-                <rx:Count>1</rx:Count>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="rx:AsyncSubject">
-              <Name>E4_API_KEY</Name>
-            </Expression>
-            <Expression xsi:type="rx:Defer">
-              <Name>InitializeServer</Name>
-              <Workflow>
-                <Nodes>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="p3:GetEnvironmentVariable">
-                      <p3:Variable>ProgramFiles(x86)</p3:Variable>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Format">
-                    <Format>{0}\Empatica\EmpaticaBLEServer\EmpaticaBLEServer.exe</Format>
-                    <Selector>it</Selector>
-                  </Expression>
-                  <Expression xsi:type="PropertyMapping">
-                    <PropertyMappings>
-                      <Property Name="FileName" />
-                    </PropertyMappings>
-                  </Expression>
-                  <Expression xsi:type="SubscribeSubject">
-                    <Name>E4_Host</Name>
-                  </Expression>
-                  <Expression xsi:type="SubscribeSubject">
-                    <Name>E4_Port</Name>
-                  </Expression>
-                  <Expression xsi:type="SubscribeSubject">
-                    <Name>E4_API_KEY</Name>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:Zip" />
-                  </Expression>
-                  <Expression xsi:type="Format">
-                    <Format>{0} {1} {2}</Format>
-                    <Selector>Item1,Item2,Item3</Selector>
-                  </Expression>
-                  <Expression xsi:type="PropertyMapping">
-                    <PropertyMappings>
-                      <Property Name="Arguments" />
-                    </PropertyMappings>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="io:StartProcess">
-                      <io:FileName>C:\Program Files (x86)\Empatica\EmpaticaBLEServer\EmpaticaBLEServer.exe</io:FileName>
-                      <io:Arguments>11111111111111111111111111111111 127.0.0.1 8000</io:Arguments>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="WorkflowOutput" />
-                </Nodes>
-                <Edges>
-                  <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="1" To="9" Label="Source2" />
-                  <Edge From="2" To="9" Label="Source1" />
-                  <Edge From="3" To="6" Label="Source2" />
-                  <Edge From="4" To="6" Label="Source3" />
-                  <Edge From="5" To="6" Label="Source1" />
-                  <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
-                  <Edge From="8" To="9" Label="Source3" />
-                  <Edge From="9" To="10" Label="Source1" />
-                </Edges>
-              </Workflow>
-            </Expression>
-            <Expression xsi:type="rx:Defer">
-              <Name>InitializeClient</Name>
-              <Workflow>
-                <Nodes>
-                  <Expression xsi:type="rx:BehaviorSubject" TypeArguments="sys:String">
-                    <rx:Name>EmpaticaCommands</rx:Name>
-                  </Expression>
-                  <Expression xsi:type="SubscribeSubject">
-                    <Name>E4_Host</Name>
-                  </Expression>
-                  <Expression xsi:type="PropertyMapping">
-                    <PropertyMappings>
-                      <Property Name="Host" />
-                    </PropertyMappings>
-                  </Expression>
-                  <Expression xsi:type="SubscribeSubject">
-                    <Name>E4_Port</Name>
-                  </Expression>
-                  <Expression xsi:type="PropertyMapping">
-                    <PropertyMappings>
-                      <Property Name="Port" />
-                    </PropertyMappings>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="p8:EmpaticaClient">
-                      <p8:Port>0</p8:Port>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="SubscribeSubject">
-                    <Name>TimestampSource</Name>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:WithLatestFrom" />
-                  </Expression>
-                  <Expression xsi:type="MulticastSubject">
-                    <Name>EmpaticaEvents</Name>
-                  </Expression>
-                  <Expression xsi:type="WorkflowOutput" />
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="StringProperty">
-                      <Value>CB1408</Value>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Format">
-                    <Format>device_connect {0}</Format>
-                    <Selector>it</Selector>
-                  </Expression>
-                  <Expression xsi:type="MulticastSubject">
-                    <Name>EmpaticaCommands</Name>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="StringProperty">
-                      <Value>bvp</Value>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="StringProperty">
-                      <Value>acc</Value>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="StringProperty">
-                      <Value>gsr</Value>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="StringProperty">
-                      <Value>ibi</Value>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="StringProperty">
-                      <Value>tmp</Value>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="StringProperty">
-                      <Value>bat</Value>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="StringProperty">
-                      <Value>tag</Value>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:Merge" />
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:Timer">
-                      <rx:DueTime>PT1S</rx:DueTime>
-                      <rx:Period>PT0.1S</rx:Period>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:Take">
-                      <rx:Count>7</rx:Count>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:Zip" />
-                  </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Item1</Selector>
-                  </Expression>
-                  <Expression xsi:type="Format">
-                    <Format>device_subscribe {0} ON</Format>
-                    <Selector>it</Selector>
-                  </Expression>
-                  <Expression xsi:type="MulticastSubject">
-                    <Name>EmpaticaCommands</Name>
-                  </Expression>
-                </Nodes>
-                <Edges>
-                  <Edge From="0" To="5" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="2" To="5" Label="Source2" />
-                  <Edge From="3" To="4" Label="Source1" />
-                  <Edge From="4" To="5" Label="Source3" />
-                  <Edge From="5" To="7" Label="Source1" />
-                  <Edge From="6" To="7" Label="Source2" />
-                  <Edge From="7" To="8" Label="Source1" />
-                  <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="11" To="12" Label="Source1" />
-                  <Edge From="13" To="20" Label="Source2" />
-                  <Edge From="14" To="20" Label="Source1" />
-                  <Edge From="15" To="20" Label="Source3" />
-                  <Edge From="16" To="20" Label="Source4" />
-                  <Edge From="17" To="20" Label="Source5" />
-                  <Edge From="18" To="20" Label="Source6" />
-                  <Edge From="19" To="20" Label="Source7" />
-                  <Edge From="20" To="23" Label="Source1" />
-                  <Edge From="21" To="22" Label="Source1" />
-                  <Edge From="22" To="23" Label="Source2" />
-                  <Edge From="23" To="24" Label="Source1" />
-                  <Edge From="24" To="25" Label="Source1" />
-                  <Edge From="25" To="26" Label="Source1" />
-                </Edges>
-              </Workflow>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:DelaySubscription">
-                <rx:DueTime>PT5S</rx:DueTime>
-              </Combinator>
-            </Expression>
-          </Nodes>
-          <Edges>
-            <Edge From="0" To="1" Label="Source1" />
-            <Edge From="1" To="2" Label="Source1" />
-            <Edge From="3" To="4" Label="Source1" />
-            <Edge From="4" To="5" Label="Source1" />
-            <Edge From="6" To="7" Label="Source1" />
-            <Edge From="7" To="8" Label="Source1" />
-            <Edge From="10" To="11" Label="Source1" />
-          </Edges>
-        </Workflow>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="GroupWorkflow">
+          <Name>Empatica</Name>
+          <Workflow>
+            <Nodes>
+              <Expression xsi:type="Combinator">
+                <Combinator xsi:type="StringProperty">
+                  <Value>127.0.0.1</Value>
+                </Combinator>
+              </Expression>
+              <Expression xsi:type="Combinator">
+                <Combinator xsi:type="rx:Take">
+                  <rx:Count>1</rx:Count>
+                </Combinator>
+              </Expression>
+              <Expression xsi:type="rx:AsyncSubject">
+                <Name>E4_Host</Name>
+              </Expression>
+              <Expression xsi:type="Combinator">
+                <Combinator xsi:type="IntProperty">
+                  <Value>8000</Value>
+                </Combinator>
+              </Expression>
+              <Expression xsi:type="Combinator">
+                <Combinator xsi:type="rx:Take">
+                  <rx:Count>1</rx:Count>
+                </Combinator>
+              </Expression>
+              <Expression xsi:type="rx:AsyncSubject">
+                <Name>E4_Port</Name>
+              </Expression>
+              <Expression xsi:type="Combinator">
+                <Combinator xsi:type="StringProperty">
+                  <Value>11111111111111111111111111111111</Value>
+                </Combinator>
+              </Expression>
+              <Expression xsi:type="Combinator">
+                <Combinator xsi:type="rx:Take">
+                  <rx:Count>1</rx:Count>
+                </Combinator>
+              </Expression>
+              <Expression xsi:type="rx:AsyncSubject">
+                <Name>E4_API_KEY</Name>
+              </Expression>
+              <Expression xsi:type="rx:Defer">
+                <Name>InitializeServer</Name>
+                <Workflow>
+                  <Nodes>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="p3:GetEnvironmentVariable">
+                        <p3:Variable>ProgramFiles(x86)</p3:Variable>
+                      </Combinator>
+                    </Expression>
+                    <Expression xsi:type="Format">
+                      <Format>{0}\Empatica\EmpaticaBLEServer\EmpaticaBLEServer.exe</Format>
+                      <Selector>it</Selector>
+                    </Expression>
+                    <Expression xsi:type="PropertyMapping">
+                      <PropertyMappings>
+                        <Property Name="FileName" />
+                      </PropertyMappings>
+                    </Expression>
+                    <Expression xsi:type="SubscribeSubject">
+                      <Name>E4_Host</Name>
+                    </Expression>
+                    <Expression xsi:type="SubscribeSubject">
+                      <Name>E4_Port</Name>
+                    </Expression>
+                    <Expression xsi:type="SubscribeSubject">
+                      <Name>E4_API_KEY</Name>
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="rx:Zip" />
+                    </Expression>
+                    <Expression xsi:type="Format">
+                      <Format>{0} {1} {2}</Format>
+                      <Selector>Item1,Item2,Item3</Selector>
+                    </Expression>
+                    <Expression xsi:type="PropertyMapping">
+                      <PropertyMappings>
+                        <Property Name="Arguments" />
+                      </PropertyMappings>
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="io:StartProcess">
+                        <io:FileName>C:\Program Files (x86)\Empatica\EmpaticaBLEServer\EmpaticaBLEServer.exe</io:FileName>
+                        <io:Arguments>11111111111111111111111111111111 127.0.0.1 8000</io:Arguments>
+                      </Combinator>
+                    </Expression>
+                    <Expression xsi:type="WorkflowOutput" />
+                  </Nodes>
+                  <Edges>
+                    <Edge From="0" To="1" Label="Source1" />
+                    <Edge From="1" To="2" Label="Source1" />
+                    <Edge From="1" To="9" Label="Source2" />
+                    <Edge From="2" To="9" Label="Source1" />
+                    <Edge From="3" To="6" Label="Source2" />
+                    <Edge From="4" To="6" Label="Source3" />
+                    <Edge From="5" To="6" Label="Source1" />
+                    <Edge From="6" To="7" Label="Source1" />
+                    <Edge From="7" To="8" Label="Source1" />
+                    <Edge From="8" To="9" Label="Source3" />
+                    <Edge From="9" To="10" Label="Source1" />
+                  </Edges>
+                </Workflow>
+              </Expression>
+              <Expression xsi:type="rx:Defer">
+                <Name>InitializeClient</Name>
+                <Workflow>
+                  <Nodes>
+                    <Expression xsi:type="rx:BehaviorSubject" TypeArguments="sys:String">
+                      <rx:Name>EmpaticaCommands</rx:Name>
+                    </Expression>
+                    <Expression xsi:type="SubscribeSubject">
+                      <Name>E4_Host</Name>
+                    </Expression>
+                    <Expression xsi:type="PropertyMapping">
+                      <PropertyMappings>
+                        <Property Name="Host" />
+                      </PropertyMappings>
+                    </Expression>
+                    <Expression xsi:type="SubscribeSubject">
+                      <Name>E4_Port</Name>
+                    </Expression>
+                    <Expression xsi:type="PropertyMapping">
+                      <PropertyMappings>
+                        <Property Name="Port" />
+                      </PropertyMappings>
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="p8:EmpaticaClient">
+                        <p8:Port>0</p8:Port>
+                      </Combinator>
+                    </Expression>
+                    <Expression xsi:type="SubscribeSubject">
+                      <Name>TimestampSource</Name>
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="rx:WithLatestFrom" />
+                    </Expression>
+                    <Expression xsi:type="MulticastSubject">
+                      <Name>EmpaticaEvents</Name>
+                    </Expression>
+                    <Expression xsi:type="WorkflowOutput" />
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="StringProperty">
+                        <Value>CB1408</Value>
+                      </Combinator>
+                    </Expression>
+                    <Expression xsi:type="Format">
+                      <Format>device_connect {0}</Format>
+                      <Selector>it</Selector>
+                    </Expression>
+                    <Expression xsi:type="MulticastSubject">
+                      <Name>EmpaticaCommands</Name>
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="StringProperty">
+                        <Value>bvp</Value>
+                      </Combinator>
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="StringProperty">
+                        <Value>acc</Value>
+                      </Combinator>
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="StringProperty">
+                        <Value>gsr</Value>
+                      </Combinator>
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="StringProperty">
+                        <Value>ibi</Value>
+                      </Combinator>
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="StringProperty">
+                        <Value>tmp</Value>
+                      </Combinator>
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="StringProperty">
+                        <Value>bat</Value>
+                      </Combinator>
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="StringProperty">
+                        <Value>tag</Value>
+                      </Combinator>
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="rx:Merge" />
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="rx:Timer">
+                        <rx:DueTime>PT1S</rx:DueTime>
+                        <rx:Period>PT0.1S</rx:Period>
+                      </Combinator>
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="rx:Take">
+                        <rx:Count>7</rx:Count>
+                      </Combinator>
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="rx:Zip" />
+                    </Expression>
+                    <Expression xsi:type="MemberSelector">
+                      <Selector>Item1</Selector>
+                    </Expression>
+                    <Expression xsi:type="Format">
+                      <Format>device_subscribe {0} ON</Format>
+                      <Selector>it</Selector>
+                    </Expression>
+                    <Expression xsi:type="MulticastSubject">
+                      <Name>EmpaticaCommands</Name>
+                    </Expression>
+                  </Nodes>
+                  <Edges>
+                    <Edge From="0" To="5" Label="Source1" />
+                    <Edge From="1" To="2" Label="Source1" />
+                    <Edge From="2" To="5" Label="Source2" />
+                    <Edge From="3" To="4" Label="Source1" />
+                    <Edge From="4" To="5" Label="Source3" />
+                    <Edge From="5" To="7" Label="Source1" />
+                    <Edge From="6" To="7" Label="Source2" />
+                    <Edge From="7" To="8" Label="Source1" />
+                    <Edge From="8" To="9" Label="Source1" />
+                    <Edge From="10" To="11" Label="Source1" />
+                    <Edge From="11" To="12" Label="Source1" />
+                    <Edge From="13" To="20" Label="Source2" />
+                    <Edge From="14" To="20" Label="Source1" />
+                    <Edge From="15" To="20" Label="Source3" />
+                    <Edge From="16" To="20" Label="Source4" />
+                    <Edge From="17" To="20" Label="Source5" />
+                    <Edge From="18" To="20" Label="Source6" />
+                    <Edge From="19" To="20" Label="Source7" />
+                    <Edge From="20" To="23" Label="Source1" />
+                    <Edge From="21" To="22" Label="Source1" />
+                    <Edge From="22" To="23" Label="Source2" />
+                    <Edge From="23" To="24" Label="Source1" />
+                    <Edge From="24" To="25" Label="Source1" />
+                    <Edge From="25" To="26" Label="Source1" />
+                  </Edges>
+                </Workflow>
+              </Expression>
+              <Expression xsi:type="Combinator">
+                <Combinator xsi:type="rx:DelaySubscription">
+                  <rx:DueTime>PT5S</rx:DueTime>
+                </Combinator>
+              </Expression>
+            </Nodes>
+            <Edges>
+              <Edge From="0" To="1" Label="Source1" />
+              <Edge From="1" To="2" Label="Source1" />
+              <Edge From="3" To="4" Label="Source1" />
+              <Edge From="4" To="5" Label="Source1" />
+              <Edge From="6" To="7" Label="Source1" />
+              <Edge From="7" To="8" Label="Source1" />
+              <Edge From="10" To="11" Label="Source1" />
+            </Edges>
+          </Workflow>
+        </Builder>
       </Expression>
       <Expression xsi:type="GroupWorkflow">
         <Name>ECG_Viz</Name>
@@ -3058,7 +2696,7 @@ it.Item3 as TimestampSource)</scr:Expression>
           <Nodes>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="p3:WindSerial">
-                <p3:PortName>COM7</p3:PortName>
+                <p3:PortName>COM5</p3:PortName>
                 <p3:RequestString>0R4!</p3:RequestString>
                 <p3:PollingInterval>50</p3:PollingInterval>
                 <p3:Timeout>1000</p3:Timeout>
@@ -3351,27 +2989,29 @@ it.Item7 as NullValue)</scr:Expression>
           </Edges>
         </Workflow>
       </Expression>
-      <Expression xsi:type="GroupWorkflow">
-        <Name>LDR</Name>
-        <Workflow>
-          <Nodes>
-            <Expression xsi:type="SubscribeSubject">
-              <Name>PlumaEvents</Name>
-            </Expression>
-            <Expression xsi:type="p4:Parse">
-              <harp:Register xsi:type="p4:TimestampedEcgAndAnalogData" />
-            </Expression>
-            <Expression xsi:type="MemberSelector">
-              <Selector>Value.Adc</Selector>
-            </Expression>
-            <Expression xsi:type="WorkflowOutput" />
-          </Nodes>
-          <Edges>
-            <Edge From="0" To="1" Label="Source1" />
-            <Edge From="1" To="2" Label="Source1" />
-            <Edge From="2" To="3" Label="Source1" />
-          </Edges>
-        </Workflow>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="GroupWorkflow">
+          <Name>LDR</Name>
+          <Workflow>
+            <Nodes>
+              <Expression xsi:type="SubscribeSubject">
+                <Name>PlumaEvents</Name>
+              </Expression>
+              <Expression xsi:type="p4:Parse">
+                <harp:Register xsi:type="p4:TimestampedEcgAndAnalogData" />
+              </Expression>
+              <Expression xsi:type="MemberSelector">
+                <Selector>Value.Adc</Selector>
+              </Expression>
+              <Expression xsi:type="WorkflowOutput" />
+            </Nodes>
+            <Edges>
+              <Edge From="0" To="1" Label="Source1" />
+              <Edge From="1" To="2" Label="Source1" />
+              <Edge From="2" To="3" Label="Source1" />
+            </Edges>
+          </Workflow>
+        </Builder>
       </Expression>
       <Expression xsi:type="Disable">
         <Builder xsi:type="GroupWorkflow">
