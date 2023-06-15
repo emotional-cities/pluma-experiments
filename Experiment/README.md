@@ -30,6 +30,25 @@ In order to have a monitor that remote applications can target, we must emulate 
 ### Execution Notes 
 - Open Bonsai and insert a CreateBrickConnection node, check the port and host, but the default values should be ok for a local system with a clena inhstallation.
 - connect that node to all specific tinkerforge sensor or actuator nodes that you have connected in your system, confure them properly (different components have differet set of settings). Don't forget to give the proper Uid (there is a dropdown that only shows compatible sensors to easy your life).
+- Run the Brickv 2.4.22 from the startup menu. 
+
+## Enobio EEG
+### Execution Notes 
+- Open NIC2 application 
+- Press use USB devices 
+- Ensure that the device is connected with usb proper plug to the computer 
+- Power on the device by pressing the side button.
+- Press scan for devices.
+- Select the device from the available that appear.
+- Click use this device.
+- Press the human face image on the left pannel.
+- Select EEG_Benchmarks.
+- Press Load Protocol.
+- Wait for the synchronizing 
+- Press Play to save Data 
+- Start Boinsai workflow.
+
+
 
 ## Pupil Labs Pupil Invisible 0MQ
 The Pupil Invisible Companion app uses the [NDSI v4 protocol](https://docs.pupil-labs.com/invisible/real-time-api/legacy-api/) to publish video streams from the world/eye cameras as well as gaze data and user-events. 
