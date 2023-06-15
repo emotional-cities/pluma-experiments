@@ -52,6 +52,15 @@ The PupilInterface package provides some specific functionality for interfacing 
 - The sensor information received from the Zyre group is received as JSON which needs to be parsed. The PupilSensor operator extracts and parses JSON in Zyre NetMQFrames to give the required sensor data for streaming.
 - The world camera data is received as individual binary frames of H264 encoded data. The DecodeByteFrame operator instantiates a frame-by-frame ffmpeg decoder that decodes each binary frame into an image.
 
+### To run the protocol:
+  0. Make sure the cellphone is connected to the same network as the computer;
+  1. Turn on the companion phone and open the `Invisible Companion` App;
+  2. Select `Wearer`, click `Adjust` and follow the calibration procedure;
+  3. Hit `Apply` and confirm by looking at the cellphone;
+  4. The App shuold now remain open to keep the `Zyre Server` active;
+
+  5. From Bonsai, just hit `Start` and it should be able to automatically start streaming the video data.
+
 ## Bonsai data logging
 
 Most of the data currently being saved in Bonsai is packaged in a HARP message format. For each different event (different address) a new .bin file will be created.
