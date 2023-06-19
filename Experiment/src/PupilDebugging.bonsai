@@ -354,134 +354,46 @@
             <Expression xsi:type="WorkflowInput">
               <Name>Source1</Name>
             </Expression>
-            <Expression xsi:type="MemberSelector">
-              <Selector>SensorUuid</Selector>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:Take">
-                <rx:Count>1</rx:Count>
-              </Combinator>
-            </Expression>
             <Expression xsi:type="rx:AsyncSubject">
-              <Name>SensorUuid</Name>
+              <Name>Sensor</Name>
+            </Expression>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>Sensor</Name>
             </Expression>
             <Expression xsi:type="MemberSelector">
               <Selector>DataEndpoint</Selector>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:Take">
-                <rx:Count>1</rx:Count>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="rx:AsyncSubject">
-              <Name>DataEndpoint</Name>
-            </Expression>
-            <Expression xsi:type="MemberSelector">
-              <Selector>CommandEndpoint</Selector>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:Take">
-                <rx:Count>1</rx:Count>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="rx:AsyncSubject">
-              <Name>CommandEndpoint</Name>
-            </Expression>
-            <Expression xsi:type="MemberSelector">
-              <Selector>NotifyEndpoint</Selector>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:Take">
-                <rx:Count>1</rx:Count>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="rx:AsyncSubject">
-              <Name>NotifyEndpoint</Name>
-            </Expression>
-            <Expression xsi:type="SubscribeSubject">
-              <Name>DataEndpoint</Name>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:WithLatestFrom" />
-            </Expression>
-            <Expression xsi:type="rx:SelectMany">
-              <Name>CreateSubStream</Name>
-              <Workflow>
-                <Nodes>
-                  <Expression xsi:type="WorkflowInput">
-                    <Name>Source1</Name>
-                  </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Item2</Selector>
-                  </Expression>
-                  <Expression xsi:type="PropertyMapping">
-                    <PropertyMappings>
-                      <Property Name="ConnectionString" />
-                    </PropertyMappings>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="zmq:Subscriber">
-                      <zmq:ConnectionString>tcp://192.168.1.82:52139</zmq:ConnectionString>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="WorkflowOutput" />
-                </Nodes>
-                <Edges>
-                  <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="2" To="3" Label="Source1" />
-                  <Edge From="3" To="4" Label="Source1" />
-                </Edges>
-              </Workflow>
-            </Expression>
-            <Expression xsi:type="MemberSelector">
-              <Selector>First</Selector>
-            </Expression>
-            <Expression xsi:type="SubscribeSubject">
-              <Name>CommandEndpoint</Name>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:WithLatestFrom" />
-            </Expression>
-            <Expression xsi:type="MemberSelector">
-              <Selector>Item2</Selector>
             </Expression>
             <Expression xsi:type="PropertyMapping">
               <PropertyMappings>
                 <Property Name="ConnectionString" />
               </PropertyMappings>
             </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="zmq:Subscriber">
+                <zmq:ConnectionString>tcp://192.168.1.82:52139</zmq:ConnectionString>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>First</Selector>
+            </Expression>
             <Expression xsi:type="rx:BehaviorSubject" TypeArguments="p3:NetMQMessage">
               <rx:Name>Commands</rx:Name>
+            </Expression>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>Sensor</Name>
+            </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>CommandEndpoint</Selector>
+            </Expression>
+            <Expression xsi:type="PropertyMapping">
+              <PropertyMappings>
+                <Property Name="ConnectionString" />
+              </PropertyMappings>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="zmq:Push">
                 <zmq:ConnectionString>tcp://192.168.1.82:56414</zmq:ConnectionString>
               </Combinator>
-            </Expression>
-            <Expression xsi:type="Disable">
-              <Builder xsi:type="SubscribeSubject">
-                <Name>CommandEndpoint</Name>
-              </Builder>
-            </Expression>
-            <Expression xsi:type="Disable">
-              <Builder xsi:type="PropertyMapping">
-                <PropertyMappings>
-                  <Property Name="ConnectionString" />
-                </PropertyMappings>
-              </Builder>
-            </Expression>
-            <Expression xsi:type="Disable">
-              <Builder xsi:type="rx:BehaviorSubject" TypeArguments="p3:NetMQMessage">
-                <rx:Name>Commands</rx:Name>
-              </Builder>
-            </Expression>
-            <Expression xsi:type="Disable">
-              <Builder xsi:type="Combinator">
-                <Combinator xsi:type="zmq:Push">
-                  <zmq:ConnectionString>tcp://192.168.1.82:62548</zmq:ConnectionString>
-                </Combinator>
-              </Builder>
             </Expression>
             <Expression xsi:type="Disable">
               <Builder xsi:type="SubscribeSubject">
@@ -503,26 +415,10 @@
               </Builder>
             </Expression>
             <Expression xsi:type="SubscribeSubject">
-              <Name>SensorUuid</Name>
+              <Name>Sensor</Name>
             </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="StringProperty">
-                <Value>{"action": "set_control_value", "control_id": "streaming", "value": "false"}</Value>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:Merge" />
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:Take">
-                <rx:Count>2</rx:Count>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="zmq:ToMessage" />
-            </Expression>
-            <Expression xsi:type="SubscribeSubject">
-              <Name>SensorUuid</Name>
+            <Expression xsi:type="MemberSelector">
+              <Selector>SensorUuid</Selector>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="StringProperty">
@@ -541,78 +437,34 @@
               <Combinator xsi:type="zmq:ToMessage" />
             </Expression>
             <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:Merge" />
+              <Combinator xsi:type="rx:Delay">
+                <rx:DueTime>PT0.2S</rx:DueTime>
+              </Combinator>
             </Expression>
             <Expression xsi:type="MulticastSubject">
               <Name>Commands</Name>
             </Expression>
-            <Expression xsi:type="Disable">
-              <Builder xsi:type="SubscribeSubject">
-                <Name>DataEndpoint</Name>
-              </Builder>
-            </Expression>
-            <Expression xsi:type="Disable">
-              <Builder xsi:type="PropertyMapping">
-                <PropertyMappings>
-                  <Property Name="ConnectionString" />
-                </PropertyMappings>
-              </Builder>
-            </Expression>
-            <Expression xsi:type="Disable">
-              <Builder xsi:type="Combinator">
-                <Combinator xsi:type="zmq:Subscriber">
-                  <zmq:ConnectionString>tcp://192.168.1.82:53889</zmq:ConnectionString>
-                </Combinator>
-              </Builder>
-            </Expression>
-            <Expression xsi:type="Disable">
-              <Builder xsi:type="WorkflowOutput" />
-            </Expression>
           </Nodes>
           <Edges>
             <Edge From="0" To="1" Label="Source1" />
-            <Edge From="0" To="4" Label="Source1" />
-            <Edge From="0" To="7" Label="Source1" />
-            <Edge From="0" To="10" Label="Source1" />
-            <Edge From="0" To="14" Label="Source1" />
-            <Edge From="0" To="18" Label="Source1" />
-            <Edge From="1" To="2" Label="Source1" />
             <Edge From="2" To="3" Label="Source1" />
+            <Edge From="3" To="4" Label="Source1" />
             <Edge From="4" To="5" Label="Source1" />
             <Edge From="5" To="6" Label="Source1" />
-            <Edge From="7" To="8" Label="Source1" />
+            <Edge From="7" To="11" Label="Source2" />
             <Edge From="8" To="9" Label="Source1" />
+            <Edge From="9" To="10" Label="Source1" />
             <Edge From="10" To="11" Label="Source1" />
-            <Edge From="11" To="12" Label="Source1" />
-            <Edge From="13" To="14" Label="Source2" />
-            <Edge From="14" To="15" Label="Source1" />
+            <Edge From="12" To="13" Label="Source1" />
+            <Edge From="13" To="14" Label="Source1" />
             <Edge From="15" To="16" Label="Source1" />
+            <Edge From="16" To="18" Label="Source1" />
+            <Edge From="16" To="17" Label="Source1" />
             <Edge From="17" To="18" Label="Source2" />
             <Edge From="18" To="19" Label="Source1" />
             <Edge From="19" To="20" Label="Source1" />
-            <Edge From="20" To="22" Label="Source1" />
-            <Edge From="21" To="22" Label="Source2" />
-            <Edge From="23" To="24" Label="Source1" />
-            <Edge From="24" To="26" Label="Source1" />
-            <Edge From="25" To="26" Label="Source2" />
-            <Edge From="27" To="28" Label="Source1" />
-            <Edge From="28" To="29" Label="Source1" />
-            <Edge From="30" To="32" Label="Source1" />
-            <Edge From="30" To="31" Label="Source1" />
-            <Edge From="31" To="32" Label="Source2" />
-            <Edge From="32" To="33" Label="Source1" />
-            <Edge From="33" To="34" Label="Source1" />
-            <Edge From="34" To="40" Label="Source1" />
-            <Edge From="35" To="37" Label="Source1" />
-            <Edge From="35" To="36" Label="Source1" />
-            <Edge From="36" To="37" Label="Source2" />
-            <Edge From="37" To="38" Label="Source1" />
-            <Edge From="38" To="39" Label="Source1" />
-            <Edge From="39" To="40" Label="Source2" />
-            <Edge From="40" To="41" Label="Source1" />
-            <Edge From="42" To="43" Label="Source1" />
-            <Edge From="43" To="44" Label="Source1" />
-            <Edge From="44" To="45" Label="Source1" />
+            <Edge From="20" To="21" Label="Source1" />
+            <Edge From="21" To="22" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
