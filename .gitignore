@@ -11,3 +11,4 @@ obj
 *.pyc
 *.pickle
 Packages
+Data
