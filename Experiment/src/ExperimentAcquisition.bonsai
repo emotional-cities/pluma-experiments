@@ -202,7 +202,7 @@
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="dsp:MatrixWriter">
-                            <dsp:Path>C:\OutedoorData\London-benchmark-pupil/Collection2023_06_20_10_54_30/\Streams_250</dsp:Path>
+                            <dsp:Path>C:\OutedoorData\London-benchmark-pupil/Collection2023_06_20_12_58_57/\Streams_250</dsp:Path>
                             <dsp:Suffix>None</dsp:Suffix>
                             <dsp:Overwrite>false</dsp:Overwrite>
                             <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -302,7 +302,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>C:\OutedoorData\London-benchmark-pupil/Collection2023_06_20_10_54_30/\StreamReadDump.bin</dsp:Path>
+                      <dsp:Path>C:\OutedoorData\London-benchmark-pupil/Collection2023_06_20_12_58_57/\StreamReadDump.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -359,7 +359,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>C:\OutedoorData\London-benchmark-pupil/Collection2023_06_20_10_54_30/\Microphone.bin</dsp:Path>
+                      <dsp:Path>C:\OutedoorData\London-benchmark-pupil/Collection2023_06_20_12_58_57/\Microphone.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -413,7 +413,7 @@
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>C:\OutedoorData\London-benchmark-pupil/Collection2023_06_20_10_54_30/\Accelerometer.csv</io:FileName>
+                    <io:FileName>C:\OutedoorData\London-benchmark-pupil/Collection2023_06_20_12_58_57/\Accelerometer.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>true</io:Overwrite>
                     <io:Suffix>None</io:Suffix>
@@ -517,7 +517,7 @@
                           <Property Name="FileName" />
                         </Expression>
                         <Expression xsi:type="io:CsvWriter">
-                          <io:FileName>C:\OutedoorData\London-benchmark-pupil/Collection2023_06_20_10_54_30/\UBX\MON_SPAN.csv</io:FileName>
+                          <io:FileName>C:\OutedoorData\London-benchmark-pupil/Collection2023_06_20_12_58_57/\UBX\RXM_RLM.csv</io:FileName>
                           <io:Append>false</io:Append>
                           <io:Overwrite>false</io:Overwrite>
                           <io:Suffix>None</io:Suffix>
@@ -563,7 +563,7 @@
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="dsp:MatrixWriter">
-                            <dsp:Path>C:\OutedoorData\London-benchmark-pupil/Collection2023_06_20_10_54_30/\UBX\MON_SPAN.bin</dsp:Path>
+                            <dsp:Path>C:\OutedoorData\London-benchmark-pupil/Collection2023_06_20_12_58_57/\UBX\RXM_RLM.bin</dsp:Path>
                             <dsp:Suffix>None</dsp:Suffix>
                             <dsp:Overwrite>false</dsp:Overwrite>
                             <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -641,7 +641,7 @@
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>C:\OutedoorData\London-benchmark-pupil/Collection2023_06_20_10_54_30/\empatica_harp_ts.csv</io:FileName>
+                    <io:FileName>C:\OutedoorData\London-benchmark-pupil/Collection2023_06_20_12_58_57/\empatica_harp_ts.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>false</io:Overwrite>
                     <io:Suffix>None</io:Suffix>
@@ -696,7 +696,7 @@
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>C:\OutedoorData\London-benchmark-pupil/Collection2023_06_20_10_54_30/\eeg_markers.csv</io:FileName>
+                    <io:FileName>C:\OutedoorData\London-benchmark-pupil/Collection2023_06_20_12_58_57/\eeg_markers.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>false</io:Overwrite>
                     <io:Suffix>None</io:Suffix>
@@ -839,7 +839,7 @@
                               </Expression>
                               <Expression xsi:type="Combinator">
                                 <Combinator xsi:type="dsp:MatrixWriter">
-                                  <dsp:Path>C:\OutedoorData\London-benchmark-pupil/Collection2023_06_19_17_57_26/\PupilLabs\Key_Frame2.bin</dsp:Path>
+                                  <dsp:Path>C:\OutedoorData\London-benchmark-pupil/Collection2023_06_20_12_58_57/\PupilLabs\WorldCamera_Frame2.bin</dsp:Path>
                                   <dsp:Suffix>None</dsp:Suffix>
                                   <dsp:Overwrite>false</dsp:Overwrite>
                                   <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -925,6 +925,7 @@
               <Name>PupilDecodedFrames</Name>
             </Expression>
             <Expression xsi:type="rx:Condition">
+              <Name>DropNull</Name>
               <Workflow>
                 <Nodes>
                   <Expression xsi:type="WorkflowInput">
@@ -982,7 +983,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:VideoWriter">
-                      <cv:FileName>C:\OutedoorData\London-benchmark-pupil/Collection2023_06_20_10_54_30/\pupil_video.avi</cv:FileName>
+                      <cv:FileName>C:\OutedoorData\London-benchmark-pupil/Collection2023_06_20_12_58_57/\pupil_video.avi</cv:FileName>
                       <cv:Suffix>None</cv:Suffix>
                       <cv:Buffered>true</cv:Buffered>
                       <cv:Overwrite>false</cv:Overwrite>
@@ -1200,7 +1201,7 @@
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="rx:Timer">
-                            <rx:DueTime>PT11.64S</rx:DueTime>
+                            <rx:DueTime>PT12.354S</rx:DueTime>
                             <rx:Period>PT0S</rx:Period>
                           </Combinator>
                         </Expression>
@@ -1940,6 +1941,9 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
             <Expression xsi:type="MulticastSubject">
               <Name>HarpSoftwareLogging</Name>
             </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>Item2.Last.Buffer</Selector>
+            </Expression>
             <Expression xsi:type="ExternalizedMapping">
               <Property Name="Value" DisplayName="Path" />
             </Expression>
@@ -1951,12 +1955,6 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
               <PropertyMappings>
                 <Property Name="BinariesPath" />
               </PropertyMappings>
-            </Expression>
-            <Expression xsi:type="SubscribeSubject">
-              <Name>PupilSensorLogging</Name>
-            </Expression>
-            <Expression xsi:type="MemberSelector">
-              <Selector>Item2.Last.Buffer</Selector>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="p7:DecodeByteFrame">
@@ -2032,26 +2030,26 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
             <Edge From="8" To="9" Label="Source1" />
             <Edge From="9" To="10" Label="Source1" />
             <Edge From="10" To="11" Label="Source1" />
+            <Edge From="10" To="14" Label="Source1" />
             <Edge From="11" To="12" Label="Source1" />
             <Edge From="12" To="13" Label="Source1" />
-            <Edge From="14" To="15" Label="Source1" />
+            <Edge From="14" To="18" Label="Source1" />
             <Edge From="15" To="16" Label="Source1" />
-            <Edge From="16" To="19" Label="Source2" />
-            <Edge From="17" To="18" Label="Source1" />
+            <Edge From="16" To="17" Label="Source1" />
+            <Edge From="17" To="18" Label="Source2" />
             <Edge From="18" To="19" Label="Source1" />
             <Edge From="19" To="20" Label="Source1" />
-            <Edge From="20" To="21" Label="Source1" />
+            <Edge From="21" To="22" Label="Source1" />
             <Edge From="22" To="23" Label="Source1" />
             <Edge From="23" To="24" Label="Source1" />
             <Edge From="24" To="25" Label="Source1" />
             <Edge From="25" To="26" Label="Source1" />
-            <Edge From="26" To="27" Label="Source1" />
+            <Edge From="27" To="28" Label="Source1" />
             <Edge From="28" To="29" Label="Source1" />
             <Edge From="29" To="30" Label="Source1" />
             <Edge From="30" To="31" Label="Source1" />
             <Edge From="31" To="32" Label="Source1" />
-            <Edge From="32" To="33" Label="Source1" />
-            <Edge From="34" To="35" Label="Source1" />
+            <Edge From="33" To="34" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
