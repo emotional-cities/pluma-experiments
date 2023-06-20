@@ -2709,6 +2709,7 @@ it.Item7 as NullValue)</scr:Expression>
             <Expression xsi:type="MulticastSubject">
               <Name>EEG_Marker</Name>
             </Expression>
+            <Expression xsi:type="WorkflowOutput" />
           </Nodes>
           <Edges>
             <Edge From="0" To="1" Label="Source1" />
@@ -2719,6 +2720,7 @@ it.Item7 as NullValue)</scr:Expression>
             <Edge From="5" To="6" Label="Source2" />
             <Edge From="6" To="7" Label="Source1" />
             <Edge From="7" To="8" Label="Source1" />
+            <Edge From="8" To="9" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
