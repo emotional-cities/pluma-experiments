@@ -2047,7 +2047,7 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
             </Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\StartZmqPupilStream.bonsai">
               <SensorLoggingName>Gaze</SensorLoggingName>
-              <SensorName>PI world v1</SensorName>
+              <SensorName>Gaze</SensorName>
             </Expression>
             <Expression xsi:type="MulticastSubject">
               <Name>PupilSensorLogging</Name>
@@ -2070,7 +2070,7 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
             </Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\StartZmqPupilStream.bonsai">
               <SensorLoggingName>Key</SensorLoggingName>
-              <SensorName>PI world v1</SensorName>
+              <SensorName>event_000a0000</SensorName>
             </Expression>
             <Expression xsi:type="MulticastSubject">
               <Name>PupilSensorLogging</Name>
@@ -2093,7 +2093,7 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
             </Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\StartZmqPupilStream.bonsai">
               <SensorLoggingName>Recording</SensorLoggingName>
-              <SensorName>PI world v1</SensorName>
+              <SensorName>OnePlus 8</SensorName>
             </Expression>
           </Nodes>
           <Edges>
