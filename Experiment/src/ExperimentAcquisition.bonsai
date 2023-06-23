@@ -1981,8 +1981,8 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
               <Name>PupilSensorData</Name>
             </Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\StartZmqPupilStream.bonsai">
-              <Value>PI world v1</Value>
               <SensorLoggingName>WorldCamera</SensorLoggingName>
+              <SensorName>PI world v1</SensorName>
             </Expression>
             <Expression xsi:type="MulticastSubject">
               <Name>PupilSensorLogging</Name>
@@ -1999,6 +1999,15 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
             </Expression>
             <Expression xsi:type="MulticastSubject">
               <Name>HarpSoftwareLogging</Name>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:ElementIndex" />
+            </Expression>
+            <Expression xsi:type="io:CsvWriter">
+              <io:Append>false</io:Append>
+              <io:Overwrite>false</io:Overwrite>
+              <io:Suffix>None</io:Suffix>
+              <io:IncludeHeader>false</io:IncludeHeader>
             </Expression>
             <Expression xsi:type="MemberSelector">
               <Selector>Item2.Last.Buffer</Selector>
@@ -2024,12 +2033,21 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
             <Expression xsi:type="MulticastSubject">
               <Name>PupilDecodedFrames</Name>
             </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:ElementIndex" />
+            </Expression>
+            <Expression xsi:type="io:CsvWriter">
+              <io:Append>false</io:Append>
+              <io:Overwrite>false</io:Overwrite>
+              <io:Suffix>None</io:Suffix>
+              <io:IncludeHeader>false</io:IncludeHeader>
+            </Expression>
             <Expression xsi:type="SubscribeSubject">
               <Name>PupilSensorData</Name>
             </Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\StartZmqPupilStream.bonsai">
-              <Value>Gaze</Value>
               <SensorLoggingName>Gaze</SensorLoggingName>
+              <SensorName>PI world v1</SensorName>
             </Expression>
             <Expression xsi:type="MulticastSubject">
               <Name>PupilSensorLogging</Name>
@@ -2051,8 +2069,8 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
               <Name>PupilSensorData</Name>
             </Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\StartZmqPupilStream.bonsai">
-              <Value>event_000a0000</Value>
               <SensorLoggingName>Key</SensorLoggingName>
+              <SensorName>PI world v1</SensorName>
             </Expression>
             <Expression xsi:type="MulticastSubject">
               <Name>PupilSensorLogging</Name>
@@ -2074,8 +2092,8 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
               <Name>PupilSensorData</Name>
             </Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\StartZmqPupilStream.bonsai">
-              <Value>OnePlus 8</Value>
               <SensorLoggingName>Recording</SensorLoggingName>
+              <SensorName>PI world v1</SensorName>
             </Expression>
           </Nodes>
           <Edges>
@@ -2089,26 +2107,30 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
             <Edge From="8" To="9" Label="Source1" />
             <Edge From="9" To="10" Label="Source1" />
             <Edge From="10" To="11" Label="Source1" />
-            <Edge From="10" To="14" Label="Source1" />
+            <Edge From="10" To="16" Label="Source1" />
             <Edge From="11" To="12" Label="Source1" />
             <Edge From="12" To="13" Label="Source1" />
-            <Edge From="14" To="18" Label="Source1" />
-            <Edge From="15" To="16" Label="Source1" />
-            <Edge From="16" To="17" Label="Source1" />
-            <Edge From="17" To="18" Label="Source2" />
+            <Edge From="13" To="14" Label="Source1" />
+            <Edge From="14" To="15" Label="Source1" />
+            <Edge From="16" To="20" Label="Source1" />
+            <Edge From="17" To="18" Label="Source1" />
             <Edge From="18" To="19" Label="Source1" />
-            <Edge From="19" To="20" Label="Source1" />
+            <Edge From="19" To="20" Label="Source2" />
+            <Edge From="20" To="21" Label="Source1" />
             <Edge From="21" To="22" Label="Source1" />
             <Edge From="22" To="23" Label="Source1" />
             <Edge From="23" To="24" Label="Source1" />
-            <Edge From="24" To="25" Label="Source1" />
             <Edge From="25" To="26" Label="Source1" />
+            <Edge From="26" To="27" Label="Source1" />
             <Edge From="27" To="28" Label="Source1" />
             <Edge From="28" To="29" Label="Source1" />
             <Edge From="29" To="30" Label="Source1" />
-            <Edge From="30" To="31" Label="Source1" />
             <Edge From="31" To="32" Label="Source1" />
+            <Edge From="32" To="33" Label="Source1" />
             <Edge From="33" To="34" Label="Source1" />
+            <Edge From="34" To="35" Label="Source1" />
+            <Edge From="35" To="36" Label="Source1" />
+            <Edge From="37" To="38" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
