@@ -47,10 +47,7 @@
 - [ ] Ipad or equivalent tablet to remote in the computer.
 - [ ] Access point where pupil labs Ipad and backpack should connect.
 
-
 ## Setup before going on site
-
-
 
 ## Setup
 ### Support 
