@@ -10,5 +10,6 @@ obj
 *.blend
 *.pyc
 *.pickle
+*.dll
 Packages
 Data
