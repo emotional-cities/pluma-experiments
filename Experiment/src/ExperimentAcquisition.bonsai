@@ -8,11 +8,11 @@
                  xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
                  xmlns:scr="clr-namespace:Bonsai.Scripting.Expressions;assembly=Bonsai.Scripting.Expressions"
                  xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
+                 xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
                  xmlns:p2="clr-namespace:OpenCV.Net;assembly=OpenCV.Net"
                  xmlns:p3="clr-namespace:;assembly=Extensions"
                  xmlns:ubx="clr-namespace:Bonsai.uBlox;assembly=Bonsai.uBlox"
                  xmlns:lsl="clr-namespace:Bonsai.Lsl;assembly=Bonsai.Lsl"
-                 xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
                  xmlns:p4="clr-namespace:Harp.Pluma;assembly=Harp.Pluma"
                  xmlns:p5="clr-namespace:Bonsai.Numerics.Distributions;assembly=Bonsai.Numerics"
                  xmlns:al="clr-namespace:Bonsai.Audio;assembly=Bonsai.Audio"
@@ -71,7 +71,7 @@
             <Expression xsi:type="rx:AsyncSubject">
               <Name>LoggingPath</Name>
             </Expression>
-            <Expression xsi:type="rx:PublishSubject" TypeArguments="harp:HarpMessage">
+            <Expression xsi:type="rx:BehaviorSubject" TypeArguments="harp:HarpMessage">
               <rx:Name>HarpSoftwareLogging</rx:Name>
             </Expression>
             <Expression xsi:type="GroupWorkflow">
@@ -324,7 +324,7 @@
                 </Edges>
               </Workflow>
             </Expression>
-            <Expression xsi:type="rx:PublishSubject" TypeArguments="p2:Mat">
+            <Expression xsi:type="rx:BehaviorSubject" TypeArguments="p2:Mat">
               <rx:Name>MicrophoneData</rx:Name>
             </Expression>
             <Expression xsi:type="GroupWorkflow">
@@ -379,7 +379,7 @@
                 </Edges>
               </Workflow>
             </Expression>
-            <Expression xsi:type="rx:PublishSubject" TypeArguments="sys:Tuple(p3:AccelerometerData,sys:Double,sys:Double)">
+            <Expression xsi:type="rx:BehaviorSubject" TypeArguments="sys:Tuple(p3:AccelerometerData,sys:Double,sys:Double)">
               <rx:Name>AccelarometerData</rx:Name>
             </Expression>
             <Expression xsi:type="GroupWorkflow">
@@ -433,7 +433,7 @@
                 </Edges>
               </Workflow>
             </Expression>
-            <Expression xsi:type="rx:PublishSubject" TypeArguments="sys:Tuple(ubx:UbxPacket,sys:Double)">
+            <Expression xsi:type="rx:BehaviorSubject" TypeArguments="sys:Tuple(ubx:UbxPacket,sys:Double)">
               <rx:Name>UbxEvents</rx:Name>
             </Expression>
             <Expression xsi:type="rx:GroupBy">
@@ -607,7 +607,7 @@
                 </Edges>
               </Workflow>
             </Expression>
-            <Expression xsi:type="rx:PublishSubject" TypeArguments="sys:Tuple(sys:String,sys:Double)">
+            <Expression xsi:type="rx:BehaviorSubject" TypeArguments="sys:Tuple(sys:String,sys:Double)">
               <rx:Name>EmpaticaEvents</rx:Name>
             </Expression>
             <Expression xsi:type="GroupWorkflow">
@@ -662,7 +662,7 @@
                 </Edges>
               </Workflow>
             </Expression>
-            <Expression xsi:type="rx:PublishSubject" TypeArguments="harp:Timestamped(lsl:Timestamped(sys:Int32))">
+            <Expression xsi:type="rx:BehaviorSubject" TypeArguments="harp:Timestamped(lsl:Timestamped(sys:Int32))">
               <rx:Name>EEG_Marker</rx:Name>
             </Expression>
             <Expression xsi:type="GroupWorkflow">
@@ -896,7 +896,7 @@
                 </Edges>
               </Workflow>
             </Expression>
-            <Expression xsi:type="rx:PublishSubject" TypeArguments="harp:Timestamped(p2:IplImage)">
+            <Expression xsi:type="rx:BehaviorSubject" TypeArguments="harp:Timestamped(p2:IplImage)">
               <rx:Name>PupilDecodedFrames</rx:Name>
             </Expression>
             <Expression xsi:type="MemberSelector">
@@ -1141,7 +1141,7 @@
               <Workflow>
                 <Nodes>
                   <Expression xsi:type="rx:BehaviorSubject" TypeArguments="harp:HarpMessage">
-                    <rx:Name>BioDataCommands</rx:Name>
+                    <rx:Name>PlumaCommands</rx:Name>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="p4:Device">
@@ -1178,7 +1178,7 @@
                     </harp:Payload>
                   </Expression>
                   <Expression xsi:type="MulticastSubject">
-                    <Name>BioDataCommands</Name>
+                    <Name>PlumaCommands</Name>
                   </Expression>
                   <Expression xsi:type="p4:CreateMessage">
                     <harp:Payload xsi:type="p4:CreateOutputClearPayload">
@@ -1187,11 +1187,11 @@
                     </harp:Payload>
                   </Expression>
                   <Expression xsi:type="MulticastSubject">
-                    <Name>BioDataCommands</Name>
+                    <Name>PlumaCommands</Name>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Timer">
-                      <rx:DueTime>PT3S</rx:DueTime>
+                      <rx:DueTime>PT1S</rx:DueTime>
                       <rx:Period>PT0S</rx:Period>
                     </Combinator>
                   </Expression>
@@ -1202,7 +1202,7 @@
                     </harp:Payload>
                   </Expression>
                   <Expression xsi:type="MulticastSubject">
-                    <Name>BioDataCommands</Name>
+                    <Name>PlumaCommands</Name>
                   </Expression>
                 </Nodes>
                 <Edges>
@@ -1292,14 +1292,14 @@
                     </harp:Payload>
                   </Expression>
                   <Expression xsi:type="MulticastSubject">
-                    <Name>BioDataCommands</Name>
+                    <Name>PlumaCommands</Name>
                   </Expression>
                   <Expression xsi:type="ExternalizedMapping">
                     <Property Name="DueTime" />
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Delay">
-                      <rx:DueTime>PT1S</rx:DueTime>
+                      <rx:DueTime>PT0.1S</rx:DueTime>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="p4:CreateMessage">
@@ -1309,7 +1309,7 @@
                     </harp:Payload>
                   </Expression>
                   <Expression xsi:type="MulticastSubject">
-                    <Name>BioDataCommands</Name>
+                    <Name>PlumaCommands</Name>
                   </Expression>
                   <Expression xsi:type="WorkflowOutput" />
                 </Nodes>
@@ -2884,7 +2884,7 @@ it.Item7 as NullValue)</scr:Expression>
                 </Combinator>
               </Expression>
               <Expression xsi:type="SubscribeSubject">
-                <Name>BioDataEvents</Name>
+                <Name>PlumaEvents</Name>
               </Expression>
               <Expression xsi:type="Combinator">
                 <Combinator xsi:type="harp:FilterMessage">
@@ -2905,7 +2905,7 @@ it.Item7 as NullValue)</scr:Expression>
               </Expression>
               <Expression xsi:type="Subtract" />
               <Expression xsi:type="SubscribeSubject">
-                <Name>LoggingDump</Name>
+                <Name>HarpSoftwareLogging</Name>
               </Expression>
               <Expression xsi:type="rx:Condition">
                 <Workflow>
@@ -3010,6 +3010,106 @@ it.Item7 as NullValue)</scr:Expression>
                 <viz:YMin xsi:nil="true" />
                 <viz:YMax xsi:nil="true" />
               </Expression>
+              <Expression xsi:type="GroupWorkflow">
+                <Name>PupilDebug</Name>
+                <Workflow>
+                  <Nodes>
+                    <Expression xsi:type="SubscribeSubject">
+                      <Name>PupilDecodedFrames</Name>
+                    </Expression>
+                    <Expression xsi:type="MemberSelector">
+                      <Selector>Value</Selector>
+                    </Expression>
+                    <Expression xsi:type="rx:Condition">
+                      <Workflow>
+                        <Nodes>
+                          <Expression xsi:type="WorkflowInput">
+                            <Name>Source1</Name>
+                          </Expression>
+                          <Expression xsi:type="scr:ExpressionTransform">
+                            <scr:Expression>it == null</scr:Expression>
+                          </Expression>
+                          <Expression xsi:type="BitwiseNot" />
+                          <Expression xsi:type="WorkflowOutput" />
+                        </Nodes>
+                        <Edges>
+                          <Edge From="0" To="1" Label="Source1" />
+                          <Edge From="1" To="2" Label="Source1" />
+                          <Edge From="2" To="3" Label="Source1" />
+                        </Edges>
+                      </Workflow>
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="dsp:Average" />
+                    </Expression>
+                    <Expression xsi:type="MemberSelector">
+                      <Selector>Val0</Selector>
+                    </Expression>
+                    <Expression xsi:type="GreaterThan">
+                      <Operand xsi:type="DoubleProperty">
+                        <Value>50</Value>
+                      </Operand>
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="rx:DistinctUntilChanged" />
+                    </Expression>
+                    <Expression xsi:type="rx:Condition">
+                      <Workflow>
+                        <Nodes>
+                          <Expression xsi:type="WorkflowInput">
+                            <Name>Source1</Name>
+                          </Expression>
+                          <Expression xsi:type="WorkflowOutput" />
+                        </Nodes>
+                        <Edges>
+                          <Edge From="0" To="1" Label="Source1" />
+                        </Edges>
+                      </Workflow>
+                    </Expression>
+                    <Expression xsi:type="Combinator">
+                      <Combinator xsi:type="IntProperty">
+                        <Value>1</Value>
+                      </Combinator>
+                    </Expression>
+                    <Expression xsi:type="rx:Scan">
+                      <Workflow>
+                        <Nodes>
+                          <Expression xsi:type="WorkflowInput">
+                            <Name>Source1</Name>
+                          </Expression>
+                          <Expression xsi:type="MemberSelector">
+                            <Selector>Accumulation</Selector>
+                          </Expression>
+                          <Expression xsi:type="Add">
+                            <Operand xsi:type="IntProperty">
+                              <Value>1</Value>
+                            </Operand>
+                          </Expression>
+                          <Expression xsi:type="WorkflowOutput" />
+                        </Nodes>
+                        <Edges>
+                          <Edge From="0" To="1" Label="Source1" />
+                          <Edge From="1" To="2" Label="Source1" />
+                          <Edge From="2" To="3" Label="Source1" />
+                        </Edges>
+                      </Workflow>
+                    </Expression>
+                    <Expression xsi:type="WorkflowOutput" />
+                  </Nodes>
+                  <Edges>
+                    <Edge From="0" To="1" Label="Source1" />
+                    <Edge From="1" To="2" Label="Source1" />
+                    <Edge From="2" To="3" Label="Source1" />
+                    <Edge From="3" To="4" Label="Source1" />
+                    <Edge From="4" To="5" Label="Source1" />
+                    <Edge From="5" To="6" Label="Source1" />
+                    <Edge From="6" To="7" Label="Source1" />
+                    <Edge From="7" To="8" Label="Source1" />
+                    <Edge From="8" To="9" Label="Source1" />
+                    <Edge From="9" To="10" Label="Source1" />
+                  </Edges>
+                </Workflow>
+              </Expression>
             </Nodes>
             <Edges>
               <Edge From="0" To="1" Label="Source1" />
@@ -3039,106 +3139,6 @@ it.Item7 as NullValue)</scr:Expression>
             </Edges>
           </Workflow>
         </Builder>
-      </Expression>
-      <Expression xsi:type="GroupWorkflow">
-        <Name>PupilDebug</Name>
-        <Workflow>
-          <Nodes>
-            <Expression xsi:type="SubscribeSubject">
-              <Name>PupilDecodedFrames</Name>
-            </Expression>
-            <Expression xsi:type="MemberSelector">
-              <Selector>Value</Selector>
-            </Expression>
-            <Expression xsi:type="rx:Condition">
-              <Workflow>
-                <Nodes>
-                  <Expression xsi:type="WorkflowInput">
-                    <Name>Source1</Name>
-                  </Expression>
-                  <Expression xsi:type="scr:ExpressionTransform">
-                    <scr:Expression>it == null</scr:Expression>
-                  </Expression>
-                  <Expression xsi:type="BitwiseNot" />
-                  <Expression xsi:type="WorkflowOutput" />
-                </Nodes>
-                <Edges>
-                  <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="2" To="3" Label="Source1" />
-                </Edges>
-              </Workflow>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="dsp:Average" />
-            </Expression>
-            <Expression xsi:type="MemberSelector">
-              <Selector>Val0</Selector>
-            </Expression>
-            <Expression xsi:type="GreaterThan">
-              <Operand xsi:type="DoubleProperty">
-                <Value>50</Value>
-              </Operand>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:DistinctUntilChanged" />
-            </Expression>
-            <Expression xsi:type="rx:Condition">
-              <Workflow>
-                <Nodes>
-                  <Expression xsi:type="WorkflowInput">
-                    <Name>Source1</Name>
-                  </Expression>
-                  <Expression xsi:type="WorkflowOutput" />
-                </Nodes>
-                <Edges>
-                  <Edge From="0" To="1" Label="Source1" />
-                </Edges>
-              </Workflow>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="IntProperty">
-                <Value>1</Value>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="rx:Scan">
-              <Workflow>
-                <Nodes>
-                  <Expression xsi:type="WorkflowInput">
-                    <Name>Source1</Name>
-                  </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Accumulation</Selector>
-                  </Expression>
-                  <Expression xsi:type="Add">
-                    <Operand xsi:type="IntProperty">
-                      <Value>1</Value>
-                    </Operand>
-                  </Expression>
-                  <Expression xsi:type="WorkflowOutput" />
-                </Nodes>
-                <Edges>
-                  <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="2" To="3" Label="Source1" />
-                </Edges>
-              </Workflow>
-            </Expression>
-            <Expression xsi:type="WorkflowOutput" />
-          </Nodes>
-          <Edges>
-            <Edge From="0" To="1" Label="Source1" />
-            <Edge From="1" To="2" Label="Source1" />
-            <Edge From="2" To="3" Label="Source1" />
-            <Edge From="3" To="4" Label="Source1" />
-            <Edge From="4" To="5" Label="Source1" />
-            <Edge From="5" To="6" Label="Source1" />
-            <Edge From="6" To="7" Label="Source1" />
-            <Edge From="7" To="8" Label="Source1" />
-            <Edge From="8" To="9" Label="Source1" />
-            <Edge From="9" To="10" Label="Source1" />
-          </Edges>
-        </Workflow>
       </Expression>
     </Nodes>
     <Edges>
