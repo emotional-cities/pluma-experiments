@@ -12,3 +12,13 @@ obj
 *.pickle
 Packages
 Data
+Experiment/Bonsai/Videos - Shortcut.lnk
+Experiment/LocalPackages/FFMPEGlib/avcodec-60.dll
+Experiment/LocalPackages/FFMPEGlib/avdevice-60.dll
+Experiment/LocalPackages/FFMPEGlib/avfilter-9.dll
+Experiment/LocalPackages/FFMPEGlib/avformat-60.dll
+Experiment/LocalPackages/FFMPEGlib/avutil-58.dll
+Experiment/LocalPackages/FFMPEGlib/postproc-57.dll
+Experiment/LocalPackages/FFMPEGlib/swresample-4.dll
+Experiment/LocalPackages/FFMPEGlib/swscale-7.dll
+Experiment/Bonsai/Empatica.ps1
