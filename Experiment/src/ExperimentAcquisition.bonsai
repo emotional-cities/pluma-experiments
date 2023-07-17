@@ -202,7 +202,7 @@
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="dsp:MatrixWriter">
-                            <dsp:Path>C:\OutedoorData\Lisbon-benchmark-pupil/Collection2023_07_17_11_12_29/\Streams_242</dsp:Path>
+                            <dsp:Path>C:\OutedoorData\Lisbon-benchmark-pupil/Collection2023_07_17_12_56_34/\Streams_39</dsp:Path>
                             <dsp:Suffix>None</dsp:Suffix>
                             <dsp:Overwrite>false</dsp:Overwrite>
                             <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -302,7 +302,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>C:\OutedoorData\Lisbon-benchmark-pupil/Collection2023_07_17_11_12_29/\StreamReadDump.bin</dsp:Path>
+                      <dsp:Path>C:\OutedoorData\Lisbon-benchmark-pupil/Collection2023_07_17_12_56_34/\StreamReadDump.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -359,7 +359,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>C:\OutedoorData\Lisbon-benchmark-pupil/Collection2023_07_17_11_12_29/\Microphone.bin</dsp:Path>
+                      <dsp:Path>C:\OutedoorData\Lisbon-benchmark-pupil/Collection2023_07_17_12_56_34/\Microphone.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -413,7 +413,7 @@
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>C:\OutedoorData\Lisbon-benchmark-pupil/Collection2023_07_17_11_12_29/\Accelerometer.csv</io:FileName>
+                    <io:FileName>C:\OutedoorData\Lisbon-benchmark-pupil/Collection2023_07_17_12_56_34/\Accelerometer.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>true</io:Overwrite>
                     <io:Suffix>None</io:Suffix>
@@ -641,7 +641,7 @@
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>C:\OutedoorData\Lisbon-benchmark-pupil/Collection2023_07_17_11_12_29/\empatica_harp_ts.csv</io:FileName>
+                    <io:FileName>C:\OutedoorData\Lisbon-benchmark-pupil/Collection2023_07_17_12_56_34/\empatica_harp_ts.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>false</io:Overwrite>
                     <io:Suffix>None</io:Suffix>
@@ -696,7 +696,7 @@
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>C:\OutedoorData\Lisbon-benchmark-pupil/Collection2023_07_17_11_12_29/\eeg_markers.csv</io:FileName>
+                    <io:FileName>C:\OutedoorData\Lisbon-benchmark-pupil/Collection2023_07_17_12_56_34/\eeg_markers.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>false</io:Overwrite>
                     <io:Suffix>None</io:Suffix>
@@ -983,7 +983,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:VideoWriter">
-                      <cv:FileName>C:\OutedoorData\Lisbon-benchmark-pupil/Collection2023_07_17_11_12_29/\pupil_video.avi</cv:FileName>
+                      <cv:FileName>C:\OutedoorData\Lisbon-benchmark-pupil/Collection2023_07_17_12_56_34/\pupil_video.avi</cv:FileName>
                       <cv:Suffix>None</cv:Suffix>
                       <cv:Buffered>true</cv:Buffered>
                       <cv:Overwrite>false</cv:Overwrite>
@@ -1260,7 +1260,7 @@
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="rx:Timer">
-                            <rx:DueTime>PT8.915S</rx:DueTime>
+                            <rx:DueTime>PT10.293S</rx:DueTime>
                             <rx:Period>PT0S</rx:Period>
                           </Combinator>
                         </Expression>
@@ -1333,50 +1333,52 @@
           </Edges>
         </Workflow>
       </Expression>
-      <Expression xsi:type="GroupWorkflow">
-        <Name>Microphone</Name>
-        <Workflow>
-          <Nodes>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="al:AudioCapture">
-                <al:DeviceName>Line (Sound Blaster G3)</al:DeviceName>
-                <al:SampleRate>44100</al:SampleRate>
-                <al:SampleFormat>Stereo16</al:SampleFormat>
-                <al:BufferLength>0.1</al:BufferLength>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="MulticastSubject">
-              <Name>MicrophoneData</Name>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:ElementIndex" />
-            </Expression>
-            <Expression xsi:type="MemberSelector">
-              <Selector>Index</Selector>
-            </Expression>
-            <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
-            <Expression xsi:type="harp:Format">
-              <harp:MessageType>Event</harp:MessageType>
-              <harp:Register xsi:type="harp:FormatMessagePayload">
-                <harp:Address>222</harp:Address>
-                <harp:PayloadType>TimestampedS32</harp:PayloadType>
-              </harp:Register>
-            </Expression>
-            <Expression xsi:type="MulticastSubject">
-              <Name>HarpSoftwareLogging</Name>
-            </Expression>
-            <Expression xsi:type="WorkflowOutput" />
-          </Nodes>
-          <Edges>
-            <Edge From="0" To="1" Label="Source1" />
-            <Edge From="1" To="2" Label="Source1" />
-            <Edge From="2" To="3" Label="Source1" />
-            <Edge From="3" To="4" Label="Source1" />
-            <Edge From="4" To="5" Label="Source1" />
-            <Edge From="5" To="6" Label="Source1" />
-            <Edge From="6" To="7" Label="Source1" />
-          </Edges>
-        </Workflow>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="GroupWorkflow">
+          <Name>Microphone</Name>
+          <Workflow>
+            <Nodes>
+              <Expression xsi:type="Combinator">
+                <Combinator xsi:type="al:AudioCapture">
+                  <al:DeviceName>Line (Sound Blaster G3)</al:DeviceName>
+                  <al:SampleRate>44100</al:SampleRate>
+                  <al:SampleFormat>Stereo16</al:SampleFormat>
+                  <al:BufferLength>0.1</al:BufferLength>
+                </Combinator>
+              </Expression>
+              <Expression xsi:type="MulticastSubject">
+                <Name>MicrophoneData</Name>
+              </Expression>
+              <Expression xsi:type="Combinator">
+                <Combinator xsi:type="rx:ElementIndex" />
+              </Expression>
+              <Expression xsi:type="MemberSelector">
+                <Selector>Index</Selector>
+              </Expression>
+              <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
+              <Expression xsi:type="harp:Format">
+                <harp:MessageType>Event</harp:MessageType>
+                <harp:Register xsi:type="harp:FormatMessagePayload">
+                  <harp:Address>222</harp:Address>
+                  <harp:PayloadType>TimestampedS32</harp:PayloadType>
+                </harp:Register>
+              </Expression>
+              <Expression xsi:type="MulticastSubject">
+                <Name>HarpSoftwareLogging</Name>
+              </Expression>
+              <Expression xsi:type="WorkflowOutput" />
+            </Nodes>
+            <Edges>
+              <Edge From="0" To="1" Label="Source1" />
+              <Edge From="1" To="2" Label="Source1" />
+              <Edge From="2" To="3" Label="Source1" />
+              <Edge From="3" To="4" Label="Source1" />
+              <Edge From="4" To="5" Label="Source1" />
+              <Edge From="5" To="6" Label="Source1" />
+              <Edge From="6" To="7" Label="Source1" />
+            </Edges>
+          </Workflow>
+        </Builder>
       </Expression>
       <Expression xsi:type="GroupWorkflow">
         <Name>TinkerForge</Name>
@@ -2000,14 +2002,18 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
             <Expression xsi:type="MulticastSubject">
               <Name>HarpSoftwareLogging</Name>
             </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:ElementIndex" />
+            <Expression xsi:type="Disable">
+              <Builder xsi:type="Combinator">
+                <Combinator xsi:type="rx:ElementIndex" />
+              </Builder>
             </Expression>
-            <Expression xsi:type="io:CsvWriter">
-              <io:Append>false</io:Append>
-              <io:Overwrite>false</io:Overwrite>
-              <io:Suffix>None</io:Suffix>
-              <io:IncludeHeader>false</io:IncludeHeader>
+            <Expression xsi:type="Disable">
+              <Builder xsi:type="io:CsvWriter">
+                <io:Append>false</io:Append>
+                <io:Overwrite>false</io:Overwrite>
+                <io:Suffix>None</io:Suffix>
+                <io:IncludeHeader>false</io:IncludeHeader>
+              </Builder>
             </Expression>
             <Expression xsi:type="MemberSelector">
               <Selector>Item2.Last.Buffer</Selector>
@@ -2033,14 +2039,18 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
             <Expression xsi:type="MulticastSubject">
               <Name>PupilDecodedFrames</Name>
             </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:ElementIndex" />
+            <Expression xsi:type="Disable">
+              <Builder xsi:type="Combinator">
+                <Combinator xsi:type="rx:ElementIndex" />
+              </Builder>
             </Expression>
-            <Expression xsi:type="io:CsvWriter">
-              <io:Append>false</io:Append>
-              <io:Overwrite>false</io:Overwrite>
-              <io:Suffix>None</io:Suffix>
-              <io:IncludeHeader>false</io:IncludeHeader>
+            <Expression xsi:type="Disable">
+              <Builder xsi:type="io:CsvWriter">
+                <io:Append>false</io:Append>
+                <io:Overwrite>false</io:Overwrite>
+                <io:Suffix>None</io:Suffix>
+                <io:IncludeHeader>false</io:IncludeHeader>
+              </Builder>
             </Expression>
             <Expression xsi:type="SubscribeSubject">
               <Name>PupilSensorData</Name>
@@ -2223,7 +2233,7 @@ it.Item3 as TimestampSource)</scr:Expression>
           <Nodes>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="ubx:Device">
-                <ubx:PortName>COM4</ubx:PortName>
+                <ubx:PortName>COM15</ubx:PortName>
               </Combinator>
             </Expression>
             <Expression xsi:type="SubscribeSubject">
