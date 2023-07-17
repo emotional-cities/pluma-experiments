@@ -8,11 +8,11 @@
                  xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
                  xmlns:scr="clr-namespace:Bonsai.Scripting.Expressions;assembly=Bonsai.Scripting.Expressions"
                  xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
-                 xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
                  xmlns:p2="clr-namespace:OpenCV.Net;assembly=OpenCV.Net"
                  xmlns:p3="clr-namespace:;assembly=Extensions"
                  xmlns:ubx="clr-namespace:Bonsai.uBlox;assembly=Bonsai.uBlox"
                  xmlns:lsl="clr-namespace:Bonsai.Lsl;assembly=Bonsai.Lsl"
+                 xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
                  xmlns:p4="clr-namespace:Harp.Pluma;assembly=Harp.Pluma"
                  xmlns:p5="clr-namespace:Bonsai.Numerics.Distributions;assembly=Bonsai.Numerics"
                  xmlns:al="clr-namespace:Bonsai.Audio;assembly=Bonsai.Audio"
@@ -50,7 +50,7 @@
             </Expression>
             <Expression xsi:type="PropertySource" TypeArguments="io:GetDirectories,sys:String">
               <MemberName>Path</MemberName>
-              <Value>C:\OutedoorData\London-benchmark-pupil</Value>
+              <Value>C:\OutedoorData\Lisbon-benchmark-pupil</Value>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="rx:Timestamp" />
@@ -202,7 +202,7 @@
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="dsp:MatrixWriter">
-                            <dsp:Path>C:\OutedoorData\London-benchmark-pupil/Collection2023_06_21_00_00_45/\Streams_214</dsp:Path>
+                            <dsp:Path>C:\OutedoorData\Lisbon-benchmark-pupil/Collection2023_07_17_11_12_29/\Streams_242</dsp:Path>
                             <dsp:Suffix>None</dsp:Suffix>
                             <dsp:Overwrite>false</dsp:Overwrite>
                             <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -302,7 +302,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>C:\OutedoorData\London-benchmark-pupil/Collection2023_06_21_00_00_45/\StreamReadDump.bin</dsp:Path>
+                      <dsp:Path>C:\OutedoorData\Lisbon-benchmark-pupil/Collection2023_07_17_11_12_29/\StreamReadDump.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -359,7 +359,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="dsp:MatrixWriter">
-                      <dsp:Path>C:\OutedoorData\London-benchmark-pupil/Collection2023_06_21_00_00_45/\Microphone.bin</dsp:Path>
+                      <dsp:Path>C:\OutedoorData\Lisbon-benchmark-pupil/Collection2023_07_17_11_12_29/\Microphone.bin</dsp:Path>
                       <dsp:Suffix>None</dsp:Suffix>
                       <dsp:Overwrite>false</dsp:Overwrite>
                       <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -413,7 +413,7 @@
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>C:\OutedoorData\London-benchmark-pupil/Collection2023_06_21_00_00_45/\Accelerometer.csv</io:FileName>
+                    <io:FileName>C:\OutedoorData\Lisbon-benchmark-pupil/Collection2023_07_17_11_12_29/\Accelerometer.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>true</io:Overwrite>
                     <io:Suffix>None</io:Suffix>
@@ -641,7 +641,7 @@
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>C:\OutedoorData\London-benchmark-pupil/Collection2023_06_21_00_00_45/\empatica_harp_ts.csv</io:FileName>
+                    <io:FileName>C:\OutedoorData\Lisbon-benchmark-pupil/Collection2023_07_17_11_12_29/\empatica_harp_ts.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>false</io:Overwrite>
                     <io:Suffix>None</io:Suffix>
@@ -696,7 +696,7 @@
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>C:\OutedoorData\London-benchmark-pupil/Collection2023_06_21_00_00_45/\eeg_markers.csv</io:FileName>
+                    <io:FileName>C:\OutedoorData\Lisbon-benchmark-pupil/Collection2023_07_17_11_12_29/\eeg_markers.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>false</io:Overwrite>
                     <io:Suffix>None</io:Suffix>
@@ -983,7 +983,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:VideoWriter">
-                      <cv:FileName>C:\OutedoorData\London-benchmark-pupil/Collection2023_06_21_00_00_45/\pupil_video.avi</cv:FileName>
+                      <cv:FileName>C:\OutedoorData\Lisbon-benchmark-pupil/Collection2023_07_17_11_12_29/\pupil_video.avi</cv:FileName>
                       <cv:Suffix>None</cv:Suffix>
                       <cv:Buffered>true</cv:Buffered>
                       <cv:Overwrite>false</cv:Overwrite>
@@ -1260,7 +1260,7 @@
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="rx:Timer">
-                            <rx:DueTime>PT10.182S</rx:DueTime>
+                            <rx:DueTime>PT8.915S</rx:DueTime>
                             <rx:Period>PT0S</rx:Period>
                           </Combinator>
                         </Expression>
