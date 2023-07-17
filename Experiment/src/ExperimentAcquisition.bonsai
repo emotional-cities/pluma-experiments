@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <WorkflowBuilder Version="2.7.3"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
@@ -1243,8 +1243,8 @@
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="p5:CreateContinuousUniform">
-                            <p5:Lower>8</p5:Lower>
-                            <p5:Upper>15</p5:Upper>
+                            <p5:Lower>5</p5:Lower>
+                            <p5:Upper>8</p5:Upper>
                           </Combinator>
                         </Expression>
                         <Expression xsi:type="Combinator">
@@ -1299,7 +1299,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Delay">
-                      <rx:DueTime>PT0.1S</rx:DueTime>
+                      <rx:DueTime>PT0.3S</rx:DueTime>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="p4:CreateMessage">
