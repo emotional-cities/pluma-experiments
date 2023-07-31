@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <WorkflowBuilder Version="2.7.3"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
@@ -1941,6 +1941,7 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
                     <Combinator xsi:type="p6:ZyreNode">
                       <p6:Name>Pupil</p6:Name>
                       <p6:Group>pupil-mobile-v4</p6:Group>
+                      <p6:Interface>192.168.137.1</p6:Interface>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="rx:Condition">
