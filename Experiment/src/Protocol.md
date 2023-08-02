@@ -8,14 +8,15 @@
 - [ ] Batteries ( 4 units ).
 - [ ] Power supply unit.
 - [ ] Harness with all sensors attached (including the environmental sensors in the pole).
+- [ ] External touch screen.
 
 ### [Eye tracking - Pupil Labs](https://pupil-labs.com/products/invisible/tech-specs/)
 - [ ] Pupil labs case with:
-  - [ ]  Phone;
-  - [ ]  Glasses;
-  - [ ]  Front camera;
-  - [ ]  USB-C to USB-C cable.
-  - [ ] Pupil labs phone charger.
+  - [ ] Phone;
+  - [ ] Glasses;
+  - [ ] Front camera;
+  - [ ] USB-C to USB-C cable.
+- [ ] Pupil labs phone charger.
 
 ### [EEG Enobio 32](https://neuroelectrics.com/solutions/enobio/32)
 - [ ] Neoprene headcap
@@ -43,15 +44,91 @@
 - [ ] Packing Material
 - [ ] Fit everything inside minus batteries
   
-### Support 
+### Accessories 
 - [ ] Ipad or equivalent tablet to remote in the computer.
-- [ ] Access point where pupil labs Ipad and backpack should connect.
+- [ ] Access to the Internet, possible solutions:
+   - [ ] **Backpack computer acting as an access point sharing the internect connection from a 3rd party phone**.
+   - [ ] Pupil labs phone pprovidingg access point and connected to the Internet by using simd data card.
+   - [ ] Access point with simd data card where pupil labs and Ipad connect by wifi and backpack connect by ethernet. May also be a USB 5g 
+ - [ ] Zip ties.
+ - [ ] Multitool.
 
 ## Setup before going on site
+- [ ] Bateries
+   - [ ] charge backpack computer
+   - [ ] charge batery packs.
+   - [ ] charge enubio NE
+   - [ ] Charge pupil labs smartphone
+   - [ ] Check (change?) mic batery.
+   - [ ] Charge empatica 
+- [ ] pupil labs
+   - [ ] tape side camera camera to pupil glasees temple arm.
+   - [ ] check camera expusure auto
+
+
 
 ## Setup
+- [ ] Turn on equipment, check networks
+- [ ] Empatica:
+   - [ ] Turn on E4 streaming server
+   - [ ] Turn on empatica
+   - [ ] check if paired on E4 streaming server
+   - [ ] Fit wristband tight
+- [ ] Pupil Labs
+   - [ ] connect usb cable, tape cable on the glasses temple tip.
+   - [ ] start app [Invisible Companion](https://play.google.com/store/apps/details?id=com.pupillabs.invisiblecomp)
+   - [ ] perform the eye calibration
+- [ ] Soundman binaural microphone
+   - [ ] Connect mic to pre amp. 
+   - [ ] Check preamp light.
+- [ ] BackPack
+   - [ ] Bonsai check if receiving data from all sensors
+      - [ ] tinkerforge 
+      - [ ] wind sensor 
+      - [ ] ubx gps 
+      - [ ] accelarometer 
+      - [ ] sound 
+      - [ ] empatica 
+      - [ ] pupil labs
+  - [ ] Fit backpack on subject back
+  - [ ] ecg
+     - [ ] Fit gel electrodes (blue on left nipple, black on right nipple, red on belly alligned with black)
+     - [ ] check ecg signal.
+  - [ ] Stop bonsai
+  - [ ] EEG
+    - [ ] Fit eeg cap
+    - [ ] Fit ear pinch reference electrode
+    - [ ] Connect usb cable
+    - [ ] Check flex cables from NE to eeg cap 
+    - [ ] Turn on Ne
+    - [ ] Start nic 
+      - [ ] choose usb device 
+      - [ ] start protocol 
+      - [ ] allow syncronizing
+      - [ ] wiggle red electrodes
+  - [ ] Fit pupli glasses
+  - [ ] Fit binaural mic earplugs
+
+ ## Trials 
+ - [ ] start recordinng EEG
+ - [ ] press play on bonsai start
+ - [ ] stop eeg
+ - [ ] press Q on bonsai
+ - [ ] stop bonsai 
+
+## Remove setup
+- [ ] remove binaural mic earplugs
+- [ ] remove pupil glasses
+- [ ] EEG
+  - [ ] turn of NE
+  - [ ] remove usb cable
+  - [ ] remove ear pinch reference electrodes
+  - [ ] remove eeg cap
+- [ ] remove ecg electrodes.
+- [ ] remove empatica wirstband
+- [ ] remove backpack
+
 ### Support 
 - [ ] Ipad or equivalent to remote in the computer.
 - [ ] Access point where pupil labs Ipad and backpack should connect.
-- [ ] 
  
