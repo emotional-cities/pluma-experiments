@@ -1,0 +1,14 @@
+# Bonsai scripting files
+.vs
+.vscode
+bin
+obj
+*.bin
+*.avi
+*.exe
+*.exe.settings
+*.blend
+*.pyc
+*.pickle
+Packages
+Data
