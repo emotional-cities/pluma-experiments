@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <WorkflowBuilder Version="2.7.3"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
@@ -20,8 +20,8 @@
                  xmlns:p6="clr-namespace:Bonsai.Zyre;assembly=Bonsai.Zyre"
                  xmlns:p7="clr-namespace:PupilInterface;assembly=PupilInterface"
                  xmlns:p8="clr-namespace:Bonsai.WebSockets;assembly=Extensions"
-                 xmlns:viz="clr-namespace:Bonsai.Design.Visualizers;assembly=Bonsai.Design.Visualizers"
                  xmlns:wie="clr-namespace:Bonsai.Windows.Input;assembly=Bonsai.Windows.Input"
+                 xmlns:viz="clr-namespace:Bonsai.Design.Visualizers;assembly=Bonsai.Design.Visualizers"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
     <Nodes>
@@ -2151,6 +2151,9 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
               <Name>AdaFruitAcc</Name>
               <Workflow>
                 <Nodes>
+                  <Expression xsi:type="ExternalizedMapping">
+                    <Property Name="PortName" />
+                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="io:CreateSerialPort">
                       <io:Name>Accel</io:Name>
@@ -2215,18 +2218,19 @@ it.Item3 as TimestampSource)</scr:Expression>
                   <Expression xsi:type="WorkflowOutput" />
                 </Nodes>
                 <Edges>
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="2" To="4" Label="Source1" />
-                  <Edge From="3" To="4" Label="Source2" />
-                  <Edge From="4" To="8" Label="Source1" />
-                  <Edge From="5" To="6" Label="Source1" />
+                  <Edge From="0" To="1" Label="Source1" />
+                  <Edge From="2" To="3" Label="Source1" />
+                  <Edge From="3" To="5" Label="Source1" />
+                  <Edge From="4" To="5" Label="Source2" />
+                  <Edge From="5" To="9" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source2" />
-                  <Edge From="8" To="9" Label="Source1" />
+                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="8" To="9" Label="Source2" />
                   <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
                   <Edge From="11" To="12" Label="Source1" />
                   <Edge From="12" To="13" Label="Source1" />
+                  <Edge From="13" To="14" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -2885,11 +2889,75 @@ it.Item7 as NullValue)</scr:Expression>
                     <lsl:Selector>it</lsl:Selector>
                     <lsl:SampleRate>0</lsl:SampleRate>
                   </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="lsl:Timestamp" />
-                  </Expression>
                   <Expression xsi:type="SubscribeSubject">
                     <Name>TimestampSource</Name>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="wie:KeyDown">
+                      <wie:Filter>A</wie:Filter>
+                      <wie:SuppressRepetitions>true</wie:SuppressRepetitions>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="IntProperty">
+                      <Value>1</Value>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="rx:Accumulate" />
+                  <Expression xsi:type="Add">
+                    <Operand xsi:type="IntProperty">
+                      <Value>35000</Value>
+                    </Operand>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="wie:KeyDown">
+                      <wie:Filter>S</wie:Filter>
+                      <wie:SuppressRepetitions>true</wie:SuppressRepetitions>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="IntProperty">
+                      <Value>1</Value>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="rx:Accumulate" />
+                  <Expression xsi:type="Add">
+                    <Operand xsi:type="IntProperty">
+                      <Value>35100</Value>
+                    </Operand>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="wie:KeyDown">
+                      <wie:Filter>D</wie:Filter>
+                      <wie:SuppressRepetitions>true</wie:SuppressRepetitions>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="IntProperty">
+                      <Value>1</Value>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="rx:Accumulate" />
+                  <Expression xsi:type="Add">
+                    <Operand xsi:type="IntProperty">
+                      <Value>35200</Value>
+                    </Operand>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:Merge" />
+                  </Expression>
+                  <Expression xsi:type="lsl:StreamOutlet">
+                    <lsl:Name>EmotionalCitiesStream2</lsl:Name>
+                    <lsl:ContentType>Markers</lsl:ContentType>
+                    <lsl:ChannelCount>1</lsl:ChannelCount>
+                    <lsl:Selector>it</lsl:Selector>
+                    <lsl:SampleRate>0</lsl:SampleRate>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:Merge" />
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="lsl:Timestamp" />
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:WithLatestFrom" />
@@ -2906,12 +2974,27 @@ it.Item7 as NullValue)</scr:Expression>
                   <Edge From="0" To="1" Label="Source1" />
                   <Edge From="1" To="2" Label="Source1" />
                   <Edge From="2" To="3" Label="Source1" />
-                  <Edge From="3" To="4" Label="Source1" />
-                  <Edge From="4" To="6" Label="Source1" />
-                  <Edge From="5" To="6" Label="Source2" />
+                  <Edge From="3" To="19" Label="Source1" />
+                  <Edge From="4" To="21" Label="Source2" />
+                  <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
                   <Edge From="7" To="8" Label="Source1" />
-                  <Edge From="8" To="9" Label="Source1" />
+                  <Edge From="8" To="17" Label="Source1" />
+                  <Edge From="9" To="10" Label="Source1" />
+                  <Edge From="10" To="11" Label="Source1" />
+                  <Edge From="11" To="12" Label="Source1" />
+                  <Edge From="12" To="17" Label="Source2" />
+                  <Edge From="13" To="14" Label="Source1" />
+                  <Edge From="14" To="15" Label="Source1" />
+                  <Edge From="15" To="16" Label="Source1" />
+                  <Edge From="16" To="17" Label="Source3" />
+                  <Edge From="17" To="18" Label="Source1" />
+                  <Edge From="18" To="19" Label="Source2" />
+                  <Edge From="19" To="20" Label="Source1" />
+                  <Edge From="20" To="21" Label="Source1" />
+                  <Edge From="21" To="22" Label="Source1" />
+                  <Edge From="22" To="23" Label="Source1" />
+                  <Edge From="23" To="24" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -3250,7 +3333,8 @@ it.Item7 as NullValue)</scr:Expression>
                 </Workflow>
               </Builder>
             </Expression>
-            <Expression xsi:type="GroupWorkflow">
+            <Expression xsi:type="Disable">
+              <Builder xsi:type="GroupWorkflow">
               <Name>Pupil Debug</Name>
               <Workflow>
                 <Nodes>
@@ -3413,6 +3497,7 @@ it.Item7 as NullValue)</scr:Expression>
                   <Edge From="18" To="19" Label="Source1" />
                 </Edges>
               </Workflow>
+              </Builder>
             </Expression>
           </Nodes>
           <Edges>
