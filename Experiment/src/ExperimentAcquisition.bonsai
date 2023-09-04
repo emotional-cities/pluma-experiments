@@ -1155,7 +1155,7 @@
                             <harp:VisualIndicators>On</harp:VisualIndicators>
                             <harp:Heartbeat>Disabled</harp:Heartbeat>
                             <harp:IgnoreErrors>false</harp:IgnoreErrors>
-                            <harp:PortName>COM8</harp:PortName>
+                            <harp:PortName>COM5</harp:PortName>
                           </Combinator>
                         </Expression>
                         <Expression xsi:type="rx:PublishSubject">
@@ -2154,7 +2154,7 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="io:CreateSerialPort">
                       <io:Name>Accel</io:Name>
-                      <io:PortName>COM10</io:PortName>
+                      <io:PortName>COM16</io:PortName>
                       <io:BaudRate>115200</io:BaudRate>
                       <io:Parity>None</io:Parity>
                       <io:ParityReplace>63</io:ParityReplace>
@@ -2620,7 +2620,7 @@ it.Item3 as TimestampSource)</scr:Expression>
                 <Nodes>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="p3:WindSerial">
-                      <p3:PortName>COM5</p3:PortName>
+                      <p3:PortName>COM17</p3:PortName>
                       <p3:RequestString>0R4!</p3:RequestString>
                       <p3:PollingInterval>50</p3:PollingInterval>
                       <p3:Timeout>1000</p3:Timeout>
