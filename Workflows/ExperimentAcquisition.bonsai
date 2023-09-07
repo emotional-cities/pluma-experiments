@@ -37,7 +37,7 @@
               <Combinator xsi:type="StringProperty" />
             </Expression>
             <Expression xsi:type="Combinator">
-              <Combinator xsi:type="p1:AssertNotNullOrEmpty">
+              <Combinator xsi:type="p1:EnsureIdentifier">
                 <p1:Message>Non-empty city must be specified.</p1:Message>
               </Combinator>
             </Expression>
@@ -48,7 +48,7 @@
               <Combinator xsi:type="StringProperty" />
             </Expression>
             <Expression xsi:type="Combinator">
-              <Combinator xsi:type="p1:AssertNotNullOrEmpty">
+              <Combinator xsi:type="p1:EnsureIdentifier">
                 <p1:Message>Non-empty city path must be specified.</p1:Message>
               </Combinator>
             </Expression>
@@ -59,7 +59,7 @@
               <Combinator xsi:type="StringProperty" />
             </Expression>
             <Expression xsi:type="Combinator">
-              <Combinator xsi:type="p1:AssertNotNullOrEmpty">
+              <Combinator xsi:type="p1:EnsureIdentifier">
                 <p1:Message>Non-empty subject ID must be specified.</p1:Message>
               </Combinator>
             </Expression>
@@ -71,7 +71,7 @@
               <Value>.</Value>
             </Expression>
             <Expression xsi:type="Combinator">
-              <Combinator xsi:type="p1:AssertNotNullOrEmpty">
+              <Combinator xsi:type="p1:EnsureIdentifier">
                 <p1:Message>Path to the root data folder must be specified.</p1:Message>
               </Combinator>
             </Expression>
