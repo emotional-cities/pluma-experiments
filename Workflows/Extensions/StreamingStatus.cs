@@ -7,7 +7,7 @@ using System.Xml;
 using System.Xml.Serialization;
 
 [Combinator]
-[TypeVisualizer(typeof(TrafficLightVisualizer))]
+[TypeVisualizer(typeof(StreamingStatusVisualizer))]
 [Description("Generates a sequence of boolean values indicating whether the sequence is emitting notifications within a specified interval.")]
 [WorkflowElementCategory(ElementCategory.Combinator)]
 public class StreamingStatus
