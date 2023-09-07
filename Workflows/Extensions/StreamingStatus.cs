@@ -12,6 +12,9 @@ using System.Xml.Serialization;
 [WorkflowElementCategory(ElementCategory.Combinator)]
 public class StreamingStatus
 {
+    [Description("The text in the status display label.")]
+    public string Name { get; set; }
+
     [XmlIgnore]
     [Description("The expected maximum interval between notifications emitted by the source sequence.")]
     public TimeSpan Interval { get; set; }
