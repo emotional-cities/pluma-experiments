@@ -2,4 +2,4 @@
 
 https://developers.hp.com/omnicept/docs/unity/getting-started
 
-* .dlls associated wih the local Bonsai executable are not tracked, they must be added using the Bonsai installer asset.
+* The Unity Bonsai installation and associated .dlls are not tracked. The emotional-cities/unity .unitypackage should be added via the package manager and then installed using the BonsaiInstaller asset.
