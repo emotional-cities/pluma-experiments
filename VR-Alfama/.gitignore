@@ -198,10 +198,14 @@ Temporary Items
 
 
 # Remove some Bonsai layout files that are note required 
-Assets\Workflows\harp-sync-test.bonsai.layout
-Assets\Workflows\harp-sync-test.bonsai.layout.meta
-Assets\Workflows\osc-receiver.bonsai.layout
-Assets\Workflows\osc-receiver.bonsai.layout.meta
+/[Aa]ssets\Workflows\harp-sync-test.bonsai.layout
+/[Aa]ssets\Workflows\harp-sync-test.bonsai.layout.meta
+/[Aa]ssets\Workflows\osc-receiver.bonsai.layout
+/[Aa]ssets\Workflows\osc-receiver.bonsai.layout.meta
+
+# Remove Bonsai dlls and scripts that come in the Bonsai unity package 
+/[Aa]ssets/Bonsai
+
 
 #Visual studio specific files that are generated 
 .vsconfig
