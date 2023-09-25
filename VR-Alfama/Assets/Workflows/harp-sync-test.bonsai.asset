@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12e75434ce01d27418bd8bdda2586480, type: 3}
+  m_Name: harp-sync-test.bonsai
+  m_EditorClassIdentifier: 
+  WorkflowBuilderData: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<WorkflowBuilder
+    Version=\"2.6.1\"\r\n                 xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n                
+    xmlns:harp=\"clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp\"\r\n                
+    xmlns:rx=\"clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core\"\r\n                
+    xmlns:io=\"clr-namespace:Bonsai.IO;assembly=Bonsai.System\"\r\n                
+    xmlns=\"https://bonsai-rx.org/2018/workflow\">\r\n  <Workflow>\r\n    <Nodes>\r\n     
+    <Expression xsi:type=\"SubscribeSubject\">\r\n        <Name>Responses</Name>\r\n     
+    </Expression>\r\n      <Expression xsi:type=\"Combinator\">\r\n        <Combinator
+    xsi:type=\"harp:FilterMessage\">\r\n          <harp:Address>35</harp:Address>\r\n         
+    <harp:MessageType>Event</harp:MessageType>\r\n        </Combinator>\r\n     
+    </Expression>\r\n      <Expression xsi:type=\"harp:Parse\">\r\n        <harp:Type>TimestampedU16</harp:Type>\r\n       
+    <harp:IsArray>true</harp:IsArray>\r\n      </Expression>\r\n      <Expression
+    xsi:type=\"MemberSelector\">\r\n        <Selector>Seconds</Selector>\r\n     
+    </Expression>\r\n      <Expression xsi:type=\"PublishSubject\">\r\n        <Name>UnityTimeStamp</Name>\r\n     
+    </Expression>\r\n      <Expression xsi:type=\"ExternalizedMapping\">\r\n       
+    <Property Name=\"Value\" DisplayName=\"UnityTimeStampInput\" />\r\n      </Expression>\r\n     
+    <Expression xsi:type=\"Combinator\">\r\n        <Combinator xsi:type=\"DoubleProperty\">\r\n         
+    <Value>0</Value>\r\n        </Combinator>\r\n      </Expression>\r\n      <Expression
+    xsi:type=\"GroupWorkflow\">\r\n        <Workflow>\r\n          <Nodes>\r\n           
+    <Expression xsi:type=\"PublishSubject\" TypeArguments=\"harp:HarpMessage\">\r\n             
+    <Name>Commands</Name>\r\n            </Expression>\r\n            <Expression
+    xsi:type=\"Combinator\">\r\n              <Combinator xsi:type=\"harp:Device\">\r\n               
+    <harp:DeviceState>Active</harp:DeviceState>\r\n                <harp:DumpRegisters>true</harp:DumpRegisters>\r\n               
+    <harp:LedState>On</harp:LedState>\r\n                <harp:VisualIndicators>On</harp:VisualIndicators>\r\n               
+    <harp:Heartbeat>Enable</harp:Heartbeat>\r\n                <harp:IgnoreErrors>false</harp:IgnoreErrors>\r\n               
+    <harp:PortName>COM9</harp:PortName>\r\n              </Combinator>\r\n           
+    </Expression>\r\n            <Expression xsi:type=\"PublishSubject\">\r\n             
+    <Name>Responses</Name>\r\n            </Expression>\r\n            <Expression
+    xsi:type=\"Combinator\">\r\n              <Combinator xsi:type=\"rx:Timer\">\r\n               
+    <rx:DueTime>PT0S</rx:DueTime>\r\n                <rx:Period>PT1S</rx:Period>\r\n             
+    </Combinator>\r\n            </Expression>\r\n            <Expression xsi:type=\"Combinator\">\r\n             
+    <Combinator xsi:type=\"rx:Take\">\r\n                <rx:Count>20</rx:Count>\r\n             
+    </Combinator>\r\n            </Expression>\r\n            <Expression xsi:type=\"PublishSubject\">\r\n             
+    <Name>TimerOutput</Name>\r\n            </Expression>\r\n          </Nodes>\r\n         
+    <Edges>\r\n            <Edge From=\"0\" To=\"1\" Label=\"Source1\" />\r\n           
+    <Edge From=\"1\" To=\"2\" Label=\"Source1\" />\r\n            <Edge From=\"3\"
+    To=\"4\" Label=\"Source1\" />\r\n            <Edge From=\"4\" To=\"5\" Label=\"Source1\"
+    />\r\n          </Edges>\r\n        </Workflow>\r\n      </Expression>\r\n     
+    <Expression xsi:type=\"Combinator\">\r\n        <Combinator xsi:type=\"rx:DelaySubscription\">\r\n         
+    <rx:DueTime>PT1S</rx:DueTime>\r\n        </Combinator>\r\n      </Expression>\r\n     
+    <Expression xsi:type=\"SubscribeSubject\">\r\n        <Name>UnityTimeStamp</Name>\r\n     
+    </Expression>\r\n      <Expression xsi:type=\"Combinator\">\r\n        <Combinator
+    xsi:type=\"io:CreateSerialPort\">\r\n          <io:PortName>COM6</io:PortName>\r\n         
+    <io:BaudRate>9600</io:BaudRate>\r\n          <io:Parity>None</io:Parity>\r\n         
+    <io:ParityReplace>63</io:ParityReplace>\r\n          <io:DataBits>8</io:DataBits>\r\n         
+    <io:StopBits>One</io:StopBits>\r\n          <io:Handshake>None</io:Handshake>\r\n         
+    <io:DiscardNull>false</io:DiscardNull>\r\n          <io:DtrEnable>false</io:DtrEnable>\r\n         
+    <io:RtsEnable>false</io:RtsEnable>\r\n          <io:ReadBufferSize>4096</io:ReadBufferSize>\r\n         
+    <io:WriteBufferSize>2048</io:WriteBufferSize>\r\n          <io:ReceivedBytesThreshold>1</io:ReceivedBytesThreshold>\r\n       
+    </Combinator>\r\n      </Expression>\r\n      <Expression xsi:type=\"PublishSubject\">\r\n       
+    <Name>SerialPortOutput</Name>\r\n      </Expression>\r\n      <Expression xsi:type=\"Combinator\">\r\n       
+    <Combinator xsi:type=\"rx:DelaySubscription\">\r\n          <rx:DueTime>PT1S</rx:DueTime>\r\n       
+    </Combinator>\r\n      </Expression>\r\n    </Nodes>\r\n    <Edges>\r\n     
+    <Edge From=\"0\" To=\"1\" Label=\"Source1\" />\r\n      <Edge From=\"1\" To=\"2\"
+    Label=\"Source1\" />\r\n      <Edge From=\"2\" To=\"3\" Label=\"Source1\" />\r\n     
+    <Edge From=\"3\" To=\"4\" Label=\"Source1\" />\r\n      <Edge From=\"5\" To=\"6\"
+    Label=\"Source1\" />\r\n      <Edge From=\"7\" To=\"8\" Label=\"Source1\" />\r\n     
+    <Edge From=\"10\" To=\"11\" Label=\"Source1\" />\r\n      <Edge From=\"11\" To=\"12\"
+    Label=\"Source1\" />\r\n    </Edges>\r\n  </Workflow>\r\n</WorkflowBuilder>"
