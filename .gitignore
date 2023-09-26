@@ -10,5 +10,5 @@ obj
 *.blend
 *.pyc
 *.pickle
-Packages
+/*/*/Packages
 Data
