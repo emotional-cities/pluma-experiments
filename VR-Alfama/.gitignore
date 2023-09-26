@@ -206,6 +206,9 @@ Temporary Items
 # Remove Bonsai dlls and scripts that come in the Bonsai unity package 
 /[Aa]ssets/Bonsai
 
+# Local installation archives
+Bonsai.zip
+
 
 #Visual studio specific files that are generated 
 .vsconfig
