@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.neurogears.pluma-vr": {
+      "version": "https://github.com/emotional-cities/pluma-vr.git?path=/com.neurogears.plumavr#ae-dev",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "8578db26631f1bd5b63606dc2a020cb9cec332ea"
+    },
     "com.unity.cinemachine": {
       "version": "2.7.3",
       "depth": 0,
