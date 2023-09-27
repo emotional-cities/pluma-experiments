@@ -16,6 +16,8 @@ Navigate to https://developers.hp.com/omnicept/downloads and download the latest
 Successfull import will add a new menu option in Unity for "HP Omnicept". Navigate here and click "Configure". This will open a dialog where you can enter your client ID and access key for your omnicept account / application https://developers.hp.com/omnicept/docs/console/getting-started.
 
 ## Bonsai
-To install a local Bonsai environment in Unity to run the workflows, download the .unitypackage for Unity/Bonsai integration from https://github.com/emotional-cities/unity/releases/tag/v0.1. Import it with Assets --> Import Package --> Custom Package and import everything when prompted by the import dialog popup. This will create or populate 2 folders called "Bonsai" and "Packages" within the Assets folder. Navigate to the Bonsai folder and find the BonsaiInstaller asset. Click on it to open an inspector dialog to set up the Bonsai environment (Download, Install, Consolidate Packages). 
+~~~To install a local Bonsai environment in Unity to run the workflows, download the .unitypackage for Unity/Bonsai integration from https://github.com/emotional-cities/unity/releases/tag/v0.1. Import it with Assets --> Import Package --> Custom Package and import everything when prompted by the import dialog popup. This will create or populate 2 folders called "Bonsai" and "Packages" within the Assets folder. Navigate to the Bonsai folder and find the BonsaiInstaller asset. Click on it to open an inspector dialog to set up the Bonsai environment (Download, Install, Consolidate Packages).~~~
+
+We will no longer use a local Unity Bonsai environment in favour of using the top-level pluma environment
 
 ## 3D Models and Content
