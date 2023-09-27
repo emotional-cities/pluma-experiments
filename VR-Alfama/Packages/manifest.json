@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.neurogears.pluma-vr": "https://github.com/emotional-cities/pluma-vr.git?path=/com.neurogears.plumavr#ae-dev",
     "com.unity.cinemachine": "2.7.3",
     "com.unity.collab-proxy": "1.5.7",
     "com.unity.ide.rider": "3.0.7",
