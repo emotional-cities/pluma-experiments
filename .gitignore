@@ -11,4 +11,5 @@ obj
 *.pyc
 *.pickle
 /*/*/Packages
+Packages
 Data

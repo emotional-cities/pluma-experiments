@@ -1015,7 +1015,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 570241667440803556, guid: fd2fd3f37f2ac384a925d572dab12d72, type: 3}
       propertyPath: OnCameraImage.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 570241667440803556, guid: fd2fd3f37f2ac384a925d572dab12d72, type: 3}
       propertyPath: OnEyeTracking.m_PersistentCalls.m_Calls.Array.size
@@ -1056,7 +1056,7 @@ PrefabInstance:
     - target: {fileID: 570241667440803556, guid: fd2fd3f37f2ac384a925d572dab12d72, type: 3}
       propertyPath: OnCameraImage.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1290947029}
     - target: {fileID: 570241667440803556, guid: fd2fd3f37f2ac384a925d572dab12d72, type: 3}
       propertyPath: OnEyeTracking.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1095,7 +1095,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 570241667440803556, guid: fd2fd3f37f2ac384a925d572dab12d72, type: 3}
       propertyPath: OnCameraImage.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CameraImageHandler
+      value: HandleMouthCameraImage
       objectReference: {fileID: 0}
     - target: {fileID: 570241667440803556, guid: fd2fd3f37f2ac384a925d572dab12d72, type: 3}
       propertyPath: OnEyeTracking.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -1127,7 +1127,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 570241667440803556, guid: fd2fd3f37f2ac384a925d572dab12d72, type: 3}
       propertyPath: OnCameraImage.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: DebugPrintMessages, Assembly-CSharp
+      value: GliaDataPublisher, neurogears.plumavr
       objectReference: {fileID: 0}
     - target: {fileID: 570241667440803556, guid: fd2fd3f37f2ac384a925d572dab12d72, type: 3}
       propertyPath: OnEyeTracking.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
