@@ -17,7 +17,7 @@ public class LookWithMouse : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -28,9 +28,12 @@ public class LookWithMouse : MonoBehaviour
 
         if (Mouse.current != null)
         {
-            var delta = Mouse.current.delta.ReadValue() / 15.0f;
-            mouseX += delta.x;
-            mouseY += delta.y;
+            if(Mouse.current.leftButton.isPressed)
+            {
+                var delta = Mouse.current.delta.ReadValue() / 15.0f;
+                mouseX += delta.x;
+                mouseY += delta.y;
+            }
         }
         if (Gamepad.current != null)
         {
