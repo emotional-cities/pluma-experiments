@@ -2099,7 +2099,7 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
                   </Expression>
                   <Expression xsi:type="PropertySource" TypeArguments="io:GetDirectories,sys:String">
                     <MemberName>Path</MemberName>
-                    <Value>C:\git\emotional-cities\benchmarks\Experiment\LocalPackages\FFMPEGlib</Value>
+                    <Value>C:\git\emotional-cities\pluma-experiments\LocalPackages\FFMPEGlib</Value>
                   </Expression>
                   <Expression xsi:type="PropertyMapping">
                     <PropertyMappings>
@@ -2108,7 +2108,7 @@ it.Item3 * (it.Item4 == 'e'? 1 : -1) as Longitude)
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="p7:DecodeByteFrame">
-                      <p7:BinariesPath>C:\git\emotional-cities\benchmarks\Experiment\LocalPackages\FFMPEGlib</p7:BinariesPath>
+                      <p7:BinariesPath>C:\git\emotional-cities\pluma-experiments\LocalPackages\FFMPEGlib</p7:BinariesPath>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
