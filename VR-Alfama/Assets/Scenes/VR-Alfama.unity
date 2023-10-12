@@ -579,6 +579,50 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 620388984}
   m_Mesh: {fileID: 9058645188400570480, guid: 0b169a69f4f407145aa55021891e64fa, type: 3}
+--- !u!1 &663490946
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 663490948}
+  - component: {fileID: 663490947}
+  m_Layer: 0
+  m_Name: ScreenGrab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &663490947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 663490946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ca270da5f021474d8a3c6d94d002a85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PublisherBindAddress: tcp://localhost:5559
+--- !u!4 &663490948
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 663490946}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.238936, y: 2.210546, z: 6.335955}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &681729591
 GameObject:
   m_ObjectHideFlags: 0
@@ -1351,8 +1395,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 570241667440803556, guid: fd2fd3f37f2ac384a925d572dab12d72, type: 3}
+      propertyPath: OnHeartRate.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 570241667440803556, guid: fd2fd3f37f2ac384a925d572dab12d72, type: 3}
       propertyPath: OnCameraImage.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 570241667440803556, guid: fd2fd3f37f2ac384a925d572dab12d72, type: 3}
       propertyPath: OnEyeTracking.m_PersistentCalls.m_Calls.Array.size
@@ -1360,6 +1408,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 570241667440803556, guid: fd2fd3f37f2ac384a925d572dab12d72, type: 3}
       propertyPath: OnIMUEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 570241667440803556, guid: fd2fd3f37f2ac384a925d572dab12d72, type: 3}
+      propertyPath: OnHeartRate.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 570241667440803556, guid: fd2fd3f37f2ac384a925d572dab12d72, type: 3}
@@ -1375,9 +1427,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 570241667440803556, guid: fd2fd3f37f2ac384a925d572dab12d72, type: 3}
+      propertyPath: OnHeartRate.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1290947029}
+    - target: {fileID: 570241667440803556, guid: fd2fd3f37f2ac384a925d572dab12d72, type: 3}
       propertyPath: OnCameraImage.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1292272811}
+      objectReference: {fileID: 1290947029}
     - target: {fileID: 570241667440803556, guid: fd2fd3f37f2ac384a925d572dab12d72, type: 3}
       propertyPath: OnEyeTracking.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1387,8 +1443,16 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 570241667440803556, guid: fd2fd3f37f2ac384a925d572dab12d72, type: 3}
+      propertyPath: OnHeartRate.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 570241667440803556, guid: fd2fd3f37f2ac384a925d572dab12d72, type: 3}
       propertyPath: OnIMUEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: HandleIMU
+      objectReference: {fileID: 0}
+    - target: {fileID: 570241667440803556, guid: fd2fd3f37f2ac384a925d572dab12d72, type: 3}
+      propertyPath: OnHeartRate.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HandleHeartRate
       objectReference: {fileID: 0}
     - target: {fileID: 570241667440803556, guid: fd2fd3f37f2ac384a925d572dab12d72, type: 3}
       propertyPath: OnCameraImage.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -1400,7 +1464,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 570241667440803556, guid: fd2fd3f37f2ac384a925d572dab12d72, type: 3}
       propertyPath: OnCameraImage.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CameraImageHandler
+      value: HandleMouthCameraImage
       objectReference: {fileID: 0}
     - target: {fileID: 570241667440803556, guid: fd2fd3f37f2ac384a925d572dab12d72, type: 3}
       propertyPath: OnEyeTracking.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -1411,8 +1475,12 @@ PrefabInstance:
       value: GliaDataPublisher, neurogears.plumavr
       objectReference: {fileID: 0}
     - target: {fileID: 570241667440803556, guid: fd2fd3f37f2ac384a925d572dab12d72, type: 3}
+      propertyPath: OnHeartRate.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GliaDataPublisher, neurogears.plumavr
+      objectReference: {fileID: 0}
+    - target: {fileID: 570241667440803556, guid: fd2fd3f37f2ac384a925d572dab12d72, type: 3}
       propertyPath: OnCameraImage.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: DebugPrintMessages, Assembly-CSharp
+      value: GliaDataPublisher, neurogears.plumavr
       objectReference: {fileID: 0}
     - target: {fileID: 570241667440803556, guid: fd2fd3f37f2ac384a925d572dab12d72, type: 3}
       propertyPath: OnEyeTracking.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1420,6 +1488,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 570241667440803556, guid: fd2fd3f37f2ac384a925d572dab12d72, type: 3}
       propertyPath: OnIMUEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 570241667440803556, guid: fd2fd3f37f2ac384a925d572dab12d72, type: 3}
+      propertyPath: OnHeartRate.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 570241667440803556, guid: fd2fd3f37f2ac384a925d572dab12d72, type: 3}
