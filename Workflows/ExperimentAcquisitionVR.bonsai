@@ -4578,7 +4578,7 @@ it.Item7 as NullValue)</scr:Expression>
                   <Expression xsi:type="harp:Format">
                     <harp:MessageType>Event</harp:MessageType>
                     <harp:Register xsi:type="harp:FormatMessagePayload">
-                      <harp:Address>216</harp:Address>
+                      <harp:Address>219</harp:Address>
                       <harp:PayloadType>TimestampedU64</harp:PayloadType>
                     </harp:Register>
                   </Expression>
@@ -4586,39 +4586,39 @@ it.Item7 as NullValue)</scr:Expression>
                     <Name>HarpSoftwareLogging</Name>
                   </Expression>
                   <Expression xsi:type="WorkflowOutput" />
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Position</Selector>
-                  </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>ForwardVector</Selector>
-                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="zmq:Subscriber">
                       <zmq:ConnectionString>tcp://localhost:5559</zmq:ConnectionString>
                     </Combinator>
                   </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Last</Selector>
-                  </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Buffer</Selector>
+                  <Expression xsi:type="MulticastSubject">
+                    <Name>VRImage</Name>
                   </Expression>
                   <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="cv:DecodeImage">
-                      <cv:Mode>Unchanged</cv:Mode>
-                    </Combinator>
+                    <Combinator xsi:type="p1:UnityTimestampMicroSeconds" />
+                  </Expression>
+                  <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
+                  <Expression xsi:type="harp:Format">
+                    <harp:MessageType>Event</harp:MessageType>
+                    <harp:Register xsi:type="harp:FormatMessagePayload">
+                      <harp:Address>220</harp:Address>
+                      <harp:PayloadType>TimestampedU64</harp:PayloadType>
+                    </harp:Register>
+                  </Expression>
+                  <Expression xsi:type="MulticastSubject">
+                    <Name>HarpSoftwareLogging</Name>
                   </Expression>
                 </Nodes>
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
                   <Edge From="1" To="2" Label="Source1" />
                   <Edge From="2" To="3" Label="Source1" />
-                  <Edge From="2" To="8" Label="Source1" />
-                  <Edge From="2" To="9" Label="Source1" />
                   <Edge From="3" To="4" Label="Source1" />
                   <Edge From="4" To="5" Label="Source1" />
                   <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
+                  <Edge From="8" To="9" Label="Source1" />
+                  <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
                   <Edge From="11" To="12" Label="Source1" />
                   <Edge From="12" To="13" Label="Source1" />
