@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <WorkflowBuilder Version="2.7.3"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:p1="clr-namespace:;assembly=Extensions"
@@ -1133,10 +1133,152 @@
               <Name>HarpSoftwareLogging</Name>
             </Expression>
             <Expression xsi:type="rx:BehaviorSubject" TypeArguments="p3:NetMQMessage">
-              <rx:Name>OmniceptGlia</rx:Name>
+              <rx:Name>VRTransform</rx:Name>
             </Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\ZeroMQLogging.bonsai">
-              <LogName>Glia.bin</LogName>
+              <LogName>VRTransform.bin</LogName>
+            </Expression>
+            <Expression xsi:type="rx:BehaviorSubject" TypeArguments="sys:Tuple(sys:String,p3:NetMQMessage)">
+              <rx:Name>OmniceptGlia</rx:Name>
+            </Expression>
+            <Expression xsi:type="rx:GroupBy">
+              <rx:KeySelector>Item1</rx:KeySelector>
+              <rx:ElementSelector>Item2</rx:ElementSelector>
+            </Expression>
+            <Expression xsi:type="rx:SelectMany">
+              <Name>ZeroMQLogging</Name>
+              <Workflow>
+                <Nodes>
+                  <Expression xsi:type="WorkflowInput">
+                    <Name>Source1</Name>
+                  </Expression>
+                  <Expression xsi:type="rx:ReplaySubject">
+                    <Name>Data</Name>
+                    <rx:BufferSize xsi:nil="true" />
+                  </Expression>
+                  <Expression xsi:type="ExternalizedMapping">
+                    <Property Name="Value" DisplayName="LogName" />
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="StringProperty">
+                      <Value>Glia</Value>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="SubscribeSubject">
+                    <Name>Data</Name>
+                  </Expression>
+                  <Expression xsi:type="MemberSelector">
+                    <Selector>Key</Selector>
+                  </Expression>
+                  <Expression xsi:type="SubscribeSubject">
+                    <Name>LoggingPath</Name>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:Zip" />
+                  </Expression>
+                  <Expression xsi:type="Format">
+                    <Format>{0}\{1}\{2}</Format>
+                    <Selector>Item1,Item2,Item3</Selector>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:Take">
+                      <rx:Count>1</rx:Count>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="rx:AsyncSubject">
+                    <Name>FilePath</Name>
+                  </Expression>
+                  <Expression xsi:type="rx:CreateObservable">
+                    <Workflow>
+                      <Nodes>
+                        <Expression xsi:type="SubscribeSubject">
+                          <Name>Data</Name>
+                        </Expression>
+                        <Expression xsi:type="Combinator">
+                          <Combinator xsi:type="rx:Merge" />
+                        </Expression>
+                        <Expression xsi:type="Combinator">
+                          <Combinator xsi:type="p1:ZeroMQMessageToByteArray" />
+                        </Expression>
+                        <Expression xsi:type="SubscribeSubject">
+                          <Name>FilePath</Name>
+                        </Expression>
+                        <Expression xsi:type="PropertyMapping">
+                          <PropertyMappings>
+                            <Property Name="Path" />
+                          </PropertyMappings>
+                        </Expression>
+                        <Expression xsi:type="Combinator">
+                          <Combinator xsi:type="dsp:MatrixWriter">
+                            <dsp:Path>C:\IndoorData\NGR_LAB_sub-01_2023-10-19T033957Z\\Glia\HeartRate</dsp:Path>
+                            <dsp:Suffix>None</dsp:Suffix>
+                            <dsp:Overwrite>false</dsp:Overwrite>
+                            <dsp:Layout>ColumnMajor</dsp:Layout>
+                          </Combinator>
+                        </Expression>
+                        <Expression xsi:type="WorkflowOutput" />
+                      </Nodes>
+                      <Edges>
+                        <Edge From="0" To="1" Label="Source1" />
+                        <Edge From="1" To="2" Label="Source1" />
+                        <Edge From="2" To="5" Label="Source1" />
+                        <Edge From="3" To="4" Label="Source1" />
+                        <Edge From="4" To="5" Label="Source2" />
+                        <Edge From="5" To="6" Label="Source1" />
+                      </Edges>
+                    </Workflow>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:Merge" />
+                  </Expression>
+                  <Expression xsi:type="WorkflowOutput" />
+                </Nodes>
+                <Edges>
+                  <Edge From="0" To="1" Label="Source1" />
+                  <Edge From="2" To="3" Label="Source1" />
+                  <Edge From="3" To="7" Label="Source2" />
+                  <Edge From="4" To="5" Label="Source1" />
+                  <Edge From="5" To="7" Label="Source3" />
+                  <Edge From="6" To="7" Label="Source1" />
+                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="8" To="9" Label="Source1" />
+                  <Edge From="9" To="10" Label="Source1" />
+                  <Edge From="11" To="12" Label="Source1" />
+                  <Edge From="12" To="13" Label="Source1" />
+                </Edges>
+              </Workflow>
+            </Expression>
+            <Expression xsi:type="Disable">
+              <Builder xsi:type="rx:BehaviorSubject" TypeArguments="sys:Tuple(sys:String,sys:Int64[],p3:NetMQMessage)">
+                <rx:Name>OmniceptGlia</rx:Name>
+              </Builder>
+            </Expression>
+            <Expression xsi:type="Disable">
+              <Builder xsi:type="rx:Condition">
+                <Workflow>
+                  <Nodes>
+                    <Expression xsi:type="WorkflowInput">
+                      <Name>Source1</Name>
+                    </Expression>
+                    <Expression xsi:type="MemberSelector">
+                      <Selector>Item1</Selector>
+                    </Expression>
+                    <Expression xsi:type="ExternalizedMapping">
+                      <Property Name="Value" DisplayName="topic" />
+                    </Expression>
+                    <Expression xsi:type="Equal">
+                      <Operand xsi:type="StringProperty" />
+                    </Expression>
+                    <Expression xsi:type="WorkflowOutput" />
+                  </Nodes>
+                  <Edges>
+                    <Edge From="0" To="1" Label="Source1" />
+                    <Edge From="1" To="3" Label="Source1" />
+                    <Edge From="2" To="3" Label="Source2" />
+                    <Edge From="3" To="4" Label="Source1" />
+                  </Edges>
+                </Workflow>
+              </Builder>
             </Expression>
             <Expression xsi:type="rx:BehaviorSubject" TypeArguments="p3:NetMQMessage">
               <rx:Name>VRTransform</rx:Name>
