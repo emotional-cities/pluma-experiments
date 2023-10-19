@@ -153,5 +153,9 @@ To achieve this, Bonsai is randomly toggling a digital output in the HARP behavi
 |                           |         Gaze          |      212      |            Timestamped(FrameNumber)           |
 |                           |         Audio         |      213      |            Timestamped(FrameNumber)           |
 |                           |          Key          |      214      |            Timestamped(FrameNumber)           |
-|       **Omnicept**        |      GliaTimestamp    |      215      |            Timestamped(long[])                |
-|     **VRTransform**       |       VrTimestamp     |      216      |            Timestamped(long)                  |
+|       **Omnicept**        |      EyeTracking      |      215      |            Timestamped(long[])                |
+|                           |       HeartRate       |      216      |            Timestamped(long[])                |
+|                           |          IMU          |      217      |            Timestamped(long[])                |
+|                           |         Mouth         |      218      |            Timestamped(long[])                |
+|     **VRTransform**       |       VrTimestamp     |      219      |            Timestamped(long)                  |
+|     **VRTransform**       |       VrTimestamp     |      220      |            Timestamped(long)                  |
