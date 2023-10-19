@@ -20,15 +20,25 @@ public class ScreenPublisher : DataPublisher
         while (true)
         {
             yield return new WaitForEndOfFrame();
-            var screenTexture = ScreenCapture.CaptureScreenshotAsTexture();
+            long timestamp = DateTime.Now.Ticks / (TimeSpan.TicksPerMillisecond / 1000);
+           
 
             // Do publishing
-            long timestamp = DateTime.Now.Ticks / (TimeSpan.TicksPerMillisecond / 1000);
             
-            byte[] imagetoSend = screenTexture.EncodeToJPG();
+
+            //byte[] imagetoSend = ScreenCapture.CaptureScreenshotAsTexture().EncodeToJPG();
+            //
+            Texture2D screenShot = new Texture2D(Screen.width, Screen.height);
+            screenShot.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
+            screenShot.Apply();
+            byte[] bytes = screenShot.EncodeToJPG();
+            UnityEngine.Object.Destroy(screenShot);
             PubSocket.SendMoreFrame("ScreenShot")
                 .SendMoreFrame(BitConverter.GetBytes(timestamp))
-                .SendFrame(imagetoSend);
+                .SendFrame(bytes);
+            yield return new WaitForSecondsRealtime(0.05f);
+            //for (int i = 0; i < 15; i++)
+            //    yield return null;
             yield return null;
         }
 
