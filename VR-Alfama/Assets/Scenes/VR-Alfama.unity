@@ -713,10 +713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SubscriberAddress: tcp://localhost:5560
-  DataPath: C:/OutdoorData
-  City: NeonGliaDataset
-  CityPath: Low
-  SubjectId: 01
+  DataPath: 
   m_RecordAudio: 1
 --- !u!1 &681729591
 GameObject:
