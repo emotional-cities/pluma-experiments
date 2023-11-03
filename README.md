@@ -158,4 +158,4 @@ To achieve this, Bonsai is randomly toggling a digital output in the HARP behavi
 |                           |          IMU          |      217      |            Timestamped(long[])                |
 |                           |         Mouth         |      218      |            Timestamped(long[])                |
 |     **VRTransform**       |       VrTimestamp     |      219      |            Timestamped(long)                  |
-|     **VRTransform**       |       VrTimestamp     |      220      |            Timestamped(long)                  |
+|     **UnityImage**        |       VrTimestamp     |      220      |            Timestamped(long)                  |
