@@ -15,6 +15,13 @@ Navigate to https://developers.hp.com/omnicept/downloads and download the latest
 
 Successfull import will add a new menu option in Unity for "HP Omnicept". Navigate here and click "Configure". This will open a dialog where you can enter the sensors to receive from the Omnicept. Ensure that the license type is set to 'Core' and that the Heart Rate, Eye Trackng, Camera Image and IMU sensors are enabled.
 
+## pluma-vr
+Reusable unity infrastructure for VR data acquisition
+
+### Installing a package from GitHub in Unity
+To install this package (or any properly constructed Unity package) from GitHub first open Window>>Package Manager in Unity. Click the '+' icon in the top left and select "Add package from Git URL...". To specify the URL of the package we use <URL>.git?path=<subfolder>#<branch>. E.g. to install the com.neurogears.plumavr package from this repo on the main branch type https://github.com/emotional-cities/pluma-vr.git?path=/com.neurogears.plumavr#main.
+
+
 ## Bonsai
 ~~~To install a local Bonsai environment in Unity to run the workflows, download the .unitypackage for Unity/Bonsai integration from https://github.com/emotional-cities/unity/releases/tag/v0.1. Import it with Assets --> Import Package --> Custom Package and import everything when prompted by the import dialog popup. This will create or populate 2 folders called "Bonsai" and "Packages" within the Assets folder. Navigate to the Bonsai folder and find the BonsaiInstaller asset. Click on it to open an inspector dialog to set up the Bonsai environment (Download, Install, Consolidate Packages).~~~
 
