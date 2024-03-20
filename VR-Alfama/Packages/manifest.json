@@ -3,7 +3,7 @@
     "com.microsoft.mixedreality.input": "file:MixedReality/com.microsoft.mixedreality.input-0.9.2006.tgz",
     "com.microsoft.mixedreality.openxr": "file:MixedReality/com.microsoft.mixedreality.openxr-1.8.1.tgz",
     "com.microsoft.spatialaudio.spatializer.unity": "file:MixedReality/com.microsoft.spatialaudio.spatializer.unity-2.0.47.tgz",
-    "com.neurogears.pluma-vr": "file:C:/git/emotional-cities/pluma-vr/com.neurogears.plumavr",
+    "com.neurogears.pluma-vr": "https://github.com/emotional-cities/pluma-vr.git?path=/com.neurogears.plumavr#ae-dev",
     "com.unity.cinemachine": "2.8.6",
     "com.unity.collab-proxy": "1.17.1",
     "com.unity.ide.rider": "3.0.15",
