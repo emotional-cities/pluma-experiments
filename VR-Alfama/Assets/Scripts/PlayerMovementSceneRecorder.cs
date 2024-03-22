@@ -51,7 +51,7 @@ public class PlayerMovementSceneRecorder : MonoBehaviour
     float mouseXLerp = 0.0f;
     float mouseYLerp = 0.0f;
     bool jumping, sprinting, crouching;
-    List<UnityEngine.XR.InputDevice> hands = null;
+
 
     //Sliding
     private Vector3 normalVector = Vector3.up;
