@@ -24,10 +24,11 @@
       "dependencies": {}
     },
     "com.neurogears.pluma-vr": {
-      "version": "file:C:/git/emotional-cities/pluma-vr/com.neurogears.plumavr",
+      "version": "https://github.com/emotional-cities/pluma-vr.git?path=/com.neurogears.plumavr#ae-dev",
       "depth": 0,
-      "source": "local",
-      "dependencies": {}
+      "source": "git",
+      "dependencies": {},
+      "hash": "980c519db34272ed1af94c43c34fc9cba507a82a"
     },
     "com.unity.burst": {
       "version": "1.6.6",
