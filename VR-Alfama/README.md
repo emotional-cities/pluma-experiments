@@ -1,6 +1,6 @@
 # Setup the full Unity project from the Github repo
 
-The github repo contains the most of the scripts and dependencies required to run the Unity project. However, some dependencies are developed separately as standalone Unity packages or libraries (or contain private information / keys that should not be tracked in the main repo). These must be manually installed.
+The github repo contains the scripts and dependencies required to run the Unity project. However, some dependencies are developed separately as standalone Unity packages or libraries (or contain private information / keys that should not be tracked in the main repo). These must be manually installed.
 
 You should Setup the project in the order described below.
 
