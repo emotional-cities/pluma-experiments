@@ -159,3 +159,6 @@ To achieve this, Bonsai is randomly toggling a digital output in the HARP behavi
 |                           |         Mouth         |      218      |            Timestamped(long[])                |
 |     **VRTransform**       |       VrTimestamp     |      219      |            Timestamped(long)                  |
 |     **UnityImage**        |       VrTimestamp     |      220      |            Timestamped(long)                  |
+
+# Simulation 
+The VR simulation environment is in **VR-Alfama** folder, to set up the Unity enviroment follow the instructions in the README.md inside **VR-Alfama**
