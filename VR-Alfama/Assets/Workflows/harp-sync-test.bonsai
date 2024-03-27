@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WorkflowBuilder Version="2.6.1"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xmlns:harp="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
+                 xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
+                 xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
+                 xmlns="https://bonsai-rx.org/2018/workflow">
+  <Workflow>
+    <Nodes>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>Responses</Name>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="harp:FilterMessage">
+          <harp:Address>35</harp:Address>
+          <harp:MessageType>Event</harp:MessageType>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="harp:Parse">
+        <harp:Type>TimestampedU16</harp:Type>
+        <harp:IsArray>true</harp:IsArray>
+      </Expression>
+      <Expression xsi:type="MemberSelector">
+        <Selector>Seconds</Selector>
+      </Expression>
+      <Expression xsi:type="PublishSubject">
+        <Name>UnityTimeStamp</Name>
+      </Expression>
+      <Expression xsi:type="ExternalizedMapping">
+        <Property Name="Value" DisplayName="UnityTimeStampInput" />
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="DoubleProperty">
+          <Value>0</Value>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="GroupWorkflow">
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="PublishSubject" TypeArguments="harp:HarpMessage">
+              <Name>Commands</Name>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="harp:Device">
+                <harp:DeviceState>Active</harp:DeviceState>
+                <harp:DumpRegisters>true</harp:DumpRegisters>
+                <harp:LedState>On</harp:LedState>
+                <harp:VisualIndicators>On</harp:VisualIndicators>
+                <harp:Heartbeat>Enable</harp:Heartbeat>
+                <harp:IgnoreErrors>false</harp:IgnoreErrors>
+                <harp:PortName>COM9</harp:PortName>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="PublishSubject">
+              <Name>Responses</Name>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Timer">
+                <rx:DueTime>PT0S</rx:DueTime>
+                <rx:Period>PT1S</rx:Period>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Take">
+                <rx:Count>20</rx:Count>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="PublishSubject">
+              <Name>TimerOutput</Name>
+            </Expression>
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="2" Label="Source1" />
+            <Edge From="3" To="4" Label="Source1" />
+            <Edge From="4" To="5" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:DelaySubscription">
+          <rx:DueTime>PT1S</rx:DueTime>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>UnityTimeStamp</Name>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="io:CreateSerialPort">
+          <io:PortName>COM6</io:PortName>
+          <io:BaudRate>9600</io:BaudRate>
+          <io:Parity>None</io:Parity>
+          <io:ParityReplace>63</io:ParityReplace>
+          <io:DataBits>8</io:DataBits>
+          <io:StopBits>One</io:StopBits>
+          <io:Handshake>None</io:Handshake>
+          <io:DiscardNull>false</io:DiscardNull>
+          <io:DtrEnable>false</io:DtrEnable>
+          <io:RtsEnable>false</io:RtsEnable>
+          <io:ReadBufferSize>4096</io:ReadBufferSize>
+          <io:WriteBufferSize>2048</io:WriteBufferSize>
+          <io:ReceivedBytesThreshold>1</io:ReceivedBytesThreshold>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="PublishSubject">
+        <Name>SerialPortOutput</Name>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:DelaySubscription">
+          <rx:DueTime>PT1S</rx:DueTime>
+        </Combinator>
+      </Expression>
+    </Nodes>
+    <Edges>
+      <Edge From="0" To="1" Label="Source1" />
+      <Edge From="1" To="2" Label="Source1" />
+      <Edge From="2" To="3" Label="Source1" />
+      <Edge From="3" To="4" Label="Source1" />
+      <Edge From="5" To="6" Label="Source1" />
+      <Edge From="7" To="8" Label="Source1" />
+      <Edge From="10" To="11" Label="Source1" />
+      <Edge From="11" To="12" Label="Source1" />
+    </Edges>
+  </Workflow>
+</WorkflowBuilder>
