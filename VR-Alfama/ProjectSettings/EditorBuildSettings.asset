@@ -11,5 +11,5 @@ EditorBuildSettings:
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 6309bcdba487594469424f5a1088ae5a, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: e1cdf3c4c5e928b4a83605eacfa37e6c, type: 2}
-    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 7a8640604be6cf048b7b26ad7e79c638, type: 2}
-    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 2f70657f085ca734d81bd253073213f8, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 32811fc02cca77c42828cc3013387fff, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 0a40dcfda29cece43829e297e15adcab, type: 2}
