@@ -13,7 +13,7 @@
                  xmlns:ubx="clr-namespace:Bonsai.uBlox;assembly=Bonsai.uBlox"
                  xmlns:lsl="clr-namespace:Bonsai.Lsl;assembly=Bonsai.Lsl"
                  xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
-                 xmlns:p4="clr-namespace:Harp.Pluma;assembly=Harp.Pluma"
+                 xmlns:p4="clr-namespace:EmotionalCities.Pluma;assembly=EmotionalCities.Pluma"
                  xmlns:p5="clr-namespace:Bonsai.Zyre;assembly=Bonsai.Zyre"
                  xmlns:p6="clr-namespace:PupilInterface;assembly=PupilInterface"
                  xmlns:p7="clr-namespace:Bonsai.Numerics.Distributions;assembly=Bonsai.Numerics"

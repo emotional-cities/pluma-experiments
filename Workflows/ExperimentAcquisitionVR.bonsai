@@ -14,7 +14,7 @@
                  xmlns:p3="clr-namespace:NetMQ;assembly=NetMQ"
                  xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
                  xmlns:wie="clr-namespace:Bonsai.Windows.Input;assembly=Bonsai.Windows.Input"
-                 xmlns:p4="clr-namespace:Harp.Pluma;assembly=Harp.Pluma"
+                 xmlns:p4="clr-namespace:EmotionalCities.Pluma;assembly=EmotionalCities.Pluma"
                  xmlns:p5="clr-namespace:Bonsai.Numerics.Distributions;assembly=Bonsai.Numerics"
                  xmlns:al="clr-namespace:Bonsai.Audio;assembly=Bonsai.Audio"
                  xmlns:tkf="clr-namespace:Bonsai.Tinkerforge;assembly=Bonsai.Tinkerforge"
