@@ -16,7 +16,7 @@
                  xmlns:pluma="clr-namespace:EmotionalCities.Pluma;assembly=EmotionalCities.Pluma"
                  xmlns:p4="clr-namespace:Bonsai.Numerics.Distributions;assembly=Bonsai.Numerics"
                  xmlns:al="clr-namespace:Bonsai.Audio;assembly=Bonsai.Audio"
-                 xmlns:tkf="clr-namespace:Bonsai.Tinkerforge;assembly=Bonsai.Tinkerforge"
+                 xmlns:tkf="clr-namespace:EmotionalCities.Tinkerforge;assembly=EmotionalCities.Tinkerforge"
                  xmlns:p5="clr-namespace:Bonsai.Zyre;assembly=Bonsai.Zyre"
                  xmlns:p6="clr-namespace:PupilInterface;assembly=PupilInterface"
                  xmlns:wie="clr-namespace:Bonsai.Windows.Input;assembly=Bonsai.Windows.Input"
