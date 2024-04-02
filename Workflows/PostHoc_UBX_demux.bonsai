@@ -3,7 +3,7 @@
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
-                 xmlns:ubx="clr-namespace:Bonsai.uBlox;assembly=Bonsai.uBlox"
+                 xmlns:ubx="clr-namespace:EmotionalCities.uBlox;assembly=EmotionalCities.uBlox"
                  xmlns:sys="clr-namespace:System;assembly=mscorlib"
                  xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
                  xmlns="https://bonsai-rx.org/2018/workflow">
