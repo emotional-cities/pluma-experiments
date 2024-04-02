@@ -1,6 +1,7 @@
 # Bonsai scripting files
 .vs
 .vscode
+.idea
 bin
 obj
 *.bin
