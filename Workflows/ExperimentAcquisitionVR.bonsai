@@ -19,7 +19,6 @@
                  xmlns:tkf="clr-namespace:Bonsai.Tinkerforge;assembly=Bonsai.Tinkerforge"
                  xmlns:p5="clr-namespace:Bonsai.Zyre;assembly=Bonsai.Zyre"
                  xmlns:p6="clr-namespace:PupilInterface;assembly=PupilInterface"
-                 xmlns:p7="clr-namespace:Bonsai.WebSockets;assembly=Extensions"
                  xmlns:wie="clr-namespace:Bonsai.Windows.Input;assembly=Bonsai.Windows.Input"
                  xmlns:viz="clr-namespace:Bonsai.Design.Visualizers;assembly=Bonsai.Design.Visualizers"
                  xmlns:zmq="clr-namespace:Bonsai.ZeroMQ;assembly=Bonsai.ZeroMQ"
@@ -2586,9 +2585,9 @@ it.Item3 as TimestampSource)</scr:Expression>
                           </PropertyMappings>
                         </Expression>
                         <Expression xsi:type="Combinator">
-                          <Combinator xsi:type="p7:EmpaticaClient">
-                            <p7:Host>127.0.0.1</p7:Host>
-                            <p7:Port>28000</p7:Port>
+                          <Combinator xsi:type="p1:EmpaticaClient">
+                            <p1:Host>127.0.0.1</p1:Host>
+                            <p1:Port>28000</p1:Port>
                           </Combinator>
                         </Expression>
                         <Expression xsi:type="SubscribeSubject">
