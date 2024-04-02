@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12e75434ce01d27418bd8bdda2586480, type: 3}
+  m_Name: osc-receiver.bonsai
+  m_EditorClassIdentifier: 
+  WorkflowBuilderData: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<WorkflowBuilder
+    Version=\"2.7.0-rc3\"\r\n                 xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n                
+    xmlns:osc=\"clr-namespace:Bonsai.Osc;assembly=Bonsai.Osc\"\r\n                
+    xmlns=\"https://bonsai-rx.org/2018/workflow\">\r\n  <Workflow>\r\n    <Nodes>\r\n     
+    <Expression xsi:type=\"Combinator\">\r\n        <Combinator xsi:type=\"osc:CreateUdpClient\">\r\n         
+    <osc:Name>Receiver</osc:Name>\r\n          <osc:Port>24242</osc:Port>\r\n         
+    <osc:RemoteHostName>127.0.0.1</osc:RemoteHostName>\r\n          <osc:RemotePort>0</osc:RemotePort>\r\n       
+    </Combinator>\r\n      </Expression>\r\n      <Expression xsi:type=\"osc:ReceiveMessage\">\r\n       
+    <osc:Address>/time</osc:Address>\r\n        <osc:TypeTag>h</osc:TypeTag>\r\n       
+    <osc:Connection>Receiver</osc:Connection>\r\n      </Expression>\r\n      <Expression
+    xsi:type=\"PublishSubject\">\r\n        <Name>ReceiveTimer</Name>\r\n      </Expression>\r\n   
+    </Nodes>\r\n    <Edges>\r\n      <Edge From=\"1\" To=\"2\" Label=\"Source1\"
+    />\r\n    </Edges>\r\n  </Workflow>\r\n</WorkflowBuilder>"
