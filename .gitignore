@@ -1,6 +1,7 @@
 # Bonsai scripting files
 .vs
 .vscode
+.idea
 bin
 obj
 *.bin
@@ -10,6 +11,5 @@ obj
 *.blend
 *.pyc
 *.pickle
-/*/*/Packages
 Packages
 Data
