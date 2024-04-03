@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WorkflowBuilder Version="2.7.0-rc1"
+<WorkflowBuilder Version="2.8.1"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
                  xmlns:harp="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
@@ -12,16 +12,16 @@
           <rx:Period>PT3S</rx:Period>
         </Combinator>
       </Expression>
-      <Expression xsi:type="harp:DeviceCommand">
-        <harp:Type>SynchronizeTimestamp</harp:Type>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="harp:SynchronizeTimestamp" />
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="harp:Device">
-          <harp:DeviceState>Active</harp:DeviceState>
+          <harp:OperationMode>Active</harp:OperationMode>
+          <harp:OperationLed>On</harp:OperationLed>
           <harp:DumpRegisters>true</harp:DumpRegisters>
-          <harp:LedState>On</harp:LedState>
           <harp:VisualIndicators>On</harp:VisualIndicators>
-          <harp:Heartbeat>Disable</harp:Heartbeat>
+          <harp:Heartbeat>Disabled</harp:Heartbeat>
           <harp:IgnoreErrors>false</harp:IgnoreErrors>
           <harp:PortName>COM9</harp:PortName>
         </Combinator>
