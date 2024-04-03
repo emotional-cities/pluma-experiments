@@ -51,7 +51,7 @@ public class WindSerial
                         }
                         catch (TimeoutException)
                         {
-                            Console.WriteLine("ATMOS22 SerialTimout");
+                            Console.WriteLine("ATMOS22 Serial Timeout");
                             continue;
                         }
                         var response = read.Split('\t');
