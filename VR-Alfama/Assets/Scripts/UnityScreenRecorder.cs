@@ -131,3 +131,4 @@ public class UnityScreenRecorder : MonoBehaviour
         StopRecording();
     }
 }
+#endif
