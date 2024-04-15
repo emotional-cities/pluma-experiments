@@ -1,1 +1,2 @@
-https://neurogears.sharepoint.com/:u:/s/EmotionalCities/EQz4qujeF41NmOaReEr_9IsBwrupN7uEv2WYuQYnxXoI3Q?e=UFWm90
+FFmpeg decoding was tested with FFmpeg 6.0 pre-built windows binaries provided here:
+https://github.com/GyanD/codexffmpeg/releases/download/6.0/ffmpeg-6.0-full_build-shared.zip
