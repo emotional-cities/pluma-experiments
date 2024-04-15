@@ -50,5 +50,6 @@ public class LookWithMouse : MonoBehaviour
 
         playerBody.Rotate(Vector3.up * mouseX);
         playerBody.Rotate(Vector3.right * -mouseY);
+        playerBody.transform.eulerAngles = new Vector3(playerBody.transform.eulerAngles.x, playerBody.transform.eulerAngles.y, 0);
     }
 }

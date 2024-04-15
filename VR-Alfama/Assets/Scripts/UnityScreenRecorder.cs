@@ -43,10 +43,12 @@ public class UnityScreenRecorder : MonoBehaviour
     [Tooltip("Only used if SubscriberAddress is kept blank")]
     public KeyCode StopRecordingKey = KeyCode.LeftShift;
 
+    private bool usingSubscriber = false;
     private void Start()
     {
-        if (SubscriberAddress != null)
+        if (SubscriberAddress != null && SubscriberAddress.Length > 0)
         {
+            usingSubscriber = true;
             SubSocket = new SubscriberSocket();
             SubSocket.Connect(SubscriberAddress);
             SubSocket.Subscribe("Path");
@@ -55,7 +57,7 @@ public class UnityScreenRecorder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (SubscriberAddress != null)
+        if (!usingSubscriber)
         {
             if (!recording && Input.GetKeyDown(StartRecordingKey))
             {
@@ -131,3 +133,4 @@ public class UnityScreenRecorder : MonoBehaviour
         StopRecording();
     }
 }
+#endif

@@ -18,22 +18,6 @@ When running it:
 2. Select project path 
 3. Press Restore Features 
 
-## HP Omnicept
-Open VR-Alfama in Unity with Unity hub and start installing
-Navigate to https://developers.hp.com/omnicept/downloads and download and install the latest HP Omnicept SDK.
-
-In Unity import the Omnicept package by navigating into  Assets --> Import Package --> Custom Package, the package is inside your omnicept install location (e.g. Program Files/HP/HP Omnicept SDK/<version>/Glia.unitypackage). Import the package and select import all.
-
-Successful import will add a new menu option in Unity for "HP Omnicept". Navigate here and click "Configure". This will open a dialog where you can enter the sensors to receive from the Omnicept. Ensure that the license type is set to 'Core' and that the Heart Rate, Eye Tracking, Camera Image and IMU sensors are enabled.
-
-More info [here](https://developers.hp.com/omnicept/docs/unity/getting-started)
-
-## pluma-vr
-Reusable unity infrastructure for VR data acquisition
-
-### Installing a package from GitHub in Unity
-To install this package (or any properly constructed Unity package) from GitHub first open Window>>Package Manager in Unity. Click the '+' icon in the top left and select "Add package from Git URL...". To specify the URL of the package we use <URL>.git?path=<subfolder>#<branch>. E.g. to install the com.neurogears.plumavr package from this repo on the main branch type https://github.com/emotional-cities/pluma-vr/tree/ae-dev/com.neurogears.plumavr.
-
 ## Project assets, 3DModels and content
 
 To access the project unity content you must ask NeuroGEARS to share the content folder with your microsoft user.
@@ -53,6 +37,21 @@ Create a link between the two folders, for that use the command mklink from comm
 Example: 
 > mklink /J Objects "C:\...OneDriveFolder...\Objects"
 
+## HP Omnicept
+Open VR-Alfama in Unity with Unity hub and start installing
+Navigate to https://developers.hp.com/omnicept/downloads and download and install the latest HP Omnicept SDK.
+
+In Unity import the Omnicept package by navigating into  Assets --> Import Package --> Custom Package, the package is inside your omnicept install location (e.g. Program Files/HP/HP Omnicept SDK/<version>/Glia.unitypackage). Import the package and select import all.
+
+Successful import will add a new menu option in Unity for "HP Omnicept". Navigate here and click "Configure". This will open a dialog where you can enter the sensors to receive from the Omnicept. Ensure that the license type is set to 'Core' and that the Heart Rate, Eye Tracking, Camera Image and IMU sensors are enabled.
+
+More info [here](https://developers.hp.com/omnicept/docs/unity/getting-started)
+
+## pluma-vr
+Reusable unity infrastructure for VR data acquisition
+
+### Installing a package from GitHub in Unity
+To install this package (or any properly constructed Unity package) from GitHub first open Window>>Package Manager in Unity. Click the '+' icon in the top left and select "Add package from Git URL...". To specify the URL of the package we use <URL>.git?path=<subfolder>#<branch>. E.g. to install the com.neurogears.plumavr package from this repo on the main branch type https://github.com/emotional-cities/pluma-vr/tree/ae-dev/com.neurogears.plumavr.
 
 # Reload unity project 
 Close unity and open the project again
