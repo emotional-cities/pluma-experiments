@@ -10,7 +10,7 @@ obj
 *.exe.settings
 *.blend
 *.pyc
+*.sln
 *.pickle
 Packages
 Data
-pluma-experiments.sln
