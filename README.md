@@ -97,7 +97,8 @@ Most of the data currently being saved in Bonsai is packaged in a HARP message f
 ## Synchronization
 
 Synchronization is either being achieved at the software level (Bonsai) by timestamping a given sample with the latest timestamp available from the HARP device or through a hardware-level TTL strategy.
-To achieve this, Bonsai is randomly toggling a digital output in the HARP behavior board every 10-30 seconds for 100ms. This signal is currently being logged in the GPS module, Bricklet's analog input. In the future we could use this to burn an LED in various camera streams if needed.
+
+To achieve this, Bonsai is randomly toggling a digital output in the HARP behavior board every 8-16 seconds for 100ms. This signal is currently being logged in the GPS module, Bricklet's analog input. In the future we could use this to burn an LED in various camera streams if needed.
 
 # Current event codes
 
@@ -105,60 +106,61 @@ To achieve this, Bonsai is randomly toggling a digital output in the HARP behavi
 
 [//]: [(https://www.tablesgenerator.com/markdown_tables#)]
 
-|         **Device**        |    **Stream**         | **EventCode** |                    **Obs**                    |
-|:-------------------------:|:---------------------:|:-------------:|:---------------------------------------------:|
-|        **BioData**        |          ???          |       32      |             Enable some sort of stream?       |
-|                           |          ???          |       33      |             Disable some sort of stream?      |
-|                           |          ECG          |       35      |            Array[2] = {ECG, Photodiode}       |
-|                           |          GSR          |       36      |                                               |
-|                           |     Accelarometer     |       37      |                                               |
-|                           |     Digital Input     |       38      |         BitMask 0x1 (GPS lock) and 0x2        |
-|                           |    SynchPulse (Set)   |       39      |                   BitMask 0x1                 |
-|                           |   SynchPulse (Clear)  |       40      |                   BitMask 0x1                 |
-|       **Microphone**      |      BufferIndex      |      222      | Raw data is saved to a separate .bin file (") |
-|         **TK-GPS**        |        Latitude       |      227      |                                               |
-|                           |       Longitude       |      228      |                                               |
-|                           |        Altitude       |      229      |                                               |
-|                           |          Data         |      230      |                                               |
-|                           |          Time         |      231      |                                               |
-|                           |         HasFix        |      232      |                                               |
-|        **TK-CO2V2**       |        CO2Conc        |      224      |                                               |
-|                           |      Temperature      |      225      |                                               |
-|                           |        Humidity       |      226      |                                               |
-|    **TK-AmbientLight**    |      AmbientLight     |      223      |                                               |
-|     **TK-AirQuality**     |       IAQ Index       |      233      |                                               |
-|                           |      Temperature      |      234      |                                               |
-|                           |        Humidity       |      235      |                                               |
-|                           |      AirPressure      |      236      |                                               |
-| **TK-SoundPressureLevel** |          SPL          |      237      |                                               |
-|      **TK-Humidity**      |        Humidity       |      238      |                                               |
-|      **TK-AnalogIn**      |        AnalogIn       |      239      |                                               |
-| **TK-Particulate Matter** |          PM1.0        |      240      |               Timestamped(int)                |
-|                           |          PM2.5        |      241      |               Timestamped(int)                |
-|                           |          PM10         |      242      |               Timestamped(int)                |
-|     **TK-Dual0-20mA**     |      Solar-Light      |      243      |               Timestamped(int)                |
-|     **TK-Thermoouple**    |      Radiant Temp     |      244      |               Timestamped(int)                |
-|        **TK-PTC**         |        Air Temp       |      245      |               Timestamped(int)                |
-|        **ATMOS22**        |       North Wind      |      246      |               Timestamped(float)              |
-|                           |        East Wind      |      247      |               Timestamped(float)              |
-|                           |        Gust Wind      |      248      |               Timestamped(float)              |
-|                           |        Air Temp       |      249      |               Timestamped(float)              |
-|                           |      XOrientation     |      250      |               Timestamped(float)              |
-|                           |      YOrientation     |      251      |               Timestamped(float)              |
-|                           |        NullValue      |      252      |               Timestamped(float)              |
-|                           |                       |               |                                               |
-|       **PupilLabs**       | WorldCamera (Decoded) |      209      |            Timestamped(HasFrame?)             |
-|                           |    WorldCamera (Raw)  |      210      |            Timestamped(FrameNumber)           |
-|                           |          IMU          |      211      |            Timestamped(FrameNumber)           |
-|                           |         Gaze          |      212      |            Timestamped(FrameNumber)           |
-|                           |         Audio         |      213      |            Timestamped(FrameNumber)           |
-|                           |          Key          |      214      |            Timestamped(FrameNumber)           |
-|       **Omnicept**        |      EyeTracking      |      215      |            Timestamped(long[])                |
-|                           |       HeartRate       |      216      |            Timestamped(long[])                |
-|                           |          IMU          |      217      |            Timestamped(long[])                |
-|                           |         Mouth         |      218      |            Timestamped(long[])                |
-|     **VRTransform**       |       VrTimestamp     |      219      |            Timestamped(long)                  |
-|     **UnityImage**        |       VrTimestamp     |      220      |            Timestamped(long)                  |
+|         **Device**        |      **Stream**       | **Code** |   **Rate**    |                    **Obs**                    |
+|:-------------------------:|:---------------------:|:--------:|:-------------:|:---------------------------------------------:|
+|        **BioData**        |     EnableStreams     |    32    |       -       |  Enable Oximeter, ECG, GSR or Accelerometer   |
+|                           |     DisableStreams    |    33    |       -       |  Enable Oximeter, ECG, GSR or Accelerometer   |
+|                           |          ECG          |    35    |     1 kHz     |  ECG and Photodiode stream @ 1 kHz            |
+|                           |          GSR          |    36    |     4 kHz     |  GSR stream @ 4 Hz                            |
+|                           |     Accelerometer     |    37    |     50 Hz     |  Accelerometer polling trigger @ 50 Hz        |
+|                           |     Digital Inputs    |    38    |       -       |  GPS lock (0x1) and Auxiliary input (0x2)     |
+|                           |    SynchPulse (Set)   |    39    |       -       |  Rising edge of pseudo-random TTL sequence    |
+|                           |   SynchPulse (Clear)  |    40    |       -       |  Falling edge of pseudo-random TTL sequence   |
+|       **Microphone**      |         Audio         |     -    |    44.1 kHz   |  Raw audio data saved to Microphone.bin       |
+|                           |      BufferIndex      |   222    |               |  Multiply by buffer size to get sample index  |
+|         **TK-GPS**        |        Latitude       |   227    |               |                                               |
+|                           |       Longitude       |   228    |               |                                               |
+|                           |        Altitude       |   229    |               |                                               |
+|                           |          Data         |   230    |               |                                               |
+|                           |          Time         |   231    |               |                                               |
+|                           |         HasFix        |   232    |               |                                               |
+|        **TK-CO2V2**       |        CO2Conc        |   224    |               |                                               |
+|                           |      Temperature      |   225    |               |                                               |
+|                           |        Humidity       |   226    |               |                                               |
+|    **TK-AmbientLight**    |      AmbientLight     |   223    |               |                                               |
+|     **TK-AirQuality**     |       IAQ Index       |   233    |               |                                               |
+|                           |      Temperature      |   234    |               |                                               |
+|                           |        Humidity       |   235    |               |                                               |
+|                           |      AirPressure      |   236    |               |                                               |
+| **TK-SoundPressureLevel** |          SPL          |   237    |               |                                               |
+|      **TK-Humidity**      |        Humidity       |   238    |               |                                               |
+|      **TK-AnalogIn**      |        AnalogIn       |   239    |               |                                               |
+| **TK-Particulate Matter** |          PM1.0        |   240    |               |               Timestamped(int)                |
+|                           |          PM2.5        |   241    |               |               Timestamped(int)                |
+|                           |          PM10         |   242    |               |               Timestamped(int)                |
+|     **TK-Dual0-20mA**     |      Solar-Light      |   243    |               |               Timestamped(int)                |
+|     **TK-Thermoouple**    |      Radiant Temp     |   244    |               |               Timestamped(int)                |
+|        **TK-PTC**         |        Air Temp       |   245    |               |               Timestamped(int)                |
+|        **ATMOS22**        |       North Wind      |   246    |               |               Timestamped(float)              |
+|                           |        East Wind      |   247    |               |               Timestamped(float)              |
+|                           |        Gust Wind      |   248    |               |               Timestamped(float)              |
+|                           |        Air Temp       |   249    |               |               Timestamped(float)              |
+|                           |      XOrientation     |   250    |               |               Timestamped(float)              |
+|                           |      YOrientation     |   251    |               |               Timestamped(float)              |
+|                           |        NullValue      |   252    |               |               Timestamped(float)              |
+|                           |                       |          |               |                                               |
+|       **PupilLabs**       | WorldCamera (Decoded) |   209    |               |            Timestamped(HasFrame?)             |
+|                           |    WorldCamera (Raw)  |   210    |               |            Timestamped(FrameNumber)           |
+|                           |          IMU          |   211    |               |            Timestamped(FrameNumber)           |
+|                           |         Gaze          |   212    |               |            Timestamped(FrameNumber)           |
+|                           |         Audio         |   213    |               |            Timestamped(FrameNumber)           |
+|                           |          Key          |   214    |               |            Timestamped(FrameNumber)           |
+|       **Omnicept**        |      EyeTracking      |   215    |               |            Timestamped(long[])                |
+|                           |       HeartRate       |   216    |               |            Timestamped(long[])                |
+|                           |          IMU          |   217    |               |            Timestamped(long[])                |
+|                           |         Mouth         |   218    |               |            Timestamped(long[])                |
+|     **VRTransform**       |       VrTimestamp     |   219    |               |            Timestamped(long)                  |
+|     **UnityImage**        |       VrTimestamp     |   220    |               |            Timestamped(long)                  |
 
 # Simulation 
 The VR simulation environment is in **VR-Alfama** folder, to set up the Unity enviroment follow the instructions in the README.md inside **VR-Alfama**
