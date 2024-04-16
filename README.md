@@ -110,30 +110,31 @@ To achieve this, Bonsai is randomly toggling a digital output in the HARP behavi
 |:-------------------------:|:---------------------:|:--------:|:-------------:|:---------------------------------------------:|
 |        **BioData**        |     EnableStreams     |    32    |       -       |  Enable Oximeter, ECG, GSR or Accelerometer   |
 |                           |     DisableStreams    |    33    |       -       |  Enable Oximeter, ECG, GSR or Accelerometer   |
-|                           |          ECG          |    35    |     1 kHz     |  ECG and Photodiode stream @ 1 kHz            |
+|                           |          ECG          |    35    |     1 kHz     |  [ECG](https://neurogears.sharepoint.com/:b:/s/EmotionalCities/EYOX02N88hRHnUCdREf_kq0BEoxvZY92nHfPOPZmq7Ua3Q?e=xWQPvN) and Photodiode stream @ 1 kHz (mv)       |
 |                           |          GSR          |    36    |     4 kHz     |  GSR stream @ 4 Hz                            |
 |                           |     Accelerometer     |    37    |     50 Hz     |  Accelerometer polling trigger @ 50 Hz        |
 |                           |     Digital Inputs    |    38    |       -       |  GPS lock (0x1) and Auxiliary input (0x2)     |
 |                           |    SynchPulse (Set)   |    39    |       -       |  Rising edge of pseudo-random TTL sequence    |
 |                           |   SynchPulse (Clear)  |    40    |       -       |  Falling edge of pseudo-random TTL sequence   |
 |       **Microphone**      |         Audio         |     -    |    44.1 kHz   |  Raw audio data saved to Microphone.bin       |
-|                           |      BufferIndex      |   222    |               |  Multiply by buffer size to get sample index  |
-|         **TK-GPS**        |        Latitude       |   227    |               |                                               |
-|                           |       Longitude       |   228    |               |                                               |
-|                           |        Altitude       |   229    |               |                                               |
-|                           |          Data         |   230    |               |                                               |
-|                           |          Time         |   231    |               |                                               |
-|                           |         HasFix        |   232    |               |                                               |
-|        **TK-CO2V2**       |        CO2Conc        |   224    |               |                                               |
-|                           |      Temperature      |   225    |               |                                               |
-|                           |        Humidity       |   226    |               |                                               |
-|    **TK-AmbientLight**    |      AmbientLight     |   223    |               |                                               |
-|     **TK-AirQuality**     |       IAQ Index       |   233    |               |                                               |
-|                           |      Temperature      |   234    |               |                                               |
-|                           |        Humidity       |   235    |               |                                               |
-|                           |      AirPressure      |   236    |               |                                               |
-| **TK-SoundPressureLevel** |          SPL          |   237    |               |                                               |
-|      **TK-Humidity**      |        Humidity       |   238    |               |                                               |
+|                           |      BufferIndex      |   222    |    *10 Khz    |  Multiply by buffer size to get sample index  |
+|         **TK-GPS**        |        Latitude       |   227    |      1 Hz     |  Depends on having GPS signal [GPS](https://www.tinkerforge.com/en/doc/Hardware/Bricklets/GPS_V2.html)           |
+|                           |       Longitude       |   228    |      1 Hz     |  Depends on having GPS signal                 |
+|                           |        Altitude       |   229    |      1 Hz     |  Depends on having GPS signal                 |
+|                           |          Data         |   230    |      1 Hz     |  Date from tinkerforge GPS device             |
+|                           |          Time         |   231    |      1 Hz     |  Time from tinkerforge GPS device             |
+|                           |         HasFix        |   232    |      1 Hz     |  Depends on having GPS signal                 |
+|        **TK-CO2V2**       |        CO2Conc        |   224    |       -       |  This sensor is not being used                |
+|                           |      Temperature      |   225    |       -       |  This sensor is not being used                |
+|                           |        Humidity       |   226    |       -       |  This sensor is not being used                |
+|    **TK-AmbientLight**    |      AmbientLight     |   223    |       -       |  This sensor is not being used                |
+|     **TK-AirQuality**     |       IAQ Index       |   233    |      1 Hz     |           [IAQ](https://www.tinkerforge.com/en/doc/Hardware/Bricklets/Air_Quality.html)                               |
+|                           |      Temperature      |   234    |      1 Hz     |  Measured at the position of the sensor       |
+|                           |        Humidity       |   235    |      1 Hz     |  Measured at the position of the sensor       |
+|                           |      AirPressure      |   236    |      1 Hz     |  Measured at the position of the sensor       |
+| **TK-SoundPressureLevel** |          SPL          |   237    |    100 Hz     |   Output db*10  [Sound Pressure Bricklet](https://www.tinkerforge.com/en/doc/Hardware/Bricklets/Sound_Pressure_Level.html)     |
+|      **TK-Humidity**      |        Humidity       |   238    |               |   Output Rh% * 100 [Humidity v2](https://www.tinkerforge.com/en/doc/Hardware/Bricklets/Humidity_V2.html)              |
+
 |      **TK-AnalogIn**      |        AnalogIn       |   239    |               |                                               |
 | **TK-Particulate Matter** |          PM1.0        |   240    |               |               Timestamped(int)                |
 |                           |          PM2.5        |   241    |               |               Timestamped(int)                |
