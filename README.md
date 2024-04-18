@@ -110,7 +110,7 @@ To achieve this, Bonsai is randomly toggling a digital output in the HARP behavi
 |:-------------------------:|:---------------------:|:--------:|:-------------:|:---------------------------------------------:|
 |        **BioData**        |     EnableStreams     |    32    |       -       |  Enable Oximeter, ECG, GSR or Accelerometer   |
 |                           |     DisableStreams    |    33    |       -       |  Enable Oximeter, ECG, GSR or Accelerometer   |
-|                           |          ECG          |    35    |     1 kHz     |  [ECG][1] and Photodiode stream @ 1 kHz (mv)       |
+|                           |          ECG          |    35    |     1 kHz     |  [ECG][1] and Photodiode stream @ 1 kHz (mv)  |
 |                           |          GSR          |    36    |     4 kHz     |  GSR stream @ 4 Hz                            |
 |                           |     Accelerometer     |    37    |     50 Hz     |  Accelerometer polling trigger @ 50 Hz        |
 |                           |     Digital Inputs    |    38    |       -       |  GPS lock (0x1) and Auxiliary input (0x2)     |
@@ -118,7 +118,7 @@ To achieve this, Bonsai is randomly toggling a digital output in the HARP behavi
 |                           |   SynchPulse (Clear)  |    40    |       -       |  Falling edge of pseudo-random TTL sequence   |
 |       **Microphone**      |         Audio         |     -    |    44.1 kHz   |  Raw audio data saved to Microphone.bin       |
 |                           |      BufferIndex      |   222    |    *10 Khz    |  Multiply by buffer size to get sample index  |
-|         **TK-GPS**        |        Latitude       |   227    |      1 Hz     |  Depends on having GPS signal [GPS][2]           |
+|         **TK-GPS**        |        Latitude       |   227    |      1 Hz     |  Depends on having GPS signal [GPS][2]        |
 |                           |       Longitude       |   228    |      1 Hz     |  Depends on having GPS signal                 |
 |                           |        Altitude       |   229    |      1 Hz     |  Depends on having GPS signal                 |
 |                           |          Data         |   230    |      1 Hz     |  Date from tinkerforge GPS device             |
@@ -135,19 +135,19 @@ To achieve this, Bonsai is randomly toggling a digital output in the HARP behavi
 | **TK-SoundPressureLevel** |          SPL          |   237    |    100 Hz     |   Output db*10  [Sound Pressure Bricklet][4]  |
 |      **TK-Humidity**      |        Humidity       |   238    |               |   Output Rh% * 100 [Humidity v2][5]           |
 |      **TK-AnalogIn**      |        AnalogIn       |   239    |      100Hz    |                                               |
-| **TK-Particulate Matter** |          PM1.0        |   240    |      100Hz    |          Timestamped(int)[µg/m³][6]           |
-|                           |          PM2.5        |   241    |      100Hz    |          Timestamped(int)[µg/m³][6]           |
-|                           |          PM10         |   242    |      100Hz    |          Timestamped(int)[µg/m³][6]           |
-|     **TK-Dual0-20mA**     |      Solar-Light      |   243    |      100Hz    |          Timestamped(int)[mA x 1000000][7]    |
-|     **TK-Thermoouple**    |      Radiant Temp     |   244    |      100Hz    |          Timestamped(int)[°C x 100][8]        |
-|        **TK-PTC**         |        Air Temp       |   245    |      100Hz    |          Timestamped(int)[°C x 100][9]        |
-|        **ATMOS22**        |       North Wind      |   246    |      ~2Hz     |          Timestamped(float)[m/s][10]          |
-|                           |        East Wind      |   247    |      ~2Hz     |          Timestamped(float)[m/s][10]          |
-|                           |        Gust Wind      |   248    |      ~2Hz     |          Timestamped(float)[m/s][10]          |
-|                           |        Air Temp       |   249    |      ~2Hz     |          Timestamped(float)[°C][10]           |
-|                           |      XOrientation     |   250    |      ~2Hz     |          Timestamped(float)[Angle (°)][10]    |
-|                           |      YOrientation     |   251    |      ~2Hz     |          Timestamped(float)[Angle (°)][10]    |
-|                           |        NullValue      |   252    |      ~2Hz     |          Timestamped(float)[][10]             |
+| **TK-Particulate Matter** |          PM1.0        |   240    |      100Hz    |          Timestamped(int) [µg/m³][6]          |
+|                           |          PM2.5        |   241    |      100Hz    |          Timestamped(int) [µg/m³][6]          |
+|                           |          PM10         |   242    |      100Hz    |          Timestamped(int) [µg/m³][6]          |
+|     **TK-Dual0-20mA**     |      Solar-Light      |   243    |      100Hz    |          Timestamped(int) [mA x 1000000][7]   |
+|     **TK-Thermoouple**    |      Radiant Temp     |   244    |      100Hz    |          Timestamped(int) [°C x 100][8]       |
+|        **TK-PTC**         |        Air Temp       |   245    |      100Hz    |          Timestamped(int) [°C x 100][9]       |
+|        **ATMOS22**        |       North Wind      |   246    |      ~2Hz     |          Timestamped(float) [m/s][10]         |
+|                           |        East Wind      |   247    |      ~2Hz     |          Timestamped(float) [m/s][10]         |
+|                           |        Gust Wind      |   248    |      ~2Hz     |          Timestamped(float) [m/s][10]         |
+|                           |        Air Temp       |   249    |      ~2Hz     |          Timestamped(float) [°C][10]          |
+|                           |      XOrientation     |   250    |      ~2Hz     |          Timestamped(float) [Angle (°)][10]   |
+|                           |      YOrientation     |   251    |      ~2Hz     |          Timestamped(float) [Angle (°)][10]   |
+|                           |        NullValue      |   252    |      ~2Hz     |          Timestamped(float)                   |
 |  **BNO055-Accelerometer** |     Orientation X     |    -     |      50Hz     |            [Angle (°)][11]                    |
 |                           |     Orientation Y     |    -     |      50Hz     |            [Angle (°)][11]                    |
 |                           |     Orientation Z     |    -     |      50Hz     |            [Angle (°)][11]                    |
@@ -198,18 +198,20 @@ To achieve this, Bonsai is randomly toggling a digital output in the HARP behavi
 |     **UnityImage**        |       VrTimestamp     |   220    |               |            Timestamped(long)                  |
 
 # Simulation 
-The VR simulation environment is in **VR-Alfama** folder, to set up the Unity environment follow the instructions in the README.md inside **VR-Alfama**
-[1]:https://neurogears.sharepoint.com/:b:/s/EmotionalCities/EYOX02N88hRHnUCdREf_kq0BEoxvZY92nHfPOPZmq7Ua3Q?e=xWQPvN
-[2]:https://www.tinkerforge.com/en/doc/Hardware/Bricklets/GPS_V2.html
-[3]:https://www.tinkerforge.com/en/doc/Hardware/Bricklets/Air_Quality.html
-[4]:https://www.tinkerforge.com/en/doc/Hardware/Bricklets/Sound_Pressure_Level.html
-[5]:https://www.tinkerforge.com/en/doc/Hardware/Bricklets/Humidity_V2.html
-[6]:https://www.tinkerforge.com/en/doc/Hardware/Bricklets/Particulate_Matter.html
-[7]:https://www.tinkerforge.com/en/doc/Hardware/Bricklets/Industrial_Dual_020mA_V2.html#industrial-dual-0-20ma-v2-bricklet
-[8]:https://www.tinkerforge.com/en/doc/Hardware/Bricklets/Thermocouple_V2.html
-[9]:https://www.tinkerforge.com/en/doc/Hardware/Bricklets/PTC_V2.html
-[10]:https://metergroup.com/products/atmos-22/atmos-22-support/
-[11]:https://learn.adafruit.com/adafruit-bno055-absolute-orientation-sensor/overview
-[12]:https://box.empatica.com/documentation/20141119_E4_TechSpecs.pdf
-[13]:https://developer.empatica.com/windows-streaming-server-data.html
-[14]:https://support.empatica.com/hc/en-us/articles/360029719792-E4-data-BVP-expected-signal
+The VR simulation environment is in **VR-Alfama** folder, to set up the Unity environment follow the instructions in the README.md inside **VR-Alfama**  
+
+
+[1]: https://neurogears.sharepoint.com/:b:/s/EmotionalCities/EYOX02N88hRHnUCdREf_kq0BEoxvZY92nHfPOPZmq7Ua3Q?e=xWQPvN  
+[2]: https://www.tinkerforge.com/en/doc/Hardware/Bricklets/GPS_V2.html  
+[3]: https://www.tinkerforge.com/en/doc/Hardware/Bricklets/Air_Quality.html  
+[4]: https://www.tinkerforge.com/en/doc/Hardware/Bricklets/Sound_Pressure_Level.html  
+[5]: https://www.tinkerforge.com/en/doc/Hardware/Bricklets/Humidity_V2.html  
+[6]: https://www.tinkerforge.com/en/doc/Hardware/Bricklets/Particulate_Matter.html  
+[7]: https://www.tinkerforge.com/en/doc/Hardware/Bricklets/Industrial_Dual_020mA_V2.html#industrial-dual-0-20ma-v2-bricklet  
+[8]: https://www.tinkerforge.com/en/doc/Hardware/Bricklets/Thermocouple_V2.html  
+[9]: https://www.tinkerforge.com/en/doc/Hardware/Bricklets/PTC_V2.html  
+[10]: https://metergroup.com/products/atmos-22/atmos-22-support/   
+[11]: https://learn.adafruit.com/adafruit-bno055-absolute-orientation-sensor/overview  
+[12]: https://box.empatica.com/documentation/20141119_E4_TechSpecs.pdf  
+[13]: https://developer.empatica.com/windows-streaming-server-data.html  
+[14]: https://support.empatica.com/hc/en-us/articles/360029719792-E4-data-BVP-expected-signal  
