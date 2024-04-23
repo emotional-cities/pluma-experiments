@@ -5,51 +5,46 @@ using UnityEngine.InputSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading;
 
 public class LookWithMouse : MonoBehaviour
 {
-    public float mouseSensitivity = 100f;
-
     public Transform playerBody;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        //Cursor.lockState = CursorLockMode.Locked;
-    }
+    public float MouseSensitivity = 200f;
+    public float OrientationSlerp = 0.1f;
+    private float mouseXLerp = 0.0f;
+    private float mouseYLerp = 0.0f;
+    private float xRotation;
 
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-#if ENABLE_INPUT_SYSTEM
-        float mouseX = 0, mouseY = 0;
+        if (Mouse.current.leftButton.isPressed)
+            Look();
+    }
+    
+    private void Look()
+    {
+        float mouseX = Input.GetAxis("Mouse X") * MouseSensitivity * Time.fixedDeltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * MouseSensitivity * Time.fixedDeltaTime;
 
-        if (Mouse.current != null)
-        {
-            if(Mouse.current.leftButton.isPressed)
-            {
-                var delta = Mouse.current.delta.ReadValue() / 15.0f;
-                mouseX += delta.x;
-                mouseY += delta.y;
-            }
-        }
-        if (Gamepad.current != null)
-        {
-            var value = Gamepad.current.rightStick.ReadValue() * 2;
-            mouseX += value.x;
-            mouseY += value.y;
-        }
+        mouseXLerp = Lerp(mouseXLerp, mouseX, OrientationSlerp);
+        mouseYLerp = Lerp(mouseYLerp, mouseY, OrientationSlerp);
 
-        mouseX *= mouseSensitivity * Time.deltaTime;
-        mouseY *= mouseSensitivity * Time.deltaTime;
-#else
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
-#endif
+        float desiredX = playerBody.transform.localRotation.eulerAngles.y + mouseXLerp;
 
-        playerBody.Rotate(Vector3.up * mouseX);
-        playerBody.Rotate(Vector3.right * -mouseY);
-        playerBody.transform.eulerAngles = new Vector3(playerBody.transform.eulerAngles.x, playerBody.transform.eulerAngles.y, 0);
+        
+        xRotation -= mouseYLerp; 
+
+        // Avoid tilt more than 180 degrees to ensure usability in fps mode
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        
+        //Apply rotation
+        playerBody.transform.localRotation = Quaternion.Euler(xRotation, desiredX, 0);
+    }
+    private float Lerp(float v0, float v1, float smooth)
+    {
+        return (1 - smooth) * v0 + smooth * v1;
     }
 }
