@@ -1358,7 +1358,7 @@
                         <Expression xsi:type="pluma:CreateMessage">
                           <harp:MessageType>Write</harp:MessageType>
                           <harp:Payload xsi:type="pluma:CreateOutputSetPayload">
-                            <pluma:OutputSet>None</pluma:OutputSet>
+                            <pluma:OutputSet>DO0 DO1</pluma:OutputSet>
                           </harp:Payload>
                         </Expression>
                         <Expression xsi:type="MulticastSubject">
@@ -1375,7 +1375,7 @@
                         <Expression xsi:type="pluma:CreateMessage">
                           <harp:MessageType>Write</harp:MessageType>
                           <harp:Payload xsi:type="pluma:CreateOutputClearPayload">
-                            <pluma:OutputClear>None</pluma:OutputClear>
+                            <pluma:OutputClear>DO0 DO1</pluma:OutputClear>
                           </harp:Payload>
                         </Expression>
                         <Expression xsi:type="MulticastSubject">
