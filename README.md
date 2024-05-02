@@ -106,96 +106,96 @@ To achieve this, Bonsai is randomly toggling a digital output in the HARP behavi
 
 [//]: [(https://www.tablesgenerator.com/markdown_tables#)]
 
-|         **Device**        |      **Stream**       | **Code** |   **Rate**    |                    **Obs**                    |
-|:-------------------------:|:---------------------:|:--------:|:-------------:|:---------------------------------------------:|
-|        **BioData**        |     EnableStreams     |    32    |       -       |  Enable Oximeter, ECG, GSR or Accelerometer   |
-|                           |     DisableStreams    |    33    |       -       |  Enable Oximeter, ECG, GSR or Accelerometer   |
-|                           |          ECG          |    35    |     1 kHz     |  [ECG][1] and Photodiode stream @ 1 kHz (mv)  |
-|                           |          GSR          |    36    |     4 kHz     |  GSR stream @ 4 Hz                            |
-|                           |     Accelerometer     |    37    |     50 Hz     |  Accelerometer polling trigger @ 50 Hz        |
-|                           |     Digital Inputs    |    38    |       -       |  GPS lock (0x1) and Auxiliary input (0x2)     |
-|                           |    SynchPulse (Set)   |    39    |       -       |  Rising edge of pseudo-random TTL sequence    |
-|                           |   SynchPulse (Clear)  |    40    |       -       |  Falling edge of pseudo-random TTL sequence   |
-|       **Microphone**      |         Audio         |     -    |    44.1 kHz   |  Raw audio data saved to Microphone.bin       |
-|                           |      BufferIndex      |   222    |    *10 Khz    |  Multiply by buffer size to get sample index  |
-|         **TK-GPS**        |        Latitude       |   227    |      1 Hz     |  Depends on having GPS signal [GPS][2]        |
-|                           |       Longitude       |   228    |      1 Hz     |  Depends on having GPS signal                 |
-|                           |        Altitude       |   229    |      1 Hz     |  Depends on having GPS signal                 |
-|                           |          Data         |   230    |      1 Hz     |  Date from tinkerforge GPS device             |
-|                           |          Time         |   231    |      1 Hz     |  Time from tinkerforge GPS device             |
-|                           |         HasFix        |   232    |      1 Hz     |  Depends on having GPS signal                 |
-|        **TK-CO2V2**       |        CO2Conc        |   224    |       -       |  This sensor is not being used                |
-|                           |      Temperature      |   225    |       -       |  This sensor is not being used                |
-|                           |        Humidity       |   226    |       -       |  This sensor is not being used                |
-|    **TK-AmbientLight**    |      AmbientLight     |   223    |       -       |  This sensor is not being used                |
-|     **TK-AirQuality**     |       IAQ Index       |   233    |      1 Hz     |           [IAQ][3]                            |
-|                           |      Temperature      |   234    |      1 Hz     |  Measured at the position of the sensor       |
-|                           |        Humidity       |   235    |      1 Hz     |  Measured at the position of the sensor       |
-|                           |      AirPressure      |   236    |      1 Hz     |  Measured at the position of the sensor       |
-| **TK-SoundPressureLevel** |          SPL          |   237    |    100 Hz     |   Output db*10  [Sound Pressure Bricklet][4]  |
-|      **TK-Humidity**      |        Humidity       |   238    |               |   Output Rh% * 100 [Humidity v2][5]           |
-|      **TK-AnalogIn**      |        AnalogIn       |   239    |      100Hz    |                                               |
-| **TK-Particulate Matter** |          PM1.0        |   240    |      100Hz    |          Timestamped(int) [µg/m³][6]          |
-|                           |          PM2.5        |   241    |      100Hz    |          Timestamped(int) [µg/m³][6]          |
-|                           |          PM10         |   242    |      100Hz    |          Timestamped(int) [µg/m³][6]          |
-|     **TK-Dual0-20mA**     |      Solar-Light      |   243    |      100Hz    |          Timestamped(int) [mA x 1000000][7]   |
-|     **TK-Thermoouple**    |      Radiant Temp     |   244    |      100Hz    |          Timestamped(int) [°C x 100][8]       |
-|        **TK-PTC**         |        Air Temp       |   245    |      100Hz    |          Timestamped(int) [°C x 100][9]       |
-|        **ATMOS22**        |       North Wind      |   246    |      ~2Hz     |          Timestamped(float) [m/s][10]         |
-|                           |        East Wind      |   247    |      ~2Hz     |          Timestamped(float) [m/s][10]         |
-|                           |        Gust Wind      |   248    |      ~2Hz     |          Timestamped(float) [m/s][10]         |
-|                           |        Air Temp       |   249    |      ~2Hz     |          Timestamped(float) [°C][10]          |
-|                           |      XOrientation     |   250    |      ~2Hz     |          Timestamped(float) [Angle (°)][10]   |
-|                           |      YOrientation     |   251    |      ~2Hz     |          Timestamped(float) [Angle (°)][10]   |
-|                           |        NullValue      |   252    |      ~2Hz     |          Timestamped(float)                   |
-|  **BNO055-Accelerometer** |     Orientation X     |    -     |      50Hz     |            [Angle (°)][11]                    |
-|                           |     Orientation Y     |    -     |      50Hz     |            [Angle (°)][11]                    |
-|                           |     Orientation Z     |    -     |      50Hz     |            [Angle (°)][11]                    |
-|                           |     Gyroscope X       |    -     |      50Hz     |            [Angle (°)][11]                    |
-|                           |     Gyroscope Y       |    -     |      50Hz     |            [Angle (°)][11]                    |
-|                           |     Gyroscope Z       |    -     |      50Hz     |            [Angle (°)][11]                    |
-|                           |     LinearAccl X      |    -     |      50Hz     |            [m/s²][11]                         |
-|                           |     LinearAccl Y      |    -     |      50Hz     |            [m/s²][11]                         |
-|                           |     LinearAccl Z      |    -     |      50Hz     |            [m/s²][11]                         |
-|                           |     Magnetometer X    |    -     |      50Hz     |            [Angle (°)][11]                    |
-|                           |     Magnetometer Y    |    -     |      50Hz     |            [Angle (°)][11]                    |
-|                           |     Magnetometer Z    |    -     |      50Hz     |            [Angle (°)][11]                    |
-|                           |     Accl X            |    -     |      50Hz     |            [m/s²][11]                         |
-|                           |     Accl Y            |    -     |      50Hz     |            [m/s²][11]                         |
-|                           |     Accl Z            |    -     |      50Hz     |            [m/s²][11]                         |
-|                           |     Gravity X         |    -     |      50Hz     |            [m/s²][11]                         |
-|                           |     Gravity Y         |    -     |      50Hz     |            [m/s²][11]                         |
-|                           |     Gravity Z         |    -     |      50Hz     |            [m/s²][11]                         |
-|                           |     SysCalibEnabled   |    -     |      50Hz     |            [Boolean][11]                      |
-|                           |     GyroCalibEnabled  |    -     |      50Hz     |            [Boolean][11]                      |
-|                           |     AccCalibEnabled   |    -     |      50Hz     |            [Boolean][11]                      |
-|                           |     MagCalibEnabled   |    -     |      50Hz     |            [Boolean][11]                      |
-|                           |     SysCalibEnabled   |    -     |      50Hz     |            [Boolean][11]                      |
-|                           |     Temperature       |    -     |      50Hz     |            Not used(??)                       |
-|                           |     SoftwareTimestamp |    -     |      50Hz     |            TimeStamp                          |
-|     [**Empatica-E4**][12] |     E4_Acc            |    -     |    31.5Hz     |    Axis: X(usb);Y(strap);Z(bottom) [m/s²][13] |
-|                           |     E4_Battery        |    -     |    0.05Hz     |      % of battery float [(0.0 to 1.0)][13]    |
-|                           |     E4_Bvp            |    -     |      64Hz     |      [Reflection of green and red light][14]  |
-|                           |     E4_Gsr            |    -     |       4Hz     |            [microsiemens][13]                 |
-|                           |     E4_Hr             |    -     |    1.56Hz     |            [beats per minute][13]             |
-|                           |     E4_Ibi            |    -     |    1.56Hz     |   Heart inter beat interval [in seconds][13]  |
-|                           |     E4_Temperature    |    -     |       4Hz     |        Wrist surface temperature in [ᵒC][13]  |
-|                           |     E4_Tag            |    -     |       -       |        [Wristband button pressed][13]         |
-|                           |     R                 |    -     |       -       |        Responses to commands sent to E4       |
-|                           |     E4_Seconds        |    -     |       -       | Every stream is timestamped with E4 timestamp |
-|       **PupilLabs**       | WorldCamera (Decoded) |   209    |      32Hz     |            Timestamped(Boolean HasFrame?)     |
-|                           |    WorldCamera (Raw)  |   210    |      32Hz     |            Timestamped(FrameNumber)           |
-|                           |         IMU           |   211    |       -       |    Not in use Timestamped(FrameNumber)        |
-|                           |         Gaze          |   212    |      250Hz    |            Timestamped(FrameNumber)           |
-|                           |         Audio         |   213    |       -       |    Not in use Timestamped(FrameNumber)        |
-|                           |         Key           |   214    |       -       |    Not in use Timestamped(FrameNumber)        |
-|       **UBX**             |         UBX           |          |               |                                               |
-|       **Omnicept**        |      EyeTracking      |   215    |               |            Timestamped(long[])                |
-|                           |       HeartRate       |   216    |               |            Timestamped(long[])                |
-|                           |          IMU          |   217    |               |            Timestamped(long[])                |
-|                           |         Mouth         |   218    |               |            Timestamped(long[])                |
-|     **VRTransform**       |       VrTimestamp     |   219    |               |            Timestamped(long)                  |
-|     **UnityImage**        |       VrTimestamp     |   220    |               |            Timestamped(long)                  |
+|         **Device**        |      **Stream**       | **Code** |    **Rate**    |                    **Obs**                    |
+|:-------------------------:|:---------------------:|:--------:|:--------------:|:---------------------------------------------:|
+|        **BioData**        |     EnableStreams     |    32    |       -        |  Enable Oximeter, ECG, GSR or Accelerometer   |
+|                           |     DisableStreams    |    33    |       -        |  Enable Oximeter, ECG, GSR or Accelerometer   |
+|                           |          ECG          |    35    |     1 kHz      |  [ECG][1] and Photodiode stream (mv)          |
+|                           |          GSR          |    36    |     4  Hz      |  GSR stream                                   |
+|                           |     Accelerometer     |    37    |     50 Hz      |  Accelerometer polling trigger                |
+|                           |     Digital Inputs    |    38    |       -        |  GPS lock (0x1) and Auxiliary input (0x2)     |
+|                           |    SynchPulse (Set)   |    39    |       -        |  Rising edge of pseudo-random TTL sequence    |
+|                           |   SynchPulse (Clear)  |    40    |       -        |  Falling edge of pseudo-random TTL sequence   |
+|       **Microphone**      |         Audio         |     -    |    44.1 kHz    |  Raw audio data saved to Microphone.bin       |
+|                           |      BufferIndex      |   222    |    *10 Khz     |  Multiply by buffer size to get sample index  |
+|         **TK-GPS**        |        Latitude       |   227    |      1 Hz      |  Depends on having GPS signal [GPS][2]        |
+|                           |       Longitude       |   228    |      1 Hz      |  Depends on having GPS signal                 |
+|                           |        Altitude       |   229    |      1 Hz      |  Depends on having GPS signal                 |
+|                           |          Data         |   230    |      1 Hz      |  Date from tinkerforge GPS device             |
+|                           |          Time         |   231    |      1 Hz      |  Time from tinkerforge GPS device             |
+|                           |         HasFix        |   232    |      1 Hz      |  Depends on having GPS signal                 |
+|        **TK-CO2V2**       |        CO2Conc        |   224    |       -        |  This sensor is not being used                |
+|                           |      Temperature      |   225    |       -        |  This sensor is not being used                |
+|                           |        Humidity       |   226    |       -        |  This sensor is not being used                |
+|    **TK-AmbientLight**    |      AmbientLight     |   223    |       -        |  This sensor is not being used                |
+|     **TK-AirQuality**     |       IAQ Index       |   233    |      1 Hz      |           [IAQ][3]                            |
+|                           |      Temperature      |   234    |      1 Hz      |  Measured at the position of the sensor       |
+|                           |        Humidity       |   235    |      1 Hz      |  Measured at the position of the sensor       |
+|                           |      AirPressure      |   236    |      1 Hz      |  Measured at the position of the sensor       |
+| **TK-SoundPressureLevel** |          SPL          |   237    |    100 Hz      |   Output db*10  [Sound Pressure Bricklet][4]  |
+|      **TK-Humidity**      |        Humidity       |   238    |                |   Output Rh% * 100 [Humidity v2][5]           |
+|      **TK-AnalogIn**      |        AnalogIn       |   239    |      100 Hz    |                                               |
+| **TK-Particulate Matter** |          PM1.0        |   240    |      100 Hz    |          Timestamped(int) [µg/m³][6]          |
+|                           |          PM2.5        |   241    |      100 Hz    |          Timestamped(int) [µg/m³][6]          |
+|                           |          PM10         |   242    |      100 Hz    |          Timestamped(int) [µg/m³][6]          |
+|     **TK-Dual0-20mA**     |      Solar-Light      |   243    |      100 Hz    |          Timestamped(int) [mA x 1000000][7]   |
+|     **TK-Thermoouple**    |      Radiant Temp     |   244    |      100 Hz    |          Timestamped(int) [°C x 100][8]       |
+|        **TK-PTC**         |        Air Temp       |   245    |      100 Hz    |          Timestamped(int) [°C x 100][9]       |
+|        **ATMOS22**        |       North Wind      |   246    |      ~2 Hz     |          Timestamped(float) [m/s][10]         |
+|                           |        East Wind      |   247    |      ~2 Hz     |          Timestamped(float) [m/s][10]         |
+|                           |        Gust Wind      |   248    |      ~2 Hz     |          Timestamped(float) [m/s][10]         |
+|                           |        Air Temp       |   249    |      ~2 Hz     |          Timestamped(float) [°C][10]          |
+|                           |      XOrientation     |   250    |      ~2 Hz     |          Timestamped(float) [Angle (°)][10]   |
+|                           |      YOrientation     |   251    |      ~2 Hz     |          Timestamped(float) [Angle (°)][10]   |
+|                           |        NullValue      |   252    |      ~2 Hz     |          Timestamped(float)                   |
+|  **BNO055-Accelerometer** |     Orientation X     |    -     |      50 Hz     |            [Angle (°)][11]                    |
+|                           |     Orientation Y     |    -     |      50 Hz     |            [Angle (°)][11]                    |
+|                           |     Orientation Z     |    -     |      50 Hz     |            [Angle (°)][11]                    |
+|                           |     Gyroscope X       |    -     |      50 Hz     |            [Angle (°)][11]                    |
+|                           |     Gyroscope Y       |    -     |      50 Hz     |            [Angle (°)][11]                    |
+|                           |     Gyroscope Z       |    -     |      50 Hz     |            [Angle (°)][11]                    |
+|                           |     LinearAccl X      |    -     |      50 Hz     |            [m/s²][11]                         |
+|                           |     LinearAccl Y      |    -     |      50 Hz     |            [m/s²][11]                         |
+|                           |     LinearAccl Z      |    -     |      50 Hz     |            [m/s²][11]                         |
+|                           |     Magnetometer X    |    -     |      50 Hz     |            [Angle (°)][11]                    |
+|                           |     Magnetometer Y    |    -     |      50 Hz     |            [Angle (°)][11]                    |
+|                           |     Magnetometer Z    |    -     |      50 Hz     |            [Angle (°)][11]                    |
+|                           |     Accl X            |    -     |      50 Hz     |            [m/s²][11]                         |
+|                           |     Accl Y            |    -     |      50 Hz     |            [m/s²][11]                         |
+|                           |     Accl Z            |    -     |      50 Hz     |            [m/s²][11]                         |
+|                           |     Gravity X         |    -     |      50 Hz     |            [m/s²][11]                         |
+|                           |     Gravity Y         |    -     |      50 Hz     |            [m/s²][11]                         |
+|                           |     Gravity Z         |    -     |      50 Hz     |            [m/s²][11]                         |
+|                           |     SysCalibEnabled   |    -     |      50 Hz     |            [Boolean][11]                      |
+|                           |     GyroCalibEnabled  |    -     |      50 Hz     |            [Boolean][11]                      |
+|                           |     AccCalibEnabled   |    -     |      50 Hz     |            [Boolean][11]                      |
+|                           |     MagCalibEnabled   |    -     |      50 Hz     |            [Boolean][11]                      |
+|                           |     SysCalibEnabled   |    -     |      50 Hz     |            [Boolean][11]                      |
+|                           |     Temperature       |    -     |      50 Hz     |            Not used(??)                       |
+|                           |     SoftwareTimestamp |    -     |      50 Hz     |            TimeStamp                          |
+|     [**Empatica-E4**][12] |     E4_Acc            |    -     |    31.5 Hz     |    Axis: X(usb);Y(strap);Z(bottom) [m/s²][13] |
+|                           |     E4_Battery        |    -     |    0.05 Hz     |      % of battery float [(0.0 to 1.0)][13]    |
+|                           |     E4_Bvp            |    -     |      64 Hz     |      [Reflection of green and red light][14]  |
+|                           |     E4_Gsr            |    -     |       4 Hz     |            [microsiemens][13]                 |
+|                           |     E4_Hr             |    -     |    1.56 Hz     |            [beats per minute][13]             |
+|                           |     E4_Ibi            |    -     |    1.56 Hz     |   Heart inter beat interval [in seconds][13]  |
+|                           |     E4_Temperature    |    -     |       4 Hz     |        Wrist surface temperature in [ᵒC][13]  |
+|                           |     E4_Tag            |    -     |       -        |        [Wristband button pressed][13]         |
+|                           |     R                 |    -     |       -        |        Responses to commands sent to E4       |
+|                           |     E4_Seconds        |    -     |       -        | Every stream is timestamped with E4 timestamp |
+|       **PupilLabs**       | WorldCamera (Decoded) |   209    |      32 Hz     |            Timestamped(Boolean HasFrame?)     |
+|                           |    WorldCamera (Raw)  |   210    |      32 Hz     |            Timestamped(FrameNumber)           |
+|                           |         IMU           |   211    |       -        |    Not in use Timestamped(FrameNumber)        |
+|                           |         Gaze          |   212    |      250 Hz    |            Timestamped(FrameNumber)           |
+|                           |         Audio         |   213    |       -        |    Not in use Timestamped(FrameNumber)        |
+|                           |         Key           |   214    |       -        |    Not in use Timestamped(FrameNumber)        |
+|       **UBX**             |         UBX           |          |                |                                               |
+|       **Omnicept**        |      EyeTracking      |   215    |                |            Timestamped(long[])                |
+|                           |       HeartRate       |   216    |                |            Timestamped(long[])                |
+|                           |          IMU          |   217    |                |            Timestamped(long[])                |
+|                           |         Mouth         |   218    |                |            Timestamped(long[])                |
+|     **VRTransform**       |       VrTimestamp     |   219    |                |            Timestamped(long)                  |
+|     **UnityImage**        |       VrTimestamp     |   220    |                |            Timestamped(long)                  |
 
 # Simulation 
 The VR simulation environment is in **VR-Alfama** folder, to set up the Unity environment follow the instructions in the README.md inside **VR-Alfama**  
