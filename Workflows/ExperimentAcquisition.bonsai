@@ -1238,10 +1238,8 @@
                           <Name>HarpSoftwareLogging</Name>
                         </Expression>
                         <Expression xsi:type="WorkflowOutput" />
-                        <Expression xsi:type="Combinator">
-                          <Combinator xsi:type="IntProperty">
-                            <Value>0</Value>
-                          </Combinator>
+                        <Expression xsi:type="SubscribeSubject">
+                          <Name>PlumaEvents</Name>
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="rx:Take">
