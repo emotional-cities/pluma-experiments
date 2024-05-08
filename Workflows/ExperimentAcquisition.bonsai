@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <WorkflowBuilder Version="2.8.1"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
@@ -2681,50 +2681,6 @@ it.Item3 as TimestampSource)</scr:Expression>
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
                   <Edge From="1" To="2" Label="Source1" />
-                </Edges>
-              </Workflow>
-            </Expression>
-            <Expression xsi:type="GroupWorkflow">
-              <Name>ECG_Viz</Name>
-              <Workflow>
-                <Nodes>
-                  <Expression xsi:type="SubscribeSubject">
-                    <Name>PlumaEvents</Name>
-                  </Expression>
-                  <Expression xsi:type="pluma:Parse">
-                    <harp:Register xsi:type="pluma:TimestampedEcgAndAnalogData" />
-                  </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Value.Ecg</Selector>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:Slice">
-                      <rx:Start>0</rx:Start>
-                      <rx:Step>4</rx:Step>
-                      <rx:Stop xsi:nil="true" />
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="dsp:FrequencyFilter">
-                      <dsp:SampleRate>250</dsp:SampleRate>
-                      <dsp:Cutoff1>1</dsp:Cutoff1>
-                      <dsp:Cutoff2>0</dsp:Cutoff2>
-                      <dsp:KernelLength>60</dsp:KernelLength>
-                      <dsp:FilterType>HighPass</dsp:FilterType>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="rx:PublishSubject">
-                    <Name>ECGViz</Name>
-                  </Expression>
-                  <Expression xsi:type="WorkflowOutput" />
-                </Nodes>
-                <Edges>
-                  <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="2" To="3" Label="Source1" />
-                  <Edge From="3" To="4" Label="Source1" />
-                  <Edge From="4" To="5" Label="Source1" />
-                  <Edge From="5" To="6" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
