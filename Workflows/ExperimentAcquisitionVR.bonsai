@@ -486,7 +486,7 @@
               <Property Name="Upper" />
               <Property Name="Lower" />
             </Expression>
-            <Expression xsi:type="IncludeWorkflow" Path="Extensions\Harp.Pluma.bonsai">
+            <Expression xsi:type="IncludeWorkflow" Path="Extensions\Pluma.bonsai">
               <DueTime>PT0.1S</DueTime>
               <Lower>8</Lower>
               <Upper>16</Upper>
