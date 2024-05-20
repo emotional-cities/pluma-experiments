@@ -10,12 +10,13 @@ using UnityEditor;
 using UnityEditor.Recorder;
 using UnityEditor.Recorder.Input;
 using NetMQ.Sockets;
+using System.Linq;
 
 /// <summary>
 /// This script is used to record videos directly from unity.
 /// It has impact on framerate so it should only be used when no headset is being used.
 /// </summary>
-public class UnityScreenRecorder : MonoBehaviour
+public class UnityScreenRecorder : DataPublisher
 {
     /// <summary>
     /// Base Path where the videos should be recorded 
@@ -27,7 +28,7 @@ public class UnityScreenRecorder : MonoBehaviour
     /// </summary>
     [Tooltip("Only used if SubscriberAddress is kept blank")]
     public string Filename;
-    private bool recording = false;
+    private bool recording;
     private RecorderController recorderController;
 
     /// <summary>
@@ -43,38 +44,42 @@ public class UnityScreenRecorder : MonoBehaviour
     [Tooltip("Only used if SubscriberAddress is kept blank")]
     public KeyCode StopRecordingKey = KeyCode.LeftShift;
 
-    private bool usingSubscriber = false;
-    private void Start()
+    private bool useSubSocket = false;
+
+    protected override void Start()
     {
+        base.Start();
+        recording = false;
         if (SubscriberAddress != null && SubscriberAddress.Length > 0)
         {
-            usingSubscriber = true;
             SubSocket = new SubscriberSocket();
             SubSocket.Connect(SubscriberAddress);
             SubSocket.Subscribe("Path");
+            useSubSocket = true;
         }
     }
     // Update is called once per frame
     void Update()
     {
-        if (!usingSubscriber)
-        {
-            if (!recording && Input.GetKeyDown(StartRecordingKey))
-            {
-                var date = DateTime.Now.ToString("yyyy_MM_dd__HH_mm_ss");
-                StartRecording(BasePath + "\\" + this.Filename + "_" + date);
-            }
-            if (recording && Input.GetKeyDown(StopRecordingKey))
-            {
-                StopRecording();
-            }
-        }
-        else if (SubSocket.HasIn)
+        if (useSubSocket && SubSocket.HasIn)
         {
             var topic = SubSocket.ReceiveFrameString();
             var message = SubSocket.ReceiveFrameString();
             Debug.Log("Received Topic:" + topic + " Msg:" + message);
-            StartRecording(message);
+            BasePath = message;
+        }
+        if (!recording && Input.GetKeyDown(StartRecordingKey))
+        {
+            var date = DateTime.Now.ToString("yyyy_MM_dd__HH_mm_ss");
+            StartRecording(BasePath + this.Filename + "_" + date);
+            SendRecordingStatus("StartRecording");
+            recording = true;
+        }
+        if (recording && Input.GetKeyDown(StopRecordingKey))
+        {
+            recorderController.StopRecording();
+            SendRecordingStatus("StopRecording");
+            recording = false;
         }
     }
 
@@ -108,20 +113,19 @@ public class UnityScreenRecorder : MonoBehaviour
         RecorderOptions.VerboseMode = false;
         recorderController.PrepareRecording();
         recorderController.StartRecording();
-
-        recording = true;
     }
-    void StopRecording()
+    private void SendRecordingStatus(string status)
     {
-        if (recording)
-        {
-            recorderController.StopRecording();
-            recording = false;
-        }
+        long timestamp = DateTime.Now.Ticks / (TimeSpan.TicksPerMillisecond / 1000);
+
+       PubSocket.SendMoreFrame("RecordingStatus")
+            .SendMoreFrame(BitConverter.GetBytes(timestamp))
+            .SendFrame(status);
     }
 
-    protected virtual void OnApplicationQuit()
+    protected override void OnApplicationQuit()
     {
+        base.OnApplicationQuit();
         if (SubSocket != null)
         {
             SubSocket.Dispose();
@@ -130,7 +134,8 @@ public class UnityScreenRecorder : MonoBehaviour
     }
     void OnDisable()
     {
-        StopRecording();
+        if(recording)
+            recorderController.StopRecording();
     }
 }
 #endif

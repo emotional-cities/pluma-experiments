@@ -1333,9 +1333,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 938518b1a2fa4ba42aa0a71acc8bf260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BasePath: C:\Data\VideosData
-  Filename: exp1
-  SubscriberAddress: 
+  PublisherBindAddress: tcp://localhost:5561
+  BasePath: C:\Data\VideosData\
+  Filename: VrVideo
+  SubscriberAddress: tcp://localhost:5560
   StartRecordingKey: 32
   StopRecordingKey: 304
 --- !u!1 &681729591
@@ -2730,6 +2731,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3827635044414375890, guid: 22732481f23aec646baef4459a695737, type: 3}
+--- !u!1 &1784282895 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6711714439356026094, guid: 573ac53c334415945bf239de2c2f0511, type: 3}
+  m_PrefabInstance: {fileID: 1448742964}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1784282905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784282895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1479fe22bfe856b4197bdcd756b9b8b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PublisherBindAddress: tcp://localhost:5558
 --- !u!1 &1799948686 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4237835407467653916, guid: 22732481f23aec646baef4459a695737, type: 3}
