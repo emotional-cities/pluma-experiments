@@ -70,8 +70,8 @@
 ## Setup
 - [ ] Turn on equipment, check networks
 - [ ] Empatica:
-   - [ ] Turn on E4 streaming server
    - [ ] Turn on empatica
+   - [ ] Turn on E4 streaming server
    - [ ] check if paired on E4 streaming server
    - [ ] Fit wristband tight
 - [ ] Pupil Labs
