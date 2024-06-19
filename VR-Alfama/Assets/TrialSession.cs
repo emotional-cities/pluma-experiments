@@ -1,3 +1,4 @@
+using NetMQ;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -59,8 +60,29 @@ public class TrialSession : DataPublisher
 
     void InterTrialIntervalState()
     {
-        UiManager.OpenMessagePanel(new UiManager.InfoMessage { Title = "AlfamaVR", Body = String.Format("Prepare to explore the space in" + System.Environment.NewLine + "{0}", Timer) });
+        UiManager.OpenMessagePanel(new UiManager.InfoMessage { Title = "AlfamaVR", Body = String.Format("Prepare to explore the space in" + System.Environment.NewLine + "{0}", Math.Ceiling(Timer)) });
 
         Timer -= Time.deltaTime;
+
+        if (Timer <= 0)
+        {
+            LogInterTrialInterval();
+
+            UiManager.CloseMessagePanel();
+            updateAction = PrimeMapState;
+        }
+    }
+
+    void PrimeMapState()
+    {
+
+    }
+
+    private void LogInterTrialInterval()
+    {
+        long timestamp = DateTime.Now.Ticks / (TimeSpan.TicksPerMillisecond / 1000);
+        PubSocket.SendMoreFrame("ITI")
+           .SendMoreFrame(BitConverter.GetBytes(timestamp))
+           .SendFrame(BitConverter.GetBytes(SecondsInterTrialInterval));
     }
 }
