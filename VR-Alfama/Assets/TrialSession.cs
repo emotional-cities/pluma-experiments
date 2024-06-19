@@ -16,6 +16,7 @@ public class TrialSession : DataPublisher
     }
 
     public float SecondsInterTrialInterval = 3;
+    public float SecondsPrimeMap = 3;
 
     public VrInteractionController InteractionSource;
     public UiManager UiManager;
@@ -76,14 +77,20 @@ public class TrialSession : DataPublisher
             // TODO spawn player at spawn point
 
             Texture2D cameraTexture = VrUtilities.TextureFromCamera(MapCamera);
-            UiManager.OpenImagePanel("AlfamaVr", cameraTexture);
+            UiManager.OpenImagePanel("AlfamaVr", cameraTexture, "Note your starting location on the map (red).");
+            Timer = SecondsPrimeMap;
             updateAction = PrimeMapState;
         }
     }
 
     void PrimeMapState()
     {
+        Timer -= Time.deltaTime;
 
+        if (Timer <= 0 )
+        {
+            UiManager.CloseImagePanel();
+        }
     }
 
     private void LogInterTrialInterval()
