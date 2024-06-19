@@ -1,4 +1,5 @@
 using NetMQ;
+using Newtonsoft.Json.Bson;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ public class TrialSession : DataPublisher
 
     public VrInteractionController InteractionSource;
     public UiManager UiManager;
+    public Camera MapCamera;
 
     public Trial[] TrialList;
     private int CurrentTrialIndex = 0;
@@ -43,7 +45,8 @@ public class TrialSession : DataPublisher
     void InitialState()
     {
         // Open initial menu
-        UiManager.OpenMessagePanel(new UiManager.InfoMessage { Title = "AlfamaVR", Body = "Adjust the headset and pick up the controllers. Press the right trigger to continue." });
+        UiManager.OpenMessagePanel("AlfamaVR", "Adjust the headset and pick up the controllers. Press the right trigger to continue." );
+        UiManager.CloseImagePanel();
 
         updateAction = StartState;
     }
@@ -60,7 +63,7 @@ public class TrialSession : DataPublisher
 
     void InterTrialIntervalState()
     {
-        UiManager.OpenMessagePanel(new UiManager.InfoMessage { Title = "AlfamaVR", Body = String.Format("Prepare to explore the space in" + System.Environment.NewLine + "{0}", Math.Ceiling(Timer)) });
+        UiManager.OpenMessagePanel("AlfamaVR", String.Format("Prepare to explore the space in" + System.Environment.NewLine + "{0}", Math.Ceiling(Timer)));
 
         Timer -= Time.deltaTime;
 
@@ -69,6 +72,11 @@ public class TrialSession : DataPublisher
             LogInterTrialInterval();
 
             UiManager.CloseMessagePanel();
+
+            // TODO spawn player at spawn point
+
+            Texture2D cameraTexture = VrUtilities.TextureFromCamera(MapCamera);
+            UiManager.OpenImagePanel("AlfamaVr", cameraTexture);
             updateAction = PrimeMapState;
         }
     }
