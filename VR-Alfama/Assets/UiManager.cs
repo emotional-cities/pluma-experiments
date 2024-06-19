@@ -5,6 +5,7 @@ using UnityEngine;
 public class UiManager : MonoBehaviour
 {
     public MessagePanel MessagePanel;
+    public ImagePanel ImagePanel;
 
     // Start is called before the first frame update
     void Start()
@@ -12,12 +13,12 @@ public class UiManager : MonoBehaviour
         CloseMessagePanel();
     }
 
-    public void OpenMessagePanel(InfoMessage message)
+    public void OpenMessagePanel(string title, string body)
     {
         MessagePanel.gameObject.SetActive(true);
 
-        MessagePanel.TitleText.text = message.Title;
-        MessagePanel.BodyText.text = message.Body;
+        MessagePanel.TitleText.text = title;
+        MessagePanel.BodyText.text = body;
     }
 
     public void CloseMessagePanel()
@@ -25,9 +26,16 @@ public class UiManager : MonoBehaviour
         MessagePanel.gameObject.SetActive(false);
     }
 
-    public struct InfoMessage
+    public void OpenImagePanel(string title, Texture2D image)
     {
-        public string Title;
-        public string Body;
+        ImagePanel.gameObject.SetActive(true);
+
+        ImagePanel.TitleText.text = title;
+        ImagePanel.Image.texture = image;
+    }
+
+    public void CloseImagePanel()
+    {
+        ImagePanel.gameObject.SetActive(false);
     }
 }
