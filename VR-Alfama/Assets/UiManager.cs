@@ -26,12 +26,13 @@ public class UiManager : MonoBehaviour
         MessagePanel.gameObject.SetActive(false);
     }
 
-    public void OpenImagePanel(string title, Texture2D image)
+    public void OpenImagePanel(string title, Texture2D image, string message)
     {
         ImagePanel.gameObject.SetActive(true);
 
         ImagePanel.TitleText.text = title;
         ImagePanel.Image.texture = image;
+        ImagePanel.Text.text = message;
     }
 
     public void CloseImagePanel()
