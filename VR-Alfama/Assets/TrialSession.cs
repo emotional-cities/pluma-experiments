@@ -3,6 +3,7 @@ using Newtonsoft.Json.Bson;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using UnityEngine;
 using UnityEngine.XR;
@@ -31,24 +32,12 @@ public class TrialSession : DataPublisher
     public Trial[] TrialList;
     private int CurrentTrialIndex = 0;
 
-    private delegate void UpdateAction();
-    private UpdateAction updateAction = () => { };
-
-    private float Timer = 0f;
-
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
-        //updateAction = InitialState;
 
         StartCoroutine(Session());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //updateAction();
     }
 
     IEnumerator Session()
@@ -82,75 +71,24 @@ public class TrialSession : DataPublisher
             LogNewScene();
             yield return new WaitForSeconds(currentTrial.SecondsDuration);
 
+            // Point to origin
+            UiManager.OpenMessagePanel("AlfamaVr", "Point to your starting position and press the right trigger.");
+            // Set origin pointer active
+
+            LogPointToOriginWorld(0);
+            while (!InteractionSource.RightInteractionState) {
+                LogPointToOriginWorld(1);
+                yield return null; 
+            }
+            LogPointToOriginWorld(2);
+
+            // Set origin pointer inactive
+
+
             CurrentTrialIndex++;
         }
 
         yield return null;
-    }
-
-    void InitialState()
-    {
-        // Open initial menu
-        UiManager.OpenMessagePanel("AlfamaVR", "Adjust the headset and pick up the controllers. Press the right trigger to continue." );
-        UiManager.CloseImagePanel();
-
-        updateAction = StartState;
-    }
-
-    void StartState()
-    {
-        if (InteractionSource.RightInteractionState)
-        {
-            Timer = SecondsInterTrialInterval;
-            UiManager.CloseMessagePanel();
-            updateAction = InterTrialIntervalState;
-        }
-    }
-
-    void InterTrialIntervalState()
-    {
-        UiManager.OpenMessagePanel("AlfamaVR", String.Format("Prepare to explore the space in" + System.Environment.NewLine + "{0}", Math.Ceiling(Timer)));
-
-        Timer -= Time.deltaTime;
-
-        if (Timer <= 0)
-        {
-            LogInterTrialInterval();
-
-            UiManager.CloseMessagePanel();
-
-            // Spawn player at spawn point
-            InteractionSource.transform.position = TrialList[CurrentTrialIndex].InitialPosition;
-            InteractionSource.transform.rotation = Quaternion.Euler(TrialList[CurrentTrialIndex].InitialRotation);
-
-            Texture2D cameraTexture = VrUtilities.TextureFromCamera(MapCamera);
-            UiManager.OpenImagePanel("AlfamaVr", cameraTexture, "Note your starting location on the map (red).");
-            Timer = SecondsPrimeMap;
-            updateAction = PrimeMapState;
-        }
-    }
-
-    void PrimeMapState()
-    {
-        Timer -= Time.deltaTime;
-
-        if (Timer <= 0 )
-        {
-            UiManager.CloseImagePanel();
-            Timer = TrialList[CurrentTrialIndex].SecondsDuration;
-            updateAction = SpatialSampling;
-        }
-    }
-
-    void SpatialSampling()
-    {
-        Timer -= Time.deltaTime;
-
-        if (Timer <= 0)
-        {
-            CurrentTrialIndex++;
-            updateAction = InterTrialIntervalState;
-        }
     }
 
     private void LogInterTrialInterval()
@@ -172,5 +110,40 @@ public class TrialSession : DataPublisher
             .SendMoreFrame(scene)
             .SendMoreFrame(spatialSample)
             .SendFrame(BitConverter.GetBytes(TrialList[CurrentTrialIndex].SecondsDuration));
+    }
+
+    private void LogPointToOriginWorld(int state)
+    {
+        var originPosition = TrialList[CurrentTrialIndex].InitialPosition;
+        var handTransform = InteractionSource.GetRightControllerTransform();
+        var handPosition = handTransform.position;
+        var handRotation = handTransform.rotation;
+        var handAxisAngle = -handTransform.up;
+
+        var originAxisAngle = (originPosition - handTransform.position).normalized;
+
+        long timestamp = DateTime.Now.Ticks / (TimeSpan.TicksPerMillisecond / 1000);
+        byte[] originPositionData = BitConverter.GetBytes(originPosition.x)
+            .Concat(BitConverter.GetBytes(originPosition.y))
+            .Concat(BitConverter.GetBytes(originPosition.z))
+            .ToArray();
+        byte[] handPositionData = BitConverter.GetBytes(handPosition.x)
+            .Concat(BitConverter.GetBytes(handPosition.y))
+            .Concat(BitConverter.GetBytes(handPosition.z))
+            .ToArray();
+        byte[] handAxisAngleData = BitConverter.GetBytes(handAxisAngle.x)
+            .Concat(BitConverter.GetBytes(handAxisAngle.y))
+            .Concat(BitConverter.GetBytes(handAxisAngle.z))
+            .ToArray();
+        byte[] originAxisAngleData = BitConverter.GetBytes(originAxisAngle.x)
+            .Concat(BitConverter.GetBytes(originAxisAngle.y))
+            .Concat(BitConverter.GetBytes(originAxisAngle.z))
+            .ToArray();
+        byte[] allData = originPositionData.Concat(handPositionData).Concat(handAxisAngleData).Concat(originAxisAngleData).ToArray();
+        PubSocket.SendMoreFrame("PointToOriginWorld")
+           .SendMoreFrame(BitConverter.GetBytes(timestamp))
+           .SendMoreFrame(allData)
+           .SendFrame(BitConverter.GetBytes(state)); ;
+
     }
 }
