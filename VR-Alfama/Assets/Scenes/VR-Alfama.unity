@@ -3134,23 +3134,23 @@ MonoBehaviour:
   MapCamera: {fileID: 664903455}
   TrialList:
   - InitialPosition: {x: -1.01632, y: 4.098989, z: -67.7467}
-    InitialRotation: {x: 0.927, y: -49.132, z: 0}
+    InitialRotation: {x: 0, y: -49.132, z: 0}
     SecondsDuration: 30
     Map: {fileID: 0}
   - InitialPosition: {x: 52.19868, y: 8.130451, z: 56.19336}
-    InitialRotation: {x: -0.607, y: -104.807, z: 0}
+    InitialRotation: {x: 0, y: -104.807, z: 0}
     SecondsDuration: 30
     Map: {fileID: 0}
   - InitialPosition: {x: 48.96687, y: 13.344337, z: 85.13644}
-    InitialRotation: {x: -3.646, y: -119.093, z: 0}
+    InitialRotation: {x: 0, y: -119.093, z: 0}
     SecondsDuration: 30
     Map: {fileID: 0}
   - InitialPosition: {x: 7.787597, y: 3.010348, z: 45.31182}
-    InitialRotation: {x: -11.37, y: 74.586, z: 0}
+    InitialRotation: {x: 0, y: 74.586, z: 0}
     SecondsDuration: 30
     Map: {fileID: 0}
   - InitialPosition: {x: -82.23508, y: 13.18168, z: -19.90988}
-    InitialRotation: {x: -6.898, y: 61.126, z: 0}
+    InitialRotation: {x: 0, y: 61.126, z: 0}
     SecondsDuration: 30
     Map: {fileID: 0}
 --- !u!1 &1308785569 stripped
