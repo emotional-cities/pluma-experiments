@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 using UnityEngine.XR;
 
 // TODO - should be moved into com.neurogears.plumavr
@@ -29,6 +30,9 @@ public class VrInteractionController : MonoBehaviour
 
     [SerializeField]
     private Transform forwardSource; // Transform used to determine what is forward relative to controller movement
+
+    [SerializeField]
+    private Transform RightController;
 
     List<InputDevice> rightControllers = new List<InputDevice>();
     List<InputDevice> leftControllers = new List<InputDevice>();
@@ -119,6 +123,11 @@ public class VrInteractionController : MonoBehaviour
         bool state;
         device.TryGetFeatureValue(CommonUsages.triggerButton, out state);
         return state;
+    }
+
+    public Transform GetRightControllerTransform()
+    {
+        return RightController.transform;
     }
 
     void OnInputDeviceConnected(InputDevice device)
