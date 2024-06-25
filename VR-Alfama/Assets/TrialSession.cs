@@ -11,6 +11,8 @@ public class TrialSession : DataPublisher
     [System.Serializable]
     public class Trial
     {
+        public Vector3 InitialPosition;
+        public Vector3 InitialRotation;
         public int SecondsDuration;
         public Texture2D Map;
     }
@@ -91,6 +93,11 @@ public class TrialSession : DataPublisher
         {
             UiManager.CloseImagePanel();
         }
+    }
+
+    void SpatialSampling()
+    {
+
     }
 
     private void LogInterTrialInterval()
