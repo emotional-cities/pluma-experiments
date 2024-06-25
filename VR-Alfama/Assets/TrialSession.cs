@@ -3,6 +3,7 @@ using Newtonsoft.Json.Bson;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.XR;
 
@@ -13,9 +14,12 @@ public class TrialSession : DataPublisher
     {
         public Vector3 InitialPosition;
         public Vector3 InitialRotation;
+        public SceneType SceneType;
         public int SecondsDuration;
         public Texture2D Map;
     }
+    
+    public enum SceneType { Adverse, Optimistic }
 
     public float SecondsInterTrialInterval = 3;
     public float SecondsPrimeMap = 3;
@@ -36,13 +40,52 @@ public class TrialSession : DataPublisher
     protected override void Start()
     {
         base.Start();
-        updateAction = InitialState;   
+        //updateAction = InitialState;
+
+        StartCoroutine(Session());
     }
 
     // Update is called once per frame
     void Update()
     {
-        updateAction();
+        //updateAction();
+    }
+
+    IEnumerator Session()
+    {
+        // Initial state
+        UiManager.OpenMessagePanel("AlfamaVR", "Adjust the headset and pick up the controllers. Press the right trigger to continue.");
+        UiManager.CloseImagePanel();
+
+        foreach (Trial currentTrial in TrialList)
+        {
+            // Start state
+            while (!InteractionSource.RightInteractionState) { yield return null; }
+
+            // Intertrial interval
+            UiManager.OpenMessagePanel("AlfamaVR", "Prepare to explore the space.");
+            yield return new WaitForSeconds(SecondsInterTrialInterval);
+            LogInterTrialInterval();
+
+            // Prime map
+            UiManager.CloseMessagePanel();
+            InteractionSource.transform.position = currentTrial.InitialPosition;
+            InteractionSource.transform.rotation = Quaternion.Euler(currentTrial.InitialRotation);
+            // TODO adverse vs. optimistic
+
+            Texture2D cameraTexture = VrUtilities.TextureFromCamera(MapCamera);
+            UiManager.OpenImagePanel("AlfamaVr", cameraTexture, "Note your starting location on the map (red).");
+            yield return new WaitForSeconds(SecondsPrimeMap);
+
+            // Spatial sampling
+            UiManager.CloseImagePanel();
+            LogNewScene();
+            yield return new WaitForSeconds(currentTrial.SecondsDuration);
+
+            CurrentTrialIndex++;
+        }
+
+        yield return null;
     }
 
     void InitialState()
@@ -76,7 +119,9 @@ public class TrialSession : DataPublisher
 
             UiManager.CloseMessagePanel();
 
-            // TODO spawn player at spawn point
+            // Spawn player at spawn point
+            InteractionSource.transform.position = TrialList[CurrentTrialIndex].InitialPosition;
+            InteractionSource.transform.rotation = Quaternion.Euler(TrialList[CurrentTrialIndex].InitialRotation);
 
             Texture2D cameraTexture = VrUtilities.TextureFromCamera(MapCamera);
             UiManager.OpenImagePanel("AlfamaVr", cameraTexture, "Note your starting location on the map (red).");
@@ -92,12 +137,20 @@ public class TrialSession : DataPublisher
         if (Timer <= 0 )
         {
             UiManager.CloseImagePanel();
+            Timer = TrialList[CurrentTrialIndex].SecondsDuration;
+            updateAction = SpatialSampling;
         }
     }
 
     void SpatialSampling()
     {
+        Timer -= Time.deltaTime;
 
+        if (Timer <= 0)
+        {
+            CurrentTrialIndex++;
+            updateAction = InterTrialIntervalState;
+        }
     }
 
     private void LogInterTrialInterval()
@@ -106,5 +159,18 @@ public class TrialSession : DataPublisher
         PubSocket.SendMoreFrame("ITI")
            .SendMoreFrame(BitConverter.GetBytes(timestamp))
            .SendFrame(BitConverter.GetBytes(SecondsInterTrialInterval));
+    }
+
+    private void LogNewScene()
+    {
+        long timestamp = DateTime.Now.Ticks / (TimeSpan.TicksPerMillisecond / 1000);
+        byte[] scene = Encoding.ASCII.GetBytes(CurrentTrialIndex.ToString() + '\0');
+        byte[] spatialSample = Encoding.ASCII.GetBytes(CurrentTrialIndex.ToString() + '\0');
+
+        PubSocket.SendMoreFrame("NewScene")
+            .SendMoreFrame(BitConverter.GetBytes(timestamp))
+            .SendMoreFrame(scene)
+            .SendMoreFrame(spatialSample)
+            .SendFrame(BitConverter.GetBytes(TrialList[CurrentTrialIndex].SecondsDuration));
     }
 }
