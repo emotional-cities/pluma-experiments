@@ -49,6 +49,7 @@ public class TrialSession : DataPublisher
         foreach (Trial currentTrial in TrialList)
         {
             // Start state
+            InteractionSource.SetPointerActive(false);
             while (!InteractionSource.RightInteractionState) { yield return null; }
 
             // Intertrial interval
@@ -73,7 +74,7 @@ public class TrialSession : DataPublisher
 
             // Point to origin
             UiManager.OpenMessagePanel("AlfamaVr", "Point to your starting position and press the right trigger.");
-            // Set origin pointer active
+            InteractionSource.SetPointerActive(true);
 
             LogPointToOriginWorld(0);
             while (!InteractionSource.RightInteractionState) {
@@ -81,8 +82,6 @@ public class TrialSession : DataPublisher
                 yield return null; 
             }
             LogPointToOriginWorld(2);
-
-            // Set origin pointer inactive
 
 
             CurrentTrialIndex++;

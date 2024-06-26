@@ -33,6 +33,7 @@ public class VrInteractionController : MonoBehaviour
 
     [SerializeField]
     private Transform RightController;
+    private RayPointer RayPointer;
 
     List<InputDevice> rightControllers = new List<InputDevice>();
     List<InputDevice> leftControllers = new List<InputDevice>();
@@ -48,6 +49,7 @@ public class VrInteractionController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        RayPointer = RightController.GetComponentInChildren<RayPointer>();
     }
 
     private void Awake()
@@ -154,5 +156,10 @@ public class VrInteractionController : MonoBehaviour
         {
             leftControllers.Remove(device);
         }
+    }
+
+    public void SetPointerActive(bool active)
+    {
+        RayPointer.gameObject.SetActive(active);
     }
 }
