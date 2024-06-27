@@ -50,6 +50,7 @@ public class TrialSession : DataPublisher
         {
             // Start state
             InteractionSource.SetPointerActive(false);
+            Debug.Log(InteractionSource.RightInteractionState);
             while (!InteractionSource.RightInteractionState) { yield return null; }
 
             // Pointer debug
@@ -59,13 +60,32 @@ public class TrialSession : DataPublisher
             InteractionSource.SetPointerActive(true);
 
             while (!InteractionSource.RightInteractionState) {
-                RaycastHit hit = InteractionSource.GetPointedObject();
+                //RaycastHit hit;
+                //var controller = InteractionSource.GetRightControllerTransform();
+                //if (Physics.Raycast(controller.position, controller.forward, out hit, Mathf.Infinity, LayerMask.GetMask("UI")))
+                //{
+                //    Vector3 localPoint = hit.collider.GetComponent<RectTransform>().InverseTransformPoint(hit.point);
+
+                //    UiManager.OpenImagePanel("AlfamaVr", cameraTexture, localPoint.x.ToString());
+                //} else
+                //{
+                //    UiManager.OpenImagePanel("AlfamaVr", cameraTexture, "no hit");
+                //}
+
+                RaycastHit hit = InteractionSource.GetPointedObject(LayerMask.GetMask("UI"));
                 if (hit.transform != null)
                 {
-                    Debug.Log(hit);
+                    Vector3 localHit = hit.collider.GetComponent<RectTransform>().InverseTransformPoint(hit.point);
+
+                    //UiManager.OpenImagePanel("AlfamaVr", cameraTexture, localHit.x.ToString());
+                    //UiManager.OpenImagePanel("AlfamaVr", cameraTexture, (UiManager.ImagePanel.Image.rectTransform.rect.height * localHit.y).ToString());
+                    UiManager.OpenImagePanel("AlfamaVr", cameraTexture, (localHit.x).ToString());
+
+                    UiManager.SetImageCursorPosition(localHit);
                 }
 
-                yield return null; 
+                //yield return null; 
+                yield return null;
             }
 
             // Intertrial interval

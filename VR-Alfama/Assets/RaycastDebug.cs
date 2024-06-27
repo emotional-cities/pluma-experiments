@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class RaycastDebug : MonoBehaviour
 {
-    public GraphicRaycaster graphicRaycaster;
+    public RectTransform Cursor;
 
     // Start is called before the first frame update
     void Start()
@@ -18,11 +18,15 @@ public class RaycastDebug : MonoBehaviour
     void Update()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity))
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+            Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.yellow);
 
-            Debug.Log(hit.point);
+            Vector3 localPoint = hit.transform.InverseTransformPoint(hit.point);
+
+            Debug.Log(localPoint);
+
+            Cursor.anchoredPosition = localPoint;
         }
     }
 }
