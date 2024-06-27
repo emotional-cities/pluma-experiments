@@ -128,10 +128,10 @@ To achieve this, Bonsai is randomly toggling a digital output in the HARP behavi
 |                           |      Temperature      |   225    |       -        |  This sensor is not being used                |
 |                           |        Humidity       |   226    |       -        |  This sensor is not being used                |
 |    **TK-AmbientLight**    |      AmbientLight     |   223    |       -        |  This sensor is not being used                |
-|     **TK-AirQuality**     |       IAQ Index       |   233    |      1 Hz      |           [IAQ][3]                            |
-|                           |      Temperature      |   234    |      1 Hz      |  Measured at the position of the sensor       |
-|                           |        Humidity       |   235    |      1 Hz      |  Measured at the position of the sensor       |
-|                           |      AirPressure      |   236    |      1 Hz      |  Measured at the position of the sensor       |
+|     **TK-AirQuality**     |       IAQ Index       |   233    |      1 Hz      |                 [IAQ][3]                      |
+|                           |      Temperature      |   234    |      1 Hz      |  	         [°C x 100]                     |
+|                           |        Humidity       |   235    |      1 Hz      |                [%RH x100]                     |
+|                           |      AirPressure      |   236    |      1 Hz      |          [airPressure/100.0 + " hPa"]         |
 | **TK-SoundPressureLevel** |          SPL          |   237    |    100 Hz      |   Output db*10  [Sound Pressure Bricklet][4]  |
 |      **TK-Humidity**      |        Humidity       |   238    |                |   Output Rh% * 100 [Humidity v2][5]           |
 |      **TK-AnalogIn**      |        AnalogIn       |   239    |      100 Hz    |                                               |
