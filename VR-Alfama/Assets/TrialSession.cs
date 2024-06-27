@@ -53,40 +53,28 @@ public class TrialSession : DataPublisher
             Debug.Log(InteractionSource.RightInteractionState);
             while (!InteractionSource.RightInteractionState) { yield return null; }
 
-            // Pointer debug
-            Texture2D cameraTexture = VrUtilities.TextureFromCamera(MapCamera);
-            UiManager.OpenImagePanel("AlfamaVr", cameraTexture, "DEBUG");
-            yield return new WaitForSeconds(0.5f);
-            InteractionSource.SetPointerActive(true);
+            //// Pointer debug
+            //Texture2D cameraTexture = VrUtilities.TextureFromCamera(MapCamera);
+            //UiManager.OpenImagePanel("AlfamaVr", cameraTexture, "DEBUG");
+            //yield return new WaitForSeconds(0.5f);
+            //InteractionSource.SetPointerActive(true);
 
-            while (!InteractionSource.RightInteractionState) {
-                //RaycastHit hit;
-                //var controller = InteractionSource.GetRightControllerTransform();
-                //if (Physics.Raycast(controller.position, controller.forward, out hit, Mathf.Infinity, LayerMask.GetMask("UI")))
-                //{
-                //    Vector3 localPoint = hit.collider.GetComponent<RectTransform>().InverseTransformPoint(hit.point);
+            //while (!InteractionSource.RightInteractionState) {
+            //    RaycastHit hit = InteractionSource.GetPointedObject(LayerMask.GetMask("UI"));
+            //    if (hit.transform != null)
+            //    {
+            //        Vector3 localHit = hit.collider.GetComponent<RectTransform>().InverseTransformPoint(hit.point);
 
-                //    UiManager.OpenImagePanel("AlfamaVr", cameraTexture, localPoint.x.ToString());
-                //} else
-                //{
-                //    UiManager.OpenImagePanel("AlfamaVr", cameraTexture, "no hit");
-                //}
+            //        //UiManager.OpenImagePanel("AlfamaVr", cameraTexture, localHit.x.ToString());
+            //        //UiManager.OpenImagePanel("AlfamaVr", cameraTexture, (UiManager.ImagePanel.Image.rectTransform.rect.height * localHit.y).ToString());
+            //        UiManager.OpenImagePanel("AlfamaVr", cameraTexture, (localHit.x).ToString());
 
-                RaycastHit hit = InteractionSource.GetPointedObject(LayerMask.GetMask("UI"));
-                if (hit.transform != null)
-                {
-                    Vector3 localHit = hit.collider.GetComponent<RectTransform>().InverseTransformPoint(hit.point);
+            //        UiManager.SetImageCursorPosition(localHit);
+            //    }
 
-                    //UiManager.OpenImagePanel("AlfamaVr", cameraTexture, localHit.x.ToString());
-                    //UiManager.OpenImagePanel("AlfamaVr", cameraTexture, (UiManager.ImagePanel.Image.rectTransform.rect.height * localHit.y).ToString());
-                    UiManager.OpenImagePanel("AlfamaVr", cameraTexture, (localHit.x).ToString());
-
-                    UiManager.SetImageCursorPosition(localHit);
-                }
-
-                //yield return null; 
-                yield return null;
-            }
+            //    //yield return null; 
+            //    yield return null;
+            //}
 
             // Intertrial interval
             UiManager.OpenMessagePanel("AlfamaVR", "Prepare to explore the space.");
@@ -99,7 +87,7 @@ public class TrialSession : DataPublisher
             InteractionSource.transform.rotation = Quaternion.Euler(currentTrial.InitialRotation);
             // TODO adverse vs. optimistic
 
-            cameraTexture = VrUtilities.TextureFromCamera(MapCamera);
+            Texture2D cameraTexture = VrUtilities.TextureFromCamera(MapCamera);
             UiManager.OpenImagePanel("AlfamaVr", cameraTexture, "Note your starting location on the map (red).");
             yield return new WaitForSeconds(SecondsPrimeMap);
 
@@ -119,6 +107,23 @@ public class TrialSession : DataPublisher
             }
             LogPointToOriginWorld(2);
 
+            // Point on map
+            InteractionSource.SetPointerActive(false);
+            UiManager.OpenImagePanel("AlfamaVr", cameraTexture, "Point to your current location and press the right trigger.");
+            yield return new WaitForSeconds(0.5f);
+            InteractionSource.SetPointerActive(true);
+
+            while (!InteractionSource.RightInteractionState)
+            {
+                RaycastHit hit = InteractionSource.GetPointedObject(LayerMask.GetMask("UI"));
+                if (hit.transform != null)
+                {
+                    Vector3 localHit = hit.collider.GetComponent<RectTransform>().InverseTransformPoint(hit.point);
+
+                    UiManager.SetImageCursorPosition(localHit);
+                }
+                yield return null;
+            }
 
             CurrentTrialIndex++;
         }
