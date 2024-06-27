@@ -49,7 +49,6 @@ public class VrInteractionController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        RayPointer = RightController.GetComponentInChildren<RayPointer>();
     }
 
     private void Awake()
@@ -57,6 +56,7 @@ public class VrInteractionController : MonoBehaviour
         // Set up input device connect / disconnect callbacks
         InputDevices.deviceConnected += OnInputDeviceConnected;
         InputDevices.deviceDisconnected += OnInputDeviceDisconnected;
+        RayPointer = RightController.GetComponentInChildren<RayPointer>();
     }
 
     // Update is called once per frame
@@ -161,5 +161,13 @@ public class VrInteractionController : MonoBehaviour
     public void SetPointerActive(bool active)
     {
         RayPointer.gameObject.SetActive(active);
+    }
+
+    public RaycastHit GetPointedObject()
+    {
+        RaycastHit hit;
+        Physics.Raycast(RightController.transform.position, RightController.transform.forward, out hit, 5f, LayerMask.NameToLayer("UI"));
+
+        return hit;
     }
 }

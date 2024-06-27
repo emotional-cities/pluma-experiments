@@ -52,6 +52,22 @@ public class TrialSession : DataPublisher
             InteractionSource.SetPointerActive(false);
             while (!InteractionSource.RightInteractionState) { yield return null; }
 
+            // Pointer debug
+            Texture2D cameraTexture = VrUtilities.TextureFromCamera(MapCamera);
+            UiManager.OpenImagePanel("AlfamaVr", cameraTexture, "DEBUG");
+            yield return new WaitForSeconds(0.5f);
+            InteractionSource.SetPointerActive(true);
+
+            while (!InteractionSource.RightInteractionState) {
+                RaycastHit hit = InteractionSource.GetPointedObject();
+                if (hit.transform != null)
+                {
+                    Debug.Log(hit);
+                }
+
+                yield return null; 
+            }
+
             // Intertrial interval
             UiManager.OpenMessagePanel("AlfamaVR", "Prepare to explore the space.");
             yield return new WaitForSeconds(SecondsInterTrialInterval);
@@ -63,7 +79,7 @@ public class TrialSession : DataPublisher
             InteractionSource.transform.rotation = Quaternion.Euler(currentTrial.InitialRotation);
             // TODO adverse vs. optimistic
 
-            Texture2D cameraTexture = VrUtilities.TextureFromCamera(MapCamera);
+            cameraTexture = VrUtilities.TextureFromCamera(MapCamera);
             UiManager.OpenImagePanel("AlfamaVr", cameraTexture, "Note your starting location on the map (red).");
             yield return new WaitForSeconds(SecondsPrimeMap);
 
