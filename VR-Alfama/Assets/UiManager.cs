@@ -35,6 +35,11 @@ public class UiManager : MonoBehaviour
         ImagePanel.Text.text = message;
     }
 
+    public void SetImageCursorPosition(Vector3 position)
+    {
+        ImagePanel.ImageCursor.anchoredPosition = position;
+    }
+
     public void CloseImagePanel()
     {
         ImagePanel.gameObject.SetActive(false);

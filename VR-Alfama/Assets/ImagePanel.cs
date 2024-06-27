@@ -8,4 +8,5 @@ public class ImagePanel : UiPanel
 {
     public RawImage Image;
     public TMP_Text Text;
+    public RectTransform ImageCursor;
 }

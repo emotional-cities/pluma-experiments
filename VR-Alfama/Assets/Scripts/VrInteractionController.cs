@@ -163,10 +163,10 @@ public class VrInteractionController : MonoBehaviour
         RayPointer.gameObject.SetActive(active);
     }
 
-    public RaycastHit GetPointedObject()
+    public RaycastHit GetPointedObject(LayerMask layer)
     {
         RaycastHit hit;
-        Physics.Raycast(RightController.transform.position, RightController.transform.forward, out hit, 5f, LayerMask.NameToLayer("UI"));
+        Physics.Raycast(RightController.transform.position, RightController.transform.forward, out hit, Mathf.Infinity, layer);
 
         return hit;
     }
