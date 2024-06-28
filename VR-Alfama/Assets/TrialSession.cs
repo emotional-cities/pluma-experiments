@@ -118,7 +118,11 @@ public class TrialSession : DataPublisher
                 RaycastHit hit = InteractionSource.GetPointedObject(LayerMask.GetMask("UI"));
                 if (hit.transform != null)
                 {
+                    RectTransform rectTransform = hit.collider.GetComponent<RectTransform>();
                     Vector3 localHit = hit.collider.GetComponent<RectTransform>().InverseTransformPoint(hit.point);
+
+                    // Express local position as a percentage of height, width
+
 
                     UiManager.SetImageCursorPosition(localHit);
                 }
