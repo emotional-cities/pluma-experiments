@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.XR;
 
 public class TrialSession : DataPublisher
@@ -32,6 +33,25 @@ public class TrialSession : DataPublisher
 
     public Trial[] TrialList;
     private int CurrentTrialIndex = 0;
+    public List<RenderSceneDefinition> RenderScenes;
+    private Dictionary<SceneType, GameObject> SceneDict = new Dictionary<SceneType, GameObject>();
+
+    [System.Serializable]
+    public class RenderSceneDefinition
+    {
+        public SceneType Name;
+        public GameObject TargetScene;
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        foreach (RenderSceneDefinition scene in RenderScenes)
+        {
+            SceneDict.Add(scene.Name, scene.TargetScene);
+        }
+    }
 
     // Start is called before the first frame update
     protected override void Start()
@@ -49,6 +69,12 @@ public class TrialSession : DataPublisher
 
         foreach (Trial currentTrial in TrialList)
         {
+            //foreach (var element in SceneDict.Values)
+            //{
+            //    element.SetActive(false);
+            //}
+            //SceneDict[currentTrial.SceneType].SetActive(true);
+
             // Start state
             InteractionSource.SetPointerActive(false);
             while (!InteractionSource.RightInteractionState) { yield return null; }

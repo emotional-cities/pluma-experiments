@@ -8,9 +8,10 @@ public class UiManager : MonoBehaviour
     public ImagePanel ImagePanel;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         CloseMessagePanel();
+        CloseImagePanel();
     }
 
     public void OpenMessagePanel(string title, string body)
