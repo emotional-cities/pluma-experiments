@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR;
 
@@ -50,31 +51,46 @@ public class TrialSession : DataPublisher
         {
             // Start state
             InteractionSource.SetPointerActive(false);
-            Debug.Log(InteractionSource.RightInteractionState);
             while (!InteractionSource.RightInteractionState) { yield return null; }
 
-            //// Pointer debug
-            //Texture2D cameraTexture = VrUtilities.TextureFromCamera(MapCamera);
-            //UiManager.OpenImagePanel("AlfamaVr", cameraTexture, "DEBUG");
-            //yield return new WaitForSeconds(0.5f);
-            //InteractionSource.SetPointerActive(true);
+            // World position DEBUG
+            Texture2D cameraTexture = VrUtilities.TextureFromCamera(MapCamera);
+            UiManager.OpenImagePanel("AlfamaVr", cameraTexture, "Point to your current location and press the right trigger.");
+            InteractionSource.SetPointerActive(true);
+            while (true)
+            {
+                Vector3 WorldPositionTarget = InteractionSource.transform.position;
+                while (!InteractionSource.RightInteractionState)
+                {
+                    RaycastHit hit = InteractionSource.GetPointedObject(LayerMask.GetMask("UI"));
+                    if (hit.transform != null)
+                    {
+                        RectTransform rectTransform = hit.collider.GetComponent<RectTransform>(); // We specifically need the RectTransform, otherwise defaults to parent transform 
+                        Vector3 localHit = hit.collider.GetComponent<RectTransform>().InverseTransformPoint(hit.point);
 
-            //while (!InteractionSource.RightInteractionState) {
-            //    RaycastHit hit = InteractionSource.GetPointedObject(LayerMask.GetMask("UI"));
-            //    if (hit.transform != null)
-            //    {
-            //        Vector3 localHit = hit.collider.GetComponent<RectTransform>().InverseTransformPoint(hit.point);
+                        // Express local position as a percentage of height, width
+                        BoxCollider collider = (BoxCollider)hit.collider;
+                        float fractionX = (localHit.x + (collider.size.x / 2)) / collider.size.x; // Assumes central anchor on UI image
+                        float fractionY = (localHit.y + (collider.size.y / 2)) / collider.size.y;
+                        int xPixel = (int)(fractionX * cameraTexture.width); // Expressed as pixel position
+                        int yPixel = (int)(fractionY * cameraTexture.height);
 
-            //        //UiManager.OpenImagePanel("AlfamaVr", cameraTexture, localHit.x.ToString());
-            //        //UiManager.OpenImagePanel("AlfamaVr", cameraTexture, (UiManager.ImagePanel.Image.rectTransform.rect.height * localHit.y).ToString());
-            //        UiManager.OpenImagePanel("AlfamaVr", cameraTexture, (localHit.x).ToString());
+                        var screenHeight = MapCamera.orthographicSize * 2;
+                        var cameraAspect = MapCamera.aspect;
 
-            //        UiManager.SetImageCursorPosition(localHit);
-            //    }
+                        Vector3 ScreenPosition = new Vector3(fractionX * Screen.width, fractionY * Screen.width, MapCamera.nearClipPlane);
+                        WorldPositionTarget = MapCamera.ScreenToWorldPoint(ScreenPosition);
 
-            //    //yield return null; 
-            //    yield return null;
-            //}
+                        UiManager.OpenImagePanel("AlfamaVr", cameraTexture, ScreenPosition.ToString());
+                        UiManager.SetImageCursorPosition(localHit);
+                    }
+                    yield return null;
+                }
+
+                InteractionSource.transform.position = WorldPositionTarget;
+
+                yield return null;
+            }
 
             // Intertrial interval
             UiManager.OpenMessagePanel("AlfamaVR", "Prepare to explore the space.");
@@ -87,7 +103,7 @@ public class TrialSession : DataPublisher
             InteractionSource.transform.rotation = Quaternion.Euler(currentTrial.InitialRotation);
             // TODO adverse vs. optimistic
 
-            Texture2D cameraTexture = VrUtilities.TextureFromCamera(MapCamera);
+            cameraTexture = VrUtilities.TextureFromCamera(MapCamera);
             UiManager.OpenImagePanel("AlfamaVr", cameraTexture, "Note your starting location on the map (red).");
             yield return new WaitForSeconds(SecondsPrimeMap);
 
@@ -118,16 +134,24 @@ public class TrialSession : DataPublisher
                 RaycastHit hit = InteractionSource.GetPointedObject(LayerMask.GetMask("UI"));
                 if (hit.transform != null)
                 {
-                    RectTransform rectTransform = hit.collider.GetComponent<RectTransform>();
+                    RectTransform rectTransform = hit.collider.GetComponent<RectTransform>(); // We specifically need the RectTransform, otherwise defaults to parent transform 
                     Vector3 localHit = hit.collider.GetComponent<RectTransform>().InverseTransformPoint(hit.point);
 
                     // Express local position as a percentage of height, width
+                    BoxCollider collider = (BoxCollider)hit.collider;
+                    float fractionX = (localHit.x + (collider.size.x / 2)) / collider.size.x; // Assumes central anchor on UI image
+                    float fractionY = (localHit.y + (collider.size.y / 2)) / collider.size.y;
+                    int xPixel = (int)(fractionX * cameraTexture.width); // Expressed as pixel position
+                    int yPixel = (int)(fractionY * cameraTexture.height);
+
 
 
                     UiManager.SetImageCursorPosition(localHit);
                 }
                 yield return null;
             }
+
+            // Reset
 
             CurrentTrialIndex++;
         }
@@ -146,7 +170,7 @@ public class TrialSession : DataPublisher
     private void LogNewScene()
     {
         long timestamp = DateTime.Now.Ticks / (TimeSpan.TicksPerMillisecond / 1000);
-        byte[] scene = Encoding.ASCII.GetBytes(CurrentTrialIndex.ToString() + '\0');
+        byte[] scene = Encoding.ASCII.GetBytes(CurrentTrialIndex.ToString() + '\0'); // TODO - should be optimistic vs. adverse?
         byte[] spatialSample = Encoding.ASCII.GetBytes(CurrentTrialIndex.ToString() + '\0');
 
         PubSocket.SendMoreFrame("NewScene")

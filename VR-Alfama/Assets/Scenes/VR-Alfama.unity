@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 4
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
@@ -1319,7 +1319,7 @@ MonoBehaviour:
     m_BarrelClipping: 0.25
     m_Anamorphism: 0
   flipYMode: 0
-  xrRendering: 1
+  xrRendering: 0
   fullscreenPassthrough: 0
   allowDynamicResolution: 0
   customRenderingSettings: 0
@@ -2273,7 +2273,7 @@ MonoBehaviour:
   - InitialPosition: {x: -1.01632, y: 4.098989, z: -67.7467}
     InitialRotation: {x: 0, y: -49.132, z: 0}
     SceneType: 0
-    SecondsDuration: 10
+    SecondsDuration: 1
     Map: {fileID: 0}
   - InitialPosition: {x: 52.19868, y: 8.130451, z: 56.19336}
     InitialRotation: {x: 0, y: -104.807, z: 0}
@@ -3592,6 +3592,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1868427235, guid: fb23b8d14bb00c64b93cbb068f3947c0, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 0.06837273
+      objectReference: {fileID: 0}
     - target: {fileID: 3843736301519752512, guid: fb23b8d14bb00c64b93cbb068f3947c0, type: 3}
       propertyPath: m_Name
       value: XRRigController
