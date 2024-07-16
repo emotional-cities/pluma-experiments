@@ -69,11 +69,12 @@ public class TrialSession : DataPublisher
 
         foreach (Trial currentTrial in TrialList)
         {
-            //foreach (var element in SceneDict.Values)
-            //{
-            //    element.SetActive(false);
-            //}
-            //SceneDict[currentTrial.SceneType].SetActive(true);
+            // Pick scenario
+            foreach (var element in SceneDict.Values)
+            {
+                element.SetActive(false);
+            }
+            SceneDict[currentTrial.SceneType].SetActive(true);
 
             // Start state
             InteractionSource.SetPointerActive(false);
@@ -103,7 +104,7 @@ public class TrialSession : DataPublisher
                         int yPixel = (int)(fractionY * cameraTexture.height);
 
                         // Expressed as world position
-                        var screenPosition = new Vector3(1080 * fractionX, 1080 * fractionY, 0f);
+                        var screenPosition = new Vector3(Screen.height * fractionX, Screen.height * fractionY, 0f);
                         Vector3 convertedPoint = MapCamera.ScreenToWorldPoint(screenPosition);
 
                         WorldPositionTarget = convertedPoint;
