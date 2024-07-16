@@ -63,12 +63,12 @@ public class TrialSession : DataPublisher
 
     IEnumerator Session()
     {
-        // Initial state
-        UiManager.OpenMessagePanel("AlfamaVR", "Adjust the headset and pick up the controllers. Press the right trigger to continue.");
-        UiManager.CloseImagePanel();
-
         foreach (Trial currentTrial in TrialList)
         {
+            // Initial state
+            UiManager.OpenMessagePanel("AlfamaVR", "Adjust the headset and pick up the controllers. Press the right trigger to continue.");
+            UiManager.CloseImagePanel();
+
             // Pick scenario
             foreach (var element in SceneDict.Values)
             {
@@ -80,46 +80,46 @@ public class TrialSession : DataPublisher
             InteractionSource.SetPointerActive(false);
             while (!InteractionSource.RightInteractionState) { yield return null; }
 
-            // World position DEBUG
-            Texture2D cameraTexture = VrUtilities.TextureFromCamera(MapCamera);
-            UiManager.OpenImagePanel("AlfamaVr", cameraTexture, "Point to your current location and press the right trigger.");
-            InteractionSource.SetPointerActive(true);
-            while (true)
-            {
-                Vector3 WorldPositionTarget = InteractionSource.transform.position;
-                while (!InteractionSource.RightInteractionState)
-                {
-                    RaycastHit hit = InteractionSource.GetPointedObject(LayerMask.GetMask("UI"));
-                    if (hit.transform != null)
-                    {
-                        RectTransform rectTransform = hit.collider.GetComponent<RectTransform>(); // We specifically need the RectTransform, otherwise defaults to parent transform 
-                        Vector3 localHit = hit.collider.GetComponent<RectTransform>().InverseTransformPoint(hit.point);
+            //// World position DEBUG
+            //Texture2D cameraTexture = VrUtilities.TextureFromCamera(MapCamera);
+            //UiManager.OpenImagePanel("AlfamaVr", cameraTexture, "Point to your current location and press the right trigger.");
+            //InteractionSource.SetPointerActive(true);
+            //while (true)
+            //{
+            //    Vector3 WorldPositionTarget = InteractionSource.transform.position;
+            //    while (!InteractionSource.RightInteractionState)
+            //    {
+            //        RaycastHit hit = InteractionSource.GetPointedObject(LayerMask.GetMask("UI"));
+            //        if (hit.transform != null)
+            //        {
+            //            RectTransform rectTransform = hit.collider.GetComponent<RectTransform>(); // We specifically need the RectTransform, otherwise defaults to parent transform 
+            //            Vector3 localHit = hit.collider.GetComponent<RectTransform>().InverseTransformPoint(hit.point);
 
-                        // Express local position as a percentage of height, width
-                        BoxCollider collider = (BoxCollider)hit.collider;
-                        float fractionX = (localHit.x + (collider.size.x / 2)) / collider.size.x; // Assumes central anchor on UI image
-                        float fractionY = (localHit.y + (collider.size.y / 2)) / collider.size.y;
+            //            // Express local position as a percentage of height, width
+            //            BoxCollider collider = (BoxCollider)hit.collider;
+            //            float fractionX = (localHit.x + (collider.size.x / 2)) / collider.size.x; // Assumes central anchor on UI image
+            //            float fractionY = (localHit.y + (collider.size.y / 2)) / collider.size.y;
 
-                        int xPixel = (int)(fractionX * cameraTexture.width); // Expressed as pixel position
-                        int yPixel = (int)(fractionY * cameraTexture.height);
+            //            int xPixel = (int)(fractionX * cameraTexture.width); // Expressed as pixel position
+            //            int yPixel = (int)(fractionY * cameraTexture.height);
 
-                        // Expressed as world position
-                        var screenPosition = new Vector3(Screen.height * fractionX, Screen.height * fractionY, 0f);
-                        Vector3 convertedPoint = MapCamera.ScreenToWorldPoint(screenPosition);
+            //            // Expressed as world position
+            //            var screenPosition = new Vector3(Screen.height * fractionX, Screen.height * fractionY, 0f);
+            //            Vector3 convertedPoint = MapCamera.ScreenToWorldPoint(screenPosition);
 
-                        WorldPositionTarget = convertedPoint;
+            //            WorldPositionTarget = convertedPoint;
 
-                        UiManager.OpenImagePanel("AlfamaVr", cameraTexture, convertedPoint.ToString());
-                        UiManager.SetImageCursorPosition(localHit);
-                    }
-                    yield return null;
-                }
+            //            UiManager.OpenImagePanel("AlfamaVr", cameraTexture, convertedPoint.ToString());
+            //            UiManager.SetImageCursorPosition(localHit);
+            //        }
+            //        yield return null;
+            //    }
 
-                InteractionSource.transform.position = WorldPositionTarget;
-                cameraTexture = VrUtilities.TextureFromCamera(MapCamera);
+            //    InteractionSource.transform.position = WorldPositionTarget;
+            //    cameraTexture = VrUtilities.TextureFromCamera(MapCamera);
 
-                yield return null;
-            }
+            //    yield return null;
+            //}
 
             // Intertrial interval
             UiManager.OpenMessagePanel("AlfamaVR", "Prepare to explore the space.");
@@ -130,9 +130,8 @@ public class TrialSession : DataPublisher
             UiManager.CloseMessagePanel();
             InteractionSource.transform.position = currentTrial.InitialPosition;
             InteractionSource.transform.rotation = Quaternion.Euler(currentTrial.InitialRotation);
-            // TODO adverse vs. optimistic
 
-            cameraTexture = VrUtilities.TextureFromCamera(MapCamera);
+            Texture2D cameraTexture = VrUtilities.TextureFromCamera(MapCamera);
             UiManager.OpenImagePanel("AlfamaVr", cameraTexture, "Note your starting location on the map (red).");
             yield return new WaitForSeconds(SecondsPrimeMap);
 
@@ -158,6 +157,7 @@ public class TrialSession : DataPublisher
             yield return new WaitForSeconds(0.5f);
             InteractionSource.SetPointerActive(true);
 
+            Vector3 FinalWorldPoint;
             while (!InteractionSource.RightInteractionState)
             {
                 RaycastHit hit = InteractionSource.GetPointedObject(LayerMask.GetMask("UI"));
@@ -173,12 +173,25 @@ public class TrialSession : DataPublisher
                     int xPixel = (int)(fractionX * cameraTexture.width); // Expressed as pixel position
                     int yPixel = (int)(fractionY * cameraTexture.height);
 
+                    // Express relative to camera position
+                    var screenPosition = new Vector3(Screen.height * fractionX, Screen.height * fractionY, 0f);
+                    Vector3 convertedPoint = MapCamera.ScreenToWorldPoint(screenPosition);
 
+                    // Express world position at ground level
+                    RaycastHit groundHit;
+                    if (Physics.Raycast(convertedPoint, Vector3.down, out hit, Mathf.Infinity))
+                    {
+                        FinalWorldPoint = hit.point;
+                    } else
+                    {
+                        FinalWorldPoint = new Vector3(convertedPoint.x, 0f, convertedPoint.y);
+                    }
 
                     UiManager.SetImageCursorPosition(localHit);
                 }
                 yield return null;
             }
+            // TODO logging
 
             // Reset
 
