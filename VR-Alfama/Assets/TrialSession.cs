@@ -77,12 +77,12 @@ public class TrialSession : DataPublisher
                         int yPixel = (int)(fractionY * cameraTexture.height);
 
                         // Expressed as world position
-                        var screenPosition = new Vector3(Screen.height * fractionX, Screen.height * fractionY, MapCamera.nearClipPlane);
+                        var screenPosition = new Vector3(1080 * fractionX, 1080 * fractionY, 0f);
                         Vector3 convertedPoint = MapCamera.ScreenToWorldPoint(screenPosition);
 
                         WorldPositionTarget = convertedPoint;
 
-                        UiManager.OpenImagePanel("AlfamaVr", cameraTexture, screenPosition.ToString());
+                        UiManager.OpenImagePanel("AlfamaVr", cameraTexture, convertedPoint.ToString());
                         UiManager.SetImageCursorPosition(localHit);
                     }
                     yield return null;
