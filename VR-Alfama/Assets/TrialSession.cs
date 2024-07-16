@@ -132,7 +132,7 @@ public class TrialSession : DataPublisher
             InteractionSource.transform.rotation = Quaternion.Euler(currentTrial.InitialRotation);
 
             Texture2D cameraTexture = VrUtilities.TextureFromCamera(MapCamera);
-            UiManager.OpenImagePanel("AlfamaVr", cameraTexture, "Note your starting location on the map (red).");
+            UiManager.OpenImagePanel("AlfamaVr", cameraTexture, "Note your starting location on the map (red).", false);
             yield return new WaitForSeconds(SecondsPrimeMap);
 
             // Spatial sampling
@@ -153,7 +153,7 @@ public class TrialSession : DataPublisher
 
             // Point on map
             InteractionSource.SetPointerActive(false);
-            UiManager.OpenImagePanel("AlfamaVr", cameraTexture, "Point to your current location and press the right trigger.");
+            UiManager.OpenImagePanel("AlfamaVr", cameraTexture, "Point to your current location and press the right trigger.", true);
             yield return new WaitForSeconds(0.5f);
             InteractionSource.SetPointerActive(true);
 

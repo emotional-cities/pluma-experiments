@@ -36,6 +36,13 @@ public class UiManager : MonoBehaviour
         ImagePanel.Text.text = message;
     }
 
+    public void OpenImagePanel(string title, Texture2D image, string message, bool imageCursorVisible)
+    {
+        OpenImagePanel(title, image, message);
+
+        ImagePanel.ImageCursor.gameObject.SetActive(imageCursorVisible);
+    }
+
     public void SetImageCursorPosition(Vector3 position)
     {
         ImagePanel.ImageCursor.anchoredPosition = position;
