@@ -157,7 +157,7 @@ public class TrialSession : DataPublisher
             yield return new WaitForSeconds(0.5f);
             InteractionSource.SetPointerActive(true);
 
-            Vector3 FinalWorldPoint;
+            Vector3 FinalWorldPoint = Vector3.zero;
             while (!InteractionSource.RightInteractionState)
             {
                 RaycastHit hit = InteractionSource.GetPointedObject(LayerMask.GetMask("UI"));
@@ -191,10 +191,9 @@ public class TrialSession : DataPublisher
                 }
                 yield return null;
             }
-            // TODO logging
+            LogPointToMap(2, FinalWorldPoint);
 
             // Reset
-
             CurrentTrialIndex++;
         }
 
@@ -253,7 +252,31 @@ public class TrialSession : DataPublisher
         PubSocket.SendMoreFrame("PointToOriginWorld")
            .SendMoreFrame(BitConverter.GetBytes(timestamp))
            .SendMoreFrame(allData)
-           .SendFrame(BitConverter.GetBytes(state)); ;
+           .SendFrame(BitConverter.GetBytes(state));
+    }
 
+    private void LogPointToMap(int state, Vector3 playerPositionGuess)
+    {
+        Vector3 subjectPositionMap = InteractionSource.transform.position;
+        var originPosition = TrialList[CurrentTrialIndex].InitialPosition;
+
+        long timestamp = DateTime.Now.Ticks / (TimeSpan.TicksPerMillisecond / 1000);
+        byte[] originPositionData = BitConverter.GetBytes(originPosition.x)
+            .Concat(BitConverter.GetBytes(originPosition.y))
+            .Concat(BitConverter.GetBytes(originPosition.z))
+            .ToArray();
+        byte[] subjectPositionData = BitConverter.GetBytes(subjectPositionMap.x)
+            .Concat(BitConverter.GetBytes(subjectPositionMap.y))
+            .Concat(BitConverter.GetBytes(subjectPositionMap.z))
+            .ToArray();
+        byte[] pointPositionData = BitConverter.GetBytes(playerPositionGuess.x)
+            .Concat(BitConverter.GetBytes(playerPositionGuess.y))
+            .Concat(BitConverter.GetBytes(playerPositionGuess.z))
+            .ToArray();
+        byte[] allData = originPositionData.Concat(subjectPositionData).Concat(pointPositionData).ToArray();
+        PubSocket.SendMoreFrame("PointToOriginMap")
+           .SendMoreFrame(BitConverter.GetBytes(timestamp))
+           .SendMoreFrame(allData)
+           .SendFrame(BitConverter.GetBytes(state));
     }
 }
