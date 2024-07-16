@@ -72,22 +72,24 @@ public class TrialSession : DataPublisher
                         BoxCollider collider = (BoxCollider)hit.collider;
                         float fractionX = (localHit.x + (collider.size.x / 2)) / collider.size.x; // Assumes central anchor on UI image
                         float fractionY = (localHit.y + (collider.size.y / 2)) / collider.size.y;
+
                         int xPixel = (int)(fractionX * cameraTexture.width); // Expressed as pixel position
                         int yPixel = (int)(fractionY * cameraTexture.height);
 
-                        var screenHeight = MapCamera.orthographicSize * 2;
-                        var cameraAspect = MapCamera.aspect;
+                        // Expressed as world position
+                        var screenPosition = new Vector3(Screen.height * fractionX, Screen.height * fractionY, MapCamera.nearClipPlane);
+                        Vector3 convertedPoint = MapCamera.ScreenToWorldPoint(screenPosition);
 
-                        Vector3 ScreenPosition = new Vector3(fractionX * Screen.width, fractionY * Screen.width, MapCamera.nearClipPlane);
-                        WorldPositionTarget = MapCamera.ScreenToWorldPoint(ScreenPosition);
+                        WorldPositionTarget = convertedPoint;
 
-                        UiManager.OpenImagePanel("AlfamaVr", cameraTexture, ScreenPosition.ToString());
+                        UiManager.OpenImagePanel("AlfamaVr", cameraTexture, screenPosition.ToString());
                         UiManager.SetImageCursorPosition(localHit);
                     }
                     yield return null;
                 }
 
                 InteractionSource.transform.position = WorldPositionTarget;
+                cameraTexture = VrUtilities.TextureFromCamera(MapCamera);
 
                 yield return null;
             }
