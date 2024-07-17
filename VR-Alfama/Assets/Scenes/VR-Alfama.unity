@@ -2273,6 +2273,7 @@ MonoBehaviour:
   PublisherBindAddress: tcp://localhost:6000
   SecondsInterTrialInterval: 3
   SecondsPrimeMap: 5
+  DebugObject: {fileID: 0}
   InteractionSource: {fileID: 3962709906633868045}
   UiManager: {fileID: 3962709907719028738}
   MapCamera: {fileID: 664903455}
