@@ -2278,9 +2278,9 @@ MonoBehaviour:
   MapCamera: {fileID: 664903455}
   TrialList:
   - InitialPosition: {x: -1.01632, y: 4.098989, z: -67.7467}
-    InitialRotation: {x: 0, y: -49.132, z: 0}
+    InitialRotation: {x: 0, y: -90, z: 0}
     SceneType: 1
-    SecondsDuration: 1
+    SecondsDuration: 10
     Map: {fileID: 0}
   - InitialPosition: {x: 52.19868, y: 8.130451, z: 56.19336}
     InitialRotation: {x: 0, y: -104.807, z: 0}
@@ -3619,6 +3619,18 @@ PrefabInstance:
       propertyPath: PointerLength
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 981777961449480016, guid: 2029cd06c7673eb49bc1c2a935d2cdd6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 981777961835204362, guid: 2029cd06c7673eb49bc1c2a935d2cdd6, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 390
+      objectReference: {fileID: 0}
+    - target: {fileID: 981777961889495250, guid: 2029cd06c7673eb49bc1c2a935d2cdd6, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 981777961889495250, guid: 2029cd06c7673eb49bc1c2a935d2cdd6, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.0055
@@ -3635,9 +3647,21 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 981777961889495250, guid: 2029cd06c7673eb49bc1c2a935d2cdd6, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 981777961889495250, guid: 2029cd06c7673eb49bc1c2a935d2cdd6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 981777961889495251, guid: 2029cd06c7673eb49bc1c2a935d2cdd6, type: 3}
       propertyPath: m_SortingOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 981777961991597091, guid: 2029cd06c7673eb49bc1c2a935d2cdd6, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 390
       objectReference: {fileID: 0}
     - target: {fileID: 4091599529004596080, guid: 2029cd06c7673eb49bc1c2a935d2cdd6, type: 3}
       propertyPath: m_Name

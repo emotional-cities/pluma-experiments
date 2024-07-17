@@ -66,7 +66,7 @@ public class TrialSession : DataPublisher
         foreach (Trial currentTrial in TrialList)
         {
             // Initial state
-            UiManager.OpenMessagePanel("AlfamaVR", "Adjust the headset and pick up the controllers. Press the right trigger to continue.");
+            UiManager.OpenMessagePanel("AlfamaVR", "Adjust the headset and pick up the controllers. Press the right trigger to continue.", 1f);
             UiManager.CloseImagePanel();
 
             // Pick scenario
@@ -77,7 +77,7 @@ public class TrialSession : DataPublisher
             SceneDict[currentTrial.SceneType].SetActive(true);
 
             // Start state
-            InteractionSource.SetPointerActive(false);
+            InteractionSource.SetPointerActive(false, 0f);
             while (!InteractionSource.RightInteractionState) { yield return null; }
 
             //// World position DEBUG
@@ -141,8 +141,8 @@ public class TrialSession : DataPublisher
             yield return new WaitForSeconds(currentTrial.SecondsDuration);
 
             // Point to origin
-            UiManager.OpenMessagePanel("AlfamaVr", "Point to your starting position and press the right trigger.");
-            InteractionSource.SetPointerActive(true);
+            UiManager.OpenMessagePanel("AlfamaVr", "Point to your starting position and press the right trigger.", 0.1f);
+            InteractionSource.SetPointerActive(true, 100f);
 
             LogPointToOriginWorld(0);
             while (!InteractionSource.RightInteractionState) {
@@ -152,10 +152,10 @@ public class TrialSession : DataPublisher
             LogPointToOriginWorld(2);
 
             // Point on map
-            InteractionSource.SetPointerActive(false);
+            InteractionSource.SetPointerActive(false, 0f);
             UiManager.OpenImagePanel("AlfamaVr", cameraTexture, "Point to your current location and press the right trigger.", true);
             yield return new WaitForSeconds(0.5f);
-            InteractionSource.SetPointerActive(true);
+            InteractionSource.SetPointerActive(true, 1.5f);
 
             Vector3 FinalWorldPoint = Vector3.zero;
             while (!InteractionSource.RightInteractionState)

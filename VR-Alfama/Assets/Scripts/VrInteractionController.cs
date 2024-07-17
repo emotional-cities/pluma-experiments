@@ -152,9 +152,10 @@ public class VrInteractionController : MonoBehaviour
         }
     }
 
-    public void SetPointerActive(bool active)
+    public void SetPointerActive(bool active, float length)
     {
         RayPointer.gameObject.SetActive(active);
+        RayPointer.PointerLength = length;
     }
 
     public RaycastHit GetPointedObject(LayerMask layer)

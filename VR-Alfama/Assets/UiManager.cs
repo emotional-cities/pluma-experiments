@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
@@ -20,6 +21,14 @@ public class UiManager : MonoBehaviour
 
         MessagePanel.TitleText.text = title;
         MessagePanel.BodyText.text = body;
+    }
+
+    public void OpenMessagePanel(string title, string body, float opacity)
+    {
+        OpenMessagePanel(title, body);
+
+        Color col = new Color(0, 0, 0, opacity);
+        MessagePanel.GetComponent<Image>().color = col;
     }
 
     public void CloseMessagePanel()
