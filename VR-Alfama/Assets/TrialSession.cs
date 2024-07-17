@@ -179,12 +179,12 @@ public class TrialSession : DataPublisher
 
                     // Express world position at ground level
                     RaycastHit groundHit;
-                    if (Physics.Raycast(convertedPoint, Vector3.down, out hit, Mathf.Infinity))
+                    if (Physics.Raycast(convertedPoint, Vector3.down, out groundHit, Mathf.Infinity))
                     {
-                        FinalWorldPoint = hit.point;
+                        FinalWorldPoint = groundHit.point;
                     } else
                     {
-                        FinalWorldPoint = new Vector3(convertedPoint.x, 0f, convertedPoint.y);
+                        FinalWorldPoint = new Vector3(convertedPoint.x, 0f, convertedPoint.z);
                     }
 
                     UiManager.SetImageCursorPosition(localHit);
@@ -196,6 +196,8 @@ public class TrialSession : DataPublisher
             // Reset
             CurrentTrialIndex++;
         }
+
+        UiManager.OpenMessagePanel("Session complete", "Please wait for someone to take the headset.", 1f);
 
         yield return null;
     }
