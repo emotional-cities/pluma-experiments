@@ -87,16 +87,10 @@ public class VrInteractionController : MonoBehaviour
         Vector3 worldRight = Vector3.ProjectOnPlane(forwardSource.right, Vector3.up);
 
         // Do translation movement
-        if (leftMovementVector.magnitude > translationThreshold)
+        if (rightMovementVector.magnitude > translationThreshold)
         {
-            Vector3 moveBy = (worldForward * leftMovementVector.y) + (worldRight * leftMovementVector.x);
+            Vector3 moveBy = (worldForward * rightMovementVector.y);
             rb.MovePosition(transform.localPosition + moveBy.normalized * translationSpeed * Time.deltaTime);
-        }
-
-        // Do rotation movement
-        if (Mathf.Abs(rightMovementVector.x) > rotationThreshold)
-        {
-            transform.Rotate(transform.up, rightMovementVector.x * rotationSpeed * Time.deltaTime);
         }
     }
 

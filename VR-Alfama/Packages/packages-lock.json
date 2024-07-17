@@ -7,7 +7,7 @@
       "dependencies": {}
     },
     "com.microsoft.mixedreality.openxr": {
-      "version": "file:MixedReality/com.microsoft.mixedreality.openxr-1.8.1.tgz",
+      "version": "file:MixedReality/com.microsoft.mixedreality.openxr-1.10.1.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {
@@ -18,7 +18,7 @@
       }
     },
     "com.microsoft.spatialaudio.spatializer.unity": {
-      "version": "file:MixedReality/com.microsoft.spatialaudio.spatializer.unity-2.0.47.tgz",
+      "version": "file:MixedReality/com.microsoft.spatialaudio.spatializer.unity-2.0.55.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {}
