@@ -30,6 +30,7 @@ public class TrialSession : DataPublisher
     public VrInteractionController InteractionSource;
     public UiManager UiManager;
     public Camera MapCamera;
+    public GameObject DebugObject;
 
     public Trial[] TrialList;
     private int CurrentTrialIndex = 0;
@@ -146,6 +147,8 @@ public class TrialSession : DataPublisher
                     {
                         FinalWorldPoint = new Vector3(convertedPoint.x, 0f, convertedPoint.z);
                     }
+
+                    DebugObject.transform.position = FinalWorldPoint;
 
                     UiManager.SetImageCursorPosition(localHit);
                 }

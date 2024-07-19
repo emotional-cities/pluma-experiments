@@ -89,7 +89,7 @@ public class VrInteractionController : MonoBehaviour
         // Do translation movement
         if (rightMovementVector.magnitude > translationThreshold)
         {
-            Vector3 moveBy = (worldForward * rightMovementVector.y);
+            Vector3 moveBy = (worldForward * rightMovementVector.y) + (worldRight * rightMovementVector.x);
             rb.MovePosition(transform.localPosition + moveBy.normalized * translationSpeed * Time.deltaTime);
         }
     }
