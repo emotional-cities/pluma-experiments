@@ -131,8 +131,6 @@ public class TrialSession : DataPublisher
                     BoxCollider collider = (BoxCollider)hit.collider;
                     float fractionX = (localHit.x + (collider.size.x / 2)) / collider.size.x; // Assumes central anchor on UI image
                     float fractionY = (localHit.y + (collider.size.y / 2)) / collider.size.y;
-                    int xPixel = (int)(fractionX * cameraTexture.width); // Expressed as pixel position
-                    int yPixel = (int)(fractionY * cameraTexture.height);
 
                     // Express relative to camera position
                     var screenPosition = new Vector3(Screen.height * fractionX, Screen.height * fractionY, 0f);
@@ -154,7 +152,7 @@ public class TrialSession : DataPublisher
                 }
                 yield return null;
             }
-            LogPointToMap(2, FinalWorldPoint);
+            LogPointToMap(2, FinalWorldPoint); // TODO - Do we need to log this before the user has made a firm choice on map position?
 
             // Reset
             CurrentTrialIndex++;
