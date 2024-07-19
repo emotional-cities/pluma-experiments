@@ -88,7 +88,8 @@ public class TrialSession : DataPublisher
             // Prime map
             UiManager.CloseMessagePanel();
             InteractionSource.transform.position = currentTrial.InitialPosition;
-            InteractionSource.transform.rotation = Quaternion.Euler(currentTrial.InitialRotation);
+            var rot = Camera.main.transform.localRotation.eulerAngles;
+            InteractionSource.transform.rotation = Quaternion.Euler(new Vector3(0, currentTrial.InitialRotation.y - rot.y, 0));
 
             Texture2D cameraTexture = VrUtilities.TextureFromCamera(MapCamera);
             UiManager.OpenImagePanel("AlfamaVr", cameraTexture, "Note your starting location on the map (red).", false);
