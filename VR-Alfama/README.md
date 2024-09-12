@@ -14,9 +14,17 @@ The [Mixed Reality Feature Tool](https://learn.microsoft.com/en-us/windows/mixed
 This should be the first package missing follow instructions on how to install it.
 
 When running it:
-1. Go to settings and check: override existing package file 
-2. Select project path 
-3. Press Restore Features 
+1. Press start
+2. Select the Unity project folder in the local repo (e.g. C:\Users\user\pluma-experiments\VR-Alfama)
+3. Press discover features
+4. Select platform support and tick 'Mixed Reality OpenXR plugin'
+5. Select spatial audio and tick 'Microsoft Spatializer'
+6. Select other features and tick 'Mixed Reality Input'
+
+## TMPro import
+Some UI components in the project use TextMeshPro which must be imported. With the Unity project open, from the menu bar click:
+1. Window >> TextMeshPro >> Import TMP Essential Resources >> Import
+2. Window >> TextMeshPro >> Import TMP Examples and Extras >> Import
 
 ## Project assets, 3DModels and content
 
