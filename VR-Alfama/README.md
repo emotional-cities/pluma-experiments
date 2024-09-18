@@ -1,88 +1,93 @@
 # Setup the full Unity project from the Github repo
 
+This repo contains most of the scripts and dependencies required to run the Unity project.
 
-The github repo contains the scripts and dependencies required to run the Unity project. 
-
-However, some dependencies are developed separately as standalone Unity packages or libraries (or contain private information / keys that should not be tracked in the main repo). 
-
-These must be manually installed.
+However, some dependencies are developed separately as standalone Unity asset packages or libraries (or contain private information / keys that should not be tracked in the main repo), and therefore must be manually installed.
 
 You should Setup the project in the order described below.
 
 ## Mixed Reality Feature Tool
-The [Mixed Reality Feature Tool](https://learn.microsoft.com/en-us/windows/mixed-reality/develop/unity/welcome-to-mr-feature-tool) is a new way for developers to discover, update, and add Mixed Reality feature packages into Unity projects. You can search packages by name or category, see their dependencies, and even view proposed changes to your projects manifest file before importing. If you've never worked with a manifest file before, it's a JSON file containing all your projects packages. Once you've validated the packages you want, the Mixed Reality Feature tool will download them into the project of your choice.
-This should be the first package missing follow instructions on how to install it.
 
-When running it:
-1. Press start
-2. Select the Unity project folder in the local repo (e.g. C:\Users\user\pluma-experiments\VR-Alfama)
-3. Press discover features
-4. Select platform support and tick 'Mixed Reality Moving Platform SDK'
-5. Select platform support and tick 'Mixed Reality OpenXR plugin'
-6. Select spatial audio and tick 'Microsoft Spatializer'
-7. Select other features and tick 'Mixed Reality Input'
+The [Mixed Reality Feature Tool](https://learn.microsoft.com/en-us/windows/mixed-reality/develop/unity/welcome-to-mr-feature-tool) should be the first missing package. It is distributed by Microsoft and is used to discover, update, and add Mixed Reality feature packages into Unity projects.
 
-## Project assets, 3DModels and content
+Below are instructions on how to install and configure:
+1. [Download the latest version of the Mixed Reality Feature Tool](https://aka.ms/MRFeatureTool)
+2. Run `MixedRealityFeatureTool.exe`
+3. Press the `Start` button
+4. Select the Unity project folder in the local repo (e.g. `C:\Users\user\pluma-experiments\VR-Alfama`)
+5. Press discover features
+6. Select platform support and tick `Mixed Reality Moving Platform SDK`
+7. Select platform support and tick `Mixed Reality OpenXR plugin`
+8. Select spatial audio and tick `Microsoft Spatializer`
+9. Select other features and tick `Mixed Reality Input`
 
-You need to create (or locate if already done) in your pc the Shared Objects folder with OneDrive. 
+## Project assets, 3D Models and content
 
-### Create:
-To access the project Unity content you must ask NeuroGEARS to share the content folder (\Objects) with your microsoft user.
-Add that folder (\Objects) to your onedrive in the computer.
-> There is a user created for accessing the shared content 
-> pluma@neurogears.org
+You need to create (or locate if it already exists) the Shared `\Objects` folder on your PC OneDrive. 
+
+### Create
+To access the project Unity content you must ask NeuroGEARS to share the content folder `\Objects` with your Microsoft user. Add that folder `\Objects` to your OneDrive in the computer.
+
+> If you are a member of the eMOTIONAL Cities consortium, you can use the `pluma@neurogears.org` account for accessing the shared content.
 
 ### Locate
-Use sharepoint (\Objects) folder location to complete the following action.
-
-Then you need to link the sharepoint (\Objects) folder to a folder inside project Assets. (\Assets)
-Open Command Prompt in the project Assets folder and
-Use the command mklink from command prompt:
+Open Command Prompt in the project Assets folder `\Assets` and run the command `mklink` replacing `...OneDriveFolder...` with the location of the `\Objects` content folder in your OneDrive:
 
 Example: 
-> mklink /J Objects "C:\...OneDriveFolder...\Objects"
+```
+mklink /J Objects "C:\...OneDriveFolder...\Objects"
+```
+
+This will make a link between the sharepoint `\Objects` folder and the local folder inside the project Assets.
 
 ## TMPro import
-Open VR-Alfama in Unity with Unity hub and start installing
+
 Some UI components in the project use TextMeshPro which must be imported. With the Unity project open, from the menu bar click:
-1. Window >> TextMeshPro >> Import TMP Essential Resources >> Import all
-2. Window >> TextMeshPro >> Import TMP Examples and Extras >> Import all
+
+1. `Window >> TextMeshPro >> Import TMP Essential Resources >> Import all`
+2. `Window >> TextMeshPro >> Import TMP Examples and Extras >> Import all`
 
 ## Reload unity project 
 Close unity and open the project again
 
 ## HP Omnicept
-Open VR-Alfama in Unity with Unity hub and start installing
+
 Navigate to https://developers.hp.com/omnicept/downloads and download and install the latest HP Omnicept SDK.
 
-In Unity import the Omnicept package by navigating into  Assets --> Import Package --> Custom Package, the package is inside your omnicept install location (e.g. Program Files/HP/HP Omnicept SDK/<version>/Unity/Glia.unitypackage). Import the package and select import all.
+In Unity, import the Omnicept package by navigating into `Assets >> Import Package >> Custom Package`. A file explorer dialog will appear. Find and select the Omnicept package which is inside your omnicept install location (e.g. `Program Files/HP/HP Omnicept SDK/<version>/Unity/Glia.unitypackage`). On the import dialog select import all.
 
-Successful import will add a new menu option in Unity for "HP Omnicept". Navigate here and click "Configure". This will open a dialog where you can enter the sensors to receive from the Omnicept. Ensure that the license type is set to 'Core' and that the Heart Rate, Eye Tracking, Camera Image and IMU sensors are enabled.
+Successful import will add a new menu option in Unity for `HP Omnicept`. Navigate here and click `Configure`. This will open a dialog where you can enter the sensors to receive from the Omnicept. Ensure that the license type is set to `Core` and that the Heart Rate, Eye Tracking, Camera Image and IMU sensors are enabled.
 
-More info [here](https://developers.hp.com/omnicept/docs/unity/getting-started)
+More info [here](https://developers.hp.com/omnicept/docs/unity/getting-started).
 
 ## Reload unity project 
 Close unity and open the project again
 
-## Setup the OpenXr 
-- In Unity go to Edit->ProjectSettings
-- Navigate to XR Plug-in Management 
-- Check the box OpenXR -> Windows Mixed Reality Feature Group 
-- Then select the OpenXR submenu 
-- On "Play Mode OpenXR Runtime" and select "Windows Mixed Reality"
-- Add a new interaction Profile and select HP reverb G2 Controller profile 
-- Close project settings window and press PLAY
+## Setup the OpenXR
+1. In Unity go to `Edit >> ProjectSettings`
+2. Navigate to XR Plug-in Management 
+3. Check the box `OpenXR >> Windows Mixed Reality Feature Group`
+4. Select the OpenXR submenu 
+5. On `Play Mode OpenXR Runtime` select `Windows Mixed Reality`
+6. Add a new interaction Profile and select HP reverb G2 Controller profile 
+7. Close project settings window
 
 ## Load unity VR-Alfama scene
-If the Vr-Alfama scene is not loaded in Unity, open Assets/Scenes folder and double click the Vr-Alfama scene to load that scene.
+If the Vr-Alfama scene is not yet loaded in Unity, open `Assets/Scenes` folder and double click the Vr-Alfama scene.
 
-## Press Play.
+## Press Play
+If all the above instructions are followed successfully you should be able to run the Unity scene and look around through the VR Headset.
 
 
 ## pluma-vr
-Reusable unity infrastructure for VR data acquisition
-pluma-vr shouldbe already installed but if there is a problem or update is needed follow the following instructions
 
+The pluma-vr package should be automatically installed from the project manifest, but if there is a problem or an update is needed follow the instructions below.
 
 ### Installing a package from GitHub in Unity
-To install this package (or any properly constructed Unity package) from GitHub first open Window>>Package Manager in Unity. Click the '+' icon in the top left and select "Add package from Git URL...". To specify the URL of the package we use <URL>.git?path=<subfolder>#<branch>. E.g. to install the com.neurogears.plumavr package from this repo on the main branch type https://github.com/emotional-cities/pluma-vr.git?path=/com.neurogears.plumavr#main.
+To install this package (or any properly constructed Unity package) from GitHub, first open `Window >> Package Manager` in Unity. Click the `+` icon in the top left and select `Add package from Git URL...`.
+
+To specify the URL of the package you must use the pattern `<URL>.git?path=<subfolder>#<branch>`, e.g. to install the package from the main branch of the `pluma-vr` repo:
+
+```
+https://github.com/emotional-cities/pluma-vr.git?path=/com.neurogears.plumavr#main
+```
