@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <WorkflowBuilder Version="2.8.1"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
@@ -436,7 +436,7 @@
                     <PortName>COM16</PortName>
                   </Expression>
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\Empatica.bonsai">
-                    <DeviceId>02725A</DeviceId>
+                    <DeviceId>73735A</DeviceId>
                   </Expression>
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\EEG.bonsai" />
                   <Expression xsi:type="GroupWorkflow">
