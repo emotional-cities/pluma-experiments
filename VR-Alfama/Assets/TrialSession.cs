@@ -30,7 +30,7 @@ public class TrialSession : DataPublisher
     public VrInteractionController InteractionSource;
     public UiManager UiManager;
     public Camera MapCamera;
-    public GameObject DebugObject;
+   // public GameObject DebugObject;
 
     public Trial[] TrialList;
     private int CurrentTrialIndex = 0;
@@ -64,12 +64,16 @@ public class TrialSession : DataPublisher
 
     IEnumerator Session()
     {
+        // Initial state
+        SceneDict[0].SetActive(true);
+        UiManager.OpenMessagePanel("AlfamaVR", "Adjust the headset and pick up the controllers. Press the trigger to continue.", 1f);
+        InteractionSource.SetPointerActive(false, 0f);
+        while (!InteractionSource.RightInteractionState) { yield return null; }
+        LogSession(0);
+        UiManager.CloseMessagePanel();
+
         foreach (Trial currentTrial in TrialList)
         {
-            // Initial state
-            UiManager.OpenMessagePanel("AlfamaVR", "Adjust the headset and pick up the controllers. Press the right trigger to continue.", 1f);
-            UiManager.CloseImagePanel();
-
             // Pick scenario
             foreach (var element in SceneDict.Values)
             {
@@ -77,9 +81,7 @@ public class TrialSession : DataPublisher
             }
             SceneDict[currentTrial.SceneType].SetActive(true);
 
-            // Start state
             InteractionSource.SetPointerActive(false, 0f);
-            while (!InteractionSource.RightInteractionState) { yield return null; }
 
             // Intertrial interval
             UiManager.OpenMessagePanel("AlfamaVR", "Prepare to explore the space.");
@@ -102,7 +104,7 @@ public class TrialSession : DataPublisher
             yield return new WaitForSeconds(currentTrial.SecondsDuration);
 
             // Point to origin
-            UiManager.OpenMessagePanel("AlfamaVr", "Point to your starting position and press the right trigger.", 0.1f);
+            UiManager.OpenMessagePanel("AlfamaVr", "Point to your starting position and press trigger.", 0.1f);
             InteractionSource.SetPointerActive(true, 100f);
 
             LogPointToOriginWorld(0);
@@ -111,10 +113,10 @@ public class TrialSession : DataPublisher
                 yield return null; 
             }
             LogPointToOriginWorld(2);
-
+            UiManager.CloseMessagePanel();
             // Point on map
             InteractionSource.SetPointerActive(false, 0f);
-            UiManager.OpenImagePanel("AlfamaVr", cameraTexture, "Point to your current location and press the right trigger.", true);
+            UiManager.OpenImagePanel("AlfamaVr", cameraTexture, "Point to your current location and press the trigger.", true);
             yield return new WaitForSeconds(0.5f);
             InteractionSource.SetPointerActive(true, 1.5f);
 
@@ -146,7 +148,7 @@ public class TrialSession : DataPublisher
                         FinalWorldPoint = new Vector3(convertedPoint.x, 0f, convertedPoint.z);
                     }
 
-                    DebugObject.transform.position = FinalWorldPoint;
+                   // DebugObject.transform.position = FinalWorldPoint;
 
                     UiManager.SetImageCursorPosition(localHit);
                 }
@@ -155,12 +157,21 @@ public class TrialSession : DataPublisher
             LogPointToMap(2, FinalWorldPoint); // TODO - Do we need to log this before the user has made a firm choice on map position?
 
             // Reset
+            UiManager.CloseImagePanel();
             CurrentTrialIndex++;
         }
-
-        UiManager.OpenMessagePanel("Session complete", "Please wait for someone to take the headset.", 1f);
-
+        LogSession(1);
+        UiManager.OpenMessagePanel("Session complete", "Please wait for someone to take the headset.");
+        while (true) 
         yield return null;
+    }
+
+    private void LogSession(int startStop)
+    {
+        long timestamp = DateTime.Now.Ticks / (TimeSpan.TicksPerMillisecond / 1000);
+        PubSocket.SendMoreFrame("Session")
+           .SendMoreFrame(BitConverter.GetBytes(timestamp))
+           .SendFrame(BitConverter.GetBytes(startStop));
     }
 
     private void LogInterTrialInterval()
