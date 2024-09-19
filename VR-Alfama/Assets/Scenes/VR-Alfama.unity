@@ -2465,15 +2465,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PublisherBindAddress: tcp://localhost:6000
-  GeoRefernce:
+  GeoReference:
   - Target: {fileID: 1872293744}
-    Latitude: 38.71451820726488
-    Longitude: -9.13117232636086
-    Height: 0
+    Latitude: 38.714523
+    Longitude: -9.131158
+    Altitude: 57
   - Target: {fileID: 1660143654}
-    Latitude: 38.7126719530456
-    Longitude: -9.129148523239753
-    Height: 0
+    Latitude: 38.712675
+    Longitude: -9.129117
+    Altitude: 33
   SecondsInterTrialInterval: 3
   SecondsPrimeMap: 5
   InteractionSource: {fileID: 3962709906633868045}

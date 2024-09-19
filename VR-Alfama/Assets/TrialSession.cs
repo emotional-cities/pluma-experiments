@@ -28,11 +28,11 @@ public class TrialSession : DataPublisher
         public GameObject Target;
         public double Latitude;
         public double Longitude;
-        public double Height;
+        public double Altitude;
     }
 
 
-    public GeoRefernceObject[] GeoRefernce;
+    public GeoRefernceObject[] GeoReference;
     public enum SceneType { Adverse, Optimistic }
 
     public float SecondsInterTrialInterval = 3;
@@ -79,8 +79,10 @@ public class TrialSession : DataPublisher
         SceneDict[0].SetActive(true);
         UiManager.OpenMessagePanel("AlfamaVR", "Adjust the headset and pick up the controllers. Press the trigger to continue.", 1f);
         InteractionSource.SetPointerActive(false, 0f);
-        while (!InteractionSource.RightInteractionState) { yield return null; }
+        //while (!InteractionSource.RightInteractionState) { yield return null; }
+        yield return new WaitForSeconds(5);
         LogSession(0);
+        LogGeoreference();
         UiManager.CloseMessagePanel();
 
         foreach (Trial currentTrial in TrialList)
@@ -175,6 +177,34 @@ public class TrialSession : DataPublisher
         UiManager.OpenMessagePanel("Session complete", "Please wait for someone to take the headset.");
         while (true) 
         yield return null;
+    }
+
+    private void LogGeoreference()
+    {
+        foreach (var target in GeoReference)
+        {
+            /*
+             [Transform.Position.X,
+             Transform.Position.Y,
+             Transform.Position.Z,
+             GpsReference.Longitude,
+             GpsReference.Latitude,
+             GpsReference.Elevation]
+             */
+            byte[] positionData = BitConverter.GetBytes(target.Target.transform.position.x)
+                                .Concat(BitConverter.GetBytes(target.Target.transform.position.y))
+                                .Concat(BitConverter.GetBytes(target.Target.transform.position.z))
+                                .ToArray();
+            byte[] gpsData = BitConverter.GetBytes(target.Longitude)
+                                .Concat(BitConverter.GetBytes(target.Latitude))
+                                .Concat(BitConverter.GetBytes(target.Altitude))
+                                .ToArray();
+            byte[] allData = positionData.Concat(gpsData).ToArray();
+            long timestamp = DateTime.Now.Ticks / (TimeSpan.TicksPerMillisecond / 1000);
+            PubSocket.SendMoreFrame("Georeference")
+               .SendMoreFrame(BitConverter.GetBytes(timestamp))
+               .SendFrame(allData);
+        }
     }
 
     private void LogSession(int startStop)

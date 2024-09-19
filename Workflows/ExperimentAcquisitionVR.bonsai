@@ -541,6 +541,18 @@ it.Item2 as ITIDuration)</scr:Expression>
               <StartIndex>0</StartIndex>
               <ExpectedIndices>3</ExpectedIndices>
             </Expression>
+            <Expression xsi:type="rx:BehaviorSubject" TypeArguments="sys:Tuple(sys:String,p2:NetMQMessage)">
+              <rx:Name>GeoReference</rx:Name>
+            </Expression>
+            <Expression xsi:type="rx:GroupBy">
+              <rx:KeySelector>Item1</rx:KeySelector>
+              <rx:ElementSelector>Item2</rx:ElementSelector>
+            </Expression>
+            <Expression xsi:type="IncludeWorkflow" Path="Extensions\ZeroMQLogging.bonsai">
+              <LogName>Unity_GeoReference</LogName>
+              <StartIndex>0</StartIndex>
+              <ExpectedIndices>3</ExpectedIndices>
+            </Expression>
           </Nodes>
           <Edges>
             <Edge From="0" To="1" Label="Source1" />
@@ -566,6 +578,8 @@ it.Item2 as ITIDuration)</scr:Expression>
             <Edge From="31" To="32" Label="Source1" />
             <Edge From="33" To="34" Label="Source1" />
             <Edge From="34" To="35" Label="Source1" />
+            <Edge From="36" To="37" Label="Source1" />
+            <Edge From="37" To="38" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
@@ -898,10 +912,8 @@ it.Item2 as ITIDuration)</scr:Expression>
                   <Expression xsi:type="MulticastSubject">
                     <Name>OmniceptGlia</Name>
                   </Expression>
-                  <Expression xsi:type="Disable">
-                    <Builder xsi:type="MemberSelector">
+                  <Expression xsi:type="MemberSelector">
                       <Selector>Item2,Item3</Selector>
-                    </Builder>
                   </Expression>
                   <Expression xsi:type="Disable">
                     <Builder xsi:type="rx:PublishSubject">
@@ -1326,29 +1338,6 @@ it.Item2 as ITIDuration)</scr:Expression>
                 <Nodes>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="zmq:Subscriber">
-                      <zmq:ConnectionString>tcp://localhost:5557</zmq:ConnectionString>
-                      <zmq:Topic>GeoRef</zmq:Topic>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="IncludeWorkflow" Path="Extensions\ZeroMqStreamPublisher.bonsai">
-                    <Name>VRTransform</Name>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="p1:UnityTimestampMicroSeconds" />
-                  </Expression>
-                  <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
-                  <Expression xsi:type="harp:Format">
-                    <harp:MessageType>Event</harp:MessageType>
-                    <harp:Register xsi:type="harp:FormatMessagePayload">
-                      <harp:Address>219</harp:Address>
-                      <harp:PayloadType>TimestampedU64</harp:PayloadType>
-                    </harp:Register>
-                  </Expression>
-                  <Expression xsi:type="MulticastSubject">
-                    <Name>HarpSoftwareLogging</Name>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="zmq:Subscriber">
                       <zmq:ConnectionString>tcp://localhost:5558</zmq:ConnectionString>
                       <zmq:Topic>Position</zmq:Topic>
                     </Combinator>
@@ -1683,6 +1672,29 @@ it.Item2 as ITIDuration)</scr:Expression>
                   <Expression xsi:type="MulticastSubject">
                     <Name>HarpSoftwareLogging</Name>
                   </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="zmq:Subscriber">
+                      <zmq:ConnectionString>tcp://localhost:6000</zmq:ConnectionString>
+                      <zmq:Topic>Georeference</zmq:Topic>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="IncludeWorkflow" Path="Extensions\ZeroMqStreamPublisher.bonsai">
+                    <Name>GeoReference</Name>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="p1:UnityTimestampMicroSeconds" />
+                  </Expression>
+                  <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
+                  <Expression xsi:type="harp:Format">
+                    <harp:MessageType>Event</harp:MessageType>
+                    <harp:Register xsi:type="harp:FormatMessagePayload">
+                      <harp:Address>211</harp:Address>
+                      <harp:PayloadType>TimestampedU64</harp:PayloadType>
+                    </harp:Register>
+                  </Expression>
+                  <Expression xsi:type="MulticastSubject">
+                    <Name>HarpSoftwareLogging</Name>
+                  </Expression>
                   <Expression xsi:type="GroupWorkflow">
                     <Name>UnityTransformDebug</Name>
                     <Workflow>
@@ -1826,9 +1838,9 @@ it.Item2 as ITIDuration)</scr:Expression>
                   <Edge From="4" To="5" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
                   <Edge From="7" To="8" Label="Source1" />
-                  <Edge From="8" To="9" Label="Source1" />
                   <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
+                  <Edge From="11" To="12" Label="Source1" />
                   <Edge From="12" To="13" Label="Source1" />
                   <Edge From="13" To="14" Label="Source1" />
                   <Edge From="15" To="16" Label="Source1" />
