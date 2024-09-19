@@ -15,6 +15,7 @@ public class TrialSession : DataPublisher
     [System.Serializable]
     public class Trial
     {
+        public int SpawnID;
         public Vector3 InitialPosition;
         public Vector3 InitialRotation;
         public SceneType SceneType;
@@ -226,14 +227,15 @@ public class TrialSession : DataPublisher
     private void LogNewScene()
     {
         long timestamp = DateTime.Now.Ticks / (TimeSpan.TicksPerMillisecond / 1000);
-        byte[] scene = Encoding.ASCII.GetBytes(CurrentTrialIndex.ToString() + '\0'); // TODO - should be optimistic vs. adverse?
-        byte[] spatialSample = Encoding.ASCII.GetBytes(CurrentTrialIndex.ToString() + '\0');
+        byte[] scene = BitConverter.GetBytes((int) TrialList[CurrentTrialIndex].SceneType); //int
+        byte[] spatialSample = BitConverter.GetBytes(TrialList[CurrentTrialIndex].SpawnID); //int
+        byte[] duration = BitConverter.GetBytes(TrialList[CurrentTrialIndex].SecondsDuration); //int
+        byte[] allData = scene.Concat(spatialSample).Concat(duration).ToArray();
+
 
         PubSocket.SendMoreFrame("NewScene")
             .SendMoreFrame(BitConverter.GetBytes(timestamp))
-            .SendMoreFrame(scene)
-            .SendMoreFrame(spatialSample)
-            .SendFrame(BitConverter.GetBytes(TrialList[CurrentTrialIndex].SecondsDuration));
+            .SendFrame(allData);
     }
 
     private void LogPointToOriginWorld(int state)
