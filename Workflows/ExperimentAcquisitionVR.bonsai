@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <WorkflowBuilder Version="2.8.1"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
@@ -310,7 +310,7 @@
                     <rx:ElementSelector>Item2</rx:ElementSelector>
                   </Expression>
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\ZeroMQLogging.bonsai">
-                    <LogName>Unity_ITI</LogName>
+                    <LogName>Protocol</LogName>
                     <StartIndex>0</StartIndex>
                     <ExpectedIndices>3</ExpectedIndices>
                   </Expression>
@@ -322,7 +322,7 @@
                     <rx:ElementSelector>Item2</rx:ElementSelector>
                   </Expression>
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\ZeroMQLogging.bonsai">
-                    <LogName>Unity_NewScene</LogName>
+                    <LogName>Protocol</LogName>
                     <StartIndex>0</StartIndex>
                     <ExpectedIndices>3</ExpectedIndices>
                   </Expression>
@@ -334,7 +334,7 @@
                     <rx:ElementSelector>Item2</rx:ElementSelector>
                   </Expression>
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\ZeroMQLogging.bonsai">
-                    <LogName>Unity_VRTransform</LogName>
+                    <LogName>Unity</LogName>
                     <StartIndex>0</StartIndex>
                     <ExpectedIndices>3</ExpectedIndices>
                   </Expression>
@@ -358,7 +358,7 @@
                     <rx:ElementSelector>Item2</rx:ElementSelector>
                   </Expression>
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\ZeroMQLogging.bonsai">
-                    <LogName>Unity_PointToOriginWorld</LogName>
+                    <LogName>Protocol</LogName>
                     <StartIndex>0</StartIndex>
                     <ExpectedIndices>3</ExpectedIndices>
                   </Expression>
@@ -370,7 +370,7 @@
                     <rx:ElementSelector>Item2</rx:ElementSelector>
                   </Expression>
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\ZeroMQLogging.bonsai">
-                    <LogName>Unity_PointToOriginMap</LogName>
+                    <LogName>Protocol</LogName>
                     <StartIndex>0</StartIndex>
                     <ExpectedIndices>3</ExpectedIndices>
                   </Expression>
@@ -382,7 +382,7 @@
                     <rx:ElementSelector>Item2</rx:ElementSelector>
                   </Expression>
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\ZeroMQLogging.bonsai">
-                    <LogName>Unity_GeoReference</LogName>
+                    <LogName>Unity</LogName>
                     <StartIndex>0</StartIndex>
                     <ExpectedIndices>3</ExpectedIndices>
                   </Expression>
@@ -1174,7 +1174,7 @@
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="zmq:Subscriber">
                             <zmq:ConnectionString>tcp://localhost:5558</zmq:ConnectionString>
-                            <zmq:Topic>Position</zmq:Topic>
+                            <zmq:Topic>VRTransform</zmq:Topic>
                           </Combinator>
                         </Expression>
                         <Expression xsi:type="IncludeWorkflow" Path="Extensions\ZeroMqStreamPublisher.bonsai">
