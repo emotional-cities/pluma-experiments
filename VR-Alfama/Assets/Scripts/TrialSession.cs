@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.XR;
 
@@ -122,7 +123,7 @@ public class TrialSession : DataPublisher
             InteractionSource.SetPointerActive(true, 100f);
 
             LogPointToOriginWorld(0);
-            while (!InteractionSource.RightInteractionState) {
+            while (!(InteractionSource.RightInteractionState || Input.GetKey(KeyCode.LeftShift))) {
                 LogPointToOriginWorld(1);
                 yield return null; 
             }
@@ -135,7 +136,7 @@ public class TrialSession : DataPublisher
             InteractionSource.SetPointerActive(true, 1.5f);
 
             Vector3 FinalWorldPoint = Vector3.zero;
-            while (!InteractionSource.RightInteractionState)
+            while (!(InteractionSource.RightInteractionState || Input.GetKey(KeyCode.LeftShift)))
             {
                 RaycastHit hit = InteractionSource.GetPointedObject(LayerMask.GetMask("UI"));
                 if (hit.transform != null)
