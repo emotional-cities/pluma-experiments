@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bonsai.Core" Version="2.7.3" />
+    <PackageReference Include="Bonsai.Core" Version="2.8.1" />
     <PackageReference Include="Bonsai.Design" Version="2.7.0" />
     <PackageReference Include="Bonsai.System" Version="2.6.0" /> 
     <PackageReference Include="Bonsai.Harp" Version="3.4.0-build220224" />
