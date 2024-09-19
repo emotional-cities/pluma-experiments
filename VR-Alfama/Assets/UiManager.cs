@@ -21,6 +21,8 @@ public class UiManager : MonoBehaviour
 
         MessagePanel.TitleText.text = title;
         MessagePanel.BodyText.text = body;
+        Color col = new Color(0, 0, 0, 1);
+        MessagePanel.GetComponent<Image>().color = col;
     }
 
     public void OpenMessagePanel(string title, string body, float opacity)
@@ -60,5 +62,6 @@ public class UiManager : MonoBehaviour
     public void CloseImagePanel()
     {
         ImagePanel.gameObject.SetActive(false);
+        ImagePanel.ImageCursor.gameObject.SetActive(false);
     }
 }
