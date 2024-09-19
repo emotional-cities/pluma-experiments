@@ -22,6 +22,17 @@ public class TrialSession : DataPublisher
         public Texture2D Map;
     }
     
+    [System.Serializable]
+    public struct GeoRefernceObject
+    {
+        public GameObject Target;
+        public double Latitude;
+        public double Longitude;
+        public double Height;
+    }
+
+
+    public GeoRefernceObject[] GeoRefernce;
     public enum SceneType { Adverse, Optimistic }
 
     public float SecondsInterTrialInterval = 3;
