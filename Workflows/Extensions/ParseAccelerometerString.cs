@@ -31,8 +31,8 @@ public class ParseAccelerometerString
             var Accl = data_split[4].Split(':')[1].Split(',');
             output.Accl = new Point3f(float.Parse(Accl[0]),float.Parse(Accl[1]) , float.Parse(Accl[2]));
             //Gravity
-            var Gravitiy = data_split[5].Split(':')[1].Split(',');
-            output.Gravitiy = new Point3f(float.Parse(Gravitiy[0]),float.Parse(Gravitiy[1]) , float.Parse(Gravitiy[2]));
+            var Gravity = data_split[5].Split(':')[1].Split(',');
+            output.Gravity = new Point3f(float.Parse(Gravity[0]),float.Parse(Gravity[1]) , float.Parse(Gravity[2]));
             //Calibration
             var Calibration = data_split[6].Split(':')[1].Split(',');
             output.SysCalib = int.Parse(Calibration[0].Split('=')[1]) == 1;
@@ -55,7 +55,7 @@ public struct AccelerometerData{
     public Point3f LinearAccl;
     public Point3f Magnetometer;
     public Point3f Accl;
-    public Point3f Gravitiy;
+    public Point3f Gravity;
     public bool SysCalib;
     public bool GyroCalib;
     public bool AcclCalib;
