@@ -82,13 +82,13 @@ The PupilInterface package provides some specific functionality for interfacing 
 
 ### To run the protocol:
 
-  0. Make sure the cellphone is connected to the same network as the computer;
-  1. Turn on the companion phone and open the `Invisible Companion` App;
-  2. Select `Wearer`, click `Adjust` and follow the calibration procedure;
-  3. Hit `Apply` and confirm by looking at the cellphone;
-  4. The App shuold now remain open to keep the `Zyre Server` active;
-
-  5. From Bonsai, just hit `Start` and it should be able to automatically start streaming the video data.
+  0. In the backpack computer activate the hotspot with ssid Backpack, make sure that hotspot power saving is disable; 
+  1. Make sure the cellphone is connected the backpack computer hotspot (named Backpack);
+  2. Turn on the companion phone and open the `Invisible Companion` App;
+  3. Select `Wearer`, click `Adjust` and follow the calibration procedure;
+  4. Hit `Apply` and confirm by looking at the cellphone;
+  5. The App shuold now remain open to keep the `Zyre Server` active;
+  6. From Bonsai, just hit `Start` and it should be able to automatically start streaming the video data.
 
 ## Bonsai data logging
 
