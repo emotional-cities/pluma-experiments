@@ -25,7 +25,7 @@ public class TrialSession : DataPublisher
     }
     
     [System.Serializable]
-    public struct GeoRefernceObject
+    public struct GeoReferenceObject
     {
         public GameObject Target;
         public double Latitude;
@@ -34,7 +34,7 @@ public class TrialSession : DataPublisher
     }
 
 
-    public GeoRefernceObject[] GeoReference;
+    public GeoReferenceObject[] GeoReference;
     public enum SceneType { Adverse, Optimistic }
 
     public float SecondsInterTrialInterval = 3;
@@ -84,7 +84,7 @@ public class TrialSession : DataPublisher
         //while (!InteractionSource.RightInteractionState) { yield return null; }
         yield return new WaitForSeconds(5);
         LogSession(0);
-        LogGeoreference();
+        LogGeoReference();
         UiManager.CloseMessagePanel();
 
         foreach (Trial currentTrial in TrialList)
@@ -181,7 +181,7 @@ public class TrialSession : DataPublisher
         yield return null;
     }
 
-    private void LogGeoreference()
+    private void LogGeoReference()
     {
         foreach (var target in GeoReference)
         {

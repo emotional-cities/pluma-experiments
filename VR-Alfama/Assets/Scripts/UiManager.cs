@@ -21,8 +21,8 @@ public class UiManager : MonoBehaviour
 
         MessagePanel.TitleText.text = title;
         MessagePanel.BodyText.text = body;
-        Color col = new Color(0, 0, 0, 1);
-        MessagePanel.GetComponent<Image>().color = col;
+        Color color = new Color(0, 0, 0, 1);
+        MessagePanel.GetComponent<Image>().color = color;
     }
 
     public void OpenMessagePanel(string title, string body, float opacity)
