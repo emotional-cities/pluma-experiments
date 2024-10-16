@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.XR;
 
@@ -15,6 +16,7 @@ public class TrialSession : DataPublisher
     [System.Serializable]
     public class Trial
     {
+        public int SpawnID;
         public Vector3 InitialPosition;
         public Vector3 InitialRotation;
         public SceneType SceneType;
@@ -22,6 +24,17 @@ public class TrialSession : DataPublisher
         public Texture2D Map;
     }
     
+    [System.Serializable]
+    public struct GeoReferenceObject
+    {
+        public GameObject Target;
+        public double Latitude;
+        public double Longitude;
+        public double Altitude;
+    }
+
+
+    public GeoReferenceObject[] GeoReference;
     public enum SceneType { Adverse, Optimistic }
 
     public float SecondsInterTrialInterval = 3;
@@ -30,7 +43,7 @@ public class TrialSession : DataPublisher
     public VrInteractionController InteractionSource;
     public UiManager UiManager;
     public Camera MapCamera;
-    public GameObject DebugObject;
+   // public GameObject DebugObject;
 
     public Trial[] TrialList;
     private int CurrentTrialIndex = 0;
@@ -64,12 +77,18 @@ public class TrialSession : DataPublisher
 
     IEnumerator Session()
     {
+        // Initial state
+        SceneDict[0].SetActive(true);
+        UiManager.OpenMessagePanel("AlfamaVR", "Adjust the headset and pick up the controllers. Press the trigger to continue.", 1f);
+        InteractionSource.SetPointerActive(false, 0f);
+        //while (!InteractionSource.RightInteractionState) { yield return null; }
+        yield return new WaitForSeconds(5);
+        LogSession(0);
+        LogGeoReference();
+        UiManager.CloseMessagePanel();
+
         foreach (Trial currentTrial in TrialList)
         {
-            // Initial state
-            UiManager.OpenMessagePanel("AlfamaVR", "Adjust the headset and pick up the controllers. Press the right trigger to continue.", 1f);
-            UiManager.CloseImagePanel();
-
             // Pick scenario
             foreach (var element in SceneDict.Values)
             {
@@ -77,9 +96,7 @@ public class TrialSession : DataPublisher
             }
             SceneDict[currentTrial.SceneType].SetActive(true);
 
-            // Start state
             InteractionSource.SetPointerActive(false, 0f);
-            while (!InteractionSource.RightInteractionState) { yield return null; }
 
             // Intertrial interval
             UiManager.OpenMessagePanel("AlfamaVR", "Prepare to explore the space.");
@@ -102,24 +119,24 @@ public class TrialSession : DataPublisher
             yield return new WaitForSeconds(currentTrial.SecondsDuration);
 
             // Point to origin
-            UiManager.OpenMessagePanel("AlfamaVr", "Point to your starting position and press the right trigger.", 0.1f);
+            UiManager.OpenMessagePanel("AlfamaVr", "Point to your starting position and press trigger.", 0.1f);
             InteractionSource.SetPointerActive(true, 100f);
 
             LogPointToOriginWorld(0);
-            while (!InteractionSource.RightInteractionState) {
+            while (!(InteractionSource.RightInteractionState || Input.GetKey(KeyCode.LeftShift))) {
                 LogPointToOriginWorld(1);
                 yield return null; 
             }
             LogPointToOriginWorld(2);
-
+            UiManager.CloseMessagePanel();
             // Point on map
             InteractionSource.SetPointerActive(false, 0f);
-            UiManager.OpenImagePanel("AlfamaVr", cameraTexture, "Point to your current location and press the right trigger.", true);
+            UiManager.OpenImagePanel("AlfamaVr", cameraTexture, "Point to your current location and press the trigger.", true);
             yield return new WaitForSeconds(0.5f);
             InteractionSource.SetPointerActive(true, 1.5f);
 
             Vector3 FinalWorldPoint = Vector3.zero;
-            while (!InteractionSource.RightInteractionState)
+            while (!(InteractionSource.RightInteractionState || Input.GetKey(KeyCode.LeftShift)))
             {
                 RaycastHit hit = InteractionSource.GetPointedObject(LayerMask.GetMask("UI"));
                 if (hit.transform != null)
@@ -146,7 +163,7 @@ public class TrialSession : DataPublisher
                         FinalWorldPoint = new Vector3(convertedPoint.x, 0f, convertedPoint.z);
                     }
 
-                    DebugObject.transform.position = FinalWorldPoint;
+                   // DebugObject.transform.position = FinalWorldPoint;
 
                     UiManager.SetImageCursorPosition(localHit);
                 }
@@ -155,12 +172,49 @@ public class TrialSession : DataPublisher
             LogPointToMap(2, FinalWorldPoint); // TODO - Do we need to log this before the user has made a firm choice on map position?
 
             // Reset
+            UiManager.CloseImagePanel();
             CurrentTrialIndex++;
         }
-
-        UiManager.OpenMessagePanel("Session complete", "Please wait for someone to take the headset.", 1f);
-
+        LogSession(1);
+        UiManager.OpenMessagePanel("Session complete", "Please wait for someone to take the headset.");
+        while (true) 
         yield return null;
+    }
+
+    private void LogGeoReference()
+    {
+        foreach (var target in GeoReference)
+        {
+            /*
+             [Transform.Position.X,
+             Transform.Position.Y,
+             Transform.Position.Z,
+             GpsReference.Longitude,
+             GpsReference.Latitude,
+             GpsReference.Elevation]
+             */
+            byte[] positionData = BitConverter.GetBytes(target.Target.transform.position.x)
+                                .Concat(BitConverter.GetBytes(target.Target.transform.position.y))
+                                .Concat(BitConverter.GetBytes(target.Target.transform.position.z))
+                                .ToArray();
+            byte[] gpsData = BitConverter.GetBytes(target.Longitude)
+                                .Concat(BitConverter.GetBytes(target.Latitude))
+                                .Concat(BitConverter.GetBytes(target.Altitude))
+                                .ToArray();
+            byte[] allData = positionData.Concat(gpsData).ToArray();
+            long timestamp = DateTime.Now.Ticks / (TimeSpan.TicksPerMillisecond / 1000);
+            PubSocket.SendMoreFrame("Georeference")
+               .SendMoreFrame(BitConverter.GetBytes(timestamp))
+               .SendFrame(allData);
+        }
+    }
+
+    private void LogSession(int startStop)
+    {
+        long timestamp = DateTime.Now.Ticks / (TimeSpan.TicksPerMillisecond / 1000);
+        PubSocket.SendMoreFrame("Session")
+           .SendMoreFrame(BitConverter.GetBytes(timestamp))
+           .SendFrame(BitConverter.GetBytes(startStop));
     }
 
     private void LogInterTrialInterval()
@@ -174,14 +228,15 @@ public class TrialSession : DataPublisher
     private void LogNewScene()
     {
         long timestamp = DateTime.Now.Ticks / (TimeSpan.TicksPerMillisecond / 1000);
-        byte[] scene = Encoding.ASCII.GetBytes(CurrentTrialIndex.ToString() + '\0'); // TODO - should be optimistic vs. adverse?
-        byte[] spatialSample = Encoding.ASCII.GetBytes(CurrentTrialIndex.ToString() + '\0');
+        byte[] scene = BitConverter.GetBytes((int) TrialList[CurrentTrialIndex].SceneType); //int
+        byte[] spatialSample = BitConverter.GetBytes(TrialList[CurrentTrialIndex].SpawnID); //int
+        byte[] duration = BitConverter.GetBytes(TrialList[CurrentTrialIndex].SecondsDuration); //int
+        byte[] allData = scene.Concat(spatialSample).Concat(duration).ToArray();
+
 
         PubSocket.SendMoreFrame("NewScene")
             .SendMoreFrame(BitConverter.GetBytes(timestamp))
-            .SendMoreFrame(scene)
-            .SendMoreFrame(spatialSample)
-            .SendFrame(BitConverter.GetBytes(TrialList[CurrentTrialIndex].SecondsDuration));
+            .SendFrame(allData);
     }
 
     private void LogPointToOriginWorld(int state)
