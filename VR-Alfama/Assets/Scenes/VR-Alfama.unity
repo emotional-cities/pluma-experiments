@@ -8121,7 +8121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PublisherBindAddress: tcp://localhost:6000
-  GeoReference:
+  Georeference:
   - Target: {fileID: 1872293744}
     Latitude: 38.714523
     Longitude: -9.131158

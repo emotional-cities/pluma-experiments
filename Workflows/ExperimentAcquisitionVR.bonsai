@@ -374,7 +374,7 @@
                     <ExpectedIndices>3</ExpectedIndices>
                   </Expression>
                   <Expression xsi:type="rx:BehaviorSubject" TypeArguments="sys:Tuple(sys:String,p2:NetMQMessage)">
-                    <rx:Name>GeoReference</rx:Name>
+                    <rx:Name>Georeference</rx:Name>
                   </Expression>
                   <Expression xsi:type="rx:GroupBy">
                     <rx:KeySelector>Item1</rx:KeySelector>
@@ -1513,7 +1513,7 @@
                           </Combinator>
                         </Expression>
                         <Expression xsi:type="IncludeWorkflow" Path="Extensions\ZeroMqStreamPublisher.bonsai">
-                          <Name>GeoReference</Name>
+                          <Name>Georeference</Name>
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="p1:UnityTimestampMicroSeconds" />
