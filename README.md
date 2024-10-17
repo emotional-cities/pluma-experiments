@@ -87,7 +87,7 @@ The PupilInterface package provides some specific functionality for interfacing 
   2. Ensure the cellphone is connected to the backpack computer hotspot (named Backpack);
   3. Turn on the companion phone and open the `Invisible Companion` App;
   4. Select `Wearer`, click `Adjust` and follow the calibration procedure;
-  5. Hit `Apply` and confirm by looking at the cellphone;
+  5. On the cellphone, hit `Apply` and confirm the eye gaze marker position matches the expected gaze;
   6. The App should now remain open to keep the `Zyre Server` active;
   7. From Bonsai, hit `Start` and it should automatically start streaming the video data.
 
