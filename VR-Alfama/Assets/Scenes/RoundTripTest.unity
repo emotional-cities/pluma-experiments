@@ -12993,7 +12993,7 @@ GameObject:
   - component: {fileID: 1009196413}
   - component: {fileID: 1009196412}
   m_Layer: 0
-  m_Name: GeoReferencePoint2
+  m_Name: GeoreferencePoint2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27892,7 +27892,7 @@ GameObject:
   - component: {fileID: 2016496830}
   - component: {fileID: 2016496829}
   m_Layer: 0
-  m_Name: GeoReferencePoint1
+  m_Name: GeoreferencePoint1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
