@@ -196,7 +196,7 @@ To achieve this, Bonsai is randomly toggling a digital output in the HARP behavi
 |                           |          IMU          |   192    |                |            Timestamped(long[])                |
 |                           |         Mouth         |   193    |                |            Timestamped(long[])                |
 |     **VRTransform**       |       VrTimestamp     |   180    |                |            Timestamped(long)                  |
-|    **GeoReference**       |       VrTimestamp     |   181    |                |            Timestamped(long)                  |
+|    **Georeference**       |       VrTimestamp     |   181    |                |            Timestamped(long)                  |
 |   **ScreenGrabImage**     |       VrTimestamp     |   182    |                |            Timestamped(int)                  |
 
 # Simulation 
