@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <WorkflowBuilder Version="2.8.1"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                 xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
+                 xmlns:port="clr-namespace:Bonsai.IO.Ports;assembly=Bonsai.System"
                  xmlns:pluma="clr-namespace:EmotionalCities.Pluma;assembly=EmotionalCities.Pluma"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
                  xmlns:harp="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
@@ -13,27 +13,27 @@
         <Property Name="PortName" />
       </Expression>
       <Expression xsi:type="Combinator">
-        <Combinator xsi:type="io:CreateSerialPort">
-          <io:Name>Accel</io:Name>
-          <io:PortName>COM16</io:PortName>
-          <io:BaudRate>115200</io:BaudRate>
-          <io:Parity>None</io:Parity>
-          <io:ParityReplace>63</io:ParityReplace>
-          <io:DataBits>8</io:DataBits>
-          <io:StopBits>One</io:StopBits>
-          <io:Handshake>None</io:Handshake>
-          <io:DiscardNull>false</io:DiscardNull>
-          <io:DtrEnable>true</io:DtrEnable>
-          <io:RtsEnable>false</io:RtsEnable>
-          <io:ReadBufferSize>4096</io:ReadBufferSize>
-          <io:WriteBufferSize>2048</io:WriteBufferSize>
-          <io:ReceivedBytesThreshold>1</io:ReceivedBytesThreshold>
+        <Combinator xsi:type="port:CreateSerialPort">
+          <port:Name>Accel</port:Name>
+          <port:PortName>COM16</port:PortName>
+          <port:BaudRate>115200</port:BaudRate>
+          <port:NewLine>\r\n</port:NewLine>
+          <port:Parity>None</port:Parity>
+          <port:ParityReplace>63</port:ParityReplace>
+          <port:DataBits>8</port:DataBits>
+          <port:StopBits>One</port:StopBits>
+          <port:Handshake>None</port:Handshake>
+          <port:DiscardNull>false</port:DiscardNull>
+          <port:DtrEnable>true</port:DtrEnable>
+          <port:RtsEnable>false</port:RtsEnable>
+          <port:ReadBufferSize>4096</port:ReadBufferSize>
+          <port:WriteBufferSize>2048</port:WriteBufferSize>
+          <port:ReceivedBytesThreshold>1</port:ReceivedBytesThreshold>
         </Combinator>
       </Expression>
       <Expression xsi:type="Combinator">
-        <Combinator xsi:type="io:SerialStringRead">
-          <io:PortName>Accel</io:PortName>
-          <io:NewLine>\r\n</io:NewLine>
+        <Combinator xsi:type="port:SerialReadLine">
+          <port:PortName>Accel</port:PortName>
         </Combinator>
       </Expression>
       <Expression xsi:type="Combinator">
