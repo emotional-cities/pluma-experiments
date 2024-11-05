@@ -40,7 +40,7 @@
             </Expression>
             <Expression xsi:type="VisualizerMapping" />
             <Expression xsi:type="SubscribeSubject">
-              <Name>EEgKeyboardStream</Name>
+              <Name>EEgProtocolStream</Name>
             </Expression>
             <Expression xsi:type="VisualizerMapping">
               <VisualizerType xsi:type="TypeMapping" TypeArguments="p2:ObjectTextVisualizer" />
