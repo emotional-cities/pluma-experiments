@@ -2,9 +2,8 @@
 <WorkflowBuilder Version="2.8.1"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
-                 xmlns:p1="clr-namespace:;assembly=Extensions"
-                 xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
                  xmlns:pluma="clr-namespace:EmotionalCities.Pluma;assembly=EmotionalCities.Pluma"
+                 xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
                  xmlns:harp="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
                  xmlns:scr="clr-namespace:Bonsai.Scripting.Expressions;assembly=Bonsai.Scripting.Expressions"
                  xmlns="https://bonsai-rx.org/2018/workflow">
@@ -38,7 +37,7 @@
         </Combinator>
       </Expression>
       <Expression xsi:type="Combinator">
-        <Combinator xsi:type="p1:ParseAccelerometerString" />
+        <Combinator xsi:type="pluma:ParseAdafruitBno055" />
       </Expression>
       <Expression xsi:type="SubscribeSubject">
         <Name>TimestampSource</Name>
