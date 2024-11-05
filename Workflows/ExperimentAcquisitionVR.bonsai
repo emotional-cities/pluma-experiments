@@ -466,7 +466,7 @@
                         </Expression>
                         <Expression xsi:type="Add">
                           <Operand xsi:type="IntProperty">
-                            <Value>215</Value>
+                            <Value>190</Value>
                           </Operand>
                         </Expression>
                         <Expression xsi:type="Combinator">
@@ -1186,88 +1186,7 @@
                         <Expression xsi:type="harp:Format">
                           <harp:MessageType>Event</harp:MessageType>
                           <harp:Register xsi:type="harp:FormatMessagePayload">
-                            <harp:Address>219</harp:Address>
-                            <harp:PayloadType>TimestampedU64</harp:PayloadType>
-                          </harp:Register>
-                        </Expression>
-                        <Expression xsi:type="MulticastSubject">
-                          <Name>HarpSoftwareLogging</Name>
-                        </Expression>
-                        <Expression xsi:type="Disable">
-                          <Builder xsi:type="Combinator">
-                            <Combinator xsi:type="zmq:Subscriber">
-                              <zmq:ConnectionString>tcp://localhost:5559</zmq:ConnectionString>
-                            </Combinator>
-                          </Builder>
-                        </Expression>
-                        <Expression xsi:type="Disable">
-                          <Builder xsi:type="IncludeWorkflow" Path="Extensions\ScreenCapture.bonsai">
-                            <Name>VRImage</Name>
-                            <CaptureRegion>
-                              <X>486</X>
-                              <Y>117</Y>
-                              <Width>624</Width>
-                              <Height>459</Height>
-                            </CaptureRegion>
-                          </Builder>
-                        </Expression>
-                        <Expression xsi:type="Disable">
-                          <Builder xsi:type="Combinator">
-                            <Combinator xsi:type="p1:UnityTimestampMicroSeconds" />
-                          </Builder>
-                        </Expression>
-                        <Expression xsi:type="Disable">
-                          <Builder xsi:type="Combinator">
-                            <Combinator xsi:type="zmq:Subscriber">
-                              <zmq:ConnectionString>tcp://localhost:5561</zmq:ConnectionString>
-                              <zmq:Topic>RecordingStatus</zmq:Topic>
-                            </Combinator>
-                          </Builder>
-                        </Expression>
-                        <Expression xsi:type="Disable">
-                          <Builder xsi:type="IncludeWorkflow" Path="Extensions\ZeroMqStreamPublisher.bonsai">
-                            <Name>UnityRecorderStatus</Name>
-                          </Builder>
-                        </Expression>
-                        <Expression xsi:type="Disable">
-                          <Builder xsi:type="Combinator">
-                            <Combinator xsi:type="p1:UnityTimestampMicroSeconds" />
-                          </Builder>
-                        </Expression>
-                        <Expression xsi:type="Disable">
-                          <Builder xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
-                        </Expression>
-                        <Expression xsi:type="Disable">
-                          <Builder xsi:type="harp:Format">
-                            <harp:MessageType>Event</harp:MessageType>
-                            <harp:Register xsi:type="harp:FormatMessagePayload">
-                              <harp:Address>199</harp:Address>
-                              <harp:PayloadType>TimestampedU64</harp:PayloadType>
-                            </harp:Register>
-                          </Builder>
-                        </Expression>
-                        <Expression xsi:type="Disable">
-                          <Builder xsi:type="MulticastSubject">
-                            <Name>HarpSoftwareLogging</Name>
-                          </Builder>
-                        </Expression>
-                        <Expression xsi:type="Combinator">
-                          <Combinator xsi:type="zmq:Subscriber">
-                            <zmq:ConnectionString>tcp://localhost:6000</zmq:ConnectionString>
-                            <zmq:Topic>NewScene</zmq:Topic>
-                          </Combinator>
-                        </Expression>
-                        <Expression xsi:type="IncludeWorkflow" Path="Extensions\ZeroMqStreamPublisher.bonsai">
-                          <Name>NewScene</Name>
-                        </Expression>
-                        <Expression xsi:type="Combinator">
-                          <Combinator xsi:type="p1:UnityTimestampMicroSeconds" />
-                        </Expression>
-                        <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
-                        <Expression xsi:type="harp:Format">
-                          <harp:MessageType>Event</harp:MessageType>
-                          <harp:Register xsi:type="harp:FormatMessagePayload">
-                            <harp:Address>225</harp:Address>
+                            <harp:Address>180</harp:Address>
                             <harp:PayloadType>TimestampedU64</harp:PayloadType>
                           </harp:Register>
                         </Expression>
@@ -1277,11 +1196,11 @@
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="zmq:Subscriber">
                             <zmq:ConnectionString>tcp://localhost:6000</zmq:ConnectionString>
-                            <zmq:Topic>ITI</zmq:Topic>
+                            <zmq:Topic>Georeference</zmq:Topic>
                           </Combinator>
                         </Expression>
                         <Expression xsi:type="IncludeWorkflow" Path="Extensions\ZeroMqStreamPublisher.bonsai">
-                          <Name>ITI</Name>
+                          <Name>Georeference</Name>
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="p1:UnityTimestampMicroSeconds" />
@@ -1290,53 +1209,7 @@
                         <Expression xsi:type="harp:Format">
                           <harp:MessageType>Event</harp:MessageType>
                           <harp:Register xsi:type="harp:FormatMessagePayload">
-                            <harp:Address>226</harp:Address>
-                            <harp:PayloadType>TimestampedU64</harp:PayloadType>
-                          </harp:Register>
-                        </Expression>
-                        <Expression xsi:type="MulticastSubject">
-                          <Name>HarpSoftwareLogging</Name>
-                        </Expression>
-                        <Expression xsi:type="Combinator">
-                          <Combinator xsi:type="zmq:Subscriber">
-                            <zmq:ConnectionString>tcp://localhost:6000</zmq:ConnectionString>
-                            <zmq:Topic>PointToOriginWorld</zmq:Topic>
-                          </Combinator>
-                        </Expression>
-                        <Expression xsi:type="IncludeWorkflow" Path="Extensions\ZeroMqStreamPublisher.bonsai">
-                          <Name>PointToOriginWorld</Name>
-                        </Expression>
-                        <Expression xsi:type="Combinator">
-                          <Combinator xsi:type="p1:UnityTimestampMicroSeconds" />
-                        </Expression>
-                        <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
-                        <Expression xsi:type="harp:Format">
-                          <harp:MessageType>Event</harp:MessageType>
-                          <harp:Register xsi:type="harp:FormatMessagePayload">
-                            <harp:Address>227</harp:Address>
-                            <harp:PayloadType>TimestampedU64</harp:PayloadType>
-                          </harp:Register>
-                        </Expression>
-                        <Expression xsi:type="MulticastSubject">
-                          <Name>HarpSoftwareLogging</Name>
-                        </Expression>
-                        <Expression xsi:type="Combinator">
-                          <Combinator xsi:type="zmq:Subscriber">
-                            <zmq:ConnectionString>tcp://localhost:6000</zmq:ConnectionString>
-                            <zmq:Topic>PointToOriginMap</zmq:Topic>
-                          </Combinator>
-                        </Expression>
-                        <Expression xsi:type="IncludeWorkflow" Path="Extensions\ZeroMqStreamPublisher.bonsai">
-                          <Name>PointToOriginMap</Name>
-                        </Expression>
-                        <Expression xsi:type="Combinator">
-                          <Combinator xsi:type="p1:UnityTimestampMicroSeconds" />
-                        </Expression>
-                        <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
-                        <Expression xsi:type="harp:Format">
-                          <harp:MessageType>Event</harp:MessageType>
-                          <harp:Register xsi:type="harp:FormatMessagePayload">
-                            <harp:Address>228</harp:Address>
+                            <harp:Address>181</harp:Address>
                             <harp:PayloadType>TimestampedU64</harp:PayloadType>
                           </harp:Register>
                         </Expression>
@@ -1499,7 +1372,65 @@
                         <Expression xsi:type="harp:Format">
                           <harp:MessageType>Event</harp:MessageType>
                           <harp:Register xsi:type="harp:FormatMessagePayload">
-                            <harp:Address>220</harp:Address>
+                            <harp:Address>182</harp:Address>
+                            <harp:PayloadType>TimestampedU64</harp:PayloadType>
+                          </harp:Register>
+                        </Expression>
+                        <Expression xsi:type="MulticastSubject">
+                          <Name>HarpSoftwareLogging</Name>
+                        </Expression>
+                        <Expression xsi:type="Disable">
+                          <Builder xsi:type="Combinator">
+                            <Combinator xsi:type="zmq:Subscriber">
+                              <zmq:ConnectionString>tcp://localhost:5561</zmq:ConnectionString>
+                              <zmq:Topic>RecordingStatus</zmq:Topic>
+                            </Combinator>
+                          </Builder>
+                        </Expression>
+                        <Expression xsi:type="Disable">
+                          <Builder xsi:type="IncludeWorkflow" Path="Extensions\ZeroMqStreamPublisher.bonsai">
+                            <Name>UnityRecorderStatus</Name>
+                          </Builder>
+                        </Expression>
+                        <Expression xsi:type="Disable">
+                          <Builder xsi:type="Combinator">
+                            <Combinator xsi:type="p1:UnityTimestampMicroSeconds" />
+                          </Builder>
+                        </Expression>
+                        <Expression xsi:type="Disable">
+                          <Builder xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
+                        </Expression>
+                        <Expression xsi:type="Disable">
+                          <Builder xsi:type="harp:Format">
+                            <harp:MessageType>Event</harp:MessageType>
+                            <harp:Register xsi:type="harp:FormatMessagePayload">
+                              <harp:Address>184</harp:Address>
+                              <harp:PayloadType>TimestampedU64</harp:PayloadType>
+                            </harp:Register>
+                          </Builder>
+                        </Expression>
+                        <Expression xsi:type="Disable">
+                          <Builder xsi:type="MulticastSubject">
+                            <Name>HarpSoftwareLogging</Name>
+                          </Builder>
+                        </Expression>
+                        <Expression xsi:type="Combinator">
+                          <Combinator xsi:type="zmq:Subscriber">
+                            <zmq:ConnectionString>tcp://localhost:6000</zmq:ConnectionString>
+                            <zmq:Topic>NewScene</zmq:Topic>
+                          </Combinator>
+                        </Expression>
+                        <Expression xsi:type="IncludeWorkflow" Path="Extensions\ZeroMqStreamPublisher.bonsai">
+                          <Name>NewScene</Name>
+                        </Expression>
+                        <Expression xsi:type="Combinator">
+                          <Combinator xsi:type="p1:UnityTimestampMicroSeconds" />
+                        </Expression>
+                        <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
+                        <Expression xsi:type="harp:Format">
+                          <harp:MessageType>Event</harp:MessageType>
+                          <harp:Register xsi:type="harp:FormatMessagePayload">
+                            <harp:Address>185</harp:Address>
                             <harp:PayloadType>TimestampedU64</harp:PayloadType>
                           </harp:Register>
                         </Expression>
@@ -1509,11 +1440,11 @@
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="zmq:Subscriber">
                             <zmq:ConnectionString>tcp://localhost:6000</zmq:ConnectionString>
-                            <zmq:Topic>Georeference</zmq:Topic>
+                            <zmq:Topic>ITI</zmq:Topic>
                           </Combinator>
                         </Expression>
                         <Expression xsi:type="IncludeWorkflow" Path="Extensions\ZeroMqStreamPublisher.bonsai">
-                          <Name>Georeference</Name>
+                          <Name>ITI</Name>
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="p1:UnityTimestampMicroSeconds" />
@@ -1522,7 +1453,53 @@
                         <Expression xsi:type="harp:Format">
                           <harp:MessageType>Event</harp:MessageType>
                           <harp:Register xsi:type="harp:FormatMessagePayload">
-                            <harp:Address>211</harp:Address>
+                            <harp:Address>186</harp:Address>
+                            <harp:PayloadType>TimestampedU64</harp:PayloadType>
+                          </harp:Register>
+                        </Expression>
+                        <Expression xsi:type="MulticastSubject">
+                          <Name>HarpSoftwareLogging</Name>
+                        </Expression>
+                        <Expression xsi:type="Combinator">
+                          <Combinator xsi:type="zmq:Subscriber">
+                            <zmq:ConnectionString>tcp://localhost:6000</zmq:ConnectionString>
+                            <zmq:Topic>PointToOriginWorld</zmq:Topic>
+                          </Combinator>
+                        </Expression>
+                        <Expression xsi:type="IncludeWorkflow" Path="Extensions\ZeroMqStreamPublisher.bonsai">
+                          <Name>PointToOriginWorld</Name>
+                        </Expression>
+                        <Expression xsi:type="Combinator">
+                          <Combinator xsi:type="p1:UnityTimestampMicroSeconds" />
+                        </Expression>
+                        <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
+                        <Expression xsi:type="harp:Format">
+                          <harp:MessageType>Event</harp:MessageType>
+                          <harp:Register xsi:type="harp:FormatMessagePayload">
+                            <harp:Address>187</harp:Address>
+                            <harp:PayloadType>TimestampedU64</harp:PayloadType>
+                          </harp:Register>
+                        </Expression>
+                        <Expression xsi:type="MulticastSubject">
+                          <Name>HarpSoftwareLogging</Name>
+                        </Expression>
+                        <Expression xsi:type="Combinator">
+                          <Combinator xsi:type="zmq:Subscriber">
+                            <zmq:ConnectionString>tcp://localhost:6000</zmq:ConnectionString>
+                            <zmq:Topic>PointToOriginMap</zmq:Topic>
+                          </Combinator>
+                        </Expression>
+                        <Expression xsi:type="IncludeWorkflow" Path="Extensions\ZeroMqStreamPublisher.bonsai">
+                          <Name>PointToOriginMap</Name>
+                        </Expression>
+                        <Expression xsi:type="Combinator">
+                          <Combinator xsi:type="p1:UnityTimestampMicroSeconds" />
+                        </Expression>
+                        <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
+                        <Expression xsi:type="harp:Format">
+                          <harp:MessageType>Event</harp:MessageType>
+                          <harp:Register xsi:type="harp:FormatMessagePayload">
+                            <harp:Address>188</harp:Address>
                             <harp:PayloadType>TimestampedU64</harp:PayloadType>
                           </harp:Register>
                         </Expression>
@@ -1672,42 +1649,40 @@
                         <Edge From="4" To="5" Label="Source1" />
                         <Edge From="6" To="7" Label="Source1" />
                         <Edge From="7" To="8" Label="Source1" />
+                        <Edge From="8" To="9" Label="Source1" />
                         <Edge From="9" To="10" Label="Source1" />
                         <Edge From="10" To="11" Label="Source1" />
-                        <Edge From="11" To="12" Label="Source1" />
                         <Edge From="12" To="13" Label="Source1" />
                         <Edge From="13" To="14" Label="Source1" />
+                        <Edge From="14" To="15" Label="Source1" />
                         <Edge From="15" To="16" Label="Source1" />
                         <Edge From="16" To="17" Label="Source1" />
-                        <Edge From="17" To="18" Label="Source1" />
                         <Edge From="18" To="19" Label="Source1" />
                         <Edge From="19" To="20" Label="Source1" />
+                        <Edge From="20" To="21" Label="Source1" />
                         <Edge From="21" To="22" Label="Source1" />
                         <Edge From="22" To="23" Label="Source1" />
-                        <Edge From="23" To="24" Label="Source1" />
                         <Edge From="24" To="25" Label="Source1" />
                         <Edge From="25" To="26" Label="Source1" />
+                        <Edge From="26" To="27" Label="Source1" />
                         <Edge From="27" To="28" Label="Source1" />
                         <Edge From="28" To="29" Label="Source1" />
-                        <Edge From="29" To="30" Label="Source1" />
                         <Edge From="30" To="31" Label="Source1" />
                         <Edge From="31" To="32" Label="Source1" />
+                        <Edge From="32" To="33" Label="Source1" />
                         <Edge From="33" To="34" Label="Source1" />
                         <Edge From="34" To="35" Label="Source1" />
-                        <Edge From="35" To="36" Label="Source1" />
                         <Edge From="36" To="37" Label="Source1" />
                         <Edge From="37" To="38" Label="Source1" />
+                        <Edge From="38" To="39" Label="Source1" />
                         <Edge From="39" To="40" Label="Source1" />
                         <Edge From="40" To="41" Label="Source1" />
-                        <Edge From="41" To="42" Label="Source1" />
                         <Edge From="42" To="43" Label="Source1" />
                         <Edge From="43" To="44" Label="Source1" />
+                        <Edge From="44" To="45" Label="Source1" />
                         <Edge From="45" To="46" Label="Source1" />
                         <Edge From="46" To="47" Label="Source1" />
-                        <Edge From="47" To="48" Label="Source1" />
-                        <Edge From="48" To="49" Label="Source1" />
                         <Edge From="49" To="50" Label="Source1" />
-                        <Edge From="52" To="53" Label="Source1" />
                       </Edges>
                     </Workflow>
                   </Expression>

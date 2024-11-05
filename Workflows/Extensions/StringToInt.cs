@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reactive.Linq;
 
 [Combinator]
-[Description("")]
+[Description("Returns the index of a a string if in the predefined string array, -1 if fails to find")]
 [WorkflowElementCategory(ElementCategory.Transform)]
 public class StringToInt
 {

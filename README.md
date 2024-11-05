@@ -191,12 +191,17 @@ To achieve this, Bonsai is randomly toggling a digital output in the HARP behavi
 |                           |         Audio         |   213    |       -        |    Not in use Timestamped(FrameNumber)        |
 |                           |         Key           |   214    |       -        |    Not in use Timestamped(FrameNumber)        |
 |       **UBX**             |         UBX           |          |                |                                               |
-|       **Omnicept**        |      EyeTracking      |   215    |                |            Timestamped(long[])                |
-|                           |       HeartRate       |   216    |                |            Timestamped(long[])                |
-|                           |          IMU          |   217    |                |            Timestamped(long[])                |
-|                           |         Mouth         |   218    |                |            Timestamped(long[])                |
-|     **VRTransform**       |       VrTimestamp     |   219    |                |            Timestamped(long)                  |
-|     **UnityImage**        |       VrTimestamp     |   220    |                |            Timestamped(long)                  |
+|       **Omnicept**        |      EyeTracking      |   190    |                |            Timestamped(long[])                |
+|                           |       HeartRate       |   191    |                |            Timestamped(long[])                |
+|                           |          IMU          |   192    |                |            Timestamped(long[])                |
+|                           |         Mouth         |   193    |                |            Timestamped(long[])                |
+|     **VRTransform**       |       VrTimestamp     |   180    |                |            Timestamped(long)                  |
+|    **Georeference**       |       VrTimestamp     |   181    |                |            Timestamped(long)                  |
+|   **ScreenGrabImage**     |       VrTimestamp     |   182    |                |            Timestamped(int)                   |
+|    **UnityNewScene**      |       VrTimestamp     |   185    |                |            Timestamped(long)                  |
+|       **UnityITI**        |       VrTimestamp     |   186    |                |            Timestamped(long)                  |
+|  **PointToOriginWorld**   |       VrTimestamp     |   187    |                |            Timestamped(long)                  |
+|   **PointToOriginMap**    |       VrTimestamp     |   188    |                |            Timestamped(long)                  |
 
 # Simulation 
 The VR simulation environment is in **VR-Alfama** folder, to set up the Unity environment follow the instructions in the README.md inside **VR-Alfama**  
