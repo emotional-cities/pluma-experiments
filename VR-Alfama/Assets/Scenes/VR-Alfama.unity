@@ -8136,35 +8136,35 @@ MonoBehaviour:
   UiManager: {fileID: 496224643}
   MapCamera: {fileID: 664903455}
   TrialList:
+  - SpawnID: 2
+    InitialPosition: {x: 48.96687, y: 13.04434, z: 85.13644}
+    InitialRotation: {x: 0, y: 180, z: 0}
+    SceneType: 1
+    SecondsDuration: 60
+    Map: {fileID: 0}
   - SpawnID: 0
     InitialPosition: {x: -1.01632, y: 4.098989, z: -67.7467}
-    InitialRotation: {x: 0, y: 0, z: 0}
-    SceneType: 0
-    SecondsDuration: 6
+    InitialRotation: {x: 0, y: -90, z: 0}
+    SceneType: 1
+    SecondsDuration: 60
     Map: {fileID: 0}
   - SpawnID: 1
     InitialPosition: {x: 52.19868, y: 8.130451, z: 56.19336}
-    InitialRotation: {x: 0, y: 0, z: 0}
-    SceneType: 0
-    SecondsDuration: 6
-    Map: {fileID: 0}
-  - SpawnID: 2
-    InitialPosition: {x: 48.96687, y: 13.344337, z: 85.13644}
-    InitialRotation: {x: 0, y: 0, z: 0}
-    SceneType: 0
-    SecondsDuration: 6
+    InitialRotation: {x: 0, y: -90, z: 0}
+    SceneType: 1
+    SecondsDuration: 60
     Map: {fileID: 0}
   - SpawnID: 3
     InitialPosition: {x: 7.787597, y: 3.010348, z: 45.31182}
-    InitialRotation: {x: 0, y: 0, z: 0}
-    SceneType: 0
-    SecondsDuration: 6
+    InitialRotation: {x: 0, y: 90, z: 0}
+    SceneType: 1
+    SecondsDuration: 60
     Map: {fileID: 0}
   - SpawnID: 4
-    InitialPosition: {x: -82.23508, y: 13.18168, z: -19.90988}
-    InitialRotation: {x: 0, y: 0, z: 0}
-    SceneType: 0
-    SecondsDuration: 6
+    InitialPosition: {x: -82.23508, y: -13.18168, z: -19.90988}
+    InitialRotation: {x: 0, y: 90, z: 0}
+    SceneType: 1
+    SecondsDuration: 60
     Map: {fileID: 0}
   RenderScenes:
   - Name: 0
