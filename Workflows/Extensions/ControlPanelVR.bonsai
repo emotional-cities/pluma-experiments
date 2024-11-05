@@ -1134,7 +1134,7 @@
               <Name>AccelerometerData</Name>
             </Expression>
             <Expression xsi:type="MemberSelector">
-              <Selector>Item1.Orientation.X,Item1.Orientation.Y,Item1.Orientation.Z</Selector>
+              <Selector>Item1.Euler.X,Item1.Euler.Y,Item1.Euler.Z</Selector>
             </Expression>
             <Expression xsi:type="viz:RollingGraphBuilder">
               <viz:SymbolType>None</viz:SymbolType>
