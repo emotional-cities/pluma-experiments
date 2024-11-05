@@ -204,7 +204,7 @@
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\LogHarpReadDump.bonsai">
                     <LogName>StreamReadDump.bin</LogName>
                   </Expression>
-                  <Expression xsi:type="rx:BehaviorSubject" TypeArguments="sys:Tuple(p1:AccelerometerData,sys:Double,sys:Double)">
+                  <Expression xsi:type="rx:BehaviorSubject" TypeArguments="sys:Tuple(pluma:Bno055DataFrame,sys:Double,sys:Double)">
                     <rx:Name>AccelerometerData</rx:Name>
                   </Expression>
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\LogAccelerometer.bonsai">
