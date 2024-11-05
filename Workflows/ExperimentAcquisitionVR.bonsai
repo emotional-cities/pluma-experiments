@@ -1,21 +1,19 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <WorkflowBuilder Version="2.8.1"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
                  xmlns:harp="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
                  xmlns:pluma="clr-namespace:EmotionalCities.Pluma;assembly=EmotionalCities.Pluma"
+                 xmlns:zmq="clr-namespace:Bonsai.ZeroMQ;assembly=Bonsai.ZeroMQ"
                  xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
                  xmlns:sys="clr-namespace:System;assembly=mscorlib"
                  xmlns:p1="clr-namespace:;assembly=Extensions"
                  xmlns:scr="clr-namespace:Bonsai.Scripting.Expressions;assembly=Bonsai.Scripting.Expressions"
                  xmlns:lsl="clr-namespace:EmotionalCities.Lsl;assembly=EmotionalCities.Lsl"
-                 xmlns:p2="clr-namespace:NetMQ;assembly=NetMQ"
-                 xmlns:p3="clr-namespace:OpenCV.Net;assembly=OpenCV.Net"
+                 xmlns:p2="clr-namespace:System.Reactive.Linq;assembly=System.Reactive.Interfaces"
+                 xmlns:p3="clr-namespace:NetMQ;assembly=NetMQ"
+                 xmlns:p4="clr-namespace:OpenCV.Net;assembly=OpenCV.Net"
                  xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
-                 xmlns:zmq="clr-namespace:Bonsai.ZeroMQ;assembly=Bonsai.ZeroMQ"
-                 xmlns:vid="clr-namespace:Bonsai.Video;assembly=Bonsai.Video"
-                 xmlns:viz="clr-namespace:Bonsai.Design.Visualizers;assembly=Bonsai.Design.Visualizers"
-                 xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
                  xmlns:wie="clr-namespace:Bonsai.Windows.Input;assembly=Bonsai.Windows.Input"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
@@ -224,19 +222,16 @@
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\LogEegMarkers.bonsai">
                     <LogName>eeg_markers.csv</LogName>
                   </Expression>
-                  <Expression xsi:type="rx:BehaviorSubject" TypeArguments="sys:Tuple(sys:String,p2:NetMQMessage)">
+                  <Expression xsi:type="rx:ReplaySubject" TypeArguments="p2:IGroupedObservable(sys:String,p3:NetMQMessage)">
                     <rx:Name>OmniceptGlia</rx:Name>
-                  </Expression>
-                  <Expression xsi:type="rx:GroupBy">
-                    <rx:KeySelector>Item1</rx:KeySelector>
-                    <rx:ElementSelector>Item2</rx:ElementSelector>
+                    <rx:BufferSize xsi:nil="true" />
                   </Expression>
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\ZeroMQLogging.bonsai">
                     <LogName>Glia</LogName>
                     <StartIndex>0</StartIndex>
                     <ExpectedIndices>3</ExpectedIndices>
                   </Expression>
-                  <Expression xsi:type="rx:BehaviorSubject" TypeArguments="p3:IplImage">
+                  <Expression xsi:type="rx:BehaviorSubject" TypeArguments="p4:IplImage">
                     <rx:Name>VRImage</rx:Name>
                   </Expression>
                   <Expression xsi:type="GroupWorkflow">
@@ -301,7 +296,7 @@
                       </Edges>
                     </Workflow>
                   </Expression>
-                  <Expression xsi:type="rx:BehaviorSubject" TypeArguments="sys:Tuple(sys:String,p2:NetMQMessage)">
+                  <Expression xsi:type="rx:BehaviorSubject" TypeArguments="sys:Tuple(sys:String,p3:NetMQMessage)">
                     <rx:Name>ITI</rx:Name>
                   </Expression>
                   <Expression xsi:type="rx:GroupBy">
@@ -313,7 +308,7 @@
                     <StartIndex>0</StartIndex>
                     <ExpectedIndices>3</ExpectedIndices>
                   </Expression>
-                  <Expression xsi:type="rx:BehaviorSubject" TypeArguments="sys:Tuple(sys:String,p2:NetMQMessage)">
+                  <Expression xsi:type="rx:BehaviorSubject" TypeArguments="sys:Tuple(sys:String,p3:NetMQMessage)">
                     <rx:Name>NewScene</rx:Name>
                   </Expression>
                   <Expression xsi:type="rx:GroupBy">
@@ -325,7 +320,7 @@
                     <StartIndex>0</StartIndex>
                     <ExpectedIndices>3</ExpectedIndices>
                   </Expression>
-                  <Expression xsi:type="rx:BehaviorSubject" TypeArguments="sys:Tuple(sys:String,p2:NetMQMessage)">
+                  <Expression xsi:type="rx:BehaviorSubject" TypeArguments="sys:Tuple(sys:String,p3:NetMQMessage)">
                     <rx:Name>VRTransform</rx:Name>
                   </Expression>
                   <Expression xsi:type="rx:GroupBy">
@@ -337,7 +332,7 @@
                     <StartIndex>0</StartIndex>
                     <ExpectedIndices>3</ExpectedIndices>
                   </Expression>
-                  <Expression xsi:type="rx:BehaviorSubject" TypeArguments="sys:Tuple(sys:String,p2:NetMQMessage)">
+                  <Expression xsi:type="rx:BehaviorSubject" TypeArguments="sys:Tuple(sys:String,p3:NetMQMessage)">
                     <rx:Name>UnityRecorderStatus</rx:Name>
                   </Expression>
                   <Expression xsi:type="rx:GroupBy">
@@ -349,7 +344,7 @@
                     <StartIndex>0</StartIndex>
                     <ExpectedIndices>3</ExpectedIndices>
                   </Expression>
-                  <Expression xsi:type="rx:BehaviorSubject" TypeArguments="sys:Tuple(sys:String,p2:NetMQMessage)">
+                  <Expression xsi:type="rx:BehaviorSubject" TypeArguments="sys:Tuple(sys:String,p3:NetMQMessage)">
                     <rx:Name>PointToOriginWorld</rx:Name>
                   </Expression>
                   <Expression xsi:type="rx:GroupBy">
@@ -361,7 +356,7 @@
                     <StartIndex>0</StartIndex>
                     <ExpectedIndices>3</ExpectedIndices>
                   </Expression>
-                  <Expression xsi:type="rx:BehaviorSubject" TypeArguments="sys:Tuple(sys:String,p2:NetMQMessage)">
+                  <Expression xsi:type="rx:BehaviorSubject" TypeArguments="sys:Tuple(sys:String,p3:NetMQMessage)">
                     <rx:Name>PointToOriginMap</rx:Name>
                   </Expression>
                   <Expression xsi:type="rx:GroupBy">
@@ -373,7 +368,7 @@
                     <StartIndex>0</StartIndex>
                     <ExpectedIndices>3</ExpectedIndices>
                   </Expression>
-                  <Expression xsi:type="rx:BehaviorSubject" TypeArguments="sys:Tuple(sys:String,p2:NetMQMessage)">
+                  <Expression xsi:type="rx:BehaviorSubject" TypeArguments="sys:Tuple(sys:String,p3:NetMQMessage)">
                     <rx:Name>Georeference</rx:Name>
                   </Expression>
                   <Expression xsi:type="rx:GroupBy">
