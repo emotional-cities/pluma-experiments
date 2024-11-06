@@ -17,8 +17,8 @@ public class ToUnityNewScene
         return source.Select(value => new UnityNewScene
         {
             SystemTimeMicroseconds = BitConverter.ToInt64(value[1].Buffer, 0),
-            SpawnID = BitConverter.ToInt32(value[2].Buffer, 0),
-            SceneType = BitConverter.ToInt32(value[2].Buffer, sizeof(int)),
+            SceneType = BitConverter.ToInt32(value[2].Buffer, 0),
+            SpawnID = BitConverter.ToInt32(value[2].Buffer, sizeof(int)),
             SecondsDuration = BitConverter.ToInt32(value[2].Buffer, sizeof(int) * 2)
         });
     }
