@@ -81,7 +81,7 @@ public class TrialSession : DataPublisher
         SceneDict[0].SetActive(true);
         UiManager.OpenMessagePanel("AlfamaVR", "Adjust the headset and pick up the controllers. Press the trigger to continue.", 1f);
         InteractionSource.SetPointerActive(false, 0f);
-        //while (!InteractionSource.RightInteractionState) { yield return null; }
+        while (!InteractionSource.RightInteractionState) { yield return null; }
         yield return new WaitForSeconds(5);
         LogSession(0);
         LogGeoreference();
