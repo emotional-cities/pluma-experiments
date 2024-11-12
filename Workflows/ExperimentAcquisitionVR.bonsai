@@ -380,6 +380,18 @@
                     <StartIndex>0</StartIndex>
                     <ExpectedIndices>3</ExpectedIndices>
                   </Expression>
+                  <Expression xsi:type="rx:BehaviorSubject" TypeArguments="sys:Tuple(sys:String,p3:NetMQMessage)">
+                    <rx:Name>Session</rx:Name>
+                  </Expression>
+                  <Expression xsi:type="rx:GroupBy">
+                    <rx:KeySelector>Item1</rx:KeySelector>
+                    <rx:ElementSelector>Item2</rx:ElementSelector>
+                  </Expression>
+                  <Expression xsi:type="IncludeWorkflow" Path="Extensions\ZeroMQLogging.bonsai">
+                    <LogName>Protocol</LogName>
+                    <StartIndex>0</StartIndex>
+                    <ExpectedIndices>3</ExpectedIndices>
+                  </Expression>
                 </Nodes>
                 <Edges>
                   <Edge From="0" To="1" Label="Source1" />
@@ -408,6 +420,8 @@
                   <Edge From="35" To="36" Label="Source1" />
                   <Edge From="37" To="38" Label="Source1" />
                   <Edge From="38" To="39" Label="Source1" />
+                  <Edge From="40" To="41" Label="Source1" />
+                  <Edge From="41" To="42" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
