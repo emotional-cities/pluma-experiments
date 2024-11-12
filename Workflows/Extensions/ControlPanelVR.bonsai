@@ -9,7 +9,6 @@
                  xmlns:harp="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
                  xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
                  xmlns:scr="clr-namespace:Bonsai.Scripting.Expressions;assembly=Bonsai.Scripting.Expressions"
-                 xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
                  xmlns:gui="clr-namespace:Bonsai.Gui;assembly=Bonsai.Gui"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
@@ -1285,78 +1284,15 @@
             </Expression>
             <Expression xsi:type="PropertyMapping">
               <PropertyMappings>
-                <Property Name="X" Selector="Item3" />
-                <Property Name="Y" Selector="Item2" />
+                <Property Name="XRangeMax" Selector="Item3" />
+                <Property Name="YRangeMax" Selector="Item2" />
               </PropertyMappings>
             </Expression>
-            <Expression xsi:type="GroupWorkflow">
-              <Name>RescaleLeft</Name>
-              <Workflow>
-                <Nodes>
-                  <Expression xsi:type="WorkflowInput">
-                    <Name>Source1</Name>
-                  </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>X</Selector>
-                  </Expression>
-                  <Expression xsi:type="ExternalizedMapping">
-                    <Property Name="RangeMax" DisplayName="X" />
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="dsp:Rescale">
-                      <dsp:Min>0.1</dsp:Min>
-                      <dsp:Max>1.1</dsp:Max>
-                      <dsp:RangeMin>0</dsp:RangeMin>
-                      <dsp:RangeMax>914</dsp:RangeMax>
-                      <dsp:RescaleType>Linear</dsp:RescaleType>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Y</Selector>
-                  </Expression>
-                  <Expression xsi:type="ExternalizedMapping">
-                    <Property Name="RangeMax" DisplayName="Y" />
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="dsp:Rescale">
-                      <dsp:Min>0.15</dsp:Min>
-                      <dsp:Max>0.9</dsp:Max>
-                      <dsp:RangeMin>0</dsp:RangeMin>
-                      <dsp:RangeMax>516</dsp:RangeMax>
-                      <dsp:RescaleType>Linear</dsp:RescaleType>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:Zip" />
-                  </Expression>
-                  <Expression xsi:type="InputMapping">
-                    <PropertyMappings>
-                      <Property Name="X" Selector="Item1" />
-                      <Property Name="Y" Selector="Item2" />
-                    </PropertyMappings>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="cv:CreatePoint">
-                      <cv:X>-1005</cv:X>
-                      <cv:Y>-791</cv:Y>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="WorkflowOutput" />
-                </Nodes>
-                <Edges>
-                  <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="0" To="4" Label="Source1" />
-                  <Edge From="1" To="3" Label="Source1" />
-                  <Edge From="2" To="3" Label="Source2" />
-                  <Edge From="3" To="7" Label="Source1" />
-                  <Edge From="4" To="6" Label="Source1" />
-                  <Edge From="5" To="6" Label="Source2" />
-                  <Edge From="6" To="7" Label="Source2" />
-                  <Edge From="7" To="8" Label="Source1" />
-                  <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="9" To="10" Label="Source1" />
-                </Edges>
-              </Workflow>
+            <Expression xsi:type="IncludeWorkflow" Path="Extensions\Rescale.bonsai">
+              <XRangeMin>0</XRangeMin>
+              <XRangeMax>0</XRangeMax>
+              <YRangeMin>0</YRangeMin>
+              <YRangeMax>0</YRangeMax>
             </Expression>
             <Expression xsi:type="VisualizerMapping" />
             <Expression xsi:type="MemberSelector">
@@ -1366,78 +1302,14 @@
               <PropertyMappings>
                 <Property Name="XRangeMin" Selector="Item3" />
                 <Property Name="XRangeMax" Selector="Item1" />
-                <Property Name="Y" Selector="Item2" />
+                <Property Name="YRangeMax" Selector="Item2" />
               </PropertyMappings>
             </Expression>
-            <Expression xsi:type="GroupWorkflow">
-              <Name>RescaleRight</Name>
-              <Workflow>
-                <Nodes>
-                  <Expression xsi:type="WorkflowInput">
-                    <Name>Source1</Name>
-                  </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>X</Selector>
-                  </Expression>
-                  <Expression xsi:type="ExternalizedMapping">
-                    <Property Name="RangeMin" DisplayName="XRangeMin" />
-                    <Property Name="RangeMax" DisplayName="XRangeMax" />
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="dsp:Rescale">
-                      <dsp:Min>0.1</dsp:Min>
-                      <dsp:Max>1.1</dsp:Max>
-                      <dsp:RangeMin>0</dsp:RangeMin>
-                      <dsp:RangeMax>914</dsp:RangeMax>
-                      <dsp:RescaleType>Linear</dsp:RescaleType>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Y</Selector>
-                  </Expression>
-                  <Expression xsi:type="ExternalizedMapping">
-                    <Property Name="RangeMax" DisplayName="Y" />
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="dsp:Rescale">
-                      <dsp:Min>0.15</dsp:Min>
-                      <dsp:Max>0.9</dsp:Max>
-                      <dsp:RangeMin>0</dsp:RangeMin>
-                      <dsp:RangeMax>516</dsp:RangeMax>
-                      <dsp:RescaleType>Linear</dsp:RescaleType>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:Zip" />
-                  </Expression>
-                  <Expression xsi:type="InputMapping">
-                    <PropertyMappings>
-                      <Property Name="X" Selector="Item1" />
-                      <Property Name="Y" Selector="Item2" />
-                    </PropertyMappings>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="cv:CreatePoint">
-                      <cv:X>-1005</cv:X>
-                      <cv:Y>-791</cv:Y>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="WorkflowOutput" />
-                </Nodes>
-                <Edges>
-                  <Edge From="0" To="1" Label="Source1" />
-                  <Edge From="0" To="4" Label="Source1" />
-                  <Edge From="1" To="3" Label="Source1" />
-                  <Edge From="2" To="3" Label="Source2" />
-                  <Edge From="3" To="7" Label="Source1" />
-                  <Edge From="4" To="6" Label="Source1" />
-                  <Edge From="5" To="6" Label="Source2" />
-                  <Edge From="6" To="7" Label="Source2" />
-                  <Edge From="7" To="8" Label="Source1" />
-                  <Edge From="8" To="9" Label="Source1" />
-                  <Edge From="9" To="10" Label="Source1" />
-                </Edges>
-              </Workflow>
+            <Expression xsi:type="IncludeWorkflow" Path="Extensions\Rescale.bonsai">
+              <XRangeMin>0</XRangeMin>
+              <XRangeMax>0</XRangeMax>
+              <YRangeMin>0</YRangeMin>
+              <YRangeMax>0</YRangeMax>
             </Expression>
             <Expression xsi:type="VisualizerMapping" />
             <Expression xsi:type="VisualizerMapping" />
