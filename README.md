@@ -190,7 +190,7 @@ To achieve this, Bonsai is randomly toggling a digital output in the HARP behavi
 |                           |         Gaze          |   212    |      250 Hz    |            Timestamped(FrameNumber)           |
 |                           |         Audio         |   213    |       -        |    Not in use Timestamped(FrameNumber)        |
 |                           |         Key           |   214    |       -        |    Not in use Timestamped(FrameNumber)        |
-|       **UBX**             |         UBX           |          |                |                                               |
+|       **UBX**             |         UBX           |          |                |      logging HarpTimestamps in csv            |
 |       **Omnicept**        |      EyeTracking      |   190    |                |            Timestamped(long[])                |
 |                           |       HeartRate       |   191    |                |            Timestamped(long[])                |
 |                           |          IMU          |   192    |                |            Timestamped(long[])                |
@@ -202,6 +202,7 @@ To achieve this, Bonsai is randomly toggling a digital output in the HARP behavi
 |       **UnityITI**        |       VrTimestamp     |   186    |                |            Timestamped(long)                  |
 |  **PointToOriginWorld**   |       VrTimestamp     |   187    |                |            Timestamped(long)                  |
 |   **PointToOriginMap**    |       VrTimestamp     |   188    |                |            Timestamped(long)                  |
+|       **Session**         |       VrTimestamp     |   189    |                |            Timestamped(long)                  |
 
 # Simulation 
 The VR simulation environment is in **VR-Alfama** folder, to set up the Unity environment follow the instructions in the README.md inside **VR-Alfama**  
