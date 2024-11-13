@@ -6,7 +6,6 @@
                  xmlns:harp="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
                  xmlns:vid="clr-namespace:Bonsai.Video;assembly=Bonsai.Video"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
-                 xmlns:viz="clr-namespace:Bonsai.Design.Visualizers;assembly=Bonsai.Design.Visualizers"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
     <Nodes>
@@ -62,6 +61,26 @@
           <zmq:Topic>Session</zmq:Topic>
         </Combinator>
       </Expression>
+      <Expression xsi:type="IncludeWorkflow" Path="Extensions\ZeroMqStreamPublisher.bonsai">
+        <Name>Session</Name>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="p1:UnityTimestampMicroSeconds" />
+      </Expression>
+      <Expression xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
+      <Expression xsi:type="harp:Format">
+        <harp:MessageType>Event</harp:MessageType>
+        <harp:Register xsi:type="harp:FormatMessagePayload">
+          <harp:Address>189</harp:Address>
+          <harp:PayloadType>TimestampedU64</harp:PayloadType>
+        </harp:Register>
+      </Expression>
+      <Expression xsi:type="MulticastSubject">
+        <Name>HarpSoftwareLogging</Name>
+      </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>Session</Name>
+      </Expression>
       <Expression xsi:type="GroupWorkflow">
         <Name>ScreenCapture</Name>
         <Workflow>
@@ -69,9 +88,12 @@
             <Expression xsi:type="WorkflowInput">
               <Name>Source1</Name>
             </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>Item2</Selector>
+            </Expression>
             <Expression xsi:type="Index">
               <Operand xsi:type="IntProperty">
-                <Value>2</Value>
+                <Value>0</Value>
               </Operand>
             </Expression>
             <Expression xsi:type="MemberSelector">
@@ -180,9 +202,10 @@
             <Edge From="0" To="1" Label="Source1" />
             <Edge From="1" To="2" Label="Source1" />
             <Edge From="2" To="3" Label="Source1" />
-            <Edge From="3" To="5" Label="Source1" />
-            <Edge From="4" To="5" Label="Source3" />
-            <Edge From="5" To="6" Label="Source1" />
+            <Edge From="3" To="4" Label="Source1" />
+            <Edge From="4" To="6" Label="Source1" />
+            <Edge From="5" To="6" Label="Source3" />
+            <Edge From="6" To="7" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
@@ -218,41 +241,6 @@
       </Expression>
       <Expression xsi:type="MulticastSubject">
         <Name>HarpSoftwareLogging</Name>
-      </Expression>
-      <Expression xsi:type="Disable">
-        <Builder xsi:type="Combinator">
-          <Combinator xsi:type="zmq:Subscriber">
-            <zmq:ConnectionString>tcp://localhost:5561</zmq:ConnectionString>
-            <zmq:Topic>RecordingStatus</zmq:Topic>
-          </Combinator>
-        </Builder>
-      </Expression>
-      <Expression xsi:type="Disable">
-        <Builder xsi:type="IncludeWorkflow" Path="Extensions\ZeroMqStreamPublisher.bonsai">
-          <Name>UnityRecorderStatus</Name>
-        </Builder>
-      </Expression>
-      <Expression xsi:type="Disable">
-        <Builder xsi:type="Combinator">
-          <Combinator xsi:type="p1:UnityTimestampMicroSeconds" />
-        </Builder>
-      </Expression>
-      <Expression xsi:type="Disable">
-        <Builder xsi:type="IncludeWorkflow" Path="Extensions\TimestampExt.bonsai" />
-      </Expression>
-      <Expression xsi:type="Disable">
-        <Builder xsi:type="harp:Format">
-          <harp:MessageType>Event</harp:MessageType>
-          <harp:Register xsi:type="harp:FormatMessagePayload">
-            <harp:Address>184</harp:Address>
-            <harp:PayloadType>TimestampedU64</harp:PayloadType>
-          </harp:Register>
-        </Builder>
-      </Expression>
-      <Expression xsi:type="Disable">
-        <Builder xsi:type="MulticastSubject">
-          <Name>HarpSoftwareLogging</Name>
-        </Builder>
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="zmq:Subscriber">
@@ -346,140 +334,6 @@
       <Expression xsi:type="MulticastSubject">
         <Name>HarpSoftwareLogging</Name>
       </Expression>
-      <Expression xsi:type="GroupWorkflow">
-        <Name>UnityTransformDebug</Name>
-        <Workflow>
-          <Nodes>
-            <Expression xsi:type="SubscribeSubject">
-              <Name>VRTransform</Name>
-            </Expression>
-            <Expression xsi:type="MemberSelector">
-              <Selector>Item2</Selector>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="p1:ToUnityTransform" />
-            </Expression>
-            <Expression xsi:type="MemberSelector">
-              <Selector>Position</Selector>
-            </Expression>
-            <Expression xsi:type="MemberSelector">
-              <Selector>Position</Selector>
-            </Expression>
-            <Expression xsi:type="VisualizerMapping" />
-            <Expression xsi:type="MemberSelector">
-              <Selector>ForwardVector</Selector>
-            </Expression>
-            <Expression xsi:type="VisualizerMapping" />
-            <Expression xsi:type="viz:TableLayoutPanelBuilder">
-              <viz:ColumnCount>1</viz:ColumnCount>
-              <viz:RowCount>2</viz:RowCount>
-              <viz:ColumnStyles />
-              <viz:RowStyles />
-              <viz:CellSpans />
-            </Expression>
-            <Expression xsi:type="WorkflowOutput" />
-          </Nodes>
-          <Edges>
-            <Edge From="0" To="1" Label="Source1" />
-            <Edge From="1" To="2" Label="Source1" />
-            <Edge From="2" To="3" Label="Source1" />
-            <Edge From="2" To="4" Label="Source1" />
-            <Edge From="2" To="6" Label="Source1" />
-            <Edge From="3" To="8" Label="Source1" />
-            <Edge From="4" To="5" Label="Source1" />
-            <Edge From="5" To="8" Label="Source2" />
-            <Edge From="6" To="7" Label="Source1" />
-            <Edge From="7" To="8" Label="Source3" />
-            <Edge From="8" To="9" Label="Source1" />
-          </Edges>
-        </Workflow>
-      </Expression>
-      <Expression xsi:type="Disable">
-        <Builder xsi:type="SubscribeSubject">
-          <Name>VRTransform</Name>
-        </Builder>
-      </Expression>
-      <Expression xsi:type="Disable">
-        <Builder xsi:type="GroupWorkflow">
-          <Workflow>
-            <Nodes>
-              <Expression xsi:type="WorkflowInput">
-                <Name>Source1</Name>
-              </Expression>
-              <Expression xsi:type="MemberSelector">
-                <Selector>Item2</Selector>
-              </Expression>
-              <Expression xsi:type="ExternalizedMapping">
-                <Property Name="Name" />
-                <Property Name="CaptureRegion" />
-              </Expression>
-              <Expression xsi:type="rx:Sink">
-                <Name>ScreenCapture</Name>
-                <Workflow>
-                  <Nodes>
-                    <Expression xsi:type="ExternalizedMapping">
-                      <Property Name="Name" />
-                    </Expression>
-                    <Expression xsi:type="ExternalizedMapping">
-                      <Property Name="CaptureRegion" />
-                    </Expression>
-                    <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="vid:ScreenCaptureStream">
-                        <vid:HideCursor>false</vid:HideCursor>
-                        <vid:CaptureRegion>
-                          <vid:X>486</vid:X>
-                          <vid:Y>117</vid:Y>
-                          <vid:Width>624</vid:Width>
-                          <vid:Height>459</vid:Height>
-                        </vid:CaptureRegion>
-                        <vid:FrameInterval>40</vid:FrameInterval>
-                      </Combinator>
-                    </Expression>
-                    <Expression xsi:type="WorkflowInput">
-                      <Name>Source1</Name>
-                    </Expression>
-                    <Expression xsi:type="MemberSelector">
-                      <Selector>First</Selector>
-                    </Expression>
-                    <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="zmq:ConvertToString" />
-                    </Expression>
-                    <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="rx:Zip" />
-                    </Expression>
-                    <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="rx:WithLatestFrom" />
-                    </Expression>
-                    <Expression xsi:type="MulticastSubject">
-                      <Name>VRImage</Name>
-                    </Expression>
-                    <Expression xsi:type="WorkflowOutput" />
-                  </Nodes>
-                  <Edges>
-                    <Edge From="0" To="8" Label="Source1" />
-                    <Edge From="1" To="2" Label="Source1" />
-                    <Edge From="2" To="7" Label="Source1" />
-                    <Edge From="3" To="4" Label="Source1" />
-                    <Edge From="3" To="6" Label="Source2" />
-                    <Edge From="4" To="5" Label="Source1" />
-                    <Edge From="5" To="6" Label="Source1" />
-                    <Edge From="6" To="7" Label="Source2" />
-                    <Edge From="7" To="8" Label="Source2" />
-                    <Edge From="8" To="9" Label="Source1" />
-                  </Edges>
-                </Workflow>
-              </Expression>
-              <Expression xsi:type="WorkflowOutput" />
-            </Nodes>
-            <Edges>
-              <Edge From="0" To="1" Label="Source1" />
-              <Edge From="1" To="3" Label="Source1" />
-              <Edge From="2" To="3" Label="Source2" />
-              <Edge From="3" To="4" Label="Source1" />
-            </Edges>
-          </Workflow>
-        </Builder>
-      </Expression>
     </Nodes>
     <Edges>
       <Edge From="0" To="1" Label="Source1" />
@@ -522,7 +376,6 @@
       <Edge From="44" To="45" Label="Source1" />
       <Edge From="45" To="46" Label="Source1" />
       <Edge From="46" To="47" Label="Source1" />
-      <Edge From="49" To="50" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>

@@ -81,7 +81,7 @@ public class TrialSession : DataPublisher
         SceneDict[0].SetActive(true);
         UiManager.OpenMessagePanel("AlfamaVR", "Adjust the headset and pick up the controllers. Press the trigger to continue.", 1f);
         InteractionSource.SetPointerActive(false, 0f);
-        //while (!InteractionSource.RightInteractionState) { yield return null; }
+        while (!InteractionSource.RightInteractionState) { yield return null; }
         yield return new WaitForSeconds(5);
         LogSession(0);
         LogGeoreference();
@@ -136,6 +136,7 @@ public class TrialSession : DataPublisher
             InteractionSource.SetPointerActive(true, 1.5f);
 
             Vector3 FinalWorldPoint = Vector3.zero;
+            LogPointToMap(0, FinalWorldPoint);
             while (!(InteractionSource.RightInteractionState || Input.GetKey(KeyCode.LeftShift)))
             {
                 RaycastHit hit = InteractionSource.GetPointedObject(LayerMask.GetMask("UI"));
@@ -162,14 +163,14 @@ public class TrialSession : DataPublisher
                     {
                         FinalWorldPoint = new Vector3(convertedPoint.x, 0f, convertedPoint.z);
                     }
-
-                   // DebugObject.transform.position = FinalWorldPoint;
+                    LogPointToMap(1, FinalWorldPoint);
+                    // DebugObject.transform.position = FinalWorldPoint;
 
                     UiManager.SetImageCursorPosition(localHit);
                 }
                 yield return null;
             }
-            LogPointToMap(2, FinalWorldPoint); // TODO - Do we need to log this before the user has made a firm choice on map position?
+            LogPointToMap(2, FinalWorldPoint); 
 
             // Reset
             UiManager.CloseImagePanel();
