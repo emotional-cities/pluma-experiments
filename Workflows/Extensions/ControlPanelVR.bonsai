@@ -39,7 +39,7 @@
             </Expression>
             <Expression xsi:type="VisualizerMapping" />
             <Expression xsi:type="SubscribeSubject">
-              <Name>EEgProtocolStream</Name>
+              <Name>EegProtocolStream</Name>
             </Expression>
             <Expression xsi:type="VisualizerMapping">
               <VisualizerType xsi:type="TypeMapping" TypeArguments="p2:ObjectTextVisualizer" />

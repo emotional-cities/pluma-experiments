@@ -216,7 +216,7 @@
         <Combinator xsi:type="rx:Merge" />
       </Expression>
       <Expression xsi:type="rx:PublishSubject">
-        <Name>EEgProtocolStream</Name>
+        <Name>EegProtocolStream</Name>
       </Expression>
       <Expression xsi:type="lsl:StreamOutlet">
         <lsl:Name>EmotionalCitiesStream2</lsl:Name>
