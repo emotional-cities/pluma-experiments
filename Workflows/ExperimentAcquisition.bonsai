@@ -50,7 +50,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="StringProperty">
-                <Value>Lisbon</Value>
+                <Value>Brussels</Value>
               </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">
@@ -63,7 +63,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="StringProperty">
-                <Value>Alfama</Value>
+                <Value>EGG</Value>
               </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">
@@ -76,7 +76,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="StringProperty">
-                <Value>Pluma01</Value>
+                <Value>BID</Value>
               </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">
@@ -272,7 +272,7 @@
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="cv:VideoWriter">
-                      <cv:FileName>C:\OutdoorData\Lisbon_Alfama_sub-Pluma01_2024-05-16T103915Z\\pupil_video.avi</cv:FileName>
+                      <cv:FileName>C:\OutdoorData\Brussels_EGG_sub-BID_2024-11-27T172435Z\\pupil_video.avi</cv:FileName>
                       <cv:Suffix>None</cv:Suffix>
                       <cv:Buffered>true</cv:Buffered>
                       <cv:Overwrite>false</cv:Overwrite>
@@ -400,16 +400,22 @@
               <Lower>8</Lower>
               <Upper>16</Upper>
             </Expression>
-            <Expression xsi:type="IncludeWorkflow" Path="Extensions\Microphone.bonsai" />
+            <Expression xsi:type="Disable">
+              <Builder xsi:type="IncludeWorkflow" Path="Extensions\Microphone.bonsai" />
+            </Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\TinkerForge.bonsai" />
-            <Expression xsi:type="IncludeWorkflow" Path="Extensions\Pupil.bonsai">
-              <Path>..\LocalPackages\FFMPEGlib</Path>
+            <Expression xsi:type="Disable">
+              <Builder xsi:type="IncludeWorkflow" Path="Extensions\Pupil.bonsai">
+                <Path>..\LocalPackages\FFMPEGlib</Path>
+              </Builder>
             </Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\AdaFruitAcc.bonsai">
               <PortName>COM16</PortName>
             </Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\UBX.bonsai" />
-            <Expression xsi:type="IncludeWorkflow" Path="Extensions\Empatica.bonsai" />
+            <Expression xsi:type="Disable">
+              <Builder xsi:type="IncludeWorkflow" Path="Extensions\Empatica.bonsai" />
+            </Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\Wind.bonsai" />
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\EEG.bonsai" />
             <Expression xsi:type="Disable">
@@ -1156,8 +1162,8 @@
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="p1:LatLongDistance">
-                            <p1:Lat>38.6935515</p1:Lat>
-                            <p1:Lon>-9.2054235</p1:Lon>
+                            <p1:Lat>50.8328358</p1:Lat>
+                            <p1:Lon>4.3275779</p1:Lon>
                           </Combinator>
                         </Expression>
                         <Expression xsi:type="rx:PublishSubject">
