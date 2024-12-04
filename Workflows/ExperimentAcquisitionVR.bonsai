@@ -445,7 +445,7 @@
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\Empatica.bonsai">
                     <DeviceId>73735A</DeviceId>
                   </Expression>
-                  <Expression xsi:type="IncludeWorkflow" Path="Extensions\EEG.bonsai" />
+                  <Expression xsi:type="IncludeWorkflow" Path="Extensions\EEGVR.bonsai" />
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\Omnicept.bonsai" />
                   <Expression xsi:type="IncludeWorkflow" Path="Extensions\Unity.bonsai" />
                 </Nodes>

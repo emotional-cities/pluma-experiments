@@ -8,11 +8,11 @@
                  xmlns:scr="clr-namespace:Bonsai.Scripting.Expressions;assembly=Bonsai.Scripting.Expressions"
                  xmlns:harp="clr-namespace:Bonsai.Harp;assembly=Bonsai.Harp"
                  xmlns:p2="clr-namespace:OpenCV.Net;assembly=OpenCV.Net"
+                 xmlns:pluma="clr-namespace:EmotionalCities.Pluma;assembly=EmotionalCities.Pluma"
                  xmlns:ubx="clr-namespace:EmotionalCities.uBlox;assembly=EmotionalCities.uBlox"
                  xmlns:lsl="clr-namespace:EmotionalCities.Lsl;assembly=EmotionalCities.Lsl"
                  xmlns:p3="clr-namespace:NetMQ;assembly=NetMQ"
                  xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
-                 xmlns:pluma="clr-namespace:EmotionalCities.Pluma;assembly=EmotionalCities.Pluma"
                  xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
                  xmlns:viz="clr-namespace:Bonsai.Design.Visualizers;assembly=Bonsai.Design.Visualizers"
                  xmlns:wie="clr-namespace:Bonsai.Windows.Input;assembly=Bonsai.Windows.Input"
@@ -159,7 +159,7 @@
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\LogMicrophone.bonsai">
               <LogName>Microphone.bin</LogName>
             </Expression>
-            <Expression xsi:type="rx:BehaviorSubject" TypeArguments="sys:Tuple(p1:AccelerometerData,sys:Double,sys:Double)">
+            <Expression xsi:type="rx:BehaviorSubject" TypeArguments="sys:Tuple(pluma:Bno055DataFrame,sys:Double,sys:Double)">
               <rx:Name>AccelerometerData</rx:Name>
             </Expression>
             <Expression xsi:type="IncludeWorkflow" Path="Extensions\LogAccelerometer.bonsai">
@@ -1702,7 +1702,7 @@ it.Item3 as GustWindSpeed)</scr:Expression>
                     <Name>AccelerometerData</Name>
                   </Expression>
                   <Expression xsi:type="MemberSelector">
-                    <Selector>Item1.Orientation.X,Item1.Orientation.Y,Item1.Orientation.Z</Selector>
+                    <Selector>Item1.Euler.X,Item1.Euler.Y,Item1.Euler.Z</Selector>
                   </Expression>
                   <Expression xsi:type="viz:RollingGraphBuilder">
                     <viz:SymbolType>None</viz:SymbolType>
