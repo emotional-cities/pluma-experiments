@@ -93,7 +93,7 @@
             </Expression>
             <Expression xsi:type="Index">
               <Operand xsi:type="IntProperty">
-                <Value>0</Value>
+                <Value>2</Value>
               </Operand>
             </Expression>
             <Expression xsi:type="MemberSelector">
