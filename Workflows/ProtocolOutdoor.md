@@ -132,3 +132,19 @@
 - [ ] Ipad or equivalent to remote in the computer.
 - [ ] Access point where pupil labs Ipad and backpack should connect.
  
+## LSL EEG Codes description
+LSL messages are sent to the EEG using the following codes:
+      - 0:35000 Incremental SyncPulse
+      - 350XX Keypress A where xxx is incremental with each keypress
+      - 351XX Keypress D where xxx is incremental with each keypress
+      - 352XX Keypress G where xxx is incremental with each keypress
+      - 353XX Keypress J where xxx is incremental with each keypress
+
+### Experiment Protocol 
+Keys are used to mark the begining of experiment, stop points, re-start points, and Questionary
+
+### Space and time Sync 
+The EEG data is synchronized with the acquisition system via a random time generator, each time the timer ticks a new **incremental** LSL message is sent ro the EEG, these messages start with 1. 
+
+### Acessing the data
+All these events are also recorded in the pluma harp streams and a spatial&Time correlation can be obtained. These correlations are exported to CSV files using the https://github.com/emotional-cities/notebooks
