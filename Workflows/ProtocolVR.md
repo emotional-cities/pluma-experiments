@@ -9,6 +9,20 @@
 - [ ] ECG Cable and pads.
 - [ ] Omnicept VR headset.
 
+## Setup Trial Sequence before experiment
+
+### Reorder Trials
+- [ ] Go to `TrialSession`Script in TrialManager game object
+ -[ ] In the `TrialList` drag-reorder the trials without changing their `spanwID`
+
+### Add New Trial
+To configure the spawn position add(+) a trial to the `TrialList` in the `TrialSession`Script in TrialManager game object:
+ - [ ] SPanwId is the unique id of the spaw point
+ - [ ] The trial order in the list is the protocol sequence order
+ - [ ] `Initial Position`: Specify the initial position for the camera.
+ - [ ] `Initial Rotation`: Specify the initial rotation for the camera, in degrees.
+ - [ ] `SceneType`: Adverse or Optimistic  
+
 ## Setup
 - [ ] Turn on equipment
 - [ ] Empatica:
