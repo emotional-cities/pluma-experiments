@@ -1,13 +1,13 @@
-# Travel CheckList
+# Experimental Procedure 
 
-## Equipment List
+## Travel Equipment List
 
-### [Backpack](https://www.hp.com/us-en/shop/tech-takes/hp-vr-backpack-g2-review)
-- [ ] Computer.
+### EC Pluma Backpack
+- [ ] [Backpack computer](https://www.hp.com/us-en/shop/tech-takes/hp-vr-backpack-g2-review)
+- [ ] [pluma pack](https://github.com/emotional-cities/pluma) with all sensors attached (including the environmental sensors in the pole).
 - [ ] Battery Charger + batt dock
 - [ ] Batteries ( 4 units ).
 - [ ] Power supply unit.
-- [ ] Harness with all sensors attached (including the environmental sensors in the pole).
 - [ ] External touch screen.
 
 ### [Eye tracking - Pupil Labs](https://pupil-labs.com/products/invisible/tech-specs/)
@@ -44,7 +44,8 @@
 - [ ] Packing Material
 - [ ] Fit everything inside minus batteries
   
-### Accessories 
+### Accessories
+
 - [ ] Ipad or equivalent tablet to remote in the computer.
 - [ ] Access to the Internet, possible solutions:
    - [ ] **Backpack computer acting as an access point sharing the internect connection from a 3rd party phone**.
@@ -127,10 +128,6 @@
 - [ ] remove ecg electrodes.
 - [ ] remove empatica wirstband
 - [ ] remove backpack
-
-### Support 
-- [ ] Ipad or equivalent to remote in the computer.
-- [ ] Access point where pupil labs Ipad and backpack should connect.
  
 ## LSL EEG Codes description
 LSL messages are sent to the EEG using the following codes:

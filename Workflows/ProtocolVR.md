@@ -1,9 +1,8 @@
 # ExperimentalProcedure 
 
-## Connect equipments 
-
-### Desktop computer or [Backpack](https://www.hp.com/us-en/shop/tech-takes/hp-vr-backpack-g2-review)
-- [ ] Computer.
+## Equipment List
+- [ ] Desktop computer or [Backpack](https://www.hp.com/us-en/shop/tech-takes/hp-vr-backpack-g2-review)
+- [ ] single board [Pluma](https://github.com/emotional-cities/pluma) 
 - [ ] Empatica.
 - [ ] Enobio 32ch EEG.
 - [ ] External screen.
