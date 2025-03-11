@@ -12,7 +12,7 @@
 ## Setup Trial Sequence before experiment
 
 ### Reorder Trials
-- [ ] Go to `TrialSession`Script in TrialManager game object
+ -[ ] Go to `TrialSession`Script in TrialManager game object
  -[ ] In the `TrialList` drag-reorder the trials without changing their `spanwID`
 
 ### Add New Trial

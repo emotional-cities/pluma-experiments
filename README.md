@@ -29,16 +29,16 @@ In order to have a monitor that remote applications can target, we must emulate 
 
 ### Install notes
 
- - Bonsai reads from Tinkerforge trhough the Brick Deamon, so you should follow the Brick Daemon Installation on Windows https://www.tinkerforge.com/en/doc/Software/Brickd_Install_Windows.html#brickd-install-windows
+ - Bonsai reads from Tinkerforge through the Brick Deamon, so you should follow the Brick Daemon Installation on Windows https://www.tinkerforge.com/en/doc/Software/Brickd_Install_Windows.html#brickd-install-windows
 
- - Is also usefull to have the Brick viewer in order to be able to check the tinkerforge system and view outputs/inputs to all sensors connected. https://www.tinkerforge.com/en/doc/Software/Brickv.html
+ - Is usefull to have the Brick viewer in order to be able to check the tinkerforge system and view outputs/inputs to all sensors connected. https://www.tinkerforge.com/en/doc/Software/Brickv.html
  - On Bonsai side you should install the tinkerforge nuget package.
 
-### Execution Notes
+### Test Execution Notes
 
-- Open Bonsai and insert a CreateBrickConnection node, check the port and host, but the default values should be ok for a local system with a clena inhstallation.
-- connect that node to all specific tinkerforge sensor or actuator nodes that you have connected in your system, confure them properly (different components have differet set of settings). Don't forget to give the proper Uid (there is a dropdown that only shows compatible sensors to easy your life).
-- Run the Brickv 2.4.22 from the startup menu. 
+- Open Bonsai and insert a CreateBrickConnection node, check the port and host, but the default values should be ok for a local system with a clean installation.
+- connect that node to all specific tinkerforge sensor or actuator nodes that you have connected in your system, configure them properly (different components have different set of settings). Don't forget to give the proper Uid (there is a dropdown that only shows compatible sensors to easy your life).
+- Run the Brickv 2.4.22 from the startup menu.
 
 ## Enobio EEG
 
@@ -140,7 +140,7 @@ To achieve this, Bonsai is randomly toggling a digital output in the HARP behavi
 |                           |          PM2.5        |   241    |      100 Hz    |          Timestamped(int) [µg/m³][6]          |
 |                           |          PM10         |   242    |      100 Hz    |          Timestamped(int) [µg/m³][6]          |
 |     **TK-Dual0-20mA**     |      Solar-Light      |   243    |      100 Hz    |          Timestamped(int) [mA x 1000000][7]   |
-|     **TK-Thermoouple**    |      Radiant Temp     |   244    |      100 Hz    |          Timestamped(int) [°C x 100][8]       |
+|     **TK-Thermocouple**   |      Radiant Temp     |   244    |      100 Hz    |          Timestamped(int) [°C x 100][8]       |
 |        **TK-PTC**         |        Air Temp       |   245    |      100 Hz    |          Timestamped(int) [°C x 100][9]       |
 |        **ATMOS22**        |       North Wind      |   246    |      ~2 Hz     |          Timestamped(float) [m/s][10]         |
 |                           |        East Wind      |   247    |      ~2 Hz     |          Timestamped(float) [m/s][10]         |

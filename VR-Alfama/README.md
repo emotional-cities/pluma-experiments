@@ -78,7 +78,6 @@ If the Vr-Alfama scene is not yet loaded in Unity, open `Assets/Scenes` folder a
 ## Press Play
 If all the above instructions are followed successfully you should be able to run the Unity scene and look around through the VR Headset.
 
-
 ## pluma-vr
 
 The pluma-vr package should be automatically installed from the project manifest, but if there is a problem or an update is needed follow the instructions below.

@@ -45,33 +45,30 @@
 - [ ] Fit everything inside minus batteries
   
 ### Accessories
-
 - [ ] Ipad or equivalent tablet to remote in the computer.
 - [ ] Access to the Internet, possible solutions:
-   - [ ] **Backpack computer acting as an access point sharing the internect connection from a 3rd party phone**.
-   - [ ] Pupil labs phone pprovidingg access point and connected to the Internet by using simd data card.
+   - [ ] **Backpack computer acting as an access point sharing the internet connection from a 3rd party phone**.
+   - [ ] Pupil labs phone providing access point and connected to the Internet by using simd data card.
    - [ ] Access point with simd data card where pupil labs and Ipad connect by wifi and backpack connect by ethernet. May also be a USB 5g 
  - [ ] Zip ties.
- - [ ] Multitool.
+ - [ ] Multi-tool.
 
 ## Setup before going on site
-- [ ] Bateries
+- [ ] Batteries
    - [ ] charge backpack computer
-   - [ ] charge batery packs.
-   - [ ] charge enubio NE
-   - [ ] Charge pupil labs smartphone
-   - [ ] Check (change?) mic batery.
-   - [ ] Charge empatica 
+   - [ ] charge battery packs.
+   - [ ] charge Enobio NE
+   - [ ] Charge Pupil Labs smartphone
+   - [ ] Check (change?) mic battery.
+   - [ ] Charge Empatica 
 - [ ] pupil labs
-   - [ ] tape side camera camera to pupil glasees temple arm.
-   - [ ] check camera expusure auto
-
-
+   - [ ] tape side camera camera to Pupil glasses temple arm.
+   - [ ] check camera exposure auto
 
 ## Setup
 - [ ] Turn on equipment, check networks
 - [ ] Empatica:
-   - [ ] Turn on empatica
+   - [ ] Turn on Empatica
    - [ ] Turn on E4 streaming server
    - [ ] check if paired on E4 streaming server
    - [ ] Fit wristband tight
@@ -84,16 +81,16 @@
    - [ ] Check preamp light.
 - [ ] BackPack
    - [ ] Bonsai check if receiving data from all sensors
-      - [ ] tinkerforge 
+      - [ ] Tinkerforge 
       - [ ] wind sensor 
       - [ ] ubx gps 
-      - [ ] accelarometer 
+      - [ ] accelerometer 
       - [ ] sound 
-      - [ ] empatica 
+      - [ ] Empatica 
       - [ ] pupil labs
   - [ ] Fit backpack on subject back
   - [ ] ecg
-     - [ ] Fit gel electrodes (blue on left nipple, black on right nipple, red on belly alligned with black)
+     - [ ] Fit gel electrodes (blue on left nipple, black on right nipple, red on belly aligned with black)
      - [ ] check ecg signal.
   - [ ] Stop bonsai
   - [ ] EEG
@@ -105,13 +102,13 @@
     - [ ] Start nic 
       - [ ] choose usb device 
       - [ ] start protocol 
-      - [ ] allow syncronizing
+      - [ ] allow synchronizing
       - [ ] wiggle red electrodes
-  - [ ] Fit pupli glasses
+  - [ ] Fit Pupil glasses
   - [ ] Fit binaural mic earplugs
 
  ## Trials 
- - [ ] start recordinng EEG
+ - [ ] start recording EEG
  - [ ] press play on bonsai start
  - [ ] stop eeg
  - [ ] press Q on bonsai
@@ -126,7 +123,7 @@
   - [ ] remove ear pinch reference electrodes
   - [ ] remove eeg cap
 - [ ] remove ecg electrodes.
-- [ ] remove empatica wirstband
+- [ ] remove Empatica wristband
 - [ ] remove backpack
  
 ## LSL EEG Codes description
@@ -138,10 +135,10 @@ LSL messages are sent to the EEG using the following codes:
       - 353XX Keypress J where xxx is incremental with each keypress
 
 ### Experiment Protocol 
-Keys are used to mark the begining of experiment, stop points, re-start points, and Questionary
+Keys are used to mark the beginning of experiment, stop points, re-start points, and Questionary
 
 ### Space and time Sync 
 The EEG data is synchronized with the acquisition system via a random time generator, each time the timer ticks a new **incremental** LSL message is sent ro the EEG, these messages start with 1. 
 
-### Acessing the data
-All these events are also recorded in the pluma harp streams and a spatial&Time correlation can be obtained. These correlations are exported to CSV files using the https://github.com/emotional-cities/notebooks
+### Accessing the data
+All these events are also recorded in the Pluma harp streams and a spatial&Time correlation can be obtained. These correlations are exported to CSV files using the https://github.com/emotional-cities/notebooks
