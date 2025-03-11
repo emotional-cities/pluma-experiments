@@ -40,6 +40,12 @@ In order to have a monitor that remote applications can target, we must emulate 
 - connect that node to all specific tinkerforge sensor or actuator nodes that you have connected in your system, configure them properly (different components have different set of settings). Don't forget to give the proper Uid (there is a dropdown that only shows compatible sensors to easy your life).
 - Run the Brickv 2.4.22 from the startup menu.
 
+## Empatica
+  - [Install](https://support.empatica.com/hc/en-us/articles/202581999-E4-wristband-technical-specifications)
+  - Turn on Empatica
+  - Turn on E4 streaming server
+  - check if paired on E4 streaming server
+
 ## Enobio EEG
 
 ### Execution Notes
