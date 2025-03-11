@@ -1,12 +1,19 @@
 # Pluma Experiments
 
 This repository contains data acquisition and benchmark workflows for the wearable data collection unit.
+## ExperimentVR
+- [InstallVR](VR-Alfama/README.md)
+- [ProtocolVR](Workflows/ProtocolVR.md)
+## ExperimentOutdoor
+- [ProtocolOutdoor](Workflows/ProtocolOutdoor.md)
 
-## Hardware
-
-The wearable data collection unit (Pluma) integrates the following hardware components:
-
- - Bricklets
+## Pluma Outdoor wearable acquisition unit
+The Pluma wearable acquisition unit integrates the following hardware components:
+ - Harp BioData board (ECG, synching, clock reference,Analog2)
+ - Enobio (EEG)
+ - Empatica (GSR,Hr)
+ - Pupillabs pupil invisible (video,gaze)
+ - Tinkerforge Bricklets
    - GPS
    - CO2
    - Ambient Light
@@ -14,16 +21,25 @@ The wearable data collection unit (Pluma) integrates the following hardware comp
    - Sound Pressure
    - Humidity
    - Analog input
- - Harp BioData board (ECG, synching, clock reference)
  - GPS Module (ZED-F9P)
- - Biaural audio
-	* no audio will be collected, instead we will short an input from the synchpulse to the audiocard to benchmark latencies
- - Pupillabs pupil invisible
- - Harp-triggered I2C Accelarometer
+ - Binaural audio
+ - Harp-triggered USB Accelerometer
+ - Backpack Computer
+ - Batteries
+ - Walker fake monitor emulate a fake display. We are currently using the `IddSampleDriver` [(Instructions and download of Release 0.0.1 here.)](https://github.com/roshkins/IddSampleDriver/releases/tag/0.0.1)
+### Pluma wearable acquisition unit Specifications
+ - Pluma Total weight with batteries: 9kg
+ - Each swappable battery collects 30min of data.
 
-## Walker fake monitor
-
-In order to have a monitor that remote applications can target, we must emulate a fake hardware display. We are currently using the `IddSampleDriver` [(Instructions and download of Release 0.0.1 here.)](https://github.com/roshkins/IddSampleDriver/releases/tag/0.0.1)
+## Pluma ExperimentVR wearable acquisition unit
+The Pluma wearable acquisition unit integrates the following hardware components:
+ - Harp BioData board (ECG, synching, clock reference,Analog2)
+ - Harp-triggered USB Accelerometer
+ - Empatica (GSR,Hr)
+ - HPOmniceptVR (IMU,gaze,Hr)
+ - Unity VRTransform (GPS)
+ - Backpack or Desktop Computer
+ - External Monitor
 
 ## Tinker Forge 
 
@@ -107,10 +123,11 @@ From the unity messages there are three types:
 All 0MQ Data is stored raw in binary streams, one folder for each type.
 In harp streams we are logging the timestamp information from those messages with latest harp timestamp to be used has frame counters and in post processing synchronization. 
 
+# Bonsai data logging
 
 Most of the data currently being saved in Bonsai is packaged in a HARP message format. For each different event (different address) a new .bin file will be created.
 
-## Synchronization
+# Synchronization
 
 Synchronization is either being achieved at the software level (Bonsai) by timestamping a given sample with the latest timestamp available from the HARP device or through a hardware-level TTL strategy.
 
