@@ -98,7 +98,15 @@ The PupilInterface package provides some specific functionality for interfacing 
   6. The App should now remain open to keep the `Zyre Server` active;
   7. From Bonsai, hit `Start` and it should automatically start streaming the video data.
 
-## Bonsai data logging
+## Unity and Omnicept 0MQ
+All Unity Messages are transmitted via 0MQ, The Omnicept sends 3 different timestamps, the unity sends only the host timestamp.
+From the unity messages there are three types: 
+ - Protocol specific messages, 
+ - Unity geo-localization messages,
+ - Glia eye-tracking, heart rate,IMU.
+All 0MQ Data is stored raw in binary streams, one folder for each type.
+In harp streams we are logging the timestamp information from those messages with latest harp timestamp to be used has frame counters and in post processing synchronization. 
+
 
 Most of the data currently being saved in Bonsai is packaged in a HARP message format. For each different event (different address) a new .bin file will be created.
 
@@ -212,7 +220,7 @@ To achieve this, Bonsai is randomly toggling a digital output in the HARP behavi
 |       **Session**         |       VrTimestamp     |   189    |                |            Timestamped(long)                  |
 
 # Simulation 
-The VR simulation environment is in **VR-Alfama** folder, to set up the Unity environment follow the instructions in the README.md inside **VR-Alfama**  
+The VR simulation environment is in **VR-Alfama** folder, to set up the Unity environment follow the instructions in the [README.md](VR-Alfama\README.md) inside **VR-Alfama**  
 
 
 [1]: https://neurogears.sharepoint.com/:b:/s/EmotionalCities/EYOX02N88hRHnUCdREf_kq0BEoxvZY92nHfPOPZmq7Ua3Q?e=xWQPvN  
