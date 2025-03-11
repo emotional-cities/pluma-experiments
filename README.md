@@ -87,7 +87,7 @@ The PupilInterface package provides some specific functionality for interfacing 
 - The sensor information received from the Zyre group is received as JSON which needs to be parsed. The PupilSensor operator extracts and parses JSON in Zyre NetMQFrames to give the required sensor data for streaming.
 - The world camera data is received as individual binary frames of H264 encoded data. The DecodeByteFrame operator instantiates a frame-by-frame ffmpeg decoder that decodes each binary frame into an image.
 
-### To run the protocol:
+### To test the pupil labs:
 
   0. In the backpack computer activate the hotspot with SSID Backpack;
   1. Ensure the hotspot power saving is disabled;
