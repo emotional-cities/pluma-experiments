@@ -60,6 +60,7 @@ In order to have a monitor that remote applications can target, we must emulate 
 - Press the human face image on the left pannel.
 - Select EEG_Benchmarks.
 - Press Load Protocol.
+- Check that protocol has LSL enabled
 - Wait for the synchronizing 
 - Press Play to save Data 
 - Start Boinsai workflow.
